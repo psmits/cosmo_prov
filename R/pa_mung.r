@@ -6,7 +6,7 @@ source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
 
-dat <- read.csv('../data/pa-occs.csv', stringsAsFactors = FALSE)
+dat <- read.csv('../data/mam-occs.csv', stringsAsFactors = FALSE)
 
 # if missing any temporal information, exclude
 temp <- c('period', 'epoch', 'subepoch', 'stage', 'formation')

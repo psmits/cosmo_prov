@@ -5,11 +5,8 @@ library(scales)
 
 source('../R/cosmo_prov.r')
 source('../R/diet_dynamics.r')
-
-zachos <- read.csv('../data/2008_zachos_data.csv', header = T)
-ti <- c('site', 'age', 'genus', 'd18o', 'd13c', 'd18o.5', 'd13c.5')
-zachos <- zachos[, 1:7]
-names(zachos) <- ti
+source('../R/life_dynamics.r')
+source('../R/oxygen_curve.r')
 
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 

@@ -1,5 +1,6 @@
 library(igraph)
 library(plyr)
+library(parallel)
 
 source('../R/pa_mung.r')
 
@@ -8,12 +9,12 @@ source('../R/biogeo_struct.r')
 source('../R/biogeo_bootstrap.r')
 source('../R/window.r')
 
-diet <- split(dat, f = dat$comdiet)
+life <- split(dat, f = dat$life_habit)
 
-stdiet <- lapply(diet, function(x) {
+stlife <- lapply(life, function(x) {
                  split(x, x$stage)})
 
-stdigr <- lapply(stdiet, function(x) {
+stdigr <- lapply(stlife, function(x) {
                  lapply(x, bin.network, taxa = 'name.bi', loc = 'formation')})
 stdigr.bg <- lapply(stdigr, function(x) {
                     lapply(biogeosum, function(y) lapply(x, y))})
@@ -27,21 +28,21 @@ stdigr.boot <- Map(function(x, y) {
                                    MoreArgs = list(fun = foo, 
                                                    data = dat, 
                                                    nsim = 10),
-                                   SIMPLIFY = FALSE)}, 
+                                   SIMPLIFY = FALSE)},
                             mc.cores = detectCores())},
                    x = stdigr, y = stdigr.hier)
 
 # with explicit bins
-wdth <- 2
-dietwin <- lapply(diet, function(x) {
-                  network.bin(x, width = wdth, time = 'ma_mid',
+wlfh <- 2
+lifewin <- lapply(life, function(x) {
+                  network.bin(x, wilfh = wlfh, time = 'ma_mid',
                               taxa = 'name.bi', loc = 'formation')})
-dtwin.bg <- lapply(dietwin, function(x) {
+lfwin.bg <- lapply(lifewin, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
 
-dtwin.hier <- lapply(dietwin, function(x) {
+lfwin.hier <- lapply(lifewin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
-dtwin.boot <- Map(function(x, y) {
+lfwin.boot <- Map(function(x, y) {
                    mclapply(biogeosum, function(foo) {
                             mapply(biogeo.boot,
                                    graph = x, taxon = y,
@@ -50,4 +51,4 @@ dtwin.boot <- Map(function(x, y) {
                                                    nsim = 10),
                                    SIMPLIFY = FALSE)},
                             mc.cores = detectCores())},
-                   x = dietwin, y = dtwin.hier)
+                   x = lifewin, y = lfwin.hier)
