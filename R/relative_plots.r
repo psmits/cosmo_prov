@@ -20,8 +20,9 @@ reldiet <- ddply(dat, .(stage), summarize,
 reldiet <- cbind(ma = tm[, 1], reldiet)
 reldiet <- melt(reldiet, id.vars = c('ma', 'stage'))
 # plot
-rdt <- ggplot(dat, aes(x = stage, fill = comdiet)) + geom_bar(position = 'fill')
-
+rdt <- ggplot(dat, aes(x = stage, fill = comdiet))
+rdt <- rdt + geom_bar(position = 'fill')
+rdt <- rdt + scale_color_manual(values = cbp)
 
 
 relloc <- ddply(dat, .(stage), summarize,
@@ -31,5 +32,7 @@ relloc <- ddply(dat, .(stage), summarize,
                 semifoss = sum(life_habit == 'semifossorial'),
                 arboreal = sum(life_habit == 'arboreal'),
                 staltatorial = sum(life_habit == 'saltatorial'))
+# plot
 rlf <- ggplot(dat, aes(x = stage, fill = life_habit))
 rlf <- rlf + geom_bar(position = 'fill')
+rlf <- rlf + scale_color_manual(values = cbp)

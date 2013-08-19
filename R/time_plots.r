@@ -23,6 +23,7 @@ ggzac <- ggzac + theme(legend.position = 'none')
 ggzac <- ggzac + labs(x = 'Time (My)')
 ggzac <- ggzac + stat_smooth(method = 'gam', 
                              formula = y ~ s(x, k = 13, bs = 'cs'))
+ggsave(file = '../doc/figure/zachos.png', plot = ggzac)
 
 # stage
 st.dat <- melt(stgraph.bg)
@@ -31,6 +32,7 @@ gst <- ggplot(st.dat, aes(x = year, y = value)) + geom_line()
 gst <- gst + facet_wrap(~ L1, scales = 'free_y')
 gst <- gst + scale_color_manual(values = cbp)
 gst <- gst + labs(x = 'Time (My)')
+ggsave(file = '../doc/figure/gen_stage.png', plot = gst)
 
 # standard bin
 bin.dat <- melt(win.bg)
@@ -41,6 +43,7 @@ ggdat <- ggdat + scale_color_manual(values = cbp)
 #ggdat <- ggdat + theme(legend.position = 'none')
 ggdat <- ggdat + labs(x = 'Time (My)')
 #ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE)
+ggsave(file = '../doc/figure/gen_bin.png', plot = ggdat)
 
 
 # diet
@@ -54,6 +57,7 @@ gdtst <- gdtst + geom_line()
 gdtst <- gdtst + facet_wrap(~ L2, scales = 'free_y')
 gdtst <- gdtst + scale_color_manual(values = cbp)
 gdtst <- gdtst + labs(x = 'Time (My)')
+ggsave(file = '../doc/figure/diet_stage.png', plot = gdtst)
 
 # standard bin
 bin.diet <- melt(dtwin.bg)
@@ -65,6 +69,7 @@ ggdiet <- ggdiet + scale_color_manual(values = cbp)
 #ggdiet <- ggdiet + theme(legend.position = 'none')
 ggdiet <- ggdiet + labs(x = 'Time (My)')
 #ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
+ggsave(file = '../doc/figure/diet_bin.png', plot = ggdiet)
 
 
 # locomotor
@@ -78,4 +83,13 @@ glfst <- glfst + geom_line()
 glfst <- glfst + facet_wrap(~ L2, scales = 'free_y')
 glfst <- glfst + scale_color_manual(values = cbp)
 glfst <- glfst + labs(x = 'Time (My)')
+ggsave(file = '../doc/figure/loco_stage.png', plot = glfst)
 
+bin.loco <- melt(lfwin.bg)
+bin.loco$L3 <- as.numeric(bin.loco$L3)
+ggloco <- ggplot(bin.loco, aes(x = L3, y = value, colour = L1))
+ggloco <- ggloco + geom_line(alpha = 0.5)
+ggloco <- ggloco + facet_wrap(~ L2, scales = 'free_y')
+ggloco <- ggloco + scale_color_manual(values = cbp)
+ggloco <- ggloco + labs(x = 'Time (My)')
+ggsave(file = '../doc/figure/loco_bin.png', plot = ggloco)
