@@ -14,14 +14,14 @@ life <- split(dat, f = dat$life_habit)
 stlife <- lapply(life, function(x) {
                  split(x, x$stage)})
 
-stdigr <- lapply(stlife, function(x) {
+stlfgr <- lapply(stlife, function(x) {
                  lapply(x, bin.network, taxa = 'name.bi', loc = 'formation')})
-stdigr.bg <- lapply(stdigr, function(x) {
+stlfgr.bg <- lapply(stlfgr, function(x) {
                     lapply(biogeosum, function(y) lapply(x, y))})
 
-stdigr.hier <- lapply(stdigr, function(x) {
+stlfgr.hier <- lapply(stlfgr, function(x) {
                       lapply(x, get.hier, level = 'family_name', data = dat)})
-stdigr.boot <- Map(function(x, y) {
+stlfgr.boot <- Map(function(x, y) {
                    mclapply(biogeosum, function(foo) {
                             mapply(biogeo.boot,
                                    graph = x, taxon = y,
@@ -30,12 +30,12 @@ stdigr.boot <- Map(function(x, y) {
                                                    nsim = 10),
                                    SIMPLIFY = FALSE)},
                             mc.cores = detectCores())},
-                   x = stdigr, y = stdigr.hier)
+                   x = stlfgr, y = stlfgr.hier)
 
 # with explicit bins
 wlfh <- 2
 lifewin <- lapply(life, function(x) {
-                  network.bin(x, wilfh = wlfh, time = 'ma_mid',
+                  network.bin(x, width = wlfh, time = 'ma_mid',
                               taxa = 'name.bi', loc = 'formation')})
 lfwin.bg <- lapply(lifewin, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})

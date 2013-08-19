@@ -66,13 +66,16 @@ ggdiet <- ggdiet + scale_color_manual(values = cbp)
 ggdiet <- ggdiet + labs(x = 'Time (My)')
 #ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
 
-# sliding
-bin.dsli <- melt(dtsli)
-bin.dsli$L3 <- as.numeric(bin.dsli$L3)
-ggdsli <- ggplot(bin.dsli, aes(x = L3, y = value, colour = L1))
-ggdsli <- ggdsli + geom_line()
-ggdsli <- ggdsli + facet_wrap(~ L2, scales = 'free_y')
-ggdsli <- ggdsli + scale_color_manual(values = cbp)
-#ggdsli <- ggdiet + theme(legend.position = 'none')
-ggdsli <- ggdsli + labs(x = 'Time (My)')
-#ggdsli <- ggdsli + stat_smooth(method = 'loess', se = FALSE)
+
+# locomotor
+# stage
+lfst.dat <- melt(stlfgr.bg)
+lfst.dat <- cbind(lfst.dat, year = tm[match(lfst.dat$L3, tm[, 2]), 1])
+lfst.dat$value[is.nan(lfst.dat$value)] <- NA
+lfst.dat$value[is.infinite(lfst.dat$value)] <- NA
+glfst <- ggplot(lfst.dat, aes(x = year, y = value, colour = L1))
+glfst <- glfst + geom_line()
+glfst <- glfst + facet_wrap(~ L2, scales = 'free_y')
+glfst <- glfst + scale_color_manual(values = cbp)
+glfst <- glfst + labs(x = 'Time (My)')
+
