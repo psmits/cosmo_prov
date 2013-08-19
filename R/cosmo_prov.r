@@ -35,8 +35,3 @@ taxawin.boot <- mclapply(biogeosum, function(foo) {
                          graph = taxawin, taxon = taxawin.hier,
                          MoreArgs = list(fun = foo, data = dat, nsim = 10),
                          SIMPLIFY = FALSE)}, mc.cores = detectCores())
-
-# with a sliding window
-#taxaslide <- slide(dat, width = wdth, speed = 1,
-#                   time = 'ma_mid', taxa = 'name.bi', loc = 'formation',
-#                   biogeo = biogeosum)
