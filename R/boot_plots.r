@@ -4,8 +4,8 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 
-source('../src/cosmo_prov.r')
-source('../src/diet_dynamics.r')
+source('../R/cosmo_prov.r')
+source('../R/diet_dynamics.r')
 
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 

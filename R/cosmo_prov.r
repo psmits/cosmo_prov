@@ -1,12 +1,12 @@
 library(igraph)
 library(plyr)
 
-source('../src/pa_mung.r')
+source('../R/pa_mung.r')
 
-source('../src/bin_network.r')
-source('../src/biogeo_struct.r')
-source('../src/biogeo_bootstrap.r')
-source('../src/window.r')
+source('../R/bin_network.r')
+source('../R/biogeo_struct.r')
+source('../R/biogeo_bootstrap.r')
+source('../R/window.r')
 
 stage <- split(dat, f = dat$stage)
 stgraph <- lapply(stage, bin.network, taxa = 'name.bi', loc = 'formation')
@@ -36,6 +36,6 @@ taxawin.boot <- lapply(biogeosum, function(foo) {
                        SIMPLIFY = FALSE)})
 
 # with a sliding window
-taxaslide <- slide(dat, width = wdth, speed = 1,
-                   time = 'ma_mid', taxa = 'name.bi', loc = 'formation',
-                   biogeo = biogeosum)
+#taxaslide <- slide(dat, width = wdth, speed = 1,
+#                   time = 'ma_mid', taxa = 'name.bi', loc = 'formation',
+#                   biogeo = biogeosum)

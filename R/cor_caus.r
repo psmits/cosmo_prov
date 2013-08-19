@@ -3,8 +3,8 @@
 
 library(reshape2)
 
-source('../src/cosmo_prov.r')
-source('../src/diet_dynamics.r')
+source('../R/cosmo_prov.r')
+source('../R/diet_dynamics.r')
 
 wnbg <- melt(win.bg)
 wnbg <- split(wnbg, f = stbg$L1)

@@ -1,7 +1,7 @@
 library(plyr)
 library(paleoTS)
 
-source('../src/cosmo_prov.r')
+source('../R/cosmo_prov.r')
 
 # raw curve
 # explicit bins

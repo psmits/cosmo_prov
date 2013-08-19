@@ -1,12 +1,12 @@
 library(igraph)
 library(plyr)
 
-source('../src/pa_mung.r')
+source('../R/pa_mung.r')
 
-source('../src/bin_network.r')
-source('../src/biogeo_struct.r')
-source('../src/biogeo_bootstrap.r')
-source('../src/window.r')
+source('../R/bin_network.r')
+source('../R/biogeo_struct.r')
+source('../R/biogeo_bootstrap.r')
+source('../R/window.r')
 
 diet <- split(dat, f = dat$comdiet)
 

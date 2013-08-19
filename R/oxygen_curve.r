@@ -5,7 +5,7 @@ require(scales)
 require(mgcv)
 require(reshape2)
 
-source('../src/mammal_curve.R')
+source('../R/mammal_curve.R')
 
 ## generate zachos et al. 2008 curve
 zachos <- read.csv('../data/2008_zachos_data.csv', header = T)

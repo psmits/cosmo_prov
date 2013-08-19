@@ -1,5 +1,3 @@
-require(reshape2)
-
 #' Make co-occurrence from multivariate abundance.
 #'
 #' This function creates a co-occurrence matrix from a multivariate abundance

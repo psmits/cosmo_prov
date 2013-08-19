@@ -3,8 +3,8 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 
-source('../src/cosmo_prov.r')
-source('../src/diet_dynamics.r')
+source('../R/cosmo_prov.r')
+source('../R/diet_dynamics.r')
 
 zachos <- read.csv('../data/2008_zachos_data.csv', header = T)
 ti <- c('site', 'age', 'genus', 'd18o', 'd13c', 'd18o.5', 'd13c.5')
