@@ -2,10 +2,15 @@ library(plyr)
 library(paleoTS)
 
 source('../R/cosmo_prov.r')
-#source('../
+source('../R/oxygen_curve.r')
 
-# raw curve
-# explicit bins
+# correlations with the bins between the four different biogeo stats and oxygen
+win.cor <- lapply(win.bg, function(x) cor.test(diff(rev(unlist(x))),
+                                               diff(rev(oxym)), 
+                                               method = 'spearman',
+                                               exact = FALSE))
+
+# paleoTS using the bootstrap results from each bin
 tx.bt <- lapply(taxawin.boot, function(x) {
                 lapply(x, function(y) {
                        list(mm = mean(y), 
@@ -26,4 +31,4 @@ mtb.pts <- lapply(mtb.ts, function(x) as.paleoTS(mm = x$mm,
                                                  vv = x$vv, 
                                                  nn = x$nn, 
                                                  tt = x$tt))
-
+mtb.res <- lapply(mtb.pts, fit3models, silent = TRUE, method = 'Joint')
