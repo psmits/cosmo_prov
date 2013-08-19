@@ -1,0 +1,57 @@
+library(igraph)
+library(plyr)
+
+source('../src/pa_mung.r')
+
+source('../src/bin_network.r')
+source('../src/biogeo_struct.r')
+source('../src/biogeo_bootstrap.r')
+source('../src/window.r')
+
+diet <- split(dat, f = dat$comdiet)
+
+stdiet <- lapply(diet, function(x) {
+                 split(x, x$stage)})
+
+stdigr <- lapply(stdiet, function(x) {
+                 lapply(x, bin.network, taxa = 'name.bi', loc = 'formation')})
+stdigr.bg <- lapply(stdigr, function(x) {
+                    lapply(biogeosum, function(y) lapply(x, y))})
+
+stdigr.hier <- lapply(stdigr, function(x) {
+                      lapply(x, get.hier, level = 'family_name', data = dat)})
+stdigr.boot <- Map(function(x, y) {
+                   lapply(biogeosum, function(foo) {
+                          mapply(biogeo.boot,
+                                 graph = x, taxon = y,
+                                 MoreArgs = list(fun = foo, 
+                                                 data = dat, 
+                                                 nsim = 10),
+                                 SIMPLIFY = FALSE)})},
+                   x = stdigr, y = stdigr.hier)
+
+# with explicit bins
+wdth <- 2
+dietwin <- lapply(diet, function(x) {
+                  network.bin(x, width = wdth, time = 'ma_mid',
+                              taxa = 'name.bi', loc = 'formation')})
+dtwin.bg <- lapply(dietwin, function(x) {
+                   lapply(biogeosum, function(y) lapply(x, y))})
+
+dtwin.hier <- lapply(dietwin, function(x) {
+                     lapply(x, get.hier, level = 'family_name', data = dat)})
+dtwin.boot <- Map(function(x, y) {
+                   lapply(biogeosum, function(foo) {
+                          mapply(biogeo.boot,
+                                 graph = x, taxon = y,
+                                 MoreArgs = list(fun = foo, 
+                                                 data = dat, 
+                                                 nsim = 10),
+                                 SIMPLIFY = FALSE)})},
+                   x = dietwin, y = dtwin.hier)
+
+# with a sliding window
+dtsli <- lapply(diet, function(x) {
+                slide(x, width = wdth, speed = 1,
+                      time = 'ma_mid', taxa = 'name.bi', loc = 'formation',
+                      biogeo = biogeosum)})

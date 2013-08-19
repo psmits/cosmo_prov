@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm}
+\usepackage{parskip, graphicx, microtype}
+\usepackage{caption, subcaption, multirow}
+\usepackage{authblk}
+\usepackage[sort&compress]{natbib}
+
+\usepackage{lipsum}
+
+\frenchspacing
+
+<<echo = FALSE, message = FALSE, warning = FALSE>>=
+library(ggplot2)
+
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+               highlight = FALSE, background = 'white')
+
+theme_set(theme_bw())
+
+# source/load the necessary files
+# have plots formatted externally then called from this document
+@
+
+\title{Cosmopolitan and provincialism dynamics of North American terrestrial mammals across the Cenozoic}
+\author[1]{Peter D Smits}
+\author[2]{John Alroy}
+\affil[1]{Committee on Evolutionary Biology, University of Chicago}
+\affil[2]{Department of Biological Sciences, Macquarie University}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This is where the abstract would go.
+\end{abstract}
+
+\section{Introduction}
+\lipsum[1-3]
+
+
+\section{Materials and Methods}
+\lipsum[1-3]
+
+
+\section{Results}
+\lipsum[1-3]
+
+
+\section{Discussion}
+\lipsum[1-3]
+
+
+\section*{Acknowledgements}
+Michael Foote, Carl Simpson, David Bapst, Benjamin Frable, Dallas Krentzel. Money? What money?
+
+\bibliographystyle{abbrv}
+\bibliography{cosmo_prov}
+
+\end{document}
