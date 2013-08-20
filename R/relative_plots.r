@@ -23,6 +23,8 @@ reldiet <- melt(reldiet, id.vars = c('ma', 'stage'))
 rdt <- ggplot(dat, aes(x = stage, fill = comdiet))
 rdt <- rdt + geom_bar(position = 'fill')
 rdt <- rdt + scale_color_manual(values = cbp)
+rdt <- rdt + theme(axis.text.x = element_text(angle = 90))
+ggsave(file = '../doc/figure/rel_diet.png', plot = rdt)
 
 
 relloc <- ddply(dat, .(stage), summarize,
@@ -36,3 +38,4 @@ relloc <- ddply(dat, .(stage), summarize,
 rlf <- ggplot(dat, aes(x = stage, fill = life_habit))
 rlf <- rlf + geom_bar(position = 'fill')
 rlf <- rlf + scale_color_manual(values = cbp)
+ggsave(file = '../doc/figure/rel_loco.png', plot = rlf)

@@ -66,6 +66,10 @@ dat$comdiet <- dat$diet1
 dat$comdiet[dat$diet1 %in% herb] <- 'herb'
 dat$comdiet[dat$diet1 %in% omm] <- 'omni'
 dat$comdiet[dat$diet1 %in% car] <- 'carni'
+pa.mat$comdiet <- pa.mat$diet1
+pa.mat$comdiet[pa.mat$diet1 %in% herb] <- 'herb'
+pa.mat$comdiet[pa.mat$diet1 %in% omm] <- 'omni'
+pa.mat$comdiet[pa.mat$diet1 %in% car] <- 'carni'
 
 
 st <- split(dat, dat$stage)
