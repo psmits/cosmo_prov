@@ -13,6 +13,21 @@ temp <- c('period', 'epoch', 'subepoch', 'stage', 'formation')
 trm <- Reduce(union, lapply(temp, function(x) which(dat[, x] == '')))
 dat <- dat[-trm, ]
 
+# clean up all the formation names
+rmform <- c('middle Miocene', 'troublesome', 'vertebrate', 'unnamed sandstone')
+dat <- dat[!dat$formation %in% rmform, ]
+dat$formation  <- gsub(pattern = '[\\"?]', 
+                       replacement = '', 
+                       x = dat$formation, perl = TRUE)
+dat$formation <- gsub(pattern = '\\([^)]*\\)', 
+                      replacement = '', 
+                      x = dat$formation, 
+                      perl = TRUE)
+dat$formation <- gsub('^[a-z. ]*', '', dat$formation, perl = TRUE)
+dat$formation <- sub('^\\s+', '', dat$formation)
+dat$formation <- sub('\\s+$', '', dat$formation)
+dat$formation[grep('Fort Union', dat$formation)] <- 'Fort Union'
+
 # make the number columns numeric
 num <- c('max_ma', 'max_ma_error',
          'min_ma', 'min_ma_error',
