@@ -9,6 +9,7 @@ carnivore, herbivore, omnivore
 Locomotor category
 ------------------
 
+ground dwelling, arboreal, fossorial, semifossorial, etc.
 
 
 Climate
