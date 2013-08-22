@@ -1,3 +1,7 @@
+% where to send?
+%   AmNat 21 pages, 6 figures/tables
+%   Paleobiology 50 pages
+
 \documentclass[12pt,letterpaper]{article}
 \usepackage{amsmath, amsthm}
 \usepackage{parskip, graphicx, microtype}
@@ -29,7 +33,10 @@
 \modulolinenumbers[2]
 
 \begin{abstract}
-  %This is where the abstract would go.
+  % This is where the abstract would go.
+  % Paleobiology: 250-300 words
+  %
+  \noindent (Keywords: )
 \end{abstract}
 
 \section{Introduction}
@@ -80,14 +87,37 @@
 % biogeographic analysis
 %   following Sidor2013, four measures of biogeographic network structure
 %     code length
+%       map equation Rosvall2007a,Rosvall2008,Rosvall2010b
+%       see Vilhena2013 for proof with bipartite networks
 %     biogeographic connectedness
 %     average number of locality occurences
 %     average number of endemics
 %   stage, bin
 %
 % resampling procedure
-% 
+%   similar to Sidor2013
+%     probability of removing an taxon
+%       number of occurences of taxon divided by total number of occurences
+%     removed taxa are replaced from random sample within same family
+%       only from those taxa present in any of the localities
+%   repeated X times
+%
 % time series analysis
+%   correlation
+%     first differences of biogeographic network structure series
+%     first differences of Zachos2008 curve
+%       between the total curves and Zachos
+%       between the diet/locomotor categories and Zachos
+%       between the diet and locomotor categories
+%     the time series presented here are too small to accurately infer directionality
+%       Hannisdal2011,Hannisdall2011d,Hannisdall2011c
+%   modeling
+%     Hunt2006a
+%     three basic models of time series
+%       random walk
+%       random walk with a trend
+%       stasis
+%     alternative methods? 
 %
 \lipsum[1-3]
 
@@ -103,7 +133,7 @@
 \section*{Acknowledgements}
 Kenneth Angielczyk, David Bapst, Michael Foote, Benjamin Frable, Dallas Krentzel, Carl Simpson. Money? What money?
 
-\bibliographystyle{abbrv}
+\bibliographystyle{amnatnat}
 \bibliography{cosmo_prov,packages}
 
 \end{document}
