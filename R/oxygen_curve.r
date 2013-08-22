@@ -13,4 +13,3 @@ for(ii in seq(length(bin) - 1)) {
 }
 
 names(oo) <- (bin + 2)[seq(length(bin) - 1)]
-oxym <- oo[names(oo) %in% names(taxawin)]

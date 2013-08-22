@@ -1,5 +1,6 @@
 library(igraph)
 library(plyr)
+library(parallel)
 
 source('../R/pa_mung.r')
 

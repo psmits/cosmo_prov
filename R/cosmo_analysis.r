@@ -5,6 +5,7 @@ source('../R/cosmo_prov.r')
 source('../R/oxygen_curve.r')
 
 # correlations with the bins between the four different biogeo stats and oxygen
+oxym <- oo[names(oo) %in% names(taxawin)]
 win.cor <- lapply(win.bg, function(x) cor.test(diff(rev(unlist(x))),
                                                diff(rev(oxym)), 
                                                method = 'spearman',
