@@ -12,7 +12,7 @@ past <- split(pa.mat, pa.mat$stage)
 subab <- list()
 for (ii in seq(length(past))) {
   ab <- table(past[[ii]]$occurrence.genus_name)
-  subab[[ii]] <- sqs(ab, q = stcov[ii, 2] - 0.06)[3]
+  subab[[ii]] <- sqs(ab, q = min(stcov[, 2]) - 0.06)[3]
 }
 names(subab) <- names(past)
 
@@ -34,12 +34,12 @@ for (ii in seq(length(dietst))) {
   dietsub <- list()
   for (jj in seq(length(oo))) {
     ab <- table(oo[[jj]]$occurrence.genus_name)
-    dietsub[[jj]] <- sqs(ab, q = uu[jj, 2] - 0.1)[3]
+    dietsub[[jj]] <- sqs(ab, q = min(uu[, 2]) - 0.1)[3]
   }
   names(dietsub) <- uu[, 1]
   dietab[[ii]] <- dietsub
 }
-
+names(dietab) <- names(dietst)
 
 # by locomotor category
 paloco <- split(pa.mat, pa.mat$life_habit)
@@ -58,8 +58,9 @@ for (ii in seq(length(locost))) {
   locosub <- list()
   for (jj in seq(length(oo))) {
     ab <- table(oo[[jj]]$occurrence.genus_name)
-    locosub[[jj]] <- sqs(ab, q = uu[jj, 2] - 0.1)[3]
+    locosub[[jj]] <- sqs(ab, q = min(uu[, 2]) - 0.1)[3]
   }
   names(locosub) <- uu[, 1]
   locoab[[ii]] <- locosub
 }
+names(locoab) <- names(locost)
