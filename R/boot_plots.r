@@ -6,6 +6,7 @@ library(scales)
 
 source('../R/cosmo_prov.r')
 source('../R/diet_dynamics.r')
+source('../R/life_dynamics.r')
 
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
@@ -30,6 +31,10 @@ gwinbt <- ggplot(win.boot, aes(x = L2, y = value))
 gwinbt <- gwinbt + geom_point() 
 gwinbt <- gwinbt + facet_wrap(~ L1, scales = 'free_y')
 gwinbt <- gwinbt + stat_smooth()
+lgg <- ggplot(win.boot, aes(x = L2, y = value, group = Var1))
+lgg <- lgg + geom_line()
+lgg <- lgg + facet_wrap(~ L1, scales = 'free_y')
+
 
 
 # diet graphs
