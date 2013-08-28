@@ -36,7 +36,6 @@ lgg <- lgg + geom_line()
 lgg <- lgg + facet_wrap(~ L1, scales = 'free_y')
 
 
-
 # diet graphs
 # stage
 dtst.boot <- melt(stdigr.boot)
@@ -45,6 +44,26 @@ gdstb <- ggplot(dtst.boot, aes(x = year, y = value, colour = L1))
 gdstb <- gdstb + geom_point()
 gdstb <- gdstb + facet_wrap(~ L2, scales = 'free_y')
 gdstb <- gdstb + stat_smooth(na.action = na.omit)
+
+# explicit bin
+dtw.bt <- melt(dtwin.boot)
+dtw.bt$value[is.nan(dtw.bt$value)] <- NA
+dtw.bt$value[is.infinite(dtw.bt$value)] <- NA
+dtw.bt$L3 <- as.numeric(dtw.bt$L3)
+gdwbt <- ggplot(dtw.bt, aes(x = L3, y = value, colour = L1))
+gdwbt <- gdwbt + geom_point() 
+gdwbt <- gdwbt + facet_wrap(~ L2, scales = 'free_y')
+gdwbt <- gdwbt + stat_smooth(na.action = na.omit)
+
+
+# loco graphs
+# stage
+lfst.boot <- melt(stlfgr.boot)
+lfst.boot <- cbind(lfst.boot, year = tm[match(lfst.boot$L3, tm[, 2]), 1])
+glstb <- ggplot(lfst.boot, aes(x = year, y = value, colour = L1))
+glstb <- glstb + geom_point()
+glstb <- glstb + facet_wrap(~ L2, scales = 'free_y')
+glstb <- glstb + stat_smooth(na.action = na.omit)
 
 # explicit bin
 dtw.bt <- melt(dtwin.boot)

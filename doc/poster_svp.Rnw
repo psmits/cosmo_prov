@@ -1,0 +1,78 @@
+\documentclass[final]{beamer}
+\usepackage[orientation = landscape, size = a0, scale = 1.4]{beamerposter}
+
+\usepackage[]{graphicx}
+\usepackage{amsmath, amsthm}
+
+\usetheme{confposter}
+
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\newlength{\threecolwid}
+\setlength{\paperwidth}{48in} % A0 width: 46.8in
+\setlength{\paperheight}{36in} % A0 height: 33.1in
+\setlength{\sepwid}{0.024\paperwidth} % Separation width (white space) between columns
+\setlength{\onecolwid}{0.22\paperwidth} % Width of one column
+\setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
+\setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
+
+<<message = FALSE, echo = FALSE, warning = FALSE>>=
+
+@
+
+
+\title{Cosmopolitan and provicialism dynamics of terrestrial mammals across the Cenozoic}
+\author{Peter D Smits}
+\institute{Committee on Evolutionary Biology, University of Chicago}
+
+\begin{document}
+\begin{frame}[t]
+  \begin{columns}
+    \begin{column}{\onecolwid}
+      \begin{block}{Introduction}
+        
+      \end{block}
+
+      \begin{block}{Methods}
+        
+      \end{block}
+    \end{column}
+
+    \begin{column}{\twocolwid}
+      \begin{columns}[t,totalwidth = \twocolwid]
+        \begin{column}{\onecolwid}
+          \begin{block}{Results}
+
+          \end{block}
+        \end{column}
+
+        \begin{column}{\onecolwid}
+          \begin{block}{Fancy}
+           
+          \end{block}
+        \end{column}
+      \end{columns}
+
+      \begin{alertblock}{Important Result}
+        
+      \end{alertblock}
+
+      \begin{columns}[t,totalwidth = \twocolwid]
+        \begin{column}{\onecolwid}
+          \begin{block}{Discussion}
+
+          \end{block}
+        \end{column}
+
+        \begin{column}{\onecolwid}
+          \begin{block}{Conclusions}
+           
+          \end{block}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+\end{document}
