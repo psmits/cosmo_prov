@@ -16,9 +16,9 @@ dat <- dat[-trm, ]
 # clean up all the formation names
 rmform <- c('middle Miocene', 'troublesome', 'vertebrate', 'unnamed sandstone')
 dat <- dat[!dat$formation %in% rmform, ]
-dat$formation  <- gsub(pattern = '[\\"?]', 
-                       replacement = '', 
-                       x = dat$formation, perl = TRUE)
+dat$formation <- gsub(pattern = '[\\"?]', 
+                      replacement = '', 
+                      x = dat$formation, perl = TRUE)
 dat$formation <- gsub(pattern = '\\([^)]*\\)', 
                       replacement = '', 
                       x = dat$formation, 
