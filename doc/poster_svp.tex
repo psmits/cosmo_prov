@@ -50,8 +50,13 @@
 \usepackage{alltt}
 \usepackage[orientation = landscape, size = a0, scale = 1.4]{beamerposter}
 
-\usepackage[]{graphicx}
 \usepackage{amsmath, amsthm}
+\usepackage[]{graphicx}
+\usepackage{parskip, microtype}
+\usepackage{caption, subcaption, multirow}
+\usepackage{morefloats, hyperref}
+\usepackage{rotating, longtable}
+\usepackage[sort&compress, numbers]{natbib}
 
 \usetheme{confposter}
 
@@ -67,11 +72,13 @@
 \setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
 \setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
 
+\def\newblock{\hskip .11em plus .33em minus .07em}
 
 
 
 
-\title{Cosmopolitan and provicialism dynamics of terrestrial mammals across the Cenozoic}
+
+\title{Cosmopolitan and endemism dynamics of terrestrial mammals across the Cenozoic}
 \author{Peter D Smits}
 \institute{Committee on Evolutionary Biology, University of Chicago}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -80,12 +87,65 @@
 \begin{frame}[t]
   \begin{columns}
     \begin{column}{\onecolwid}
-      \begin{block}{Introduction}
+      \begin{block}{}
+        \begin{abstract}
+          %This is where the abstract would go.
+          How life history traits, such as diet, are related to the distribution of taxa across the landscape.
+        \end{abstract}
         
+      \end{block}
+      \begin{block}{Introduction}
+% trophic structure change through time
+%   constituent taxa
+%   paleo record
+%     sampling (lack of abundance in terrestrial systems)
+%     site occupancy/distribution
+%   evolution of community
+%     Damuth1982 on preservation of structure
+%     Roopnarine2010,Roopnarine2012b,Roopnarine2007,
+%     Roopnarine2006,Mitchell2012,Angielczyk2005
+%
+% distribution of organisms across the landscape
+% how does life history affect distribution?
+% how does taxonomic distribution change over time
+%   life history characters
+%     diet
+%     life habit/locomotor category
+%   abiotic factors
+%     climate Zachos2001,Zachos2008
+%
+% previous work on contribution of different taxa to site similarity
+%   Jernvall2004
+%   Jernvall2002
+%
+  
+        Previous work on mammalian site similarity has focused on organismal dietary distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
+        Here, I expand that analysis the entire Cenozoic of North America and analyze both diety and locomotor categories of terrestrial mammals.
       \end{block}
 
       \begin{block}{Methods}
-        
+        Mammalian taxonomic occurence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}).
+        Taxonomic occurence information was restricted to only mammals occuring in North America during the Cenozoic.
+        Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?).
+        Temporal, geologic, dietary and life habit informaiton was also compiled for all taxa.
+
+        Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, taxonomic abundance distributions were not analyzed.
+
+        %Temporal bins: stage, 2My
+
+        %biogeographic networks
+        Following \citet{Sidor2013} and \citet{Vilhena2013}
+
+      \end{block}
+
+      \begin{block}{Relative abundance}
+        %\begin{figure}[ht]
+        %  \begin{center}
+        %    \includegraphics[width = \onecolwid]{figure/rel_diet}
+        %  \end{center}
+        %  \caption{Relative abundance of mammalian dietary categories.}
+        %  \label{fig:rel_diet}
+        %\end{figure}
       \end{block}
     \end{column}
 
@@ -99,13 +159,27 @@
 
         \begin{column}{\onecolwid}
           \begin{block}{Fancy}
-           
           \end{block}
         \end{column}
       \end{columns}
 
-      \begin{alertblock}{Important Result}
-        
+      \begin{alertblock}{Biogeographic networks}
+        \begin{figure}[ht]
+          \begin{center}
+            \begin{subfigure}[b]{\onecolwid}
+              \centering
+              \includegraphics[width = \onecolwid]{figure/diet_bin}
+              \label{fig:net_diet}
+            \end{subfigure}
+            \begin{subfigure}[b]{\onecolwid}
+              \centering
+              \includegraphics[width = \onecolwid]{figure/loco_bin}
+              \label{fig:net_loco}
+            \end{subfigure}
+          \end{center}
+          \caption{Biogeographic network summary statistics from the 2 My bins.}
+          \label{fig:net_sum}
+        \end{figure}
       \end{alertblock}
 
       \begin{columns}[t,totalwidth = \twocolwid]
@@ -119,6 +193,18 @@
           \begin{block}{Conclusions}
            
           \end{block}
+
+          \begin{block}{Acknowledgements}
+            John Alroy, Michael Foote, Ken Angielczyk.
+          \end{block}
+
+          % bibliography
+          \begin{scriptsize}
+            \begin{block}{Bibliography}
+              \bibliographystyle{abbrvnat}
+              \bibliography{cosmo_prov,packages}
+            \end{block}
+          \end{scriptsize}
         \end{column}
       \end{columns}
     \end{column}
