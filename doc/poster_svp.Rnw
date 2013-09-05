@@ -30,7 +30,7 @@
 @
 
 
-\title{Cosmopolitan and endemism dynamics of terrestrial mammals across the Cenozoic}
+\title{Cosmopolitan and endemism dynamics of terrestrial Cenozoic mammals} 
 \author{Peter D Smits}
 \institute{Committee on Evolutionary Biology, University of Chicago}
 
@@ -41,15 +41,14 @@
       \begin{block}{}
         \begin{abstract}
           %This is where the abstract would go.
-          How life history traits, such as diet, are related to the distribution of taxa across the landscape.
+          Community structure plays a fundamental roll in determining ecological dynamics. 
+          
+          Evolutionary paleoecology is concerned with how ecological traits expressed at any level affect the evolutionary process. Related to this is how ecological traits are related to the distribution of biota across space, which in turn affects the structure and nature of biotic interactions.
 
-          evolutionary paleoecology
+          Here, I investigate whether community structure has or has not changed in relation to life history traits over geologic time and as abiotic conditions have changed. 
 
-          life history traits
+          Life history traits are those traits which are expressed at the organismal level but are constant across all members of that species. For example, dietary category can be considered a life history trait.
 
-          taxonomic distribution
-
-          what is driving similarity in biotic interaction?
         \end{abstract}
         
       \end{block}
