@@ -91,6 +91,14 @@
         \begin{abstract}
           %This is where the abstract would go.
           How life history traits, such as diet, are related to the distribution of taxa across the landscape.
+
+          evolutionary paleoecology
+
+          life history traits
+
+          taxonomic distribution
+
+          what is driving similarity in biotic interaction?
         \end{abstract}
         
       \end{block}
@@ -113,16 +121,19 @@
 %     life habit/locomotor category
 %   abiotic factors
 %     climate Zachos2001,Zachos2008
+        Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citet{Kitchell1985a}. 
 %
 % previous work on contribution of different taxa to site similarity
 %   Jernvall2004
 %   Jernvall2002
 %
-  
+        How taxonomic composition of communities have changed over time is of interest because
+
         Previous work on mammalian site similarity has focused on organismal dietary distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
         Here, I expand that analysis the entire Cenozoic of North America and analyze both diety and locomotor categories of terrestrial mammals.
       \end{block}
 
+      \begin{footnotesize}
       \begin{block}{Methods}
         Mammalian taxonomic occurence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}).
         Taxonomic occurence information was restricted to only mammals occuring in North America during the Cenozoic.
@@ -131,12 +142,20 @@
 
         Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, taxonomic abundance distributions were not analyzed.
 
-        %Temporal bins: stage, 2My
 
         %biogeographic networks
-        Following \citet{Sidor2013} and \citet{Vilhena2013}
+        Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructued. 
+        Here, taxa were defined as the occurence list of all unique species and locality was defined as formation.
+        Biogeographic networks were constructed at two different temporal scales: geologic stages of the Cenozoic and uniform 2 My bins from the K/Pg to the Recent. 
+        Uniform 2 My bins were chosen for multiple reasons. 
+        Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citet{Alroy1996a,Alroy2000g}. 
+        Here, because I am interested in diversity dynamics across multiple formations, I increased bin width to 2 My to allow for every bin to be represented by minimum two formations.
+        Presented here are the results from analysis of the uniform 2 My bins. 
+
+        %Temporal bins: stage, 2My
 
       \end{block}
+      \end{footnotesize}
 
       \begin{block}{Relative abundance}
         %\begin{figure}[ht]
@@ -153,6 +172,13 @@
       \begin{columns}[t,totalwidth = \twocolwid]
         \begin{column}{\onecolwid}
           \begin{block}{Results}
+            \begin{figure}[ht]
+              \begin{center}
+                \includegraphics{figure/gen_bin}
+              \end{center}
+              \caption{Summary statistics of the mammal wide biogeographic networks for every 2 My bin.}
+              \label{fig:net_gen}
+            \end{figure}
 
           \end{block}
         \end{column}
@@ -168,12 +194,12 @@
           \begin{center}
             \begin{subfigure}[b]{\onecolwid}
               \centering
-              \includegraphics[width = \onecolwid]{figure/diet_bin}
+              \includegraphics[width = 0.8\onecolwid]{figure/diet_bin}
               \label{fig:net_diet}
             \end{subfigure}
             \begin{subfigure}[b]{\onecolwid}
               \centering
-              \includegraphics[width = \onecolwid]{figure/loco_bin}
+              \includegraphics[width = 0.8\onecolwid]{figure/loco_bin}
               \label{fig:net_loco}
             \end{subfigure}
           \end{center}
