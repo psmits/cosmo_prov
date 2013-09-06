@@ -16,7 +16,7 @@ time.match <- cbind(ma = dat$stmid, st = data.frame(dat$stage))
 tm <- unique(time.match)
 
 # zachos curve
-ggzac <- ggplot(zachos, aes(x = age, y = d18o)) 
+ggzac <- ggplot(zachos, aes(x = age, y = -d18o)) 
 ggzac <- ggzac + geom_point(aes(alpha = 0.3))
 #ggzac <- ggzac + scale_color_manual(values = cbp)
 ggzac <- ggzac + theme(legend.position = 'none')
@@ -42,7 +42,7 @@ ggdat <- ggdat + facet_wrap(~ L1, scales = 'free_y')
 ggdat <- ggdat + scale_color_manual(values = cbp)
 #ggdat <- ggdat + theme(legend.position = 'none')
 ggdat <- ggdat + labs(x = 'Time (My)')
-#ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE)
+ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/gen_bin.png', plot = ggdat)
 
 
@@ -68,7 +68,7 @@ ggdiet <- ggdiet + facet_wrap(~ L2, scales = 'free_y')
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 #ggdiet <- ggdiet + theme(legend.position = 'none')
 ggdiet <- ggdiet + labs(x = 'Time (My)')
-#ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
+ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/diet_bin.png', plot = ggdiet)
 
 
@@ -92,4 +92,5 @@ ggloco <- ggloco + geom_line(alpha = 0.5)
 ggloco <- ggloco + facet_wrap(~ L2, scales = 'free_y')
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
+ggloco <- ggloco + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/loco_bin.png', plot = ggloco)

@@ -3,44 +3,44 @@ The top-level auxiliary file: poster_svp.aux
 The style file: abbrvnat.bst
 Database file #1: cosmo_prov.bib
 Database file #2: packages.bib
-You've used 7 entries,
+You've used 8 entries,
             2773 wiz_defined-function locations,
-            662 strings with 6515 characters,
-and the built_in function-call counts, 3913 in all, are:
-= -- 365
-> -- 251
+            667 strings with 6372 characters,
+and the built_in function-call counts, 4378 in all, are:
+= -- 402
+> -- 281
 < -- 4
-+ -- 85
-- -- 78
-* -- 362
-:= -- 627
++ -- 95
+- -- 87
+* -- 405
+:= -- 695
 add.period$ -- 34
-call.type$ -- 7
-change.case$ -- 47
-chr.to.int$ -- 7
-cite$ -- 14
-duplicate$ -- 143
-empty$ -- 277
-format.name$ -- 89
-if$ -- 793
+call.type$ -- 8
+change.case$ -- 53
+chr.to.int$ -- 8
+cite$ -- 16
+duplicate$ -- 164
+empty$ -- 318
+format.name$ -- 99
+if$ -- 888
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 7
-newline$ -- 56
-num.names$ -- 28
-pop$ -- 69
+missing$ -- 8
+newline$ -- 58
+num.names$ -- 32
+pop$ -- 82
 preamble$ -- 1
-purify$ -- 40
+purify$ -- 45
 quote$ -- 0
-skip$ -- 111
+skip$ -- 125
 stack$ -- 0
-substring$ -- 170
-swap$ -- 11
+substring$ -- 197
+swap$ -- 13
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 77
+type$ -- 88
 warning$ -- 0
-while$ -- 34
+while$ -- 39
 width$ -- 0
-write$ -- 124
+write$ -- 131

@@ -85,31 +85,20 @@
 
 \begin{document}
 \begin{frame}[t]
-  \begin{columns}
+  \begin{columns}[t]
     \begin{column}{\onecolwid}
-      \begin{block}{}
-        \begin{abstract}
-          %This is where the abstract would go.
-          Community structure plays a fundamental roll in determining ecological dynamics. 
-          
-          Evolutionary paleoecology is concerned with how ecological traits expressed at any level affect the evolutionary process. Related to this is how ecological traits are related to the distribution of biota across space, which in turn affects the structure and nature of biotic interactions.
+%      \begin{block}{}
+%        \begin{abstract}
+%          Community structure plays a fundamental roll in determining ecological dynamics. 
+%          Evolutionary paleoecology is concerned with how ecological traits expressed at any level affect the evolutionary process. Related to this is how ecological traits are related to the distribution of biota across space, which in turn affects the structure and nature of biotic interactions.
+%          Here, I investigate whether community structure has or has not changed in relation to life history traits and fluctuating abiotic conditions over geologic time.
+%          Life history traits are those traits which are expressed at the organismal level but are constant across all members of that species. For example, dietary category can be considered a life history trait.
+%          To measure taxonomic distribution as a proxy community structure biogeogrpahic networks were constructed between species and formation occurrence. Four different measures of beiogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
+%          % results
+%        \end{abstract}
+%      \end{block}
 
-          Here, I investigate whether community structure has or has not changed in relation to life history traits over geologic time and as abiotic conditions have changed.
-
-          Life history traits are those traits which are expressed at the organismal level but are constant across all members of that species.
-
-
-          evolutionary paleoecology
-
-          life history traits
-
-          taxonomic distribution
-
-          what is driving similarity in biotic interaction?
-        \end{abstract}
-        
-      \end{block}
-      \begin{block}{Introduction}
+    \begin{block}{Extended abstract}
 % trophic structure change through time
 %   constituent taxa
 %   paleo record
@@ -128,60 +117,52 @@
 %     life habit/locomotor category
 %   abiotic factors
 %     climate Zachos2001,Zachos2008
-        Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citet{Kitchell1985a}. 
-%
-% previous work on contribution of different taxa to site similarity
-%   Jernvall2004
-%   Jernvall2002
-%
-        How taxonomic composition of communities have changed over time is of interest because
+
+        Community structure plays a fundamental roll in determining ecological dynamics. 
+        Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citep{Kitchell1985a}. Biotic and abiotic interactions change over time and understanding their interplay, both biotic--biotic and biotic--abiotic, is important for better understanding how and which ecological properties affect macroevolutionary trends.
+        How taxonomic composition of communities have changed over time is of interest because community composition determines the range of plausible biotic interactions. Additionally, if change in taxonomic and life history composition is correlated with abiotic factors such as temperature %then what does this mean?
 
         Previous work on mammalian site similarity has focused on organismal dietary distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
-        Here, I expand that analysis the entire Cenozoic of North America and analyze both diety and locomotor categories of terrestrial mammals.
+        Here, I expand that analysis the entire Cenozoic of North America and analyze both diety and locomotor categories of terrestrial mammals. Additionally, I analyze if shifts in taxonomic and life history composition are correlated with climatic change.
+        To measure taxonomic distribution as a proxy community structure biogeogrpahic networks were constructed between species and formation occurrence. Four different measures of beiogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
       \end{block}
 
       \begin{footnotesize}
       \begin{block}{Methods}
-        Mammalian taxonomic occurence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}).
-        Taxonomic occurence information was restricted to only mammals occuring in North America during the Cenozoic.
-        Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?).
-        Temporal, geologic, dietary and life habit informaiton was also compiled for all taxa.
-
-        Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, taxonomic abundance distributions were not analyzed.
-
+        Mammalian taxonomic occurence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}). Taxonomic occurence information was restricted to only mammals occuring in North America during the Cenozoic. Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?). Temporal, geologic, and life history informaiton was also compiled for all taxa. Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, taxonomic abundance distributions were not analyzed.
 
         %biogeographic networks
-        Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructued. 
-        Here, taxa were defined as the occurence list of all unique species and locality was defined as formation.
-        Biogeographic networks were constructed at two different temporal scales: geologic stages of the Cenozoic and uniform 2 My bins from the K/Pg to the Recent. 
-        Uniform 2 My bins were chosen for multiple reasons. 
-        Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citet{Alroy1996a,Alroy2000g}. 
-        Here, because I am interested in diversity dynamics across multiple formations, I increased bin width to 2 My to allow for every bin to be represented by minimum two formations.
-        Presented here are the results from analysis of the uniform 2 My bins. 
+        Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructued. Here, taxa were defined as the occurence list of all unique species and locality was defined as formation. Biogeographic networks were constructed for uniform 2 My bins from the K/Pg to the Recent which were chosen for multiple reasons. Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citep{Alroy1996a,Alroy2000g}. Here, because I am interested in diversity dynamics across multiple formations, I increased bin width to 2 My to allow for every bin to be represented by minimum two formations.
 
-        %Temporal bins: stage, 2My
+        Biogeographic network structure was measured using four previously defined measures \citep{Sidor2013}: average number of locality occurences per taxon, biogeographic connectedness, code length, and average number of endemic taxa per locality. 
+
+        % climate
+        Climate change, specifically temperature, was determined using a benthic foram \(\delta O^{18}\) isotope curve of the whole Cenozoic \citep{Zachos2008}. Bin \(\delta O^{18}\) values were calculated as the average of all data points occuring in that bin.% Zachos2008
+
+        % analysis
+        Correlation tests were done between between the first differences of all biogeographic summary statistic time series and the \(\delta O^{18}\) curve. 
 
       \end{block}
       \end{footnotesize}
 
-      \begin{block}{Relative abundance}
-        %\begin{figure}[ht]
-        %  \begin{center}
-        %    \includegraphics[width = \onecolwid]{figure/rel_diet}
-        %  \end{center}
-        %  \caption{Relative abundance of mammalian dietary categories.}
-        %  \label{fig:rel_diet}
-        %\end{figure}
-      \end{block}
     \end{column}
 
     \begin{column}{\twocolwid}
       \begin{columns}[t,totalwidth = \twocolwid]
         \begin{column}{\onecolwid}
-          \begin{block}{Results}
+%          \begin{block}{Relative abundance}
+            %\begin{figure}[ht]
+            %  \begin{center}
+            %    \includegraphics[width = \onecolwid]{figure/rel_diet}
+            %  \end{center}
+            %  \caption{Relative abundance of mammalian dietary categories.}
+            %  \label{fig:rel_diet}
+            %\end{figure}
+%          \end{block}
+          \begin{block}{Biogeographic structure}
             \begin{figure}[ht]
               \begin{center}
-                \includegraphics{figure/gen_bin}
+                \includegraphics[height = 0.2\textheight]{figure/gen_bin}
               \end{center}
               \caption{Summary statistics of the mammal wide biogeographic networks for every 2 My bin.}
               \label{fig:net_gen}
@@ -191,12 +172,18 @@
         \end{column}
 
         \begin{column}{\onecolwid}
-          \begin{block}{Fancy}
+          \begin{block}{\(\delta O^{18}\)}
+            \begin{figure}[ht]
+              \centering
+              \includegraphics[height = 0.2\textheight]{figure/zachos}
+              \caption{Oxygen curve \citep{Zachos2008} with fitted GAM to illustrate overall structure.}
+              \label{fig:zac}
+            \end{figure}
           \end{block}
         \end{column}
       \end{columns}
 
-      \begin{alertblock}{Biogeographic networks}
+      \begin{alertblock}{Life history dynamics}
         \begin{figure}[ht]
           \begin{center}
             \begin{subfigure}[b]{\onecolwid}
@@ -217,30 +204,41 @@
 
       \begin{columns}[t,totalwidth = \twocolwid]
         \begin{column}{\onecolwid}
-          \begin{block}{Discussion}
+          \begin{block}{Results}
 
           \end{block}
         \end{column}
 
         \begin{column}{\onecolwid}
-          \begin{block}{Conclusions}
+          \begin{block}{Time series analysis}
            
           \end{block}
-
-          \begin{block}{Acknowledgements}
-            John Alroy, Michael Foote, Ken Angielczyk.
-          \end{block}
-
-          % bibliography
-          \begin{scriptsize}
-            \begin{block}{Bibliography}
-              \bibliographystyle{abbrvnat}
-              \bibliography{cosmo_prov,packages}
-            \end{block}
-          \end{scriptsize}
         \end{column}
       \end{columns}
+
+
     \end{column}
+
+    \begin{columns}[t,totalwidth = \onecolwid]
+      \begin{column}{\onecolwid}
+        \begin{block}{Discussion}
+          This is where the magic happens
+        \end{block}
+
+        \begin{block}{Acknowledgements}
+          John Alroy, Michael Foote, Ken Angielczyk.
+        \end{block}
+
+        % bibliography
+        \begin{scriptsize}
+          \begin{block}{Bibliography}
+            \bibliographystyle{abbrvnat}
+            \bibliography{cosmo_prov,packages}
+          \end{block}
+        \end{scriptsize}
+      \end{column}
+    \end{columns}
+
   \end{columns}
 \end{frame}
 \end{document}
