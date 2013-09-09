@@ -38,6 +38,16 @@ sdt <- sdt + scale_fill_manual(values = cbp)
 sdt <- sdt + scale_color_manual(values = cbp)
 ggsave(file = '../doc/figure/sub_diet.png', plot = sdt)
 
+# subsampled at the bin level
+subdtbin <- melt(lapply(dtbinab, function(x) {
+                        lapply(x, as.numeric)}))
+subdtbin$L2 <- as.numeric(subdtbin$L2)
+bsdt <- ggplot(subdtbin, aes(x = L2, y = value,
+                             colour = L1, fill = L1, group = L1))
+bsdt <- bsdt + geom_area(position = 'fill', stat = 'identity')
+bsdt <- bsdt + labs(x = 'Time (My)', y = 'relative subsampled richness')
+ggsave(file = '../doc/figure/sub_bin_diet.png', plot = sdt)
+
 
 # relative locomotor category
 relloc <- ddply(dat, .(stage), summarize,

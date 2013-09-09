@@ -16,6 +16,25 @@ for (ii in seq(length(past))) {
 }
 names(subab) <- names(past)
 
+# do at 2My bins
+bins <- seq(from = 0, to = 66, by = 2)
+bins <- cbind(top = bins[-1], bot = bins[-length(bins)])
+# assign every occurence to a bin
+pa.mat$bins <- rep(NA, nrow(pa.mat))
+for (ii in seq(nrow(bins))) {
+  out <- which(pa.mat$ma_mid < bins[ii, 1] & pa.mat$ma_mid >= bins[ii, 2])
+  pa.mat$bins[out] <- bins[ii, 1]
+}
+bincov <- ddply(pa.mat, .(bins), summarize,
+                uu = coverage(table(occurrence.genus_name)))
+
+pabin <- split(pa.mat, pa.mat$bins)
+binsub <- list()
+for (ii in seq(length(pabin))) {
+  ab <- table(pabin[[ii]]$occurrence.genus_name)
+  binsub[[ii]] <- sqs(ab, q = min(bincov[, 2]) - 0.06)[3]
+}
+
 
 # by dietary category
 padiet <- split(pa.mat, pa.mat$comdiet)
@@ -40,6 +59,28 @@ for (ii in seq(length(dietst))) {
   dietab[[ii]] <- dietsub
 }
 names(dietab) <- names(dietst)
+
+# repeate at bin level
+dtbncov <- llply(padiet, function(x) {
+                 ddply(x, .(bins), summarize,
+                       uu = coverage(table(occurrence.genus_name)))})
+
+dtbin <- lapply(padiet, function(x) {
+                split(x, x$bins)})
+dtbinab <- list()
+for (ii in seq(length(dtbin))) {
+  oo <- dtbin[[ii]]
+  uu <- dtbncov[[ii]]
+  dtbnsb <- list()
+  for (jj in seq(length(oo))) {
+    ab <- table(oo[[jj]]$occurrence.genus_name)
+    dtbnsb[[jj]] <- sqs(ab, q = min(uu[, 2]) - 0.1)[3]
+  }
+  names(dtbnsb) <- uu[, 1]
+  dtbinab[[ii]] <- dtbnsb
+}
+names(dtbinab) <- names(dtbin)
+
 
 # by locomotor category
 paloco <- split(pa.mat, pa.mat$life_habit)

@@ -87,17 +87,6 @@
 \begin{frame}[t]
   \begin{columns}[t]
     \begin{column}{\onecolwid}
-%      \begin{block}{}
-%        \begin{abstract}
-%          Community structure plays a fundamental roll in determining ecological dynamics. 
-%          Evolutionary paleoecology is concerned with how ecological traits expressed at any level affect the evolutionary process. Related to this is how ecological traits are related to the distribution of biota across space, which in turn affects the structure and nature of biotic interactions.
-%          Here, I investigate whether community structure has or has not changed in relation to life history traits and fluctuating abiotic conditions over geologic time.
-%          Life history traits are those traits which are expressed at the organismal level but are constant across all members of that species. For example, dietary category can be considered a life history trait.
-%          To measure taxonomic distribution as a proxy community structure biogeogrpahic networks were constructed between species and formation occurrence. Four different measures of beiogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
-%          % results
-%        \end{abstract}
-%      \end{block}
-
     \begin{block}{Extended abstract}
 % trophic structure change through time
 %   constituent taxa
@@ -150,15 +139,17 @@
     \begin{column}{\twocolwid}
       \begin{columns}[t,totalwidth = \twocolwid]
         \begin{column}{\onecolwid}
-%          \begin{block}{Relative abundance}
-            %\begin{figure}[ht]
-            %  \begin{center}
-            %    \includegraphics[width = \onecolwid]{figure/rel_diet}
-            %  \end{center}
-            %  \caption{Relative abundance of mammalian dietary categories.}
-            %  \label{fig:rel_diet}
-            %\end{figure}
-%          \end{block}
+          \begin{block}{\(\delta O^{18}\)}
+            \begin{figure}[ht]
+              \centering
+              \includegraphics[height = 0.2\textheight]{figure/zachos}
+              \caption{Oxygen curve \citep{Zachos2008} with fitted GAM to illustrate overall structure.}
+              \label{fig:zac}
+            \end{figure}
+          \end{block}
+        \end{column}
+
+        \begin{column}{\onecolwid}
           \begin{block}{Biogeographic structure}
             \begin{figure}[ht]
               \begin{center}
@@ -166,18 +157,6 @@
               \end{center}
               \caption{Summary statistics of the mammal wide biogeographic networks for every 2 My bin.}
               \label{fig:net_gen}
-            \end{figure}
-
-          \end{block}
-        \end{column}
-
-        \begin{column}{\onecolwid}
-          \begin{block}{\(\delta O^{18}\)}
-            \begin{figure}[ht]
-              \centering
-              \includegraphics[height = 0.2\textheight]{figure/zachos}
-              \caption{Oxygen curve \citep{Zachos2008} with fitted GAM to illustrate overall structure.}
-              \label{fig:zac}
             \end{figure}
           \end{block}
         \end{column}
@@ -204,14 +183,24 @@
 
       \begin{columns}[t,totalwidth = \twocolwid]
         \begin{column}{\onecolwid}
-          \begin{block}{Results}
-
+          \begin{block}{Relative diet}
+            \begin{figure}[ht]
+              \centering
+              \includegraphics[height = 0.2\textheight]{figure/sub_bin_diet}
+              \caption{Relative abundance of mammalian dietary categories. Abundance is based on subsampling using SQS.}
+              \label{fig:rel_ab}
+            \end{figure}
           \end{block}
         \end{column}
 
         \begin{column}{\onecolwid}
-          \begin{block}{Time series analysis}
-           
+          \begin{block}{Diet ~ oxygen}
+            \begin{figure}[ht]
+              \centering
+              \includegraphics[height = 0.2\textheight]{figure/dt_oxy}
+              \caption{<+caption text+>}
+              \label{fig:cor}
+            \end{figure}
           \end{block}
         \end{column}
       \end{columns}
@@ -222,7 +211,19 @@
     \begin{columns}[t,totalwidth = \onecolwid]
       \begin{column}{\onecolwid}
         \begin{block}{Discussion}
-          This is where the magic happens
+          \begin{itemize}
+            \item primarily stationary time series of biogeographic structure over Cenozoic (Fig. \ref{fig:net_gen})
+            \item no correlation between oxygen and dietary (Fig. \ref{fig:cor}) or locomotor category (not shown)
+            \item increase in relative proportion of herbivores (Fig. \ref{fig:rel_ab})
+            \item preliminary correlation between dietary and locomotor categories
+          \end{itemize}
+        \end{block}
+
+        \begin{block}{Future directions}
+          \begin{itemize}
+            \item restrict to major orders \citep{Jernvall2004}
+            \item reorganize locomotor categories (i.e. fewer)
+          \end{itemize}
         \end{block}
 
         \begin{block}{Acknowledgements}
