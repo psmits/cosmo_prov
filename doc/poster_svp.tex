@@ -108,27 +108,25 @@
 %     climate Zachos2001,Zachos2008
 
         Community structure plays a fundamental roll in determining ecological dynamics. 
-        Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citep{Kitchell1985a}. Biotic and abiotic interactions change over time and understanding their interplay, both biotic--biotic and biotic--abiotic, is important for better understanding how and which ecological properties affect macroevolutionary trends.
-        How taxonomic composition of communities have changed over time is of interest because community composition determines the range of plausible biotic interactions. Additionally, if change in taxonomic and life history composition is correlated with abiotic factors such as temperature %then what does this mean?
+        Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citep{Kitchell1985a}. Biotic and abiotic interactions change over time and understanding their interplay, both biotic--biotic and biotic--abiotic, is important for determining which ecological properties affect macroevolutionary trends and how.
+        How the taxonomic composition of communities have changed over time is of interest because community composition determines the range of plausible biotic interactions. Additionally, if change in taxonomic and life history composition is correlated with abiotic factors such as temperature then our knowledge of the pattern of mammalian evolution in the past and in the future might be better constrained.
 
-        Previous work on mammalian site similarity has focused on organismal dietary distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
-        Here, I expand that analysis the entire Cenozoic of North America and analyze both diety and locomotor categories of terrestrial mammals. Additionally, I analyze if shifts in taxonomic and life history composition are correlated with climatic change.
-        To measure taxonomic distribution as a proxy community structure biogeogrpahic networks were constructed between species and formation occurrence. Four different measures of beiogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
+        Previous work on mammalian site similarity has focused on distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
+        Here, I expand that analysis to the entire Cenozoic of North America and both dietary and locomotor categories of terrestrial mammals. Additionally, I analyze if shifts in taxonomic and life history composition are correlated with climatic change.
+        To measure taxonomic distribution as a proxy for community structure, biogeographic networks were constructed between species and formation occurrence. Four different measures of biogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
       \end{block}
 
       \begin{footnotesize}
       \begin{block}{Methods}
-        Mammalian taxonomic occurence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}). Taxonomic occurence information was restricted to only mammals occuring in North America during the Cenozoic. Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?). Temporal, geologic, and life history informaiton was also compiled for all taxa. Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, taxonomic abundance distributions were not analyzed.
+        Mammalian taxonomic occurrence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}). Taxonomic occurrence information was restricted to only mammals occurring in North America during the Cenozoic. Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?). Temporal, geologic, and life history information was also compiled. Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, abundance distributions were not analyzed.
 
         %biogeographic networks
-        Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructued. Here, taxa were defined as the occurence list of all unique species and locality was defined as formation. Biogeographic networks were constructed for uniform 2 My bins from the K/Pg to the Recent which were chosen for multiple reasons. Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citep{Alroy1996a,Alroy2000g}. Here, because I am interested in diversity dynamics across multiple formations, I increased bin width to 2 My to allow for every bin to be represented by minimum two formations.
+        Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructed. Here, taxa were defined as the occurrence list of all unique species and locality was defined as formation. Biogeographic networks were constructed for uniform 2 My bins from the K/Pg to the Recent which were chosen for multiple reasons. Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citep{Alroy1996a,Alroy2000g}. Here, because I am interested in diversity dynamics across multiple formations, I used a bin width of 2 My to allow for every bin to be represented by minimum of two formations.
 
-        Biogeographic network structure was measured using four previously defined measures \citep{Sidor2013}: average number of locality occurences per taxon, biogeographic connectedness, code length, and average number of endemic taxa per locality. 
+        Biogeographic network structure was assessed using four previously defined measures \citep{Sidor2013}: average number of locality occurrences per taxon, biogeographic connectedness, code length, and average number of endemic taxa per locality. 
 
-        % climate
-        Climate change, specifically temperature, was determined using a benthic foram \(\delta O^{18}\) isotope curve of the whole Cenozoic \citep{Zachos2008}. Bin \(\delta O^{18}\) values were calculated as the average of all data points occuring in that bin.% Zachos2008
+        Climate change, specifically temperature, was estimated using a benthic foram \(\delta O^{18}\) isotope curve of the whole Cenozoic \citep{Zachos2008}. Bin \(\delta O^{18}\) values were calculated as the average of all data points occuring in that bin.
 
-        % analysis
         Correlation tests were done between between the first differences of all biogeographic summary statistic time series and the \(\delta O^{18}\) curve. 
 
       \end{block}
@@ -198,7 +196,7 @@
             \begin{figure}[ht]
               \centering
               \includegraphics[height = 0.2\textheight]{figure/dt_oxy}
-              \caption{<+caption text+>}
+              \caption{Biplots of the first differences of the biogeographic network summary statistic time series versus the first differences of the binned \(\delta O^{18}\) isotope curve from \citep{Zachos2008}.}
               \label{fig:cor}
             \end{figure}
           \end{block}
@@ -235,7 +233,7 @@
             \end{itemize}
             \item account for difference in (relative) abundance (Fig. \ref{fig:rel_ab})
             \begin{itemize}
-              \item maintenance of tropic structure \citep{Jernvall2004}?
+              \item maintenance of trophic structure \citep{Jernvall2004}?
               \item common taxa driving structure (ground-dwelling herbivores) \citep{Jernvall2002}?
             \end{itemize}
             \item is ecotype effect stronger than taxonomic effect?
