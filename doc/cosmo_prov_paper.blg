@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: cosmo_prov_paper.aux
+The style file: amnatnat.bst
+Database file #1: cosmo_prov.bib
+Database file #2: packages.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 472446405560.
+You've used 10 entries,
+            3251 wiz_defined-function locations,
+            734 strings with 6943 characters,
+and the built_in function-call counts, 6838 in all, are:
+= -- 556
+> -- 397
+< -- 3
++ -- 133
+- -- 123
+* -- 515
+:= -- 1122
+add.period$ -- 40
+call.type$ -- 10
+change.case$ -- 91
+chr.to.int$ -- 10
+cite$ -- 10
+duplicate$ -- 469
+empty$ -- 448
+format.name$ -- 151
+if$ -- 1334
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 101
+newline$ -- 54
+num.names$ -- 40
+pop$ -- 188
+preamble$ -- 1
+purify$ -- 81
+quote$ -- 0
+skip$ -- 124
+stack$ -- 0
+substring$ -- 344
+swap$ -- 219
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 90
+warning$ -- 0
+while$ -- 49
+width$ -- 0
+write$ -- 133

@@ -1,0 +1,169 @@
+% where to send?
+%   AmNat 21 pages, 6 figures/tables
+%   Paleobiology 50 pages
+
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsmath, amsthm}
+\usepackage{parskip, graphicx, microtype}
+\usepackage{caption, subcaption, multirow}
+\usepackage{morefloats, hyperref}
+\usepackage{rotating, longtable}
+\usepackage{authblk}
+\usepackage[sort&compress]{natbib}
+\usepackage{fullpage}
+
+\usepackage{lineno}
+
+\usepackage{lipsum}
+
+\frenchspacing
+
+
+\title{Cosmopolitan and provincialism dynamics of North American terrestrial mammals across the Cenozoic}
+\author[1]{Peter D Smits}
+\author[2]{John Alroy}
+\affil[1]{Committee on Evolutionary Biology, University of Chicago}
+\affil[2]{Department of Biological Sciences, Macquarie University}
+
+\begin{document}
+
+\maketitle
+
+\linenumbers
+\modulolinenumbers[2]
+
+\begin{abstract}
+  % This is where the abstract would go.
+  % Paleobiology: 250-300 words
+  %
+  \noindent (Keywords: )
+\end{abstract}
+
+\section{Introduction}
+Evolutionary paleoecology is the study of how ecological traits expressed at any level affect the macroevolutionary process, or long term trends in speciation and extinction \citep{Kitchell1985a}. Community structure plays a fundamental roll in determining which biotic interactions are possible at a given time. The importance of biotic interactions in understanding evolutionary dynamics
+% evolutionary paleoecology
+%   Kitchell1985
+%   what organisms interact?
+%     macroecology 
+%       mammal work focuses on body size and range size
+%   how does community structure change over time?
+%     consitituent taxa
+%       paleo record complicates sampling
+%         use site occupancy/distribution Sidor2013,Jerval2004
+%       preservation of structure Damuth1982
+%     site similarity
+%       common herbivores drive trends Jernvall2002
+%         cosmopolitan taxa drive trends
+%       stability/stationary relationship between trophic groups Jernvall2004
+%         herbivore group is largest
+%         resilience and locality coverage 
+%           comparison of three dietary categories
+%     network analysis
+%       food webs
+%         community stability 
+%           Permo-Triassic boundary Angielczyk2005,Roopnarine2007
+%           late Cretaceous terrestrial Mitchell2012
+%         methods Roopnarine2006,Roopnarine2010
+%       biogeographic networks
+%         Sidor2013,Vilhena2013
+% questions
+%   what is the pattern of organismal distribution over the Cenozoic?
+%     how does taxonomic abundance affect this pattern?
+%     how does life history affect this pattern?
+%       diet Jernvall2004
+%       locomotor category
+%     how does climate affect this pattern?
+%       abiotic factors Alroy2008g,Zachos2001,Zachos2008
+
+
+\section{Materials and Methods}
+Mammalian occurrence information was obtained from the Paleobiology Database (PBDB; \url{http://www.paleodb.org}). Occurrence information was restricted to terrestrial mammals from the North American fossil record of the Cenozoic. For each occurrence, the locality information was also recorded, most importantly formation name and estimated age.
+
+For each taxon, dietary and life habit information recorded in the PBDB was gathered. Dietary information was then simplified into three categories: herbivore, omnivore, and carnivore. Herbivorous taxa were the amalgam of the PBDB classifications herbivore, grazer, browser, folivore, and granivore. Omnivorous taxa were the amalgam of frugivores and omnivores. Finally, carnivores were the amalgam of all carnivores and insectivores. These three categories were chosen because they represent coarse groups which are identifiable from most mammalian teeth which are the primarily mammalian fossil material. Additionally, these groupings have been used in prior analysis of the effect of ecology on site similarity \citep{Jernvall2004}.
+
+Temperature information was estimated using the \(\delta O^{18}\) isotope information from the benthic foram record for the entire Cenozoic \citep{Zachos2008}. An increase in \(\delta O^{18}\) levels are associated with a decrease in atmospheric temperature \citep{Zachos2001,Zachos2008}. Benthic foram \(\delta O^{18}\) information has been used previously as climatic information in studies of mammalian macroevolutionary patterns \citep{Alroy2000g,Figueirido2012,Rose2011}.
+% taxonomic occurence information from PBDB
+%   mammals from North America
+%   dietary information
+%   life habit information
+%   geological information (including formation)
+%   taxonomic information
+%     all incompletely/partially identified speciems were excluded
+%   d18o data from Zachos2008
+%
+% temporal bins
+%   stage
+%   fixed bin (2 My)
+%     Alroy2000g,Alroy2000a,Alroy1996a,Alroy1998a,Alroy1998 1 My bins
+%     wanted to include ~2+ formations per bin
+%
+
+Taxonomic presence-absence was recorded for each formation. Abundance information was not included in this analysis, though it is possible \citep{Sidor2013}, because the highly variable preservation conditions not just between formations but across the Cenozoic may not accurately record abundance information \citep{Damuth1982}.
+
+% abundance information
+%   relative raw
+%     tabulated at number of unique genus not abundance
+%   relative subsampled
+%     subsampled using sqs following Alroy2010,Alroy2010b,Alroy2010c
+%
+% following Sidor et al. 2013 and Vilhena et al. 2013
+%   bipartite occurence network
+%     taxon defined as species
+%     locality defined as formation
+%   constructed for total data, diet data, and locomotor data
+%   Sidor2013,Vilhena2013
+%   igraph
+%
+
+Biogeographic networks were constructed, following \citet{Sidor2013} and \citet{Vilhena2013}, with species as the taxonomic occurrence and formation as the locality of interest.
+
+% biogeographic analysis
+%   following Sidor2013, four measures of biogeographic network structure
+%     code length
+%       map equation Rosvall2007a,Rosvall2008,Rosvall2010b
+%       see Vilhena2013 for proof with bipartite networks
+%     biogeographic connectedness
+%     average number of locality occurences
+%     average number of endemics
+%   stage, bin
+%
+% resampling procedure
+%   similar to Sidor2013
+%     probability of removing an taxon
+%       number of occurences of taxon divided by total number of occurences
+%     removed taxa are replaced from random sample within same family
+%       only from those taxa present in any of the localities
+%   repeated X times
+%
+% time series analysis
+%   correlation
+%     first differences of biogeographic network structure series
+%     first differences of Zachos2008 curve
+%       between the total curves and Zachos
+%       between the diet/locomotor categories and Zachos
+%       between the diet and locomotor categories
+%     the time series presented here are too small to accurately infer directionality
+%       Hannisdal2011,Hannisdall2011d,Hannisdall2011c
+%   modeling
+%     Hunt2006a
+%     three basic models of time series
+%       random walk
+%       random walk with a trend
+%       stasis
+%     alternative methods? 
+%
+
+
+\section{Results}
+
+
+\section{Discussion}
+
+
+\section*{Acknowledgements}
+Kenneth Angielczyk, David Bapst, Michael Foote, Benjamin Frable, Dallas Krentzel, Carl Simpson. Money? What money?
+
+\bibliographystyle{amnatnat}
+\bibliography{cosmo_prov,packages}
+
+\end{document}
