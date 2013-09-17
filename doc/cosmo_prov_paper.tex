@@ -36,11 +36,11 @@
   % This is where the abstract would go.
   % Paleobiology: 250-300 words
   %
-  \noindent (Keywords: )
+  \noindent (Keywords: macroevolution, paleoecology, herbivory, trophic structure, biogeography)
 \end{abstract}
 
 \section{Introduction}
-Evolutionary paleoecology is the study of how ecological traits expressed at any level affect the macroevolutionary process, or long term trends in speciation and extinction \citep{Kitchell1985a}. Community structure plays a fundamental roll in determining which biotic interactions are possible at a given time. The importance of biotic interactions in understanding evolutionary dynamics
+Evolutionary paleoecology is the study of how ecological traits expressed at any level affect the macroevolutionary process, or long term patterns in speciation and extinction \citep{Kitchell1985a}. Community structure plays a fundamental roll in determining which biotic interactions are possible at a given time. The importance of biotic interactions in understanding evolutionary dynamics
 % evolutionary paleoecology
 %   Kitchell1985
 %   what organisms interact?
@@ -77,16 +77,11 @@ Evolutionary paleoecology is the study of how ecological traits expressed at any
 
 
 \section{Materials and Methods}
-Mammalian occurrence information was obtained from the Paleobiology Database (PBDB; \url{http://www.paleodb.org}). Occurrence information was restricted to terrestrial mammals from the North American fossil record of the Cenozoic. For each occurrence, the locality information was also recorded, most importantly formation name and estimated age.
+Mammalian occurrence information was obtained from the Paleobiology Database (PBDB; \url{http://www.paleodb.org}). Occurrence information was restricted to terrestrial mammals from the North American fossil record of the Cenozoic. For each occurrence, the locality information was also recorded, most importantly formation name and estimated age. Hierarchical taxonomic information was recorded for each taxon. All partially, ambiguously, or incompletely identified genera or species (e.g. aff., cf., ?) were excluded from analysis. 
 
 For each taxon, dietary and life habit information recorded in the PBDB was gathered. Dietary information was then simplified into three categories: herbivore, omnivore, and carnivore. Herbivorous taxa were the amalgam of the PBDB classifications herbivore, grazer, browser, folivore, and granivore. Omnivorous taxa were the amalgam of frugivores and omnivores. Finally, carnivores were the amalgam of all carnivores and insectivores. These three categories were chosen because they represent coarse groups which are identifiable from most mammalian teeth which are the primarily mammalian fossil material. Additionally, these groupings have been used in prior analysis of the effect of ecology on site similarity \citep{Jernvall2004}.
 
 Temperature information was estimated using the \(\delta O^{18}\) isotope information from the benthic foram record for the entire Cenozoic \citep{Zachos2008}. An increase in \(\delta O^{18}\) levels are associated with a decrease in atmospheric temperature \citep{Zachos2001,Zachos2008}. Benthic foram \(\delta O^{18}\) information has been used previously as climatic information in studies of mammalian macroevolutionary patterns \citep{Alroy2000g,Figueirido2012,Rose2011}.
-% taxonomic occurence information from PBDB
-%   mammals from North America
-%   dietary information
-%   life habit information
-%   geological information (including formation)
 %   taxonomic information
 %     all incompletely/partially identified speciems were excluded
 %   d18o data from Zachos2008
@@ -106,27 +101,18 @@ Taxonomic presence-absence was recorded for each formation. Abundance informatio
 %   relative subsampled
 %     subsampled using sqs following Alroy2010,Alroy2010b,Alroy2010c
 %
-% following Sidor et al. 2013 and Vilhena et al. 2013
-%   bipartite occurence network
-%     taxon defined as species
-%     locality defined as formation
-%   constructed for total data, diet data, and locomotor data
-%   Sidor2013,Vilhena2013
-%   igraph
-%
 
-Biogeographic networks were constructed, following \citet{Sidor2013} and \citet{Vilhena2013}, with species as the taxonomic occurrence and formation as the locality of interest.
+Bipartite biogeographic networks were constructed, following \citet{Sidor2013} and \citet{Vilhena2013}, with species as the taxonomic occurrence and formation as the locality of interest. As explained in \citet{Sidor2013}, biogeographic networks have many advantages over ordination based methods that are frequently used in numerical ecology \citep{Legendre2012}. Principally, both taxonomic and locality information are preserved in analysis which allows for a more complete understanding of community structure. For each temporal bin biogeographic networks were constructed for all taxonomic information, individually for each dietary category and each locomotor category.
 
-% biogeographic analysis
-%   following Sidor2013, four measures of biogeographic network structure
-%     code length
-%       map equation Rosvall2007a,Rosvall2008,Rosvall2010b
-%       see Vilhena2013 for proof with bipartite networks
-%     biogeographic connectedness
-%     average number of locality occurences
-%     average number of endemics
-%   stage, bin
-%
+Four measures of biogeographic network structure were used to asses community change: code length as measured via the map equation \citep{Rosvall2007a,Rosvall2008,Rosvall2010b}, biogeographic connectedness, average number of locality occurrences per taxon, and average number of endemics per site. Biogeographic connectedness is defined 
+\begin{equation}
+  BC = \frac{O - N}{LN - N}
+  \label{eq:bc}
+\end{equation}
+where \(O\) is the number of edges or number of occurrences in the biogeographic network, \(N\) is the number of taxa, and \(L\) is the number of localities \citep{Sidor2013}. All four of these measures have previously been used to assess cosmopolitan and endemism dynamics \citep{Sidor2013}. The four measures of biogeographic network were then calculated for each temporal bin for the total network, each of the dietary networks, and each of the locomotor category networks.
+
+Network analysis, including calculation of network code length, was done using the \texttt{igraph} package \citep{Csardi2006} for the R language \citep{R2013}.
+
 % resampling procedure
 %   similar to Sidor2013
 %     probability of removing an taxon
