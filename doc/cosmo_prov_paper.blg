@@ -4,44 +4,44 @@ The style file: amnatnat.bst
 Database file #1: cosmo_prov.bib
 Database file #2: packages.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 472446405560.
-You've used 16 entries,
+You've used 28 entries,
             3251 wiz_defined-function locations,
-            778 strings with 7818 characters,
-and the built_in function-call counts, 10102 in all, are:
-= -- 847
-> -- 523
-< -- 9
-+ -- 177
-- -- 159
-* -- 731
-:= -- 1656
-add.period$ -- 65
-call.type$ -- 16
-change.case$ -- 133
-chr.to.int$ -- 19
-cite$ -- 16
-duplicate$ -- 710
-empty$ -- 691
-format.name$ -- 211
-if$ -- 1989
+            864 strings with 9861 characters,
+and the built_in function-call counts, 16987 in all, are:
+= -- 1471
+> -- 789
+< -- 18
++ -- 267
+- -- 237
+* -- 1194
+:= -- 2783
+add.period$ -- 113
+call.type$ -- 28
+change.case$ -- 219
+chr.to.int$ -- 31
+cite$ -- 28
+duplicate$ -- 1200
+empty$ -- 1204
+format.name$ -- 327
+if$ -- 3361
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 148
-newline$ -- 84
-num.names$ -- 64
-pop$ -- 283
+missing$ -- 246
+newline$ -- 144
+num.names$ -- 112
+pop$ -- 459
 preamble$ -- 1
-purify$ -- 117
+purify$ -- 191
 quote$ -- 0
-skip$ -- 204
+skip$ -- 357
 stack$ -- 0
-substring$ -- 495
-swap$ -- 325
+substring$ -- 912
+swap$ -- 542
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 141
+type$ -- 249
 warning$ -- 0
-while$ -- 75
+while$ -- 135
 width$ -- 0
-write$ -- 211
+write$ -- 367
