@@ -21,16 +21,16 @@ stlfgr.bg <- lapply(stlfgr, function(x) {
 
 stlfgr.hier <- lapply(stlfgr, function(x) {
                       lapply(x, get.hier, level = 'family_name', data = dat)})
-stlfgr.boot <- Map(function(x, y) {
-                   mclapply(biogeosum, function(foo) {
-                            mapply(biogeo.boot,
-                                   graph = x, taxon = y,
-                                   MoreArgs = list(fun = foo, 
-                                                   data = dat, 
-                                                   nsim = 10),
-                                   SIMPLIFY = FALSE)},
-                            mc.cores = detectCores())},
-                   x = stlfgr, y = stlfgr.hier)
+#stlfgr.boot <- Map(function(x, y) {
+#                   mclapply(biogeosum, function(foo) {
+#                            mapply(biogeo.boot,
+#                                   graph = x, taxon = y,
+#                                   MoreArgs = list(fun = foo, 
+#                                                   data = dat, 
+#                                                   nsim = 10),
+#                                   SIMPLIFY = FALSE)},
+#                            mc.cores = detectCores())},
+#                   x = stlfgr, y = stlfgr.hier)
 
 # with explicit bins
 wlfh <- 2
@@ -42,13 +42,13 @@ lfwin.bg <- lapply(lifewin, function(x) {
 
 lfwin.hier <- lapply(lifewin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
-lfwin.boot <- Map(function(x, y) {
-                   mclapply(biogeosum, function(foo) {
-                            mapply(biogeo.boot,
-                                   graph = x, taxon = y,
-                                   MoreArgs = list(fun = foo, 
-                                                   data = dat, 
-                                                   nsim = 10),
-                                   SIMPLIFY = FALSE)},
-                            mc.cores = detectCores())},
-                   x = lifewin, y = lfwin.hier)
+#lfwin.boot <- Map(function(x, y) {
+#                   mclapply(biogeosum, function(foo) {
+#                            mapply(biogeo.boot,
+#                                   graph = x, taxon = y,
+#                                   MoreArgs = list(fun = foo, 
+#                                                   data = dat, 
+#                                                   nsim = 10),
+#                                   SIMPLIFY = FALSE)},
+#                            mc.cores = detectCores())},
+#                   x = lifewin, y = lfwin.hier)

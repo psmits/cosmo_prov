@@ -21,16 +21,16 @@ stdigr.bg <- lapply(stdigr, function(x) {
 
 stdigr.hier <- lapply(stdigr, function(x) {
                       lapply(x, get.hier, level = 'family_name', data = dat)})
-stdigr.boot <- Map(function(x, y) {
-                   mclapply(biogeosum, function(foo) {
-                            mapply(biogeo.boot,
-                                   graph = x, taxon = y,
-                                   MoreArgs = list(fun = foo, 
-                                                   data = dat, 
-                                                   nsim = 10),
-                                   SIMPLIFY = FALSE)}, 
-                            mc.cores = detectCores())},
-                   x = stdigr, y = stdigr.hier)
+#stdigr.boot <- Map(function(x, y) {
+#                   mclapply(biogeosum, function(foo) {
+#                            mapply(biogeo.boot,
+#                                   graph = x, taxon = y,
+#                                   MoreArgs = list(fun = foo, 
+#                                                   data = dat, 
+#                                                   nsim = 10),
+#                                   SIMPLIFY = FALSE)}, 
+#                            mc.cores = detectCores())},
+#                   x = stdigr, y = stdigr.hier)
 
 # with explicit bins
 wdth <- 2
@@ -42,13 +42,13 @@ dtwin.bg <- lapply(dietwin, function(x) {
 
 dtwin.hier <- lapply(dietwin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
-dtwin.boot <- Map(function(x, y) {
-                   mclapply(biogeosum, function(foo) {
-                            mapply(biogeo.boot,
-                                   graph = x, taxon = y,
-                                   MoreArgs = list(fun = foo, 
-                                                   data = dat, 
-                                                   nsim = 10),
-                                   SIMPLIFY = FALSE)},
-                            mc.cores = detectCores())},
-                   x = dietwin, y = dtwin.hier)
+#dtwin.boot <- Map(function(x, y) {
+#                   mclapply(biogeosum, function(foo) {
+#                            mapply(biogeo.boot,
+#                                   graph = x, taxon = y,
+#                                   MoreArgs = list(fun = foo, 
+#                                                   data = dat, 
+#                                                   nsim = 10),
+#                                   SIMPLIFY = FALSE)},
+#                            mc.cores = detectCores())},
+#                   x = dietwin, y = dtwin.hier)
