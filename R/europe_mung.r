@@ -69,3 +69,7 @@ aa <- lapply(aa, function(x) {
              x <- x[!duplicated(x$name.bi), ]
              x})
 eur <- Reduce(rbind, aa)
+
+# get rid of taxa with no dietary information
+dts <- c('omnivore', 'herbivore', 'carnivore')
+eur <- eur[eur$DIET_2 %in% dts, ]

@@ -3,6 +3,7 @@ library(plyr)
 library(parallel)
 
 source('../R/na_mung.r')
+source('../R/europe_mung.r')
 
 source('../R/bin_network.r')
 source('../R/biogeo_struct.r')
@@ -10,6 +11,7 @@ source('../R/biogeo_bootstrap.r')
 source('../R/window.r')
 
 diet <- split(dat, f = dat$comdiet)
+eurdt <- split(eur, f = eur$DIET_2)
 
 stdiet <- lapply(diet, function(x) {
                  split(x, x$stage)})
@@ -42,6 +44,12 @@ dtwin.bg <- lapply(dietwin, function(x) {
 
 dtwin.hier <- lapply(dietwin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
+
+dteur <- lapply(eurdt, function(x) {
+                  network.bin(x, width = wdth, time = 'MID_AGE',
+                              taxa = 'name.bi', loc = 'NAME')})
+dteur.bg <- lapply(dteur, function(x) {
+                   lapply(biogeosum, function(y) lapply(x, y))})
 #dtwin.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,

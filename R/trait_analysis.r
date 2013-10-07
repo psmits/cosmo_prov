@@ -17,7 +17,6 @@ dts$L3 <- as.numeric(dts$L3)
 
 
 
-
 # diet ~ oxygen
 oxyd <- Map(function(x, y) {
             x[names(x) %in% names(y)]
