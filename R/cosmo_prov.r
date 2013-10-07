@@ -3,6 +3,7 @@ library(plyr)
 library(parallel)
 
 source('../R/na_mung.r')
+source('../R/europe_mung.r')
 
 source('../R/bin_network.r')
 source('../R/biogeo_struct.r')
@@ -30,6 +31,13 @@ win.bg <- lapply(biogeosum, function(x) {
                  lapply(taxawin, x)})
 
 taxawin.hier <- lapply(taxawin, get.hier, level = 'family_name', data = dat)
+
+eurwin <- network.bin(eur, width = wdth, time = 'MID_AGE',
+                      taxa = 'name.bi', loc = 'NAME')
+
+eurwin.bg <- lapply(biogeosum, function(x) {
+                    lapply(eurwin, x)})
+
 #taxawin.boot <- mclapply(biogeosum, function(foo) {
 #                         mapply(biogeo.boot,
 #                         graph = taxawin, taxon = taxawin.hier,

@@ -51,3 +51,21 @@ eur <- eur[!(eur$ORDER %in% aq), ]
 # these are useless
 rms <- which(table(eur$NAME) == 1)
 eur <- eur[!(eur$NAME %in% names(rms)), ]
+
+# add in midpoint age
+eur$MID_AGE <- (eur$MAX_AGE - eur$MIN_AGE) / 2
+
+# remove indeterminate genera
+eur <- eur[eur$GENUS != 'indet.', ]
+
+# add binomial name
+binm <- with(eur, binom.make(GENUS, SPECIES))
+eur <- cbind(eur, name.bi = binm)
+eur$name.bi <- as.character(eur$name.bi)
+
+# get rid of the duplicates
+aa <- split(eur, eur$NAME)
+aa <- lapply(aa, function(x) {
+             x <- x[!duplicated(x$name.bi), ]
+             x})
+eur <- Reduce(rbind, aa)
