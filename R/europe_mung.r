@@ -45,10 +45,28 @@ eur <- eur[!(eur$life_habit %in% lf), ]
 
 # remove all the sp.-s
 #grep('sp', x = dat$occurence.species_name, perl = TRUE)
-eur <- eur[eur$occurrence.species_name != 'sp.', ]  # change to a grep 
+#eur <- eur[eur$occurrence.species_name != 'sp.', ]  # change to a grep 
 
+# bionmial names
+binm <- with(eur, binom.make(occurrence.genus_name, occurrence.species_name))
+eur <- cbind(eur, name.bi = binm)
+eur$name.bi <- as.character(eur$name.bi)
 
+# remove duplicates
+dd <- split(eur, eur$formation)
+dd <- lapply(dd, function(x) {
+             x <- x[!duplicated(x$name.bi), ]
+             x})
+eur <- Reduce(rbind, dd)
 
+# coarse diet
+herb <- c('herbivore', 'grazer', 'browser', 'folivore', 'granivore')
+omm <- c('frugivore', 'omnivore')
+car <- c('carnivore', 'insectivore')
+eur$comdiet <- eur$diet1
+eur$comdiet[eur$diet1 %in% herb] <- 'herb'
+eur$comdiet[eur$diet1 %in% omm] <- 'omni'
+eur$comdiet[eur$diet1 %in% car] <- 'carni'
 
 
 

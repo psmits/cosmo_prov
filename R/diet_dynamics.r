@@ -11,7 +11,7 @@ source('../R/biogeo_bootstrap.r')
 source('../R/window.r')
 
 diet <- split(dat, f = dat$comdiet)
-eurdt <- split(eur, f = eur$DIET_2)
+eurdt <- split(eur, f = eur$comdiet)
 
 stdiet <- lapply(diet, function(x) {
                  split(x, x$stage)})
@@ -46,8 +46,8 @@ dtwin.hier <- lapply(dietwin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
 
 dteur <- lapply(eurdt, function(x) {
-                  network.bin(x, width = wdth, time = 'MID_AGE',
-                              taxa = 'name.bi', loc = 'NAME')})
+                  network.bin(x, width = wdth, time = 'ma_mid',
+                              taxa = 'name.bi', loc = 'formation')})
 dteur.bg <- lapply(dteur, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
 #dtwin.boot <- Map(function(x, y) {

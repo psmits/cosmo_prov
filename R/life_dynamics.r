@@ -10,6 +10,7 @@ source('../R/biogeo_bootstrap.r')
 source('../R/window.r')
 
 life <- split(dat, f = dat$life_habit)
+eulf <- split(eur, f = eur$life_habit)
 
 stlife <- lapply(life, function(x) {
                  split(x, x$stage)})
@@ -42,6 +43,12 @@ lfwin.bg <- lapply(lifewin, function(x) {
 
 lfwin.hier <- lapply(lifewin, function(x) {
                      lapply(x, get.hier, level = 'family_name', data = dat)})
+
+lfeur <- lapply(eulf, function(x) {
+                network.bin(x, width = wdth, time = 'ma_mid',
+                            taxa = 'name.bi', loc = 'formation')})
+lfeur.bg <- lapply(lfeur, function(x) {
+                   lapply(biogeosum, function(y) lapply(x, y))})
 #lfwin.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,

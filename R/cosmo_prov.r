@@ -32,8 +32,8 @@ win.bg <- lapply(biogeosum, function(x) {
 
 taxawin.hier <- lapply(taxawin, get.hier, level = 'family_name', data = dat)
 
-eurwin <- network.bin(eur, width = wdth, time = 'MID_AGE',
-                      taxa = 'name.bi', loc = 'NAME')
+eurwin <- network.bin(eur, width = wdth, time = 'ma_mid',
+                      taxa = 'name.bi', loc = 'formation')
 
 eurwin.bg <- lapply(biogeosum, function(x) {
                     lapply(eurwin, x)})
