@@ -135,8 +135,8 @@
           \begin{block}{Relative diet}
             \begin{figure}[ht]
               \centering
-              \includegraphics[height = 0.2\textheight]{figure/sub_bin_diet}
-              \caption{Relative abundance of mammalian dietary categories. Abundance is based on subsampling using SQS.}
+              \includegraphics[height = 0.2\textheight]{figure/facet_mix}
+              \caption{Relative abundance of mammalian dietary categories both raw and subsampled. Subsampled abundance was done using SQS.}
               \label{fig:rel_ab}
             \end{figure}
           \end{block}

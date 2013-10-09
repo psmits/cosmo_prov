@@ -86,6 +86,15 @@ pa.mat$comdiet[pa.mat$diet1 %in% herb] <- 'herb'
 pa.mat$comdiet[pa.mat$diet1 %in% omm] <- 'omni'
 pa.mat$comdiet[pa.mat$diet1 %in% car] <- 'carni'
 
+# do at 2My bins
+bins <- seq(from = 0, to = 66, by = 2)
+bins <- cbind(top = bins[-1], bot = bins[-length(bins)])
+# assign every occurence to a bin
+dat$bins <- rep(NA, nrow(dat))
+for (ii in seq(nrow(bins))) {
+  out <- which(dat$ma_mid < bins[ii, 1] & dat$ma_mid >= bins[ii, 2])
+  dat$bins[out] <- bins[ii, 1]
+}
 
 st <- split(dat, dat$stage)
 yst <- lapply(st, function(x) mean(x$ma_mid))

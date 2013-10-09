@@ -18,25 +18,54 @@ reldiet <- ddply(dat, .(stage), summarize,
                  herb = sum(comdiet == 'herb'),
                  omni = sum(comdiet == 'omni'),
                  carni = sum(comdiet == 'carni'))
-reldiet <- cbind(ma = tm[, 1], reldiet)
+reldiet <- cbind(ma = tm[match(reldiet$stage, tm[, 2]), 1], reldiet)
 reldiet <- melt(reldiet, id.vars = c('ma', 'stage'))
 # plot
-rdt <- ggplot(dat, aes(x = stage, fill = comdiet))
-rdt <- rdt + geom_bar(position = 'fill')
+rdt <- ggplot(reldiet, aes(x = ma, y = value,
+                             colour = variable, 
+                             fill = variable, 
+                             group = variable))
+rdt <- rdt + geom_area(position = 'fill', stat = 'identity')
 rdt <- rdt + scale_color_manual(values = cbp)
-rdt <- rdt + theme(axis.text.x = element_text(angle = 90))
+rdt <- rdt + scale_fill_manual(values = cbp)
 ggsave(file = '../doc/figure/rel_diet.png', plot = rdt)
 
 # subsampled diet category
 subdt <- melt(dietab)
 subdt <- cbind(subdt, ma = tm[match(subdt$L2, tm[, 2]), 1])
 subdt$L2 <- factor(subdt$L2, levels = tm[order(tm[, 1]), 2])
+subdt$L1 <- factor(subdt$L1, levels = levels(reldiet$variable))
 sdt <- ggplot(subdt, aes(x = ma, y = value, 
                          colour = L1, fill = L1, group = L1))
 sdt <- sdt + geom_area(position = 'fill', stat = 'identity')
 sdt <- sdt + scale_fill_manual(values = cbp)
 sdt <- sdt + scale_color_manual(values = cbp)
 ggsave(file = '../doc/figure/sub_diet.png', plot = sdt)
+
+# faceted version of the the stage plot
+rrsub <- subdt[, c(4, 2, 3, 1)]
+names(rrsub) <- names(reldiet)
+relcombo <- rbind(cbind(reldiet, cl = rep('raw', nrow(reldiet))),
+                  cbind(rrsub, cl = rep('sub', nrow(subdt))))
+relcombo <- relcombo[order(relcombo$variable), ]
+relcb <- ggplot(relcombo, aes(x = ma, y = value,
+                              colour = variable, 
+                              fill = variable, 
+                              group = variable))
+relcb <- relcb + geom_area(position = 'fill', stat = 'identity')
+relcb <- relcb + scale_fill_manual(values = cbp)
+relcb <- relcb + scale_color_manual(values = cbp)
+relcb <- relcb + facet_wrap(~ cl, scales = 'free')
+ggsave(file = '../doc/figure/facet_diet.png', plot = relcb)
+
+
+# bin level
+relbin <- ddply(dat, .(bins), summarize,
+                herb = sum(comdiet == 'herb'),
+                omni = sum(comdiet == 'omni'),
+                carni = sum(comdiet == 'carni'))
+mrb <- melt(relbin, id.vars = 'bins')
+mrb <- mrb[, c(3, 1, 2)]
 
 # subsampled at the bin level
 subdtbin <- melt(lapply(dtbinab, function(x) {
@@ -47,6 +76,22 @@ bsdt <- ggplot(subdtbin, aes(x = L2, y = value,
 bsdt <- bsdt + geom_area(position = 'fill', stat = 'identity')
 bsdt <- bsdt + labs(x = 'Time (My)', y = 'relative subsampled richness')
 ggsave(file = '../doc/figure/sub_bin_diet.png', plot = sdt)
+
+names(subdtbin) <- names(mrb)
+relmix <- rbind(cbind(mrb, cl = rep('raw', nrow(mrb))),
+                cbind(subdtbin, cl = rep('sub', nrow(subdtbin))))
+relmix <- relmix[order(relmix$variable), ]
+mix <- ggplot(relmix, aes(x = bins, y = value,
+                          colour = variable, 
+                          fill = variable, 
+                          group = variable))
+mix <- mix + geom_area(position = 'fill', stat = 'identity', na.rm = TRUE)
+mix <- mix + labs(x = 'Time (My)', y = 'relative richness')
+mix <- mix + scale_fill_manual(values = cbp)
+mix <- mix + scale_color_manual(values = cbp)
+mix <- mix + facet_wrap(~ cl, scales = 'free')
+ggsave(file = '../doc/figure/facet_mix.png', plot = mix)
+
 
 
 # relative locomotor category
