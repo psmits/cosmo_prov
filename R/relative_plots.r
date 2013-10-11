@@ -80,17 +80,28 @@ ggsave(file = '../doc/figure/sub_bin_diet.png', plot = sdt)
 names(subdtbin) <- names(mrb)
 relmix <- rbind(cbind(mrb, cl = rep('raw', nrow(mrb))),
                 cbind(subdtbin, cl = rep('sub', nrow(subdtbin))))
+relmix$variable <- factor(relmix$variable, 
+                          levels = c('carni', 'herb', 'omni'))
 relmix <- relmix[order(relmix$variable), ]
+#relmix <- relmix[order(relmix$variable), ]
+#relmix <- relmix[relmix$variable != 'omni', ]
+relmix <- Reduce(rbind, 
+                 lapply(split(relmix, relmix$cl), function(x) {
+                        rms <- x[is.na(x[, 1]), 2]
+                        x[!(x[, 2] %in% c(rms, 6, 8)), ]
+                             })
+                 )
 mix <- ggplot(relmix, aes(x = bins, y = value,
                           colour = variable, 
-                          fill = variable, 
+                          fill = variable,
                           group = variable))
-mix <- mix + geom_area(position = 'fill', stat = 'identity', na.rm = TRUE)
+mix <- mix + geom_area(position = 'fill', stat = 'identity')
 mix <- mix + labs(x = 'Time (My)', y = 'relative richness')
 mix <- mix + scale_fill_manual(values = cbp)
 mix <- mix + scale_color_manual(values = cbp)
 mix <- mix + facet_wrap(~ cl, scales = 'free')
-ggsave(file = '../doc/figure/facet_mix.png', plot = mix)
+ggsave(file = '../doc/figure/facet_mix.png', 
+       width = 15, height = 10, plot = mix)
 
 
 
