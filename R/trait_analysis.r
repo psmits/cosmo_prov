@@ -1,6 +1,7 @@
 library(plyr)
 library(reshape2)
 library(nlme)
+library(mgcv)
 library(MuMIn)
 
 source('../R/cosmo_prov.r')
@@ -15,6 +16,15 @@ dts <- melt(dtwin.bg)
 dts$L3 <- as.numeric(dts$L3)
 
 
+# generalized additive models
+dts <- split(dts, dts$L2)
+diet.gam <- lapply(dts, function(x) {
+                   g1 <- gamm(value ~ 1, random = list(L1 = ~ 1), data = x)
+                   g2 <- gamm(value ~ L3, random = list(L1 = ~ 1), data = x)
+                   out <- list(g1,
+                               g2)
+                   out})
+lapply(diet.gam, function(x) lapply(x, AIC))
 
 
 # diet ~ oxygen
