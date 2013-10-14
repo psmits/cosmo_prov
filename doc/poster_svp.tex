@@ -58,8 +58,10 @@
 \usepackage{rotating, longtable}
 \usepackage[sort&compress, numbers]{natbib}
 
-\usetheme{confposter}
+\captionsetup{labelformat=simple}
+%\setbeamertemplate{caption}[numbered]
 
+\usetheme{confposter}
 
 \newlength{\sepwid}
 \newlength{\onecolwid}
@@ -80,7 +82,7 @@
 
 
 
-\title{Cosmopolitan and endemism in of North American Cenozoic mammals} 
+\title{Cosmopolitan and endemic mammal dynamics of Cenozoic North America} 
 \author{Peter D Smits}
 \institute{Committee on Evolutionary Biology, University of Chicago}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -109,17 +111,17 @@
 %   abiotic factors
 %     climate Zachos2001,Zachos2008
 
-  \alert{Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citep{Kitchell1985a}.} Biotic and abiotic interactions change over time and understanding their interplay, both biotic--biotic and biotic--abiotic, is important for determining which ecological properties affect macroevolutionary patterns and how.
-  \alert{How community composition has changed over time is of interest because community composition determines the range of plausible biotic interactions.} Additionally, if change in taxonomic and life history composition is correlated with abiotic factors such as temperature then our knowledge of the pattern of mammalian evolution in the past and in the future might be better constrained.
+  \alert{Evolutionary paleoecology is defined as the study of the consequences of ecological properties, roles and strategies at any and all levels on the evolutionary process \citep{Kitchell1985a}.} Biotic and abiotic interactions change over time and understanding their interplay is important for determining which ecological properties affect macroevolutionary patterns and how.
+  \alert{How community composition has changed over time is of interest because community composition determines the range of plausible biotic interactions.} Additionally, if change in taxonomic and life history composition is correlated with abiotic factors such as temperature, then our knowledge of the pattern of mammalian evolution in the past and in the future might be better constrained.
 
         Previous work on mammalian site similarity has focused on distributions of terrestrial mammals in the Neogene Old World \citep{Jernvall2002,Jernvall2004}. 
-        \alert{Here I will analyze the Cenozoic record of North America to understand if either dietary and/or locomotor categories affect the distribution of terrestrial mammals. Additionally, I analyze if shifts in taxonomic and life history composition are correlated with climatic change.}
+        \alert{Here I analyze the Cenozoic record of North America to understand if either dietary and/or locomotor categories affect the distribution of terrestrial mammals. Additionally, I analyze if shifts in taxonomic and life history composition are correlated with climatic change.}
         To measure taxonomic distribution as a proxy for community structure, biogeographic networks were constructed between species and formation occurrence. Four different summaries of biogeographic network structure were used to assess changes in mammalian community structure through the Cenozoic.
       \end{block}
 
       \begin{footnotesize}
       \begin{block}{Methods}
-        Mammalian taxonomic occurrence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}). Occurrence information was restricted to only mammals occurring in North America during the Cenozoic. Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?). Temporal, geologic, and life history information was also compiled. Because terrestrial assemblages across the Cenozoic do not preserve as complete a record of community structure, abundance distributions were not analyzed.
+        Mammalian taxonomic occurrence information was obtained from the Paleobiology Database (\url{http://www.paleodb.org}). Occurrence information was restricted to only mammals occurring in North America during the Cenozoic. Ambiguously identified taxa were excluded from all analyses (e.g. aff., cf., ?). Temporal, geologic, and life history information was also compiled. Because terrestrial assemblages across the Cenozoic do not preserve as a complete record of community structure, abundance distributions were not analyzed.
 
         %biogeographic networks
         Following \citet{Sidor2013} and \citet{Vilhena2013}, bipartite taxa-locality networks were constructed. Here, taxa were defined as the occurrence of a unique species at a locality which is here defined as a formation. Biogeographic networks were constructed for uniform 2 My bins from the K/Pg to the Recent. This bin size was chosen for multiple reasons. Prior analysis has shown that the mammalian fossil record of the Cenozoic of North America is resolvable to approximately 1 My \citep{Alroy1996a,Alroy2000g}. Here, because I am interested in diversity dynamics across multiple formations, I used a bin width of 2 My to allow for every bin to be represented by minimum of two formations.
@@ -154,7 +156,7 @@
               \begin{center}
                 \includegraphics[height = 0.2\textheight]{figure/gen_bin}
               \end{center}
-              \caption{Summary statistics of the mammal wide biogeographic networks for every 2 My bin.}
+              \caption{Summary statistics of the mammal-wide biogeographic networks for every 2 My bin.}
               \label{fig:net_gen}
             \end{figure}
           \end{block}
@@ -193,7 +195,7 @@
         \end{column}
 
         \begin{column}{\onecolwid}
-          \begin{block}{Diet ~ oxygen}
+          \begin{block}{Diet -- oxygen}
             \begin{figure}[ht]
               \centering
               \includegraphics[height = 0.2\textheight]{figure/dt_oxy}
@@ -219,7 +221,7 @@
             \item no correlation between oxygen and dietary (Fig. \ref{fig:cor}) or locomotor category (not shown)
               \begin{itemize}
                 \item climate not a correlate/driver of NA-wide community structure over all Cenozoic
-                \item life history traits plays stronger roll
+                \item life history traits play a stronger role
               \end{itemize}
             \item preliminary correlation between dietary and locomotor categories (not shown)
           \end{itemize}
@@ -245,7 +247,7 @@
 
         \begin{scriptsize}
           \begin{block}{Acknowledgements}
-            I would like to thank John Alroy for helpful advice and kindly having compiled the (vast) majority of the occurence information in the PBDB that used in this study. I would also like to thank my advisors Ken Angielczyk and Michael Foote for useful advice which greatly improved this study. 
+            I would like to thank John Alroy for helpful advice and kindly having compiled the (vast) majority of the occurence information in the PBDB was that used in this study. I would also like to thank my advisors Ken Angielczyk and Michael Foote for useful advice which greatly improved this study. 
             \begin{center}
               \includegraphics[height = 0.1\textheight]{figure/chicago}
               \includegraphics[height = 0.1\textheight]{figure/pbdb}

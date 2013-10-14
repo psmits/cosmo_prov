@@ -72,6 +72,8 @@ ggdiet <- ggdiet + facet_wrap(~ L2, scales = 'free_y')
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 #ggdiet <- ggdiet + theme(legend.position = 'none')
 ggdiet <- ggdiet + labs(x = 'Time (My)')
+ggdiet <- ggdiet + theme(axis.title = element_text(size = 17),
+                         axis.text = element_text(size = 15))
 ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/diet_bin.png', 
        width = 15, height = 10, plot = ggdiet)
@@ -98,6 +100,8 @@ ggloco <- ggloco + geom_line(alpha = 0.5)
 ggloco <- ggloco + facet_wrap(~ L2, scales = 'free_y')
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
+ggloco <- ggloco + theme(axis.title = element_text(size = 17),
+                         axis.text = element_text(size = 15))
 #ggloco <- ggloco + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/loco_bin.png', 
        width = 15, height = 10, plot = ggloco)
