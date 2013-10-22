@@ -28,6 +28,8 @@ rdt <- ggplot(reldiet, aes(x = ma, y = value,
 rdt <- rdt + geom_area(position = 'fill', stat = 'identity')
 rdt <- rdt + scale_color_manual(values = cbp)
 rdt <- rdt + scale_fill_manual(values = cbp)
+rdt <- rdt + theme(axis.title = element_text(size = 19),
+                   axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/rel_diet.png', plot = rdt)
 
 # subsampled diet category
@@ -40,6 +42,8 @@ sdt <- ggplot(subdt, aes(x = ma, y = value,
 sdt <- sdt + geom_area(position = 'fill', stat = 'identity')
 sdt <- sdt + scale_fill_manual(values = cbp)
 sdt <- sdt + scale_color_manual(values = cbp)
+sdt <- sdt + theme(axis.title = element_text(size = 19),
+                   axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/sub_diet.png', plot = sdt)
 
 # faceted version of the the stage plot
@@ -56,6 +60,8 @@ relcb <- relcb + geom_area(position = 'fill', stat = 'identity')
 relcb <- relcb + scale_fill_manual(values = cbp)
 relcb <- relcb + scale_color_manual(values = cbp)
 relcb <- relcb + facet_wrap(~ cl, scales = 'free')
+relcb <- relcb + theme(axis.title = element_text(size = 19),
+                       axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/facet_diet.png', plot = relcb)
 
 
@@ -75,6 +81,8 @@ bsdt <- ggplot(subdtbin, aes(x = L2, y = value,
                              colour = L1, fill = L1, group = L1))
 bsdt <- bsdt + geom_area(position = 'fill', stat = 'identity')
 bsdt <- bsdt + labs(x = 'Time (My)', y = 'relative subsampled richness')
+bsdt <- bsdt + theme(axis.title = element_text(size = 19),
+                     axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/sub_bin_diet.png', plot = sdt)
 
 names(subdtbin) <- names(mrb)
@@ -100,6 +108,8 @@ mix <- mix + labs(x = 'Time (My)', y = 'relative richness')
 mix <- mix + scale_fill_manual(values = cbp)
 mix <- mix + scale_color_manual(values = cbp)
 mix <- mix + facet_wrap(~ cl, scales = 'free')
+mix <- mix + theme(axis.title = element_text(size = 19),
+                   axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/facet_mix.png', 
        width = 15, height = 10, plot = mix)
 
@@ -117,6 +127,8 @@ relloc <- ddply(dat, .(stage), summarize,
 rlf <- ggplot(dat, aes(x = stage, fill = life_habit))
 rlf <- rlf + geom_bar(position = 'fill')
 rlf <- rlf + scale_color_manual(values = cbp)
+rlf <- rlf + theme(axis.title = element_text(size = 19),
+                   axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/rel_loco.png', plot = rlf)
 
 # subsampled locomotor category
@@ -128,4 +140,6 @@ slf <- ggplot(sublf, aes(x = ma, y = value,
 slf <- slf + geom_area(position = 'fill', stat = 'identity')
 slf <- slf + scale_fill_manual(values = cbp)
 slf <- slf + scale_color_manual(values = cbp)
+slf <- slf + theme(axis.title = element_text(size = 19),
+                   axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/sub_loco.png', plot = slf)

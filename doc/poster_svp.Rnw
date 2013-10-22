@@ -197,13 +197,15 @@
 
 
         \begin{scriptsize}
+          \tiny{
           \begin{block}{Acknowledgements}
-            I would like to thank John Alroy for helpful advice and kindly having compiled the (vast) majority of the occurence information in the PBDB was that used in this study. I would also like to thank my advisors Ken Angielczyk and Michael Foote for useful advice which greatly improved this study. 
+            I would like to thank John Alroy for helpful advice and kindly having compiled the (vast) majority of the occurence information in the PBDB was that used in this study. I would also like to thank my advisors Ken Angielczyk and Michael Foote for useful advice which greatly improved this study. Additional thanks to Darcy Ross, Dallas Krentzel, and David Bapst for helpful discussion.
             \begin{center}
-              \includegraphics[height = 0.1\textheight]{figure/chicago}
-              \includegraphics[height = 0.1\textheight]{figure/pbdb}
+              \includegraphics[height = 0.05\textheight]{figure/chicago}
+              \includegraphics[height = 0.05\textheight]{figure/pbdb}
             \end{center}
           \end{block}
+          }
         \end{scriptsize}
 
         % bibliography
