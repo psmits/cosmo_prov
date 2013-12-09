@@ -64,3 +64,16 @@ for (ii in seq(nrow(bins))) {
 
 # 2x2, 5x5, 10x10 
 eur$gid <- with(eur, grid.id(paleolatdec, paleolngdec, 2))
+
+# remove duplicates at grid locations in each bin
+db <- split(eur, eur$bins)
+dbg <- lapply(db, function(x) split(x, x$gid))
+uu <- lapply(dbg, function(x) {
+             lapply(x, function(y) {
+                    dup <- duplicated(y$name.bi)
+                    y[!dup, ]})})
+uu <- lapply(uu, function(x) {
+             rms <- lapply(x, nrow) == 0
+             x[!rms]})
+uu <- lapply(uu, function(x) Reduce(rbind, x))
+eur <- Reduce(rbind, uu)
