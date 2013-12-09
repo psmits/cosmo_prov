@@ -29,6 +29,7 @@ ggsave(file = '../doc/figure/zachos.png',
 cont <- list(na = win.bg, eur = eurwin.bg)
 bin.dat <- melt(cont)
 bin.dat$L3 <- as.numeric(bin.dat$L3)
+bin.dat <- bin.dat[!(bin.dat[, 1] == Inf | is.na(bin.dat[, 1])), ]
 ggdat <- ggplot(bin.dat, aes(x = L3, y = value, colour = L1)) + geom_line()
 ggdat <- ggdat + facet_wrap(~ L2, scales = 'free_y')
 ggdat <- ggdat + scale_color_manual(values = cbp)
@@ -40,21 +41,36 @@ ggsave(file = '../doc/figure/gen_bin.png',
 
 
 # diet
-# standard bin
+# na diet
 bin.diet <- melt(dtwin.bg)
 bin.diet$L3 <- as.numeric(bin.diet$L3)
-ggdiet <- ggplot(bin.diet, aes(x = L3, y = value, colour = L1))
-ggdiet <- ggdiet + geom_line(alpha = 0.5)
-ggdiet <- ggdiet + facet_wrap(~ L2, scales = 'free_y')
-ggdiet <- ggdiet + scale_color_manual(values = cbp)
-ggdiet <- ggdiet + labs(x = 'Time (My)')
-ggdiet <- ggdiet + theme(legend.position = 'none', 
+nadiet <- ggplot(bin.diet, aes(x = L3, y = value, colour = L1))
+nadiet <- nadiet + geom_line(alpha = 0.5)
+nadiet <- nadiet + facet_wrap(~ L2, scales = 'free_y')
+nadiet <- nadiet + scale_color_manual(values = cbp)
+nadiet <- nadiet + labs(x = 'Time (My)')
+nadiet <- nadiet + theme(legend.position = 'none', 
                          axis.title = element_text(size = 19),
                          axis.text = element_text(size = 17))
-ggdiet <- ggdiet + stat_smooth(method = 'loess', se = FALSE)
+nadiet <- nadiet + stat_smooth(method = 'loess', se = FALSE)
 ggsave(file = '../doc/figure/diet_bin.png', 
-       width = 15, height = 10, plot = ggdiet)
+       width = 15, height = 10, plot = nadiet)
 
+# europe diet
+eub.diet <- melt(dteur.bg)
+eub.diet$L3 <- as.numeric(eub.diet$L3)
+eub.diet <- eub.diet[!(eub.diet[, 1] == Inf | is.na(eub.diet[, 1])), ]
+eudiet <- ggplot(eub.diet, aes(x = L3, y = value, colour = L1))
+eudiet <- eudiet + geom_line(alpha = 0.5)
+eudiet <- eudiet + facet_wrap(~ L2, scales = 'free_y')
+eudiet <- eudiet + scale_color_manual(values = cbp)
+eudiet <- eudiet + labs(x = 'Time (My)')
+eudiet <- eudiet + theme(legend.position = 'none', 
+                         axis.title = element_text(size = 19),
+                         axis.text = element_text(size = 17))
+eudiet <- eudiet + stat_smooth(method = 'loess', se = FALSE)
+ggsave(file = '../doc/figure/eudt_bin.png', 
+       width = 15, height = 10, plot = nadiet)
 
 # locomotor
 bin.loco <- melt(lfwin.bg)

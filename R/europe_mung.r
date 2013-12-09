@@ -15,8 +15,7 @@ eur <- eur[!is.na(eur$ma_max), ]
 eur <- eur[!is.na(eur$ma_min), ]
 
 # make sure i'm entirely in the Cenozoic via max
-kpg <- 65.6
-eur <- eur[!eur$ma_max > kpg, ]
+kpg <- 65.6 eur <- eur[!eur$ma_max > kpg, ]
 
 # lat/long fix
 eur$paleolatdec <- as.numeric(eur$paleolatdec)
