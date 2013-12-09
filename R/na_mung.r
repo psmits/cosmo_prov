@@ -35,7 +35,7 @@ dat$name.bi <- as.character(dat$name.bi)
 # exclude aquatic and volant nonsense
 aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
 dat <- dat[!(dat$order_name %in% aq), ]
-lf <- c('amphibious', 'volant', 'aquatic')
+lf <- c('amphibious', 'volant', 'aquatic', 'glinding')
 dat <- dat[!(dat$life_habit %in% lf), ]
 
 # diet assignments
@@ -48,6 +48,11 @@ dat$comdiet[dat$diet1 %in% omm] <- 'omni'
 dat$comdiet[dat$diet1 %in% car] <- 'carni'
 
 # locomotor assignments
+tree <- c('arboreal')
+ground <- c('ground dwelling', 'semifossorial', 'fossorial', 'saltatorial')
+dat$comlife <- dat$life_habit
+dat$comlife[dat$life_habit %in% tree] <- 'arboreal'
+dat$comlife[dat$life_habit %in% ground] <- 'ground dwelling'
 
 # assign every occurence to a 2 My bin
 bins <- seq(from = 0, to = 66, by = 2)
