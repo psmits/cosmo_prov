@@ -20,8 +20,8 @@ stlfgr <- lapply(stlife, function(x) {
 stlfgr.bg <- lapply(stlfgr, function(x) {
                     lapply(biogeosum, function(y) lapply(x, y))})
 
-stlfgr.hier <- lapply(stlfgr, function(x) {
-                      lapply(x, get.hier, level = 'family_name', data = dat)})
+#stlfgr.hier <- lapply(stlfgr, function(x) {
+#                      lapply(x, get.hier, level = 'family_name', data = dat)})
 #stlfgr.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,
@@ -41,14 +41,14 @@ lifewin <- lapply(life, function(x) {
 lfwin.bg <- lapply(lifewin, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
 
-lfwin.hier <- lapply(lifewin, function(x) {
-                     lapply(x, get.hier, level = 'family_name', data = dat)})
-
 lfeur <- lapply(eulf, function(x) {
                 network.bin(x, width = wdth, time = 'ma_mid',
                             taxa = 'name.bi', loc = 'formation')})
 lfeur.bg <- lapply(lfeur, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
+
+#lfwin.hier <- lapply(lifewin, function(x) {
+#                     lapply(x, get.hier, level = 'family_name', data = dat)})
 #lfwin.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,

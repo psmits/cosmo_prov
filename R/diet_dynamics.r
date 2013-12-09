@@ -21,8 +21,8 @@ stdigr <- lapply(stdiet, function(x) {
 stdigr.bg <- lapply(stdigr, function(x) {
                     lapply(biogeosum, function(y) lapply(x, y))})
 
-stdigr.hier <- lapply(stdigr, function(x) {
-                      lapply(x, get.hier, level = 'family_name', data = dat)})
+#stdigr.hier <- lapply(stdigr, function(x) {
+#                      lapply(x, get.hier, level = 'family_name', data = dat)})
 #stdigr.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,
@@ -42,14 +42,14 @@ dietwin <- lapply(diet, function(x) {
 dtwin.bg <- lapply(dietwin, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
 
-dtwin.hier <- lapply(dietwin, function(x) {
-                     lapply(x, get.hier, level = 'family_name', data = dat)})
-
 dteur <- lapply(eurdt, function(x) {
                   network.bin(x, width = wdth, time = 'ma_mid',
                               taxa = 'name.bi', loc = 'formation')})
 dteur.bg <- lapply(dteur, function(x) {
                    lapply(biogeosum, function(y) lapply(x, y))})
+
+#dtwin.hier <- lapply(dietwin, function(x) {
+#                     lapply(x, get.hier, level = 'family_name', data = dat)})
 #dtwin.boot <- Map(function(x, y) {
 #                   mclapply(biogeosum, function(foo) {
 #                            mapply(biogeo.boot,

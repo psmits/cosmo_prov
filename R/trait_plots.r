@@ -21,7 +21,8 @@ tot <- tot + geom_point() + stat_smooth(method = 'lm')
 tot <- tot + facet_wrap(~ L1, scales = 'free')
 tot <- tot + labs(x = 'first differences oxygen',
                   y = 'first differences network statistic')
-tot <- tot + theme(axis.title = element_text(size = 19),
+tot <- tot + theme(legend.position = 'none',
+                   axis.title = element_text(size = 19),
                    axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/tot_oxy.png', 
        width = 15, height = 10, plot = tot)
@@ -39,7 +40,8 @@ dtox <- dtox + facet_wrap(~ L2, scales = 'free')
 dtox <- dtox + scale_color_manual(values = cbp)
 dtox <- dtox + labs(x = 'first differences oxygen',
                     y = 'first differences network statistic')
-dtox <- dtox + theme(axis.title = element_text(size = 19),
+dtox <- dtox + theme(legend.position = 'none',
+                     axis.title = element_text(size = 19),
                      axis.text = element_text(size = 17))
 ggsave(file = '../doc/figure/dt_oxy.png', 
        width = 15, height = 10, plot = dtox)

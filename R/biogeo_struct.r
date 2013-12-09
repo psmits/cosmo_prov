@@ -72,8 +72,11 @@ endemic <- function(graph, l.small = TRUE) {
   }
 
   nei <- lapply(tx, function(x) neighbors(graph, x))
+  tps <- table(unlist(nei))
   ende <- which(unlist(lapply(nei, length)) == 1)
-  avg.end <- length(ende) / length(st)
+  locs <- table(unlist(nei[ende]))
+  ww <- match(names(locs), names(tps))
+  avg.end <- sum(locs / tps[ww]) / length(st)
 
   avg.end
 }
@@ -149,13 +152,17 @@ avgocc <- function(graph, l.small = TRUE) {
 
   if(l.small) {
     taxa <- V(bip[[wm]])$name
+    st <- V(bip[[ws]])$name
   } else if(!l.small) {
     taxa <- V(bip[[ws]])$name
+    st <- V(bip[[wm]])$name
   }
 
   # ask the neighbors of all the taxa
   nei <- lapply(taxa, function(x) neighbors(graph, x))
-  ao <- mean(unlist(lapply(nei, length)))
+  # (sum l / L) / N
+  occ <- lapply(lapply(nei, length), function(x) x / length(st))
+  ao <- mean(unlist(occ))
 
   ao
 }

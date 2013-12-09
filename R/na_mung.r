@@ -96,6 +96,10 @@ for (ii in seq(nrow(bins))) {
   dat$bins[out] <- bins[ii, 1]
 }
 
+# 5 by 5 and 10 by 10 paleo-lat grid
+
+
+# stage
 st <- split(dat, dat$stage)
 yst <- lapply(st, function(x) mean(x$ma_mid))
 yst <- Map(function(x, y) rep(x, y), x = yst, y = lapply(st, nrow))

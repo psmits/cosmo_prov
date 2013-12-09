@@ -16,7 +16,7 @@ stgraph <- lapply(stage, bin.network, taxa = 'name.bi', loc = 'formation')
 stgraph.bg <- lapply(biogeosum, function(x) {
                      lapply(stgraph, x)})
 
-stgraph.hier <- lapply(stgraph, get.hier, level = 'family_name', data = dat)
+#stgraph.hier <- lapply(stgraph, get.hier, level = 'family_name', data = dat)
 #stgraph.boot <- mclapply(biogeosum, function(foo) {
 #                         mapply(biogeo.boot,
 #                         graph = stgraph, taxon = stgraph.hier,
@@ -30,14 +30,13 @@ taxawin <- network.bin(dat, width = wdth, time = 'ma_mid',
 win.bg <- lapply(biogeosum, function(x) {
                  lapply(taxawin, x)})
 
-taxawin.hier <- lapply(taxawin, get.hier, level = 'family_name', data = dat)
-
 eurwin <- network.bin(eur, width = wdth, time = 'ma_mid',
                       taxa = 'name.bi', loc = 'formation')
 
 eurwin.bg <- lapply(biogeosum, function(x) {
                     lapply(eurwin, x)})
 
+#taxawin.hier <- lapply(taxawin, get.hier, level = 'family_name', data = dat)
 #taxawin.boot <- mclapply(biogeosum, function(foo) {
 #                         mapply(biogeo.boot,
 #                         graph = taxawin, taxon = taxawin.hier,
