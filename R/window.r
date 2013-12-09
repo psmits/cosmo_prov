@@ -50,10 +50,9 @@ binner <- function(data, width, time) {
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @export
 #' @examples
-network.bin <- function(data, width, time, taxa, loc) {
-  bin <- binner(data = data, width = width, time = time)
-  bin <- bin[-which(unlist(lapply(bin, nrow)) == 0)]
-  out <- lapply(bin, bin.network,
+network.bin <- function(data, bin, taxa, loc) {
+  bb <- split(data, data[, bin])
+  out <- lapply(bb, bin.network,
                 taxa = taxa, loc = loc)
   out
 }

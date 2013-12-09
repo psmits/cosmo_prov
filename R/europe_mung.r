@@ -2,64 +2,42 @@ library(plyr)
 library(reshape2)
 
 source('../R/clean_pbdb.r')
+source('../R/mung_help.r')
 source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
 
 eur <- read.csv('../data/euro-occs.csv', stringsAsFactors = FALSE)
 
-# remove things with missing temporal information
-temp <- c('period', 'epoch', 'subepoch', 'stage', 'formation')
-trm <- Reduce(union, lapply(temp, function(x) which(eur[, x] == '')))
-eur <- eur[-trm, ]
-
-# clean up the formation names
-# doesn't start with a capital letter
-eur <- eur[grep(pattern = '^[A-Z]', eur$formation, perl = TRUE), ]
-eur$formation <- gsub(pattern = ' s', replacement = ' S',
-                      eur$formation, perl = TRUE)
-
-# make the number columns numeric
-num <- c('max_ma', 'max_ma_error',
-         'min_ma', 'min_ma_error',
-         'interval_base', 'interval_top', 'interval_midpoint',
-         'interpolated_base', 'interpolated_top', 'interpolated_mid',
-         'ma_max', 'ma_min', 'ma_mid',
-         'collection_no')
-eur[, num] <- apply(eur[, num], 2, as.numeric)
-# need to have ma_mid values
+# remove specimens that don't have time assigned
 eur <- eur[!is.na(eur$ma_mid), ]
+eur <- eur[!is.na(eur$ma_max), ]
+eur <- eur[!is.na(eur$ma_min), ]
 
-# make sure i'm entirely in the Cenozoic
+# make sure i'm entirely in the Cenozoic via max
 kpg <- 65.6
-if(sum(eur$interval_top > kpg, na.rm = TRUE)) {
-  eur <- eur[!eur$interval_top > kpg]
-}
+eur <- eur[!eur$ma_max > kpg, ]
 
-# aquatics and volants
-aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
-eur <- eur[!(eur$order_name %in% aq), ]
-
-lf <- c('amphibious', 'volant', 'aquatic')
-eur <- eur[!(eur$life_habit %in% lf), ]
+# lat/long fix
+eur$paleolatdec <- as.numeric(eur$paleolatdec)
+eur$paleolngdec <- as.numeric(eur$paleolngdec)
+eur <- eur[!(is.na(eur$paleolatdec) | is.na(eur$paleolngdec)), ]
 
 # remove all the sp.-s
 #grep('sp', x = dat$occurence.species_name, perl = TRUE)
-#eur <- eur[eur$occurrence.species_name != 'sp.', ]  # change to a grep 
+eur <- eur[eur$occurrence.species_name != 'sp.', ]  # change to a grep 
 
-# bionmial names
 binm <- with(eur, binom.make(occurrence.genus_name, occurrence.species_name))
 eur <- cbind(eur, name.bi = binm)
 eur$name.bi <- as.character(eur$name.bi)
 
-# remove duplicates
-dd <- split(eur, eur$formation)
-dd <- lapply(dd, function(x) {
-             x <- x[!duplicated(x$name.bi), ]
-             x})
-eur <- Reduce(rbind, dd)
+# exclude aquatic and volant nonsense
+aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
+eur <- eur[!(eur$order_name %in% aq), ]
+lf <- c('amphibious', 'volant', 'aquatic')
+eur <- eur[!(eur$life_habit %in% lf), ]
 
-# coarse diet
+# diet assignments
 herb <- c('herbivore', 'grazer', 'browser', 'folivore', 'granivore')
 omm <- c('frugivore', 'omnivore')
 car <- c('carnivore', 'insectivore')
@@ -68,74 +46,16 @@ eur$comdiet[eur$diet1 %in% herb] <- 'herb'
 eur$comdiet[eur$diet1 %in% omm] <- 'omni'
 eur$comdiet[eur$diet1 %in% car] <- 'carni'
 
+# locomotor assignments
 
+# assign every occurence to a 2 My bin
+bins <- seq(from = 0, to = 66, by = 2)
+bins <- cbind(top = bins[-1], bot = bins[-length(bins)])
+eur$bins <- rep(NA, nrow(eur))
+for (ii in seq(nrow(bins))) {
+  out <- which(eur$ma_mid < bins[ii, 1] & eur$ma_mid >= bins[ii, 2])
+  eur$bins[out] <- bins[ii, 1]
+}
 
-
-
-#eur <- read.csv('../data/now_database.csv', stringsAsFactors = FALSE)
-
-# restrict to europe
-#eur.count <- c('Switzerland', 'Spain', 'Greece', 'Germany', 'Italy',
-#               'France', 'Bulgaria', 'Ukraine', 'Australia', 'Portugal',
-#               'Belgium', 'Romania', 'Moldova', 'United Kingdom', 'Hungary',
-#               'Czech Republic', 'Poland', 'Serbia', 'Slovakia', 'Netherlands',
-#               'Ireland', 'Croatia', 'Malta', 'Serbia and Montenegro', 'Sweden',
-#               'Belarus', 'Slovenia', 'Estonia')
-#eur <- eur[eur$COUNTRY %in% eur.count, ]
-
-# restrict to Cenozoic
-#kpg <- 65.6
-#eur <- eur[eur$MAX_AGE <= kpg, ]
-
-# clean locality names
-#eur$NAME <- gsub(pattern = '[0-9](.*)$', replacement = '',
-#                 x = eur$NAME, perl = TRUE)
-#eur$NAME <- gsub(pattern = '\\([^)]*\\)', replacement = '', 
-#                 x = eur$NAME, perl = TRUE)  # parens
-#eur$NAME <- gsub(pattern = '[\\[\\(](.*)$', replacement = '', 
-#                 x = eur$NAME, perl = TRUE)
-# trailing and leading spaces
-#eur$NAME <- gsub('^\\s+', '', eur$NAME)
-#eur$NAME <- gsub('\\s+$', '', eur$NAME)
-#eur$NAME <- gsub(pattern = '[-A-Z]$', replacement = '',
-#                 x = eur$NAME, perl = TRUE)
-#eur$NAME <- gsub(pattern = ' I*$', replacement = '', 
-#                 x = eur$NAME, perl = TRUE)
-#eur$NAME <- gsub(pattern = ' cave(.)+$', replacement = '', 
-#                 x = eur$NAME, perl = TRUE)
-#eur$NAME <- gsub(pattern = ' st(.)+$', replacement = '', 
-#                 x = eur$NAME, perl = TRUE)
-#eur$NAME <- gsub('^\\s+', '', eur$NAME)
-#eur$NAME <- gsub('\\s+$', '', eur$NAME)
-
-
-# exclude aquative and volant nonsense
-#aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
-#eur <- eur[!(eur$ORDER %in% aq), ]
-
-# get read of any locality with only one entry
-# these are useless
-#rms <- which(table(eur$NAME) == 1)
-#eur <- eur[!(eur$NAME %in% names(rms)), ]
-
-# add in midpoint age
-#eur$MID_AGE <- (eur$MAX_AGE - eur$MIN_AGE) / 2
-
-# remove indeterminate genera
-#eur <- eur[eur$GENUS != 'indet.', ]
-
-# add binomial name
-#binm <- with(eur, binom.make(GENUS, SPECIES))
-#eur <- cbind(eur, name.bi = binm)
-#eur$name.bi <- as.character(eur$name.bi)
-
-# get rid of the duplicates
-#aa <- split(eur, eur$NAME)
-#aa <- lapply(aa, function(x) {
-#             x <- x[!duplicated(x$name.bi), ]
-#             x})
-#eur <- Reduce(rbind, aa)
-
-# get rid of taxa with no dietary information
-#dts <- c('omnivore', 'herbivore', 'carnivore')
-#eur <- eur[eur$DIET_2 %in% dts, ]
+# 2x2, 5x5, 10x10 
+eur$gid <- with(eur, grid.id(paleolatdec, paleolngdec, 2))
