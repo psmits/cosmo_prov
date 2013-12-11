@@ -1,12 +1,14 @@
 library(plyr)
 library(reshape2)
-library(sp)
+library(taxize)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')
 source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
+source('../R/my_get_eolid.r')
+eol.key = '2a9932f264f3f0421db36158b6e785b535c6da0e'
 
 dat <- read.csv('../data/mam-occs.csv', stringsAsFactors = FALSE)
 
@@ -80,3 +82,15 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 dat <- Reduce(rbind, uu)
+
+# taxonomic information
+# get for all unique genera
+gen <- unique(dat$occurrence.genus_name)
+un <- unique(dat$name.bi)
+
+new.tax <- grab.heir(gen, key = eol.key)
+for(ii in seq(nrow(new.tax))) {
+  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
+  dat[rp, 'order_name'] <- new.tax[ii, 1]
+  dat[rp, 'family_name'] <- new.tax[ii, 2]
+}

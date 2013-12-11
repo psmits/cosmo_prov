@@ -1,11 +1,13 @@
 library(plyr)
 library(reshape2)
+library(taxize)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')
 source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
+eol.key = '2a9932f264f3f0421db36158b6e785b535c6da0e'
 
 eur <- read.csv('../data/euro-occs.csv', stringsAsFactors = FALSE)
 
@@ -77,3 +79,16 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 eur <- Reduce(rbind, uu)
+
+# taxonomic information
+# get for all unique genera
+gen <- unique(eur$occurrence.genus_name)
+un <- unique(eur$name.bi)
+
+new.tax <- grab.heir(gen, key = eol.key)
+for(ii in seq(nrow(new.tax))) {
+  rp <- which(eur$occurrence.genus_name == new.tax[ii, 3])
+  eur[rp, 'order_name'] <- new.tax[ii, 1]
+  eur[rp, 'family_name'] <- new.tax[ii, 2]
+}
+

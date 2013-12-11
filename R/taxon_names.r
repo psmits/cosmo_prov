@@ -55,3 +55,37 @@ get.hier <- function(graph, level, data) {
 
   laply(taxa, hierfind, level = level, data = data)
 }
+
+
+#' Grab heir
+#'
+#'
+grab.heir <- function(taxon, key) {
+  eol.id <- my.get_eolid(taxon, key = key)
+  tax <- classification(eol.id, key = key)
+  names(tax) <- taxon
+
+  oandf <- lapply(tax, function(x) {
+                  if(class(x) != 'character') {
+                    pick <- which(x$taxonRank == 'order')
+                    x[seq(pick, nrow(x)), ]}})
+  oandf <- oandf[!laply(oandf, is.null)]
+
+  oandf <- lapply(oandf, function(x) {
+                  data.frame(lapply(x, as.character), 
+                             stringsAsFactors = FALSE)})
+  o <- list()
+  for(ii in seq(length(oandf))) {
+    o[[ii]] <- rbind(oandf[[ii]][, 2:3], c(names(oandf)[ii], 'genus'))
+  }
+  names(o) <- names(oandf)
+
+  o <- lapply(o, function(x) {
+              x <- t(x)
+              colnames(x) <- x[2, ]
+              x <- x[1, ]
+              x})
+  o <- Reduce(rbind, o)
+  rownames(o) <- NULL
+  o
+}
