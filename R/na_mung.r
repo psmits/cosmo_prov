@@ -88,9 +88,11 @@ dat <- Reduce(rbind, uu)
 gen <- unique(dat$occurrence.genus_name)
 un <- unique(dat$name.bi)
 
+gen <- gen[-which(gen %in% c('Vulpes'))]
+
 new.tax <- grab.heir(gen, key = eol.key)
-for(ii in seq(nrow(new.tax))) {
-  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
-  dat[rp, 'order_name'] <- new.tax[ii, 1]
-  dat[rp, 'family_name'] <- new.tax[ii, 2]
-}
+#for(ii in seq(nrow(new.tax))) {
+#  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
+#  dat[rp, 'order_name'] <- new.tax[ii, 1]
+#  dat[rp, 'family_name'] <- new.tax[ii, 2]
+#}

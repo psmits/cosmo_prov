@@ -66,8 +66,12 @@ grab.heir <- function(taxon, key) {
   names(tax) <- taxon
 
   oandf <- lapply(tax, function(x) {
-                  if(class(x) != 'character') {
-                    pick <- which(x$taxonRank == 'order')
+                  if(class(x) != 'character' & !is.na(x)){
+                    if(any(x$taxonRank == 'order', na.rm = TRUE)) {
+                       pick <- which(x$taxonRank == 'order')
+                    } else {
+                      pick <- which(x$taxonRank == 'superorder') + 1
+                    }
                     x[seq(pick, nrow(x)), ]}})
   oandf <- oandf[!laply(oandf, is.null)]
 
@@ -85,6 +89,18 @@ grab.heir <- function(taxon, key) {
               colnames(x) <- x[2, ]
               x <- x[1, ]
               x})
+  # exclude any not order, family or genus
+  o <- lapply(o, function(x) {
+              if(is.na(names(x)[1])) {
+                names(x)[1] <- 'order'
+                x
+              } else { 
+                x
+              }})
+  o <- lapply(o, function(x) {
+              tt <- names(x) %in% c('order', 'family', 'genus')
+              x[tt]})
+
   o <- Reduce(rbind, o)
   rownames(o) <- NULL
   o

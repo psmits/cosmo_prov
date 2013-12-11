@@ -10,7 +10,8 @@ my.get_eolid <- function (sciname, ask = TRUE, verbose = TRUE, key = NULL) {
         pageids <- tmp[grep(sciname, tmp$name), "pageid"]
         dfs <- compact(lapply(pageids, function(x) eol_pages(x, key = key)$scinames))
         dfs <- ldply(dfs[!sapply(dfs, nrow) == 0])
-        df <- dfs[, c("identifier", "scientificName", "nameAccordingTo")]
+        df <- try(dfs[, c("identifier", "scientificName", "nameAccordingTo")])
+        if(class(df) %in% 'try-error') return(NA)
         names(df) <- c("eolid", "name", "source")
         df <- taxize:::getsourceshortnames(df)
         if (nrow(df) == 0) {
