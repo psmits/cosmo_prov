@@ -91,8 +91,14 @@ un <- unique(dat$name.bi)
 gen <- gen[-which(gen %in% c('Vulpes'))]
 
 new.tax <- grab.heir(gen, key = eol.key)
-#for(ii in seq(nrow(new.tax))) {
-#  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
-#  dat[rp, 'order_name'] <- new.tax[ii, 1]
-#  dat[rp, 'family_name'] <- new.tax[ii, 2]
-#}
+new.tax <- apply(new.tax, 2, function(x) {
+                 gsub(pattern = '\\s(.*)', x = x, 
+                      perl = TRUE, replacement = '')})
+bad.orders <- unique(new.tax[, 1])[13:length(unique(new.tax[, 1]))]
+new.tax <- new.tax[!(new.tax[, 1] %in% bad.orders), ]
+
+for(ii in seq(nrow(new.tax))) {
+  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
+  dat[rp, 'order_name'] <- new.tax[ii, 1]
+  dat[rp, 'family_name'] <- new.tax[ii, 2]
+}

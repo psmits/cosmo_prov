@@ -7,6 +7,7 @@ source('../R/mung_help.r')
 source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
+source('../R/my_get_eolid.r')
 eol.key = '2a9932f264f3f0421db36158b6e785b535c6da0e'
 
 eur <- read.csv('../data/euro-occs.csv', stringsAsFactors = FALSE)
@@ -85,10 +86,17 @@ eur <- Reduce(rbind, uu)
 gen <- unique(eur$occurrence.genus_name)
 un <- unique(eur$name.bi)
 
+gen <- gen[-which(gen %in% c('Vulpes', 'Myxomygale'))]
+
 new.tax <- grab.heir(gen, key = eol.key)
+new.tax <- apply(new.tax, 2, function(x) {
+                 gsub(pattern = '\\s(.*)', x = x, 
+                      perl = TRUE, replacement = '')})
+bad.orders <- unique(new.tax[, 1])[c(10, 14:length(unique(new.tax[, 1])))]
+new.tax <- new.tax[!(new.tax[, 1] %in% bad.orders), ]
+
 for(ii in seq(nrow(new.tax))) {
   rp <- which(eur$occurrence.genus_name == new.tax[ii, 3])
   eur[rp, 'order_name'] <- new.tax[ii, 1]
   eur[rp, 'family_name'] <- new.tax[ii, 2]
 }
-
