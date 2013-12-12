@@ -66,7 +66,10 @@ for (ii in seq(nrow(bins))) {
 }
 
 # 2x2, 5x5, 10x10 
-eur$gid <- with(eur, grid.id(paleolatdec, paleolngdec, 2))
+eur$gid <- as.character(with(eur, grid.id(paleolatdec, paleolngdec, 
+                                          2, 'mercator')))
+# relevel the factor
+eur$gid <- factor(eur$gid, unique(eur$gid))
 
 # remove duplicates at grid locations in each bin
 db <- split(eur, eur$bins)

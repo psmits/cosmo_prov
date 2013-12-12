@@ -1,6 +1,7 @@
 library(plyr)
 library(reshape2)
 library(taxize)
+library(mapproj)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')
@@ -65,8 +66,10 @@ for (ii in seq(nrow(bins))) {
   dat$bins[out] <- bins[ii, 1]
 }
 
+# get rid of anything that is missing
 # 2x2, 5x5, 10x10 
-dat$gid <- as.character(with(dat, grid.id(paleolatdec, paleolngdec, 2)))
+dat$gid <- as.character(with(dat, grid.id(paleolatdec, paleolngdec, 
+                                          2, 'mercator'))
 # relevel the factor
 dat$gid <- factor(dat$gid, unique(dat$gid))
 
