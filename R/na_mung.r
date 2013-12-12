@@ -101,4 +101,7 @@ for(ii in seq(nrow(new.tax))) {
   rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
   dat[rp, 'order_name'] <- new.tax[ii, 1]
   dat[rp, 'family_name'] <- new.tax[ii, 2]
+
+  rfa <- which(dat$family_name == new.tax[ii, 2])
+  dat[rfa, 'order_name'] <- new.tax[ii, 1]
 }

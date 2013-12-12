@@ -99,4 +99,7 @@ for(ii in seq(nrow(new.tax))) {
   rp <- which(eur$occurrence.genus_name == new.tax[ii, 3])
   eur[rp, 'order_name'] <- new.tax[ii, 1]
   eur[rp, 'family_name'] <- new.tax[ii, 2]
+
+  rfa <- which(eur$family_name == new.tax[ii, 2])
+  eur[rfa, 'order_name'] <- new.tax[ii, 1]
 }
