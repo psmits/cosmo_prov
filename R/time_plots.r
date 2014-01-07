@@ -53,7 +53,7 @@ ggdiet <- ggdiet + geom_line()
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 ggdiet <- ggdiet + labs(x = 'Time (My)')
 ggdiet <- ggdiet + facet_grid(L3 ~ L1, scales = 'free')
-ggsave(file = '../doc/figure/diets.png', width = 10, height = 20, plot = ggdiet)
+ggsave(file = '../doc/figure/diets.png', width = 10, height = 15, plot = ggdiet)
 
 
 # locomotor
@@ -65,4 +65,4 @@ ggloco <- ggloco + geom_line()
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
 ggloco <- ggloco + facet_grid(L3 ~ L1, scales = 'free')
-ggsave(file = '../doc/figure/locos.png', width = 10, height = 20, plot = ggloco)
+ggsave(file = '../doc/figure/locos.png', width = 10, height = 15, plot = ggloco)
