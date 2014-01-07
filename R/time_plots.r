@@ -55,6 +55,30 @@ ggdiet <- ggdiet + labs(x = 'Time (My)')
 ggdiet <- ggdiet + facet_grid(L3 ~ L1, scales = 'free')
 ggsave(file = '../doc/figure/diets.png', width = 10, height = 15, plot = ggdiet)
 
+# just NA
+nadt <- melt(dtwin.bg)
+nadt$L3 <- as.numeric(nadt$L3)
+ggnad <- ggplot(nadt, aes(x = L3, y = value, colour = L1))
+ggnad <- ggnad + geom_line()
+ggnad <- ggnad + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggnad <- ggnad + scale_color_manual(values = cbp,
+                                    name = 'Dietary\nCategory')
+ggnad <- ggnad + labs(x = 'Time (My)')
+ggnad <- ggnad + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggsave(file = '../doc/figure/na_dt.png', width = 15, height = 5, plot = ggnad)
+
+# just Eur
+erdt <- melt(dteur.bg)
+erdt$L3 <- as.numeric(erdt$L3)
+ggerd <- ggplot(erdt, aes(x = L3, y = value, colour = L1))
+ggerd <- ggerd + geom_line()
+ggerd <- ggerd + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggerd <- ggerd + scale_color_manual(values = cbp,
+                                    name = 'Dietary\nCategory')
+ggerd <- ggerd + labs(x = 'Time (My)')
+ggerd <- ggerd + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggsave(file = '../doc/figure/er_dt.png', width = 15, height = 5, plot = ggerd)
+
 
 # locomotor
 locodf <- list(na = lfwin.bg, eur = lfeur.bg)
@@ -66,3 +90,27 @@ ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
 ggloco <- ggloco + facet_grid(L3 ~ L1, scales = 'free')
 ggsave(file = '../doc/figure/locos.png', width = 10, height = 15, plot = ggloco)
+
+# just NA
+nalf <- melt(lfwin.bg)
+nalf$L3 <- as.numeric(nalf$L3)
+ggnal <- ggplot(nalf, aes(x = L3, y = value, colour = L1))
+ggnal <- ggnal + geom_line()
+ggnal <- ggnal + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggnal <- ggnal + scale_color_manual(values = cbp,
+                                    name = 'Locomotor\nCategory')
+ggnal <- ggnal + labs(x = 'Time (My)')
+ggnal <- ggnal + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggsave(file = '../doc/figure/na_lf.png', width = 15, height = 5, plot = ggnal)
+
+# just Eur
+erlf <- melt(lfeur.bg)
+erlf$L3 <- as.numeric(erlf$L3)
+ggerl <- ggplot(erlf, aes(x = L3, y = value, colour = L1))
+ggerl <- ggerl + geom_line()
+ggerl <- ggerl + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggerl <- ggerl + scale_color_manual(values = cbp,
+                                    name = 'Locomotor\nCategory')
+ggerl <- ggerl + labs(x = 'Time (My)')
+ggerl <- ggerl + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggsave(file = '../doc/figure/er_lf.png', width = 15, height = 5, plot = ggerl)
