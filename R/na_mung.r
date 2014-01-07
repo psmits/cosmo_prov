@@ -38,7 +38,7 @@ dat$name.bi <- as.character(dat$name.bi)
 # exclude aquatic and volant nonsense
 aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
 dat <- dat[!(dat$order_name %in% aq), ]
-lf <- c('amphibious', 'volant', 'aquatic', 'glinding')
+lf <- c('amphibious', 'volant', 'aquatic', 'gliding')
 dat <- dat[!(dat$life_habit %in% lf), ]
 
 # diet assignments
@@ -69,7 +69,7 @@ for (ii in seq(nrow(bins))) {
 # get rid of anything that is missing
 # 2x2, 5x5, 10x10 
 dat$gid <- as.character(with(dat, grid.id(paleolatdec, paleolngdec, 
-                                          2, 'mercator'))
+                                          2, 'mercator')))
 # relevel the factor
 dat$gid <- factor(dat$gid, unique(dat$gid))
 

@@ -2,16 +2,15 @@ library(igraph)
 library(plyr)
 library(parallel)
 
-source('../R/na_mung.r')
-source('../R/europe_mung.r')
+#source('../R/na_mung.r')
+#source('../R/europe_mung.r')
 
 source('../R/bin_network.r')
 source('../R/biogeo_struct.r')
-source('../R/biogeo_bootstrap.r')
 source('../R/window.r')
 
-life <- split(dat, f = dat$life_habit)
-eulf <- split(eur, f = eur$life_habit)
+life <- split(dat, f = dat$comlife)
+eulf <- split(eur, f = eur$comlife)
 
 # with explicit bins
 wlfh <- 2

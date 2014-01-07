@@ -3,9 +3,12 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 
+source('../R/na_mung.r')
+source('../R/europe_mung.r')
+
 source('../R/cosmo_prov.r')
-#source('../R/diet_dynamics.r')
-#source('../R/life_dynamics.r')
+source('../R/diet_dynamics.r')
+source('../R/life_dynamics.r')
 source('../R/oxygen_curve.r')
 
 theme_set(theme_bw())
@@ -26,63 +29,40 @@ ggsave(file = '../doc/figure/zachos.png',
        width = 15, height = 10, plot = ggzac)
 
 # standard bin
+win.bg <- win.bg[1:4]
 cont <- list(na = win.bg, eur = eurwin.bg)
 bin.dat <- melt(cont)
 bin.dat$L3 <- as.numeric(bin.dat$L3)
 bin.dat <- bin.dat[!(bin.dat[, 1] == Inf | is.na(bin.dat[, 1])), ]
-ggdat <- ggplot(bin.dat, aes(x = L3, y = value, colour = L1)) + geom_line()
-ggdat <- ggdat + facet_wrap(~ L2, scales = 'free_y')
-ggdat <- ggdat + scale_color_manual(values = cbp)
-#ggdat <- ggdat + theme(legend.position = 'none')
+ggdat <- ggplot(bin.dat, aes(x = L3, y = value, linetype = L1)) + geom_line()
 ggdat <- ggdat + labs(x = 'Time (My)')
+ggdat <- ggdat + scale_linetype_manual(values = c(1,2),
+                                       name = 'Region')
 ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggdat <- ggdat + facet_wrap(~ L2, scales = 'free_y')
 ggsave(file = '../doc/figure/gen_bin.png', 
        width = 15, height = 10, plot = ggdat)
 
 
 # diet
-# na diet
-bin.diet <- melt(dtwin.bg)
-bin.diet$L3 <- as.numeric(bin.diet$L3)
-nadiet <- ggplot(bin.diet, aes(x = L3, y = value, colour = L1))
-nadiet <- nadiet + geom_line(alpha = 0.5)
-nadiet <- nadiet + facet_wrap(~ L2, scales = 'free_y')
-nadiet <- nadiet + scale_color_manual(values = cbp)
-nadiet <- nadiet + labs(x = 'Time (My)')
-nadiet <- nadiet + theme(legend.position = 'none', 
-                         axis.title = element_text(size = 19),
-                         axis.text = element_text(size = 17))
-nadiet <- nadiet + stat_smooth(method = 'loess', se = FALSE)
-ggsave(file = '../doc/figure/diet_bin.png', 
-       width = 15, height = 10, plot = nadiet)
+dietdf <- list(na = dtwin.bg, eur = dteur.bg)
+dietdf <- melt(dietdf)
+dietdf$L4 <- as.numeric(dietdf$L4)
+ggdiet <- ggplot(dietdf, aes(x = L4, y = value, colour = L2))
+ggdiet <- ggdiet + geom_line()
+ggdiet <- ggdiet + scale_color_manual(values = cbp)
+ggdiet <- ggdiet + labs(x = 'Time (My)')
+ggdiet <- ggdiet + facet_grid(L3 ~ L1, scales = 'free')
+ggsave(file = '../doc/figure/diets.png', width = 10, height = 20, plot = ggdiet)
 
-# europe diet
-eub.diet <- melt(dteur.bg)
-eub.diet$L3 <- as.numeric(eub.diet$L3)
-eub.diet <- eub.diet[!(eub.diet[, 1] == Inf | is.na(eub.diet[, 1])), ]
-eudiet <- ggplot(eub.diet, aes(x = L3, y = value, colour = L1))
-eudiet <- eudiet + geom_line(alpha = 0.5)
-eudiet <- eudiet + facet_wrap(~ L2, scales = 'free_y')
-eudiet <- eudiet + scale_color_manual(values = cbp)
-eudiet <- eudiet + labs(x = 'Time (My)')
-eudiet <- eudiet + theme(legend.position = 'none', 
-                         axis.title = element_text(size = 19),
-                         axis.text = element_text(size = 17))
-eudiet <- eudiet + stat_smooth(method = 'loess', se = FALSE)
-ggsave(file = '../doc/figure/eudt_bin.png', 
-       width = 15, height = 10, plot = nadiet)
 
 # locomotor
-bin.loco <- melt(lfwin.bg)
-bin.loco$L3 <- as.numeric(bin.loco$L3)
-ggloco <- ggplot(bin.loco, aes(x = L3, y = value, colour = L1))
-ggloco <- ggloco + geom_line(alpha = 0.5)
-ggloco <- ggloco + facet_wrap(~ L2, scales = 'free_y')
+locodf <- list(na = lfwin.bg, eur = lfeur.bg)
+locodf <- melt(locodf)
+locodf$L4 <- as.numeric(locodf$L4)
+ggloco <- ggplot(locodf, aes(x = L4, y = value, colour = L2))
+ggloco <- ggloco + geom_line()
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
-ggloco <- ggloco + theme(legend.position = 'none', 
-                         axis.title = element_text(size = 19),
-                         axis.text = element_text(size = 17))
-#ggloco <- ggloco + stat_smooth(method = 'loess', se = FALSE)
-ggsave(file = '../doc/figure/loco_bin.png', 
-       width = 15, height = 10, plot = ggloco)
+ggloco <- ggloco + facet_grid(L3 ~ L1, scales = 'free')
+ggsave(file = '../doc/figure/locos.png', width = 10, height = 20, plot = ggloco)

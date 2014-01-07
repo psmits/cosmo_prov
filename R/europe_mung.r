@@ -37,7 +37,7 @@ eur$name.bi <- as.character(eur$name.bi)
 # exclude aquatic and volant nonsense
 aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
 eur <- eur[!(eur$order_name %in% aq), ]
-lf <- c('amphibious', 'volant', 'aquatic', 'glinding')
+lf <- c('amphibious', 'volant', 'aquatic', 'gliding')
 eur <- eur[!(eur$life_habit %in% lf), ]
 
 # diet assignments
