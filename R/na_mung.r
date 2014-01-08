@@ -44,11 +44,13 @@ dat <- dat[!(dat$life_habit %in% lf), ]
 # diet assignments
 herb <- c('herbivore', 'grazer', 'browser', 'folivore', 'granivore')
 omm <- c('frugivore', 'omnivore')
-car <- c('carnivore', 'insectivore')
+car <- c('carnivore')#, 'insectivore')
+insect <- c('insectivore')
 dat$comdiet <- dat$diet1
 dat$comdiet[dat$diet1 %in% herb] <- 'herb'
 dat$comdiet[dat$diet1 %in% omm] <- 'omni'
 dat$comdiet[dat$diet1 %in% car] <- 'carni'
+dat$comdiet[dat$diet1 %in% insect] <- 'insect'
 
 # locomotor assignments
 tree <- c('arboreal')

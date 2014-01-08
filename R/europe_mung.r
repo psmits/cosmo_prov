@@ -43,11 +43,13 @@ eur <- eur[!(eur$life_habit %in% lf), ]
 # diet assignments
 herb <- c('herbivore', 'grazer', 'browser', 'folivore', 'granivore')
 omm <- c('frugivore', 'omnivore')
-car <- c('carnivore', 'insectivore')
+car <- c('carnivore')#, 'insectivore')
+insect <- c('insectivore')
 eur$comdiet <- eur$diet1
 eur$comdiet[eur$diet1 %in% herb] <- 'herb'
 eur$comdiet[eur$diet1 %in% omm] <- 'omni'
 eur$comdiet[eur$diet1 %in% car] <- 'carni'
+eur$comdiet[eur$diet1 %in% insect] <- 'insect'
 
 # locomotor assignments
 tree <- c('arboreal')
