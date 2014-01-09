@@ -34,12 +34,27 @@ cont <- list(na = win.bg, eur = eurwin.bg)
 bin.dat <- melt(cont)
 bin.dat$L3 <- as.numeric(bin.dat$L3)
 bin.dat <- bin.dat[!(bin.dat[, 1] == Inf | is.na(bin.dat[, 1])), ]
+
+bin.dat$L2[bin.dat$L2 == 'bc'] <- 'BC' 
+bin.dat$L2[bin.dat$L2 == 'end'] <- 'E'
+bin.dat$L2[bin.dat$L2 == 'avgcoc'] <- 'Occ'
+bin.dat$L2[bin.dat$L2 == 'code'] <- 'Code length'
+
+bin.dat$L1[bin.dat$L1 == 'na'] <- 'NA'
+bin.dat$L1[bin.dat$L1 == 'eur'] <- 'Europe'
+
 ggdat <- ggplot(bin.dat, aes(x = L3, y = value, linetype = L1)) + geom_line()
 ggdat <- ggdat + labs(x = 'Time (My)')
 ggdat <- ggdat + scale_linetype_manual(values = c(1,2),
                                        name = 'Region')
 ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggdat <- ggdat + facet_wrap(~ L2, scales = 'free_y')
+ggdat <- ggdat + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 17),
+                       axis.title = element_text(size = 20),
+                       legend.text = element_text(size = 15),
+                       legend.title = element_text(size = 16),
+                       strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/gen_bin.png', 
        width = 15, height = 10, plot = ggdat)
 
@@ -58,6 +73,11 @@ ggsave(file = '../doc/figure/diets.png', width = 10, height = 15, plot = ggdiet)
 # just NA
 nadt <- melt(dtwin.bg)
 nadt$L3 <- as.numeric(nadt$L3)
+nadt$L2[nadt$L2 == 'bc'] <- 'BC'
+nadt$L2[nadt$L2 == 'end'] <- 'E'
+nadt$L2[nadt$L2 == 'avgcoc'] <- 'Occ'
+nadt$L2[nadt$L2 == 'code'] <- 'Code length'
+
 ggnad <- ggplot(nadt, aes(x = L3, y = value, colour = L1))
 ggnad <- ggnad + geom_line()
 #ggnad <- ggnad + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
@@ -65,11 +85,22 @@ ggnad <- ggnad + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggnad <- ggnad + labs(x = 'Time (My)')
 ggnad <- ggnad + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggnad <- ggnad + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 17),
+                       axis.title = element_text(size = 20),
+                       legend.text = element_text(size = 15),
+                       legend.title = element_text(size = 16),
+                       strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/na_dt.png', width = 15, height = 5, plot = ggnad)
 
 # just Eur
 erdt <- melt(dteur.bg)
 erdt$L3 <- as.numeric(erdt$L3)
+erdt$L2[erdt$L2 == 'bc'] <- 'BC'
+erdt$L2[erdt$L2 == 'end'] <- 'E'
+erdt$L2[erdt$L2 == 'avgcoc'] <- 'Occ'
+erdt$L2[erdt$L2 == 'code'] <- 'Code length'
+
 ggerd <- ggplot(erdt, aes(x = L3, y = value, colour = L1))
 ggerd <- ggerd + geom_line()
 #ggerd <- ggerd + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
@@ -77,6 +108,12 @@ ggerd <- ggerd + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggerd <- ggerd + labs(x = 'Time (My)')
 ggerd <- ggerd + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggerd <- ggerd + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 17),
+                       axis.title = element_text(size = 20),
+                       legend.text = element_text(size = 15),
+                       legend.title = element_text(size = 16),
+                       strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/er_dt.png', width = 15, height = 5, plot = ggerd)
 
 
@@ -94,6 +131,11 @@ ggsave(file = '../doc/figure/locos.png', width = 10, height = 15, plot = ggloco)
 # just NA
 nalf <- melt(lfwin.bg)
 nalf$L3 <- as.numeric(nalf$L3)
+nalf$L2[nalf$L2 == 'bc'] <- 'BC'
+nalf$L2[nalf$L2 == 'end'] <- 'E'
+nalf$L2[nalf$L2 == 'avgcoc'] <- 'Occ'
+nalf$L2[nalf$L2 == 'code'] <- 'Code length'
+
 ggnal <- ggplot(nalf, aes(x = L3, y = value, colour = L1))
 ggnal <- ggnal + geom_line()
 #ggnal <- ggnal + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
@@ -101,11 +143,22 @@ ggnal <- ggnal + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggnal <- ggnal + labs(x = 'Time (My)')
 ggnal <- ggnal + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggnal <- ggnal + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 17),
+                       axis.title = element_text(size = 20),
+                       legend.text = element_text(size = 15),
+                       legend.title = element_text(size = 16),
+                       strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/na_lf.png', width = 15, height = 5, plot = ggnal)
 
 # just Eur
 erlf <- melt(lfeur.bg)
 erlf$L3 <- as.numeric(erlf$L3)
+erlf$L2[erlf$L2 == 'bc'] <- 'BC'
+erlf$L2[erlf$L2 == 'end'] <- 'E'
+erlf$L2[erlf$L2 == 'avgcoc'] <- 'Occ'
+erlf$L2[erlf$L2 == 'code'] <- 'Code length'
+
 ggerl <- ggplot(erlf, aes(x = L3, y = value, colour = L1))
 ggerl <- ggerl + geom_line()
 #ggerl <- ggerl + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
@@ -113,4 +166,10 @@ ggerl <- ggerl + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggerl <- ggerl + labs(x = 'Time (My)')
 ggerl <- ggerl + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggerl <- ggerl + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 17),
+                       axis.title = element_text(size = 20),
+                       legend.text = element_text(size = 15),
+                       legend.title = element_text(size = 16),
+                       strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/er_lf.png', width = 15, height = 5, plot = ggerl)
