@@ -68,7 +68,7 @@ ggdiet <- ggdiet + geom_line()
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 ggdiet <- ggdiet + labs(x = 'Time (My)')
 ggdiet <- ggdiet + facet_grid(L3 ~ L1, scales = 'free')
-ggsave(file = '../doc/figure/diets.png', width = 10, height = 15, plot = ggdiet)
+ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
 # just NA
 nadt <- melt(dtwin.bg)
@@ -84,14 +84,14 @@ ggnad <- ggnad + geom_line()
 ggnad <- ggnad + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggnad <- ggnad + labs(x = 'Time (My)')
-ggnad <- ggnad + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggnad <- ggnad + facet_wrap(~ L2, scales = 'free')
 ggnad <- ggnad + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
                        legend.text = element_text(size = 15),
                        legend.title = element_text(size = 16),
                        strip.text = element_text(size = 15))
-ggsave(file = '../doc/figure/na_dt.png', width = 15, height = 5, plot = ggnad)
+ggsave(file = '../doc/figure/na_dt.png', width = 15, height = 10, plot = ggnad)
 
 # just Eur
 erdt <- melt(dteur.bg)
@@ -107,14 +107,14 @@ ggerd <- ggerd + geom_line()
 ggerd <- ggerd + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggerd <- ggerd + labs(x = 'Time (My)')
-ggerd <- ggerd + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggerd <- ggerd + facet_wrap(~ L2, scales = 'free')
 ggerd <- ggerd + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
                        legend.text = element_text(size = 15),
                        legend.title = element_text(size = 16),
                        strip.text = element_text(size = 15))
-ggsave(file = '../doc/figure/er_dt.png', width = 15, height = 5, plot = ggerd)
+ggsave(file = '../doc/figure/er_dt.png', width = 15, height = 10, plot = ggerd)
 
 
 # locomotor
@@ -126,7 +126,7 @@ ggloco <- ggloco + geom_line()
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
 ggloco <- ggloco + facet_grid(L3 ~ L1, scales = 'free')
-ggsave(file = '../doc/figure/locos.png', width = 10, height = 15, plot = ggloco)
+ggsave(file = '../doc/figure/locos.png', width = 15, height = 10, plot = ggloco)
 
 # just NA
 nalf <- melt(lfwin.bg)
@@ -142,14 +142,14 @@ ggnal <- ggnal + geom_line()
 ggnal <- ggnal + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggnal <- ggnal + labs(x = 'Time (My)')
-ggnal <- ggnal + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggnal <- ggnal + facet_wrap(~ L2, scales = 'free')
 ggnal <- ggnal + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
                        legend.text = element_text(size = 15),
                        legend.title = element_text(size = 16),
                        strip.text = element_text(size = 15))
-ggsave(file = '../doc/figure/na_lf.png', width = 15, height = 5, plot = ggnal)
+ggsave(file = '../doc/figure/na_lf.png', width = 15, height = 10, plot = ggnal)
 
 # just Eur
 erlf <- melt(lfeur.bg)
@@ -165,11 +165,11 @@ ggerl <- ggerl + geom_line()
 ggerl <- ggerl + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggerl <- ggerl + labs(x = 'Time (My)')
-ggerl <- ggerl + facet_wrap(~ L2, nrow = 1, scales = 'free')
+ggerl <- ggerl + facet_wrap(~ L2, scales = 'free')
 ggerl <- ggerl + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
                        legend.text = element_text(size = 15),
                        legend.title = element_text(size = 16),
                        strip.text = element_text(size = 15))
-ggsave(file = '../doc/figure/er_lf.png', width = 15, height = 5, plot = ggerl)
+ggsave(file = '../doc/figure/er_lf.png', width = 15, height = 10, plot = ggerl)
