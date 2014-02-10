@@ -1,6 +1,7 @@
 library(plyr)
 library(reshape2)
 library(taxize)
+library(mapproj)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')

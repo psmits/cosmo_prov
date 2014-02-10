@@ -1,7 +1,10 @@
 #!/bin/bash
 
-cd R
+cd ./R
 
-nohup nice R CMD BATCH --vanilla ../R/cosmo_analysis.r
-nohup nice R CMD BATCH --vanilla ../R/trait_analysis.r
-nohup nice R CMD BATCH --vanilla ../R/diversity.r
+nohup nice R CMD BATCH --vanilla ../R/time_plots.r
+nohup nice R CMD BATCH --vanilla ../R/surv_analysis.r
+
+cd ..
+
+echo 'analysis complete' | mail -s 'mam' psmits@uchicago.edu
