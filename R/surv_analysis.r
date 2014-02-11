@@ -1,6 +1,5 @@
 library(survival)
 library(MuMIn)
-library(xtable)
 
 source('../R/na_surv.r')
 source('../R/eur_surv.r')
