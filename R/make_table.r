@@ -12,11 +12,13 @@ surv.tab <- function(mods, label) {
   res <- res[order(res$AICc), ]
   res$shape[res$distribution == 'exponential'] <- NA
   rownames(res) <- NULL
-  res[, 3:5] <- apply(res[, 3:5], 2, as.numeric)
+  num <- c('shape', 'df', 'AICc')
+  res[, num] <- apply(res[, num], 2, as.numeric)
   res$weight <- aic.wts(res$AICc)
 
   tab <- xtable(res)
-  digits(tab)[5:7] <- c(0, 4, 2)
+  short <- which(names(tab) %in% c('df', 'AICc', 'weight')) + 1
+  digits(tab)[short] <- c(0, 4, 2)
   label(tab) <- label
 
   tab
