@@ -24,6 +24,26 @@ nadl.exp <- survreg(formula = na.surv ~ diet + move,
 na.mod <- list(na.wei, nad.wei, nal.wei, nadl.wei,
                na.exp, nad.exp, nal.exp, nadl.exp)
 
+
+nag.km <- survfit(formula = nagen.surv ~ 1)
+nag.kmd <- survfit(formula = nagen.surv ~ diet, data = na.genecol)
+nag.kml <- survfit(formula = nagen.surv ~ move, data = na.genecol)
+nag.kmdl <- survfit(formula = nagen.surv ~ diet + move, data = na.genecol)
+
+nag.wei <- survreg(formula = nagen.surv ~ 1, dist = 'weibull')
+nagd.wei <- survreg(formula = nagen.surv ~ diet, data = na.genecol, dist = 'weibull')
+nagl.wei <- survreg(formula = nagen.surv ~ move, data = na.genecol, dist = 'weibull')
+nagdl.wei <- survreg(formula = nagen.surv ~ diet + move,
+                     data = na.genecol, dist = 'weibull')
+nag.exp <- survreg(formula = nagen.surv ~ 1, dist = 'exponential')
+nagd.exp <- survreg(formula = nagen.surv ~ diet, data = na.genecol, dist = 'exponential')
+nagl.exp <- survreg(formula = nagen.surv ~ move, data = na.genecol, dist = 'exponential')
+nagdl.exp <- survreg(formula = nagen.surv ~ diet + move,
+                     data = na.genecol, dist = 'exponential')
+
+nagen.mod <- list(nag.wei, nagd.wei, nagl.wei, nagdl.wei,
+                  nag.exp, nagd.exp, nagl.exp, nagdl.exp)
+
 # just europe
 er.km <- survfit(formula = er.surv ~ 1)
 er.kmd <- survfit(formula = er.surv ~ diet, data = er.ecol)
@@ -44,4 +64,21 @@ erdl.exp <- survreg(formula = er.surv ~ diet + move,
 er.mod <- list(er.wei, erd.wei, erl.wei, erdl.wei,
                er.exp, erd.exp, erl.exp, erdl.exp)
 
-# combined
+erg.km <- survfit(formula = ergen.surv ~ 1)
+erg.kmd <- survfit(formula = ergen.surv ~ diet, data = er.genecol)
+erg.kml <- survfit(formula = ergen.surv ~ move, data = er.genecol)
+erg.kmdl <- survfit(formula = ergen.surv ~ diet + move, data = er.genecol)
+
+erg.wei <- survreg(formula = ergen.surv ~ 1, dist = 'weibull')
+ergd.wei <- survreg(formula = ergen.surv ~ diet, data = er.genecol, dist = 'weibull')
+ergl.wei <- survreg(formula = ergen.surv ~ move, data = er.genecol, dist = 'weibull')
+ergdl.wei <- survreg(formula = ergen.surv ~ diet + move,
+                     data = er.genecol, dist = 'weibull')
+erg.exp <- survreg(formula = ergen.surv ~ 1, dist = 'exponential')
+ergd.exp <- survreg(formula = ergen.surv ~ diet, data = er.genecol, dist = 'exponential')
+ergl.exp <- survreg(formula = ergen.surv ~ move, data = er.genecol, dist = 'exponential')
+ergdl.exp <- survreg(formula = ergen.surv ~ diet + move,
+                     data = er.genecol, dist = 'exponential')
+
+ergen.mod <- list(erg.wei, ergd.wei, ergl.wei, ergdl.wei,
+                  erg.exp, ergd.exp, ergl.exp, ergdl.exp)
