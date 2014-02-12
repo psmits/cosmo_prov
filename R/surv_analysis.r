@@ -4,13 +4,6 @@ library(MuMIn)
 source('../R/na_surv.r')
 source('../R/eur_surv.r')
 
-aic.wts <- function(aic) {
-  dels <- aic - min(aic)
-  rel <- exp(-0.5 * dels)
-
-  rel / sum(rel)
-}
-
 # just north america
 na.km <- survfit(formula = na.surv ~ 1)
 na.kmd <- survfit(formula = na.surv ~ diet, data = na.ecol)
@@ -28,6 +21,9 @@ nal.exp <- survreg(formula = na.surv ~ move, data = na.ecol, dist = 'exponential
 nadl.exp <- survreg(formula = na.surv ~ diet + move,
                     data = na.ecol, dist = 'exponential')
 
+na.mod <- list(na.wei, nad.wei, nal.wei, nadl.wei,
+               na.exp, nad.exp, nal.exp, nadl.exp)
+
 # just europe
 er.km <- survfit(formula = er.surv ~ 1)
 er.kmd <- survfit(formula = er.surv ~ diet, data = er.ecol)
@@ -44,5 +40,8 @@ erd.exp <- survreg(formula = er.surv ~ diet, data = er.ecol, dist = 'exponential
 erl.exp <- survreg(formula = er.surv ~ move, data = er.ecol, dist = 'exponential')
 erdl.exp <- survreg(formula = er.surv ~ diet + move,
                     data = er.ecol, dist = 'exponential')
+
+er.mod <- list(er.wei, erd.wei, erl.wei, erdl.wei,
+               er.exp, erd.exp, erl.exp, erdl.exp)
 
 # combined
