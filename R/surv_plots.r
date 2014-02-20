@@ -14,6 +14,8 @@ nakm.curve <- cbind(data.frame(time = na.km$time), surv = na.km$surv)
 ggna <- ggplot(nakm.curve, aes(x = time, y = surv))
 ggna <- ggna + geom_step()
 ggna <- ggna + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_na.png', plot = ggna,
+       height = 10, width = 15)
 
 nn <- c(rep('carni', na.kmd$strata[1]),
         rep('herb', na.kmd$strata[2]),
@@ -23,6 +25,8 @@ nakmd.curve <- cbind(data.frame(time = na.kmd$time), surv = na.kmd$surv, diet = 
 ggnad <- ggplot(nakmd.curve, aes(x = time, y = surv, colour = diet)) 
 ggnad <- ggnad + geom_step()
 ggnad <- ggnad + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_nad.png', plot = ggnad,
+       height = 10, width = 15)
 
 nn <- c(rep('arboreal', na.kml$strata[1]),
         rep('ground dwelling', na.kml$strata[2]),
@@ -31,6 +35,8 @@ nakml.curve <- cbind(data.frame(time = na.kml$time), surv = na.kml$surv, diet = 
 ggnal <- ggplot(nakml.curve, aes(x = time, y = surv, colour = diet)) 
 ggnal <- ggnal + geom_step()
 ggnal <- ggnal + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_nal.png', plot = ggnal,
+       height = 10, width = 15)
 
 
 # europe
@@ -38,6 +44,8 @@ erkm.curve <- cbind(data.frame(time = er.km$time), surv = er.km$surv)
 gger <- ggplot(erkm.curve, aes(x = time, y = surv))
 gger <- gger + geom_step()
 gger <- gger + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_er.png', plot = gger,
+       height = 10, width = 15)
 
 nn <- c(rep('carni', er.kmd$strata[1]),
         rep('herb', er.kmd$strata[2]),
@@ -47,6 +55,8 @@ erkmd.curve <- cbind(data.frame(time = er.kmd$time), surv = er.kmd$surv, diet = 
 ggerd <- ggplot(erkmd.curve, aes(x = time, y = surv, colour = diet)) 
 ggerd <- ggerd + geom_step()
 ggerd <- ggerd + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_erd.png', plot = ggerd,
+       height = 10, width = 15)
 
 nn <- c(rep('arboreal', er.kml$strata[1]),
         rep('ground dwelling', er.kml$strata[2]),
@@ -55,3 +65,5 @@ erkml.curve <- cbind(data.frame(time = er.kml$time), surv = er.kml$surv, diet = 
 ggerl <- ggplot(erkml.curve, aes(x = time, y = surv, colour = diet)) 
 ggerl <- ggerl + geom_step()
 ggerl <- ggerl + scale_y_continuous(trans = log_trans())
+ggsave(filename = '../doc/figure/km_erl.png', plot = ggerl,
+       height = 10, width = 15)
