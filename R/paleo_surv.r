@@ -6,7 +6,8 @@
 #' @param lad vector; last apperance dates
 #' @param start scalar; interval start
 #' @param end scalar; interval end
-paleosurv <- function(fad, lad, start, end) {
+#' @param censor character; type of censoring, interval and right only
+paleosurv <- function(fad, lad, start, end, censor = 'right') {
   left <- which(fad > start)
   right <- which(lad <= end)
 
@@ -30,5 +31,13 @@ paleosurv <- function(fad, lad, start, end) {
   fad[ee] <- lad[ee]
   lad[ee] <- NA
 
-  Surv(time = fad, time2 = lad, type = 'interval2')
+  if(censor == 'right') {
+    out <- Surv(fad, !is.na(lad))
+  }
+
+  if(censor == 'interval') {
+    out <- Surv(time = fad, time2 = lad, type = 'interval2')
+  }
+
+  out
 }

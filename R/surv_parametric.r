@@ -5,11 +5,7 @@ source('../R/na_surv.r')
 source('../R/eur_surv.r')
 
 # just north america
-na.km <- survfit(formula = na.surv ~ 1)
-na.kmd <- survfit(formula = na.surv ~ diet, data = na.ecol)
-na.kml <- survfit(formula = na.surv ~ move, data = na.ecol)
-na.kmdl <- survfit(formula = na.surv ~ diet + move, data = na.ecol)
-
+# species
 na.wei <- survreg(formula = na.surv ~ 1, dist = 'weibull')
 nad.wei <- survreg(formula = na.surv ~ diet, data = na.ecol, dist = 'weibull')
 nal.wei <- survreg(formula = na.surv ~ move, data = na.ecol, dist = 'weibull')
@@ -24,12 +20,7 @@ nadl.exp <- survreg(formula = na.surv ~ diet + move,
 na.mod <- list(na.wei, nad.wei, nal.wei, nadl.wei,
                na.exp, nad.exp, nal.exp, nadl.exp)
 
-
-nag.km <- survfit(formula = nagen.surv ~ 1)
-nag.kmd <- survfit(formula = nagen.surv ~ diet, data = na.genecol)
-nag.kml <- survfit(formula = nagen.surv ~ move, data = na.genecol)
-nag.kmdl <- survfit(formula = nagen.surv ~ diet + move, data = na.genecol)
-
+# genus
 nag.wei <- survreg(formula = nagen.surv ~ 1, dist = 'weibull')
 nagd.wei <- survreg(formula = nagen.surv ~ diet, data = na.genecol, dist = 'weibull')
 nagl.wei <- survreg(formula = nagen.surv ~ move, data = na.genecol, dist = 'weibull')
@@ -45,11 +36,7 @@ nagen.mod <- list(nag.wei, nagd.wei, nagl.wei, nagdl.wei,
                   nag.exp, nagd.exp, nagl.exp, nagdl.exp)
 
 # just europe
-er.km <- survfit(formula = er.surv ~ 1)
-er.kmd <- survfit(formula = er.surv ~ diet, data = er.ecol)
-er.kml <- survfit(formula = er.surv ~ move, data = er.ecol)
-er.kmdl <- survfit(formula = er.surv ~ diet + move, data = er.ecol)
-
+# species
 er.wei <- survreg(formula = er.surv ~ 1, dist = 'weibull')
 erd.wei <- survreg(formula = er.surv ~ diet, data = er.ecol, dist = 'weibull')
 erl.wei <- survreg(formula = er.surv ~ move, data = er.ecol, dist = 'weibull')
@@ -63,12 +50,7 @@ erdl.exp <- survreg(formula = er.surv ~ diet + move,
 
 er.mod <- list(er.wei, erd.wei, erl.wei, erdl.wei,
                er.exp, erd.exp, erl.exp, erdl.exp)
-
-erg.km <- survfit(formula = ergen.surv ~ 1)
-erg.kmd <- survfit(formula = ergen.surv ~ diet, data = er.genecol)
-erg.kml <- survfit(formula = ergen.surv ~ move, data = er.genecol)
-erg.kmdl <- survfit(formula = ergen.surv ~ diet + move, data = er.genecol)
-
+# genus
 erg.wei <- survreg(formula = ergen.surv ~ 1, dist = 'weibull')
 ergd.wei <- survreg(formula = ergen.surv ~ diet, data = er.genecol, dist = 'weibull')
 ergl.wei <- survreg(formula = ergen.surv ~ move, data = er.genecol, dist = 'weibull')

@@ -9,14 +9,12 @@ nadur <- read.csv('../data/mam-ranges.csv', stringsAsFactors = FALSE)
 names(nadur) <- c('genus', 'species', 'fad', 'lad', 
                   'collections', 'abundance', 'geo.mean.ab')
 
-
 bi <- with(nadur, binom.make(genus, species))
 nadur <- nadur[bi %in% dat$name.bi, ]
 nadur$name.bi <- with(nadur, binom.make(genus, species))
 
 ecol <- cbind(data.frame(taxa = dat$name.bi, stringsAsFactors = FALSE),
               diet = dat$comdiet, move = dat$comlife)
-
 ecol <- ecol[order(ecol$taxa), ]
 na.ecol <- ecol[!duplicated(ecol$taxa), ]
 
