@@ -2,13 +2,13 @@ library(igraph)
 library(plyr)
 library(parallel)
 
-#source('../R/na_mung.r')
-#source('../R/europe_mung.r')
+source('../R/na_mung.r')
+source('../R/europe_mung.r')
 
-source('../R/bin_network.r')
 source('../R/biogeo_struct.r')
+source('../R/bin_network.r')
 source('../R/window.r')
-source('../R/phylo_gen.r')
+#source('../R/phylo_gen.r')
 
 # with explicit bins
 wdth <- 2
