@@ -1,6 +1,5 @@
 library(plyr)
 library(reshape2)
-library(taxize)
 library(mapproj)
 
 source('../R/clean_pbdb.r')
@@ -8,8 +7,6 @@ source('../R/mung_help.r')
 source('../R/collapse_names.r')
 source('../R/remove_zeroes.r')
 source('../R/taxon_names.r')
-source('../R/my_get_eolid.r')
-eol.key = '2a9932f264f3f0421db36158b6e785b535c6da0e'
 
 dat <- read.csv('../data/mam-occs.csv', stringsAsFactors = FALSE)
 

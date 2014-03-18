@@ -1,7 +1,10 @@
 library(ape)
 #source('http://www.phytools.org/read.newick/v0.4/read.newick.R')
 
-# convert a taxonomy into a phylogeny
+#' convert a taxonomy into a phylogeny
+#'
+#' @param taxa df; 4 column data frame (genus, family, order, binomial)
+#' @return object of class phylo
 make.tree <- function(taxo) {
   taxo$occurrence.genus_name <- as.factor(taxo$occurrence.genus_name)
   taxo$family_name <- as.factor(taxo$family_name)
@@ -12,7 +15,11 @@ make.tree <- function(taxo) {
   tree
 }
 
-# make a tree of all the taxa
+#' make a tree of all the taxa
+#'
+#' @param data df; needs order, family, genus, binomial name
+#' @return object of class phylo, all edges length 1
+#' @export
 big.tree <- function(data) {
   taxa <- unique(data[, c('order_name', 'family_name', 
                           'occurrence.genus_name', 'name.bi')])
@@ -21,7 +28,12 @@ big.tree <- function(data) {
   big.tree
 }
 
-# get the taxa for every locality
+#' get the taxa for every locality
+#'
+#' @param graph bipartite graph object
+#' @param l.small logical; is the smaller part of the bipartite the localities?
+#' @return list of occurrences per site
+#' @export
 node.taxo <- function(graph, l.small = TRUE) {
   bip <- bipartite.projection(graph)
   len <- lapply(bip, function(x) length(V(x)))
@@ -40,25 +52,4 @@ node.taxo <- function(graph, l.small = TRUE) {
   
   occ <- lapply(pres, function(x) tx[x])
   occ                                  
-}
-
-# grab the necessary tips, get mean cophenetic
-mean.coph <- function(graph, data, l.small = TRUE) {
-  tt <- node.taxo(graph, l.small)
-  bt <- big.tree(data)
-
-  co <- combn(length(tt), m = 2)
-  ph <- array(dim = ncol(co))
-  for(ii in seq(ncol(co))) {
-    tip <- c(tt[[co[1, ii]]], tt[[co[2, ii]]])
-    if(Reduce(identical, tip)) {
-      ph[ii] <- 0
-    } else {
-      tr <- drop.tip(bt, which(!(bt$tip.label %in% tip)))
-      cop <- cophenetic(tr)
-     ph[ii] <- mean(cop[lower.tri(cop)])
-    }
-  }
-
-  ph
 }

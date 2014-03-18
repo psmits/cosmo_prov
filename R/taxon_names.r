@@ -57,51 +57,48 @@ get.hier <- function(graph, level, data) {
 }
 
 
-#' Grab heir
+#' replace taxonomy for data
 #'
-#'
-grab.heir <- function(taxon, key) {
-  eol.id <- my.get_eolid(taxon, key = key)
-  tax <- classification(eol.id, key = key)
-  names(tax) <- taxon
-
-  oandf <- lapply(tax, function(x) {
-                  if(class(x) != 'character' & !is.na(x)){
-                    if(any(x$taxonRank == 'order', na.rm = TRUE)) {
-                       pick <- which(x$taxonRank == 'order')
-                    } else {
-                      pick <- which(x$taxonRank == 'superorder') + 1
-                    }
-                    x[seq(pick, nrow(x)), ]}})
-  oandf <- oandf[!laply(oandf, is.null)]
-
-  oandf <- lapply(oandf, function(x) {
-                  data.frame(lapply(x, as.character), 
-                             stringsAsFactors = FALSE)})
-  o <- list()
-  for(ii in seq(length(oandf))) {
-    o[[ii]] <- rbind(oandf[[ii]][, 2:3], c(names(oandf)[ii], 'genus'))
+#' @param data; PBDB output
+#' @param update; new hierarchy information (order, family, genus)
+#' @return updated data object
+#' @export
+replace.taxonomy <- function(data, update) {
+  for(ii in seq(nrow(update))) {
+    rp <- which(data$occurrence.genus_name == update[ii, 3])
+    data[rp, 'order_name'] <- update[ii, 1]
+    data[rp, 'family_name'] <- update[ii, 2]
+    rfa <- which(data$family_name == update[ii, 2])
+    data[rfa, 'order_name'] <- update[ii, 1]
   }
-  names(o) <- names(oandf)
+  data
+}
 
-  o <- lapply(o, function(x) {
-              x <- t(x)
-              colnames(x) <- x[2, ]
-              x <- x[1, ]
-              x})
-  # exclude any not order, family or genus
-  o <- lapply(o, function(x) {
-              if(is.na(names(x)[1])) {
-                names(x)[1] <- 'order'
-                x
-              } else { 
-                x
-              }})
-  o <- lapply(o, function(x) {
-              tt <- names(x) %in% c('order', 'family', 'genus')
-              x[tt]})
 
-  o <- Reduce(rbind, o)
-  rownames(o) <- NULL
-  o
+#' double check missing orders
+#'
+#' @param data; PBDB output
+#' @return vector character family names
+#' @export
+miss.ord <- function(data) {
+  mat.fam <- ord.fam(data)
+  fix.ord <- tax_name(query = mat.fam, get = 'order')
+  ups <- mat.fam[!is.na(fix.ord)]
+  for(ii in seq(length(ups))) {
+    rr <- data$family_name == ups[ii]
+    data$order_name[rr] <- na.omit(fix.ord)[ii, 1]
+  }
+  data
+}
+
+#' families of missing orders
+#'
+#' @param data; PBDB output
+#' @return vector of character family names
+#' @export
+ord.fam <- function(data) {
+  ord <- data$order_name == ''
+  mat.fam <- unique(data$family_name[ord])
+  mat.fam <- mat.fam[mat.fam != '']
+  mat.fam
 }
