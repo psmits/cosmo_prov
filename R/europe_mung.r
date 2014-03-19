@@ -1,6 +1,5 @@
 library(plyr)
 library(reshape2)
-library(taxize)
 library(mapproj)
 
 source('../R/clean_pbdb.r')
@@ -86,26 +85,3 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 eur <- Reduce(rbind, uu)
-
-# taxonomic information
-# get for all unique genera
-#gen <- unique(eur$occurrence.genus_name)
-#un <- unique(eur$name.bi)
-
-#gen <- gen[-which(gen %in% c('Vulpes', 'Myxomygale'))]
-
-#new.tax <- grab.heir(gen, key = eol.key)
-#new.tax <- apply(new.tax, 2, function(x) {
-#                 gsub(pattern = '\\s(.*)', x = x, 
-#                      perl = TRUE, replacement = '')})
-#bad.orders <- unique(new.tax[, 1])[c(10, 14:length(unique(new.tax[, 1])))]
-#new.tax <- new.tax[!(new.tax[, 1] %in% bad.orders), ]
-
-#for(ii in seq(nrow(new.tax))) {
-#  rp <- which(eur$occurrence.genus_name == new.tax[ii, 3])
-#  eur[rp, 'order_name'] <- new.tax[ii, 1]
-#  eur[rp, 'family_name'] <- new.tax[ii, 2]
-
-#  rfa <- which(eur$family_name == new.tax[ii, 2])
-#  eur[rfa, 'order_name'] <- new.tax[ii, 1]
-#}
