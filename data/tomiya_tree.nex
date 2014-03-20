@@ -1,0 +1,478 @@
+#NEXUS
+[written Fri Jul 12 13:01:31 PDT 2013 by Mesquite  version 2.75 (build 564) at Susumu-PC/128.32.118.166]
+
+BEGIN TAXA;
+	TITLE Taxa;
+	DIMENSIONS NTAX=276;
+	TAXLABELS
+		Achlyoscapter Acritohippus Adeloblarina Adelphailurus Adilophontes Aelurodon Aepycamelus Agriotherium Aletomeryx Alforjas Alilepus Allomys Alluvisorex Alphagaulus Amphechinus Amphicyon Anchippus Anchitherium Angustidens Antecalomys Antesorex Aphelops Archaeohippus Arctonasua Arretotherium Astrohippus Australocamelus Balantiomys Barbourofelis Barbouromeryx Bassaricyonoides Blastomeryx Blickomylus Borophagus Bouromeryx Brachycrus Brachyerix Brachypsalis Buisnictis Calippus Calomys Carpocyon Catagonus Cephalogale Cernictis Copemys Cormohipparion Cosoryx Cranioceras Crusafontia Cupidinimus Cuyamalagus Cynarctus Cynelos Cynomyoides 'Cynorca_occidentale' 'Cynorca_sociale' Daphoenodon Delahomeryx Desmatippus Desmocyon Dikkomys Dinohippus Dipoides Diprionomys Domninoides Drepanomeryx Dromomeryx Dyseohyus Ectopocynus Epicyon Eucastor Eucyon Euhapsis Euoplocyon Euroxenomys Floridaceras Floridachoerus Floridameryx Floridatragulus Fossorcastor Gaillardia Galbreathia Gentilicamelus Goniodontomys Gripholagomys Harrymys Hemicyon Hesperhys Hesperocamelus Hesperolagomys Heteropliohippus Hexameryx Hipparion Hypohippus Hypolagus Hypsiops Hystricops Ilingoceros Indarctos Ischyrocyon Jacobsomys Jimomys Kansasimys Korthomys Kyptoceras Lambdoceras Lantanotherium Lemoynea Lepoides Leptarctus Leptochoerus Lignimus Limnoecus Liodontia Longirostromeryx Lutravus Machaeromeryx Machairodus Macrogenis Macrognathomys Martinogale Megacamelus Megahippus Megalictis Megantereon Megasminthus Megatylopus Merriamoceros Merychippus 'Merychippus_hipparionine' Merychyus Merycodus Mesoreodon Mesoscalops Metatomarctus Metechinus Michenia Microdipoides Microtomarctus Mimomys Mioheteromys Miolabis Miomustela Mionictis Mojavemys Monosaulax Mookomys Moropus Mystipterus Nannippus Neatocastor Nebraskomys Nekrolagus Neohipparion Nimravides Nothokemas Nothotylopus Ogmodontomys Onohippidium Ophiomys Oregonomys Oreolagus Osbornoceros Otarocyon Oxydactylus Paenemarmota Parablastomeryx Paracosoryx Paracryptotis Paracynarctus Paradaphoenus Paradomnina Parahippus Parallomys Paramicrotoscoptes Paramiolabis Parapliohippus Parapliosaccomys Paratoceras Paratomarctus Paratylopus Paronychomys Paroreodon Parvericius Pediomeryx Peraceras Peridiomys Petauristodon Phelosaccomys Phenacocoelus Phoberocyon Pleiolama Plesiogulo Plesiosorex Pleurolicus Plioceros Pliocyon Pliogeomys Pliohippus 'Pliohippus_tehonensis' Plionarctos Plionictis Pliophenacomys Pliosaccomys Pliotaxidea Pliotomodon Pliozapus Plithocyon Poebrotherium Priscocamelus Problastomeryx Procamelus Procastoroides Procranioceras Prodipodomys Promimomys Pronotolagus Prosigmodon 'Prosthennops_niobrarensis' 'Prosthennops_serus' 'Prosthennops_xiphodonticus' Prosynthetoceras Protepicyon Protohippus Protolabis Protomarctus Protopliophenacomys Psalidocyon Pseudaelurus Pseudhipparion Pseudoblastomeryx Pseudoceras Pseudocyon Pseudopalaeocastor Pseudoparablastomeryx Pseudotheridomys Rakomeryx Rakomylus Ramoceros Repomys Russellagus Satherium Scapanoscapter Scaphohippus Similisciurus Sinclairomeryx Sphenophalos Stenoechinus Stenomylus Sthenictis Stratimus Subdromomeryx Symmetrodontomys Syndyoceras Synthetoceras Tanymykter Tapiravus Tardontia Teleoceras Tephrocyon Texoceros Texomys 'Thinohyus_siouxensis' Ticholeptus Tomarctus Tregomys Tregosorex Trigonictis Trogomys Tylocephalonyx Untermannerix Wilsonosorex Yatkolamys Ysengrinia Yumaceras 
+	;
+
+END;
+
+
+BEGIN TREES;
+	Title Trees;
+	LINK Taxa = Taxa;
+	TRANSLATE
+		1 Achlyoscapter,
+		2 Acritohippus,
+		3 Adeloblarina,
+		4 Adelphailurus,
+		5 Adilophontes,
+		6 Aelurodon,
+		7 Aepycamelus,
+		8 Agriotherium,
+		9 Aletomeryx,
+		10 Alforjas,
+		11 Alilepus,
+		12 Allomys,
+		13 Alluvisorex,
+		14 Alphagaulus,
+		15 Amphechinus,
+		16 Amphicyon,
+		17 Anchippus,
+		18 Anchitherium,
+		19 Angustidens,
+		20 Antecalomys,
+		21 Antesorex,
+		22 Aphelops,
+		23 Archaeohippus,
+		24 Arctonasua,
+		25 Arretotherium,
+		26 Astrohippus,
+		27 Australocamelus,
+		28 Balantiomys,
+		29 Barbourofelis,
+		30 Barbouromeryx,
+		31 Bassaricyonoides,
+		32 Blastomeryx,
+		33 Blickomylus,
+		34 Borophagus,
+		35 Bouromeryx,
+		36 Brachycrus,
+		37 Brachyerix,
+		38 Brachypsalis,
+		39 Buisnictis,
+		40 Calippus,
+		41 Calomys,
+		42 Carpocyon,
+		43 Catagonus,
+		44 Cephalogale,
+		45 Cernictis,
+		46 Copemys,
+		47 Cormohipparion,
+		48 Cosoryx,
+		49 Cranioceras,
+		50 Crusafontia,
+		51 Cupidinimus,
+		52 Cuyamalagus,
+		53 Cynarctus,
+		54 Cynelos,
+		55 Cynomyoides,
+		56 'Cynorca_occidentale',
+		57 'Cynorca_sociale',
+		58 Daphoenodon,
+		59 Delahomeryx,
+		60 Desmatippus,
+		61 Desmocyon,
+		62 Dikkomys,
+		63 Dinohippus,
+		64 Dipoides,
+		65 Diprionomys,
+		66 Domninoides,
+		67 Drepanomeryx,
+		68 Dromomeryx,
+		69 Dyseohyus,
+		70 Ectopocynus,
+		71 Epicyon,
+		72 Eucastor,
+		73 Eucyon,
+		74 Euhapsis,
+		75 Euoplocyon,
+		76 Euroxenomys,
+		77 Floridaceras,
+		78 Floridachoerus,
+		79 Floridameryx,
+		80 Floridatragulus,
+		81 Fossorcastor,
+		82 Gaillardia,
+		83 Galbreathia,
+		84 Gentilicamelus,
+		85 Goniodontomys,
+		86 Gripholagomys,
+		87 Harrymys,
+		88 Hemicyon,
+		89 Hesperhys,
+		90 Hesperocamelus,
+		91 Hesperolagomys,
+		92 Heteropliohippus,
+		93 Hexameryx,
+		94 Hipparion,
+		95 Hypohippus,
+		96 Hypolagus,
+		97 Hypsiops,
+		98 Hystricops,
+		99 Ilingoceros,
+		100 Indarctos,
+		101 Ischyrocyon,
+		102 Jacobsomys,
+		103 Jimomys,
+		104 Kansasimys,
+		105 Korthomys,
+		106 Kyptoceras,
+		107 Lambdoceras,
+		108 Lantanotherium,
+		109 Lemoynea,
+		110 Lepoides,
+		111 Leptarctus,
+		112 Leptochoerus,
+		113 Lignimus,
+		114 Limnoecus,
+		115 Liodontia,
+		116 Longirostromeryx,
+		117 Lutravus,
+		118 Machaeromeryx,
+		119 Machairodus,
+		120 Macrogenis,
+		121 Macrognathomys,
+		122 Martinogale,
+		123 Megacamelus,
+		124 Megahippus,
+		125 Megalictis,
+		126 Megantereon,
+		127 Megasminthus,
+		128 Megatylopus,
+		129 Merriamoceros,
+		130 Merychippus,
+		131 'Merychippus_hipparionine',
+		132 Merychyus,
+		133 Merycodus,
+		134 Mesoreodon,
+		135 Mesoscalops,
+		136 Metatomarctus,
+		137 Metechinus,
+		138 Michenia,
+		139 Microdipoides,
+		140 Microtomarctus,
+		141 Mimomys,
+		142 Mioheteromys,
+		143 Miolabis,
+		144 Miomustela,
+		145 Mionictis,
+		146 Mojavemys,
+		147 Monosaulax,
+		148 Mookomys,
+		149 Moropus,
+		150 Mystipterus,
+		151 Nannippus,
+		152 Neatocastor,
+		153 Nebraskomys,
+		154 Nekrolagus,
+		155 Neohipparion,
+		156 Nimravides,
+		157 Nothokemas,
+		158 Nothotylopus,
+		159 Ogmodontomys,
+		160 Onohippidium,
+		161 Ophiomys,
+		162 Oregonomys,
+		163 Oreolagus,
+		164 Osbornoceros,
+		165 Otarocyon,
+		166 Oxydactylus,
+		167 Paenemarmota,
+		168 Parablastomeryx,
+		169 Paracosoryx,
+		170 Paracryptotis,
+		171 Paracynarctus,
+		172 Paradaphoenus,
+		173 Paradomnina,
+		174 Parahippus,
+		175 Parallomys,
+		176 Paramicrotoscoptes,
+		177 Paramiolabis,
+		178 Parapliohippus,
+		179 Parapliosaccomys,
+		180 Paratoceras,
+		181 Paratomarctus,
+		182 Paratylopus,
+		183 Paronychomys,
+		184 Paroreodon,
+		185 Parvericius,
+		186 Pediomeryx,
+		187 Peraceras,
+		188 Peridiomys,
+		189 Petauristodon,
+		190 Phelosaccomys,
+		191 Phenacocoelus,
+		192 Phoberocyon,
+		193 Pleiolama,
+		194 Plesiogulo,
+		195 Plesiosorex,
+		196 Pleurolicus,
+		197 Plioceros,
+		198 Pliocyon,
+		199 Pliogeomys,
+		200 Pliohippus,
+		201 'Pliohippus_tehonensis',
+		202 Plionarctos,
+		203 Plionictis,
+		204 Pliophenacomys,
+		205 Pliosaccomys,
+		206 Pliotaxidea,
+		207 Pliotomodon,
+		208 Pliozapus,
+		209 Plithocyon,
+		210 Poebrotherium,
+		211 Priscocamelus,
+		212 Problastomeryx,
+		213 Procamelus,
+		214 Procastoroides,
+		215 Procranioceras,
+		216 Prodipodomys,
+		217 Promimomys,
+		218 Pronotolagus,
+		219 Prosigmodon,
+		220 'Prosthennops_niobrarensis',
+		221 'Prosthennops_serus',
+		222 'Prosthennops_xiphodonticus',
+		223 Prosynthetoceras,
+		224 Protepicyon,
+		225 Protohippus,
+		226 Protolabis,
+		227 Protomarctus,
+		228 Protopliophenacomys,
+		229 Psalidocyon,
+		230 Pseudaelurus,
+		231 Pseudhipparion,
+		232 Pseudoblastomeryx,
+		233 Pseudoceras,
+		234 Pseudocyon,
+		235 Pseudopalaeocastor,
+		236 Pseudoparablastomeryx,
+		237 Pseudotheridomys,
+		238 Rakomeryx,
+		239 Rakomylus,
+		240 Ramoceros,
+		241 Repomys,
+		242 Russellagus,
+		243 Satherium,
+		244 Scapanoscapter,
+		245 Scaphohippus,
+		246 Similisciurus,
+		247 Sinclairomeryx,
+		248 Sphenophalos,
+		249 Stenoechinus,
+		250 Stenomylus,
+		251 Sthenictis,
+		252 Stratimus,
+		253 Subdromomeryx,
+		254 Symmetrodontomys,
+		255 Syndyoceras,
+		256 Synthetoceras,
+		257 Tanymykter,
+		258 Tapiravus,
+		259 Tardontia,
+		260 Teleoceras,
+		261 Tephrocyon,
+		262 Texoceros,
+		263 Texomys,
+		264 'Thinohyus_siouxensis',
+		265 Ticholeptus,
+		266 Tomarctus,
+		267 Tregomys,
+		268 Tregosorex,
+		269 Trigonictis,
+		270 Trogomys,
+		271 Tylocephalonyx,
+		272 Untermannerix,
+		273 Wilsonosorex,
+		274 Yatkolamys,
+		275 Ysengrinia,
+		276 Yumaceras;
+	TREE Composite_Tree = ((((((230,(156,(4,(126,119))Machairodontinae))Felidae,29),((((58,5),172),(((198,54),(234,101)),(16,275))Amphicyoninae)Amphicyonidae,(((((39,122),144)Mephitidae,((31,24)Procyoninae,((38,125)Oligobuninae,(111,(206,(((45,269),117)Galictini,((145,243)Lutrini,(203,(194,251))Ischyrictini))))))),((8,100,202)Ursinae,(44,(192,(209,88)))Hemicyoninae)Ursidae)[%nodeAgeConstraints = 'string:49.68' ],(70,(73,(165,(61,((171,53),(136,(75,(229,(140,(227,((6,266),261,(181,(42,(224,(34,71)))))))))))))Borophaginae))Canidae)[%nodeAgeConstraints = 'string:56.49' ]))Carnivora[%nodeAgeConstraints = 'string:63.44' ],((((((((80,((157,84),((177,(158,143)),(257,(226,138)),(166,(27,211,((213,(123,128)),90,((10,193),7))))))),(250,(33,239))),210),182)Camelidae,(134,(97,(191,(184,(36,(132,265)))))))Tylopoda,((((((((221,43),120),220),222),69,56),(89,57,78)),264)Tayassuidae,(25,((180,((106,255),(107,(256,223))))Protoceratidae,(((((93,262),164,((248,99),197)),(240,129),48,133),169)Antilocapridae,(((32,168),(116,118)),(212,232))Moschidae,236,59,(79,233)Gelocidae,((9,247),((((68,253),238),67),(30,(35,(215,(49,(186,276)))))))Palaeomerycidae)Ruminantia))Ruminantiamorpha)[%nodeAgeConstraints = 'string:67.79' ])[%nodeAgeConstraints = 'string:70.65' ],112)Artiodactyla,(((((187,22),77),260),258)[%nodeAgeConstraints = 'string:51.49' ],((149,271)Chalicotheridae,((18,(124,95))Anchitheriinae,(23,(17,60,(174,(130,(((231,(94,155)),(131,(151,47)))Hipparionini,(((40,225),245),(2,(178,(200,((92,201),(160,26,63))))))Equini))Equinae))))))Perissodactyla[%nodeAgeConstraints = 'string:55.78' ])[%nodeAgeConstraints = 'string:83.39' ])[%nodeAgeConstraints = 'string:84.61' ],((135,(150,(82,(109,(1,(244,66)))))Talpidae),((195,((273,173),((114,19),(21,(13,(50,((268,170),3)))))))Soricidae,(108,((249,272),((137,37),(185,15))))Erinaceidae)[%nodeAgeConstraints = 'string:75.37' ])Lipotyphla[%nodeAgeConstraints = 'string:80.65' ])Laurasiatheria[%nodeAgeConstraints = 'string:87.77' ],(((86,163,52,242,91)Ochotonidae,((96,110),((11,154),218)))[%nodeAgeConstraints = 'string:64.31' ],(((175,(12,((259,115),(83,14)))),(189,((55,167),246))Sciuridae)[%nodeAgeConstraints = 'string:56.43' ],((((217,(153,((204,228),((159,161),141))))Arvicolidae,(274,(207,((241,183),((85,176),(46,(267,(20,((41,254),(102,219)))))Cricetinae)))))Muroidea,(121,(208,127))Dipodidae)[%nodeAgeConstraints = 'string:70.30' ],((152,((235,(81,74))Palaeocastorinae,(98,(76,(147,((139,72),(64,214)))Castoridini)Castoridinae)))Castoridae,(((263,103),(190,146,(62,(87,113)),((148,((105,270),(188,142,28,(65,((51,216),(162,252))))))Heteromyidae,(((179,199),205),196)Geomyidae)[%nodeAgeConstraints = 'string:35.85' ]))Geomorpha,(237,104)))[%nodeAgeConstraints = 'string:69.02' ])[%nodeAgeConstraints = 'string:78.19' ])Rodentia[%nodeAgeConstraints = 'string:82.72' ])[%nodeAgeConstraints = 'string:88.94' ])Boreoeutheria[%nodeAgeConstraints = 'string:96.06' ];
+
+END;
+
+
+Begin MESQUITE;
+		MESQUITESCRIPTVERSION 2;
+		TITLE AUTO;
+		tell ProjectCoordinator;
+		timeSaved 1373659291150;
+		getEmployee #mesquite.minimal.ManageTaxa.ManageTaxa;
+		tell It;
+			setID 0 7418935813060010713;
+			tell It;
+				setDefaultOrder  0 1 2 265 3 4 5 329 220 176 522 372 7 8 10 11 12 13 613 414 614 15 16 17 18 347 19 474 258 221 319 20 21 282 22 239 23 24 297 25 418 26 207 332 298 27 348 29 30 616 476 527 33 252 501 213 212 251 34 35 36 37 349 393 39 40 222 42 43 44 286 47 287 48 49 50 367 204 237 53 54 55 56 179 422 529 59 333 60 1114 530 351 160 352 62 651 63 64 162 334 254 425 472 457 481 214 215 569 541 652 66 247 67 68 69 229 302 230 272 203 782 304 183 70 71 273 73 182 163 914 354 75 164 78 79 80 81 82 399 83 433 84 85 86 87 89 90 91 92 93 357 94 434 655 353 275 97 185 437 358 440 485 659 165 982 186 510 232 167 554 100 255 101 359 103 443 104 105 106 216 107 188 444 243 108 223 109 110 111 112 113 335 189 307 565 117 168 118 723 360 363 336 119 448 492 309 449 784 337 198 191 233 121 408 224 488 451 534 452 209 199 210 123 984 124 125 126 788 127 128 361 234 238 257 130 235 464 225 192 170 775 535 312 134 362 137 226 171 138 193 139 140 227 778 219 218 142 343 143 144 145 175 146 211 147 148 780 599 316 713 341 150 151 152 153 228;
+				attachments ;
+			endTell;
+		endTell;
+		getWindow;
+		tell It;
+			suppress;
+			setResourcesState false false 100;
+			setPopoutState 400;
+			setExplanationSize 0;
+			setAnnotationSize 0;
+			setFontIncAnnot 0;
+			setFontIncExp 0;
+			setSize 1263 618;
+			setLocation 15 10;
+			setFont SanSerif;
+			setFontSize 10;
+			getToolPalette;
+			tell It;
+			endTell;
+			desuppress;
+		endTell;
+		getEmployee  #mesquite.minimal.ManageTaxa.ManageTaxa;
+		tell It;
+			showTaxa #7418935813060010713 #mesquite.lists.TaxonList.TaxonList;
+			tell It;
+				setTaxa #7418935813060010713;
+				getWindow;
+				tell It;
+					newAssistant  #mesquite.lists.DefaultTaxaOrder.DefaultTaxaOrder;
+					newAssistant  #mesquite.lists.TaxonListCurrPartition.TaxonListCurrPartition;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 1163 551;
+					setLocation 15 10;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+						setTool mesquite.lists.TaxonList.TaxonListWindow.arrow;
+					endTell;
+				endTell;
+				showWindow;
+				getEmployee #mesquite.lists.ColorTaxon.ColorTaxon;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.lists.TaxonListAnnotPanel.TaxonListAnnotPanel;
+				tell It;
+					togglePanel off;
+				endTell;
+			endTell;
+		endTell;
+		getEmployee  #mesquite.trees.BasicTreeWindowCoord.BasicTreeWindowCoord;
+		tell It;
+			makeTreeWindow #7418935813060010713  #mesquite.trees.BasicTreeWindowMaker.BasicTreeWindowMaker;
+			tell It;
+				suppressEPCResponse;
+				setTreeSource  #mesquite.trees.StoredTrees.StoredTrees;
+				tell It;
+					setTreeBlock 1;
+					toggleUseWeights off;
+				endTell;
+				setAssignedID 839.1373659253078.7149057992393579598;
+				getTreeWindow;
+				tell It;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 1163 551;
+					setLocation 15 10;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+					endTell;
+					setActive;
+					getTreeDrawCoordinator #mesquite.trees.BasicTreeDrawCoordinator.BasicTreeDrawCoordinator;
+				tell It;
+					suppress;
+					setTreeDrawer  #mesquite.trees.SquareTree.SquareTree;
+					tell It;
+						setNodeLocs #mesquite.trees.NodeLocsStandard.NodeLocsStandard;
+						tell It;
+							branchLengthsToggle off;
+							toggleScale on;
+							toggleBroadScale off;
+							toggleCenter on;
+							toggleEven on;
+						endTell;
+						setEdgeWidth 6;
+						orientUp;
+						setCornerMode Right_Angle  50;
+					endTell;
+					setBackground White;
+					setBranchColor Black;
+					showNodeNumbers off;
+					showBranchColors on;
+					labelBranchLengths off;
+					centerBrLenLabels on;
+					showBrLensUnspecified on;
+					showBrLenLabelsOnTerminals on;
+					setBrLenLabelColor 0 0 255;
+					setNumBrLenDecimals 6;
+					desuppress;
+					getEmployee #mesquite.trees.BasicDrawTaxonNames.BasicDrawTaxonNames;
+					tell It;
+						setColor Black;
+						toggleColorPartition on;
+						toggleShadePartition off;
+						toggleShowFootnotes on;
+						toggleNodeLabels on;
+						toggleCenterNodeNames off;
+						toggleShowNames on;
+						namesAngle ?;
+					endTell;
+				endTell;
+					setTreeNumber 1;
+					setDrawingSizeMode 0;
+					toggleLegendFloat on;
+					scale 0;
+					toggleTextOnTree off;
+					showWindow;
+				endTell;
+				desuppressEPCResponse;
+				getEmployee #mesquite.trees.ColorBranches.ColorBranches;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.ornamental.BranchNotes.BranchNotes;
+				tell It;
+					setAlwaysOn off;
+				endTell;
+				getEmployee #mesquite.ornamental.ColorTreeByPartition.ColorTreeByPartition;
+				tell It;
+					colorByPartition off;
+				endTell;
+				getEmployee #mesquite.ornamental.DrawTreeAssocDoubles.DrawTreeAssocDoubles;
+				tell It;
+					setOn on;
+					setDigits 4;
+					writeAsPercentage off;
+					toggleCentred on;
+					toggleHorizontal on;
+					toggleWhiteEdges on;
+					setFontSize 10;
+					setOffset 0  0;
+				endTell;
+				getEmployee #mesquite.ornamental.DrawTreeAssocStrings.DrawTreeAssocStrings;
+				tell It;
+					setOn on;
+					toggleCentred on;
+					toggleHorizontal on;
+					setFontSize 10;
+					setOffset 0  0;
+				endTell;
+				getEmployee #mesquite.trees.TreeInfoValues.TreeInfoValues;
+				tell It;
+					panelOpen false;
+				endTell;
+			endTell;
+		endTell;
+		endTell;
+end;
+
+

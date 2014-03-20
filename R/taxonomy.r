@@ -1,5 +1,6 @@
 library(taxize)
 library(plyr)
+library(stringr)
 
 source('../R/my_get_eolid.r')
 source('../R/eol_taxonomy.r')
@@ -11,6 +12,7 @@ source('../R/europe_mung.r')
 
 eol.key = '2a9932f264f3f0421db36158b6e785b535c6da0e'
 now <- read.csv('../data/now_database.csv')
+tomiya <- read.csv('../data/tomiya_mass.csv', stringsAsFactors = FALSE)
 
 # update from the now
 miss.fam <- dat$occurrence.genus_name[dat$family_name == '']
@@ -26,6 +28,21 @@ now.info <- now[now$GENUS %in% in.now, ]
 now.info <- now.info[now.info$FAMILY != 'incertae sedis', ]
 now.heir <- unique(now.info[, c('ORDER', 'FAMILY', 'GENUS')])
 eur <- replace.taxonomy(eur, now.heir)
+
+# update from Susumu
+miss.fam <- dat$occurrence.genus_name[dat$family_name == '']
+in.tom <- unique(miss.fam[miss.fam %in% tomiya$Genus])
+tom.info <- tomiya[tomiya$Genus %in% in.tom, ]
+tom.info <- tom.info[tom.info$Family != 'unknown', ]
+tom.heir <- unique(tom.info[, c('Order', 'Family', 'Genus')])
+dat <- replace.taxonomy(dat, tom.heir)
+
+miss.fam <- eur$occurrence.genus_name[eur$family_name == '']
+in.tom <- unique(miss.fam[miss.fam %in% tomiya$Genus])
+tom.info <- tomiya[tomiya$Genus %in% in.tom, ]
+tom.info <- tom.info[tom.info$Family != 'unknown', ]
+tom.heir <- unique(tom.info[, c('Order', 'Family', 'Genus')])
+eur <- replace.taxonomy(eur, tom.heir)
 
 
 # update with EOL

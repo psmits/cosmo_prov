@@ -9,6 +9,8 @@ nadur <- read.csv('../data/mam-ranges.csv', stringsAsFactors = FALSE)
 names(nadur) <- c('genus', 'species', 'fad', 'lad', 
                   'collections', 'abundance', 'geo.mean.ab')
 
+load('../data/body_mass.rdata')  # body mass data
+
 bi <- with(nadur, binom.make(genus, species))
 nadur <- nadur[bi %in% dat$name.bi, ]
 nadur$name.bi <- with(nadur, binom.make(genus, species))

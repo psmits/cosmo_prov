@@ -9,6 +9,8 @@ erdur <- read.csv('../data/euro-ranges.csv', stringsAsFactors = FALSE)
 names(erdur) <- c('genus', 'species', 'fad', 'lad', 
                   'collections', 'abundance', 'geo.mean.ab')
 
+load('../data/body_mass.rdata')  # body mass data
+
 bi <- with(erdur, binom.make(genus, species))
 erdur <- erdur[bi %in% eur$name.bi, ]
 erdur$name.bi <- with(erdur, binom.make(genus, species))
