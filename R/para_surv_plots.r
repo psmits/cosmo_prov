@@ -101,3 +101,173 @@ nl <- nl + theme(axis.title.y = element_text(angle = 0),
                  legend.title = element_text(size = 19))
 ggsave(filename = '../doc/figure/para_na_loco.png', plot = nl,
        width = 15, height = 10)
+
+# diet and loco
+# this has to be rather iterative
+# plot as facet, with each facet as locomotor and the diet spread in each
+move <- c('arboreal', 'ground dwelling', 'scansorial')
+diet <- c('carni', 'herb', 'insect', 'omni')
+out <- list()
+for(ii in seq(length(move))) {
+  out[[ii]] <- predict(nadl.exp, newdata = data.frame(move = move[ii],
+                                                      diet = diet),
+                       type = 'quantile',
+                       p = seq(0.0, 0.99, by = 0.01),
+                       se.fit = TRUE)
+}
+names(out) <- move
+out <- lapply(out, function(x) lapply(x, function(y) {
+                                      rownames(y) <- diet
+                                      y}))
+out <- lapply(out, function(x) lapply(x, t))
+out <- lapply(out, function(x) lapply(x, melt))
+out <- lapply(out, function(x) cbind(fit = x$fit, se = x$se.fit$value))
+out <- cbind(Reduce(rbind, out), 
+             move = Reduce(c, Map(function(x, y) rep(x, y), 
+                                  names(out), lapply(out, nrow))))
+out[, 1] <- (100 - out[, 1]) / 100
+names(out) <- c('quant', 'diet', 'surv', 'se', 'move')
+ndl <- ggplot(out, aes(x = quant, y = surv, colour = diet))
+ndl <- ndl + geom_line()
+ndl <- ndl + geom_ribbon(aes(ymin = surv - se, ymax = surv + se, fill = diet),
+                         alpha = 0.3, colour = NA)
+ndl <- ndl + coord_flip()
+ndl <- ndl + labs(y = 'Time', x = 'S(t)')
+ndl <- ndl + facet_grid(. ~ move)
+ndl <- ndl + theme(axis.title.y = element_text(angle = 0),
+                   axis.text = element_text(size = 20),
+                   axis.title = element_text(size = 23),
+                   legend.text = element_text(size = 17),
+                   legend.title = element_text(size = 19))
+ggsave(filename = '../doc/figure/para_na_dl.png', plot = ndl,
+       width = 15, height = 10)
+
+# europe
+ercurve <- predict(er.wei, 
+                   type = 'quantile',
+                   p = seq(0.0, 0.99, by = 0.01),
+                   se.fit = TRUE)
+ercurve <- lapply(ercurve, function(x) x[1, ])
+ercurve <- lapply(ercurve, t)
+ercurve <- lapply(ercurve, melt)
+ercurve <- cbind(fit = ercurve$fit[, -1], se = ercurve$se.fit$value)
+ercurve[, 1] <- (100 - ercurve[, 1]) / 100
+
+er <- ggplot(ercurve, aes(x = fit.Var2, y = fit.value))
+er <- er + geom_line()
+er <- er + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
+                       alpha = 0.3)
+er <- er + coord_flip()
+er <- er + labs(y = 'Time', x = 'S(t)')
+er <- er + theme(axis.title.y = element_text(angle = 0),
+                 axis.text = element_text(size = 20),
+                 axis.title = element_text(size = 23),
+                 legend.text = element_text(size = 17),
+                 legend.title = element_text(size = 19))
+ggsave(filename = '../doc/figure/para_er.png', plot = er,
+       width = 15, height = 10)
+
+# diet
+edcurve <- predict(erd.wei, newdata = data.frame(diet = c('carni',
+                                                          'herb',
+                                                          'insect',
+                                                          'omni')),
+                   type = 'quantile',
+                   p = seq(0.0, 0.99, by = 0.01),
+                   se.fit = TRUE)
+rownames(edcurve$fit) <- rownames(edcurve$se.fit) <- c('carni',
+                                                       'herb',
+                                                       'insect',
+                                                       'omni')
+edcurve <- lapply(edcurve, t)
+edcurve <- lapply(edcurve, melt)
+edcurve <- cbind(fit = edcurve$fit, se = edcurve$se.fit$value)
+edcurve[, 1] <- (100 - edcurve[, 1]) / 100
+
+ed <- ggplot(edcurve, aes(x = fit.Var1, y = fit.value, color = fit.Var2))
+ed <- ed + geom_line()
+ed <- ed + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se,
+                       fill = fit.Var2), alpha = 0.3, colour = NA)
+ed <- ed + labs(y = 'Time', x = 'S(t)')
+ed <- ed + coord_flip()
+ed <- ed + scale_fill_manual(values = cbp,
+                             name = 'dietary\ncategory')
+ed <- ed + scale_colour_manual(values = cbp, 
+                               name = 'dietary\ncategory')
+ed <- ed + theme(axis.title.y = element_text(angle = 0),
+                 axis.text = element_text(size = 20),
+                 axis.title = element_text(size = 23),
+                 legend.text = element_text(size = 17),
+                 legend.title = element_text(size = 19))
+ggsave(filename = '../doc/figure/para_er_diet.png', plot = ed,
+       width = 15, height = 10)
+
+# locomotor
+elcurve <- predict(erl.wei, newdata = data.frame(move = c('arboreal',
+                                                          'ground dwelling',
+                                                          'scansorial')),
+                   type = 'quantile',
+                   p = seq(0.0, 0.99, by = 0.01),
+                   se.fit = TRUE)
+rownames(elcurve$fit) <- rownames(elcurve$se.fit) <- c('arboreal',
+                                                       'ground dwelling',
+                                                       'scansorial')
+elcurve <- lapply(elcurve, t)
+elcurve <- lapply(elcurve, melt)
+elcurve <- cbind(fit = elcurve$fit, se = elcurve$se.fit$value)
+elcurve[, 1] <- (100 - elcurve[, 1]) / 100
+el <- ggplot(elcurve, aes(x = fit.Var1, y = fit.value, color = fit.Var2))
+el <- el + geom_line()
+el <- el + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se,
+                       fill = fit.Var2), alpha = 0.3, colour = NA)
+el <- el + labs(y = 'Time', x = 'S(t)')
+el <- el + coord_flip()
+el <- el + scale_fill_manual(values = cbp,
+                             name = 'locomotor\ncategory')
+el <- el + scale_colour_manual(values = cbp, 
+                               name = 'locomotor\ncategory')
+el <- el + theme(axis.title.y = element_text(angle = 0),
+                 axis.text = element_text(size = 20),
+                 axis.title = element_text(size = 23),
+                 legend.text = element_text(size = 17),
+                 legend.title = element_text(size = 19))
+ggsave(filename = '../doc/figure/para_er_loco.png', plot = el,
+       width = 15, height = 10)
+
+# diet and loco
+move <- c('arboreal', 'ground dwelling', 'scansorial')
+diet <- c('carni', 'herb', 'insect', 'omni')
+out <- list()
+for(ii in seq(length(move))) {
+  out[[ii]] <- predict(erdl.wei, newdata = data.frame(move = move[ii],
+                                                      diet = diet),
+                       type = 'quantile',
+                       p = seq(0.0, 0.99, by = 0.01),
+                       se.fit = TRUE)
+}
+names(out) <- move
+out <- lapply(out, function(x) lapply(x, function(y) {
+                                      rownames(y) <- diet
+                                      y}))
+out <- lapply(out, function(x) lapply(x, t))
+out <- lapply(out, function(x) lapply(x, melt))
+out <- lapply(out, function(x) cbind(fit = x$fit, se = x$se.fit$value))
+out <- cbind(Reduce(rbind, out), 
+             move = Reduce(c, Map(function(x, y) rep(x, y), 
+                                  names(out), lapply(out, nrow))))
+out[, 1] <- (100 - out[, 1]) / 100
+names(out) <- c('quant', 'diet', 'surv', 'se', 'move')
+edl <- ggplot(out, aes(x = quant, y = surv, colour = diet))
+edl <- edl + geom_line()
+edl <- edl + geom_ribbon(aes(ymin = surv - se, ymax = surv + se, fill = diet),
+                         alpha = 0.3, colour = NA)
+edl <- edl + coord_flip()
+edl <- edl + labs(y = 'Time', x = 'S(t)')
+edl <- edl + facet_grid(. ~ move)
+edl <- edl + theme(axis.title.y = element_text(angle = 0),
+                   axis.text = element_text(size = 20),
+                   axis.title = element_text(size = 23),
+                   legend.text = element_text(size = 17),
+                   legend.title = element_text(size = 19))
+ggsave(filename = '../doc/figure/para_er_dl.png', plot = edl,
+       width = 15, height = 10)
