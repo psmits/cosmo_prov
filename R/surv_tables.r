@@ -4,7 +4,7 @@ library(xtable)
 
 source('../R/make_table.r')
 
-source('../R/surv_analysis.r')
+source('../R/surv_parametric.r')
 
 na.table <- surv.tab(na.mod, 'tab:na')
 
