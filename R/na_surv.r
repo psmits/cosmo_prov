@@ -40,8 +40,8 @@ nagen <- ddply(nadur, .(genus), summarize,
                lad = min(lad))
 nagen.surv <- paleosurv(fad = nagen[, 2], lad = nagen[, 3], start = 66, end = 2)
 
-genecol <- ddply(dat, .(occurrence.genus_name), summarize,
-                 diet = names(which.max(table(comdiet))),
-                 move = names(which.max(table(comlife))))
+na.genecol <- ddply(dat, .(occurrence.genus_name), summarize,
+                    diet = names(which.max(table(comdiet))),
+                    move = names(which.max(table(comlife))))
 
-na.genecol <- na.genecol[na.genecol$genus %in% nagen$genus, ]
+na.genecol <- na.genecol[na.genecol[, 1] %in% nagen$genus, ]

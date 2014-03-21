@@ -41,8 +41,8 @@ ergen <- ddply(erdur, .(genus), summarize,
                lad = min(lad))
 ergen.surv <- paleosurv(fad = ergen[, 2], lad = ergen[, 3], start = 66, end = 2)
 
-genecol <- ddply(dat, .(occurrence.genus_name), summarize,
-                 diet = names(which.max(table(comdiet))),
-                 move = names(which.max(table(comlife))))
+er.genecol <- ddply(eur, .(occurrence.genus_name), summarize,
+                    diet = names(which.max(table(comdiet))),
+                    move = names(which.max(table(comlife))))
 
-er.genecol <- er.genecol[er.genecol$genus %in% ergen$genus, ]
+er.genecol <- er.genecol[er.genecol[, 1] %in% ergen$genus, ]
