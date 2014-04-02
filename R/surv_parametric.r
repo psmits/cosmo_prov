@@ -19,6 +19,37 @@ nadl.exp <- survreg(formula = na.surv ~ diet + move,
 
 na.mod <- list(na.wei, nad.wei, nal.wei, nadl.wei,
                na.exp, nad.exp, nal.exp, nadl.exp)
+# including mass
+nab.wei <- survreg(formula = best.surv ~ 1, dist = 'weibull')
+nabd.wei <- survreg(formula = best.surv ~ diet, data = best, dist = 'weibull')
+nabl.wei <- survreg(formula = best.surv ~ move, data = best, dist = 'weibull')
+nabdl.wei <- survreg(formula = best.surv ~ diet + move,
+                    data = best, dist = 'weibull')
+nabm.wei <- survreg(formula = best.surv ~ log(mass), data = best, dist = 'weibull')
+nabmd.wei <- survreg(formula = best.surv ~ log(mass) + diet,
+                     data = best, dist = 'weibull')
+nabml.wei <- survreg(formula = best.surv ~ log(mass) + move,
+                     data = best, dist = 'weibull')
+nabmdl.wei <- survreg(formula = best.surv ~ log(mass) + diet +move,
+                     data = best, dist = 'weibull')
+nab.exp <- survreg(formula = best.surv ~ 1, dist = 'exponential')
+nabd.exp <- survreg(formula = best.surv ~ diet, data = best, dist = 'exponential')
+nabl.exp <- survreg(formula = best.surv ~ move, data = best, dist = 'exponential')
+nabdl.exp <- survreg(formula = best.surv ~ diet + move,
+                    data = best, dist = 'exponential')
+nabm.exp <- survreg(formula = best.surv ~ log(mass), data = best, 
+                    dist = 'exponential')
+nabmd.exp <- survreg(formula = best.surv ~ log(mass) + diet,
+                     data = best, dist = 'exponential')
+nabml.exp <- survreg(formula = best.surv ~ log(mass) + move,
+                     data = best, dist = 'exponential')
+nabmdl.exp <- survreg(formula = best.surv ~ log(mass) + diet +move,
+                     data = best, dist = 'exponential')
+best.mod <- list(nab.wei, nabd.wei, nabl.wei, nabdl.wei, nabm.wei, 
+                 nabmd.wei, nabml.wei, nabmdl.wei,
+                 nab.exp, nabd.exp, nabl.exp, nabdl.exp, nabm.exp, 
+                 nabmd.exp, nabml.exp, nabmdl.exp)
+
 
 # genus
 nag.wei <- survreg(formula = nagen.surv ~ 1, dist = 'weibull')

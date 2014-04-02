@@ -12,6 +12,8 @@ print.xtable(na.table, file = '../doc/namod_tabs.tex',
              hline.after = 0,
              include.rownames = FALSE)
 
+best.table <- surv.tab(best.mod, 'tab:best')
+
 er.table <- surv.tab(er.mod, 'tab:er')
 
 print.xtable(er.table, file = '../doc/ermod_tabs.tex',
