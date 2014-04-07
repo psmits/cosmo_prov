@@ -1,0 +1,218 @@
+Species,insularity,log mass,body mass reference,Phylogeny reference
+Capromeryx minor,no,4.32,Brook & Bowman 2004,Janis & Manning 1998
+Stockoceros conklingi,no,4.72,Brook & Bowman 2004,Janis & Manning 1998
+Tetrameryx shuleri,no,4.79,Brook & Bowman 2004,Janis & Manning 1998
+Capromeryx mexicana,no,4.18,Smith et al. 2003,Janis & Manning 1998
+Stockoceros onusrosagris,no,4.74,Smith et al. 2003,Janis & Manning 1998
+Bison antiquus,no,6.01,Brook & Bowman 2004,Geraards 1992
+Bison latifrons,no,6.02,Brook & Bowman 2004,Geraards 1992
+Bos primigenius,no,5.97,"Meloro et al., 2007",Geraards 1992
+Bison priscus,no,5.95,Smith et al. 2003,Geraards 1992
+Pelorovis antiquus,no,6,Smith et al. 2003,Geraards 1992
+Bootherium bombifrons,no,5.88,Brook & Bowman 2004,McDonald & Ray 1989
+Euceratherium collinum,no,5.7,Brook & Bowman 2004,McDonald & Ray 1989
+Symbos cavifrons,no,5.6,Smith et al. 2003,McDonald & Ray 1989
+Megalotragus priscus,no,5.3,Smith et al. 2003,Vrba 1979
+Antidorcas australis,no,4.6,Smith et al. 2003,placed with A. marsupialis
+Antidorcas bondi,no,4.53,Smith et al. 2003,placed with A. marsupialis
+Oreamnos harringtoni,no,4.88,Smith et al. 2003,placed with O. americanus
+Camelus thomasi,no,5.7,Smith et al. 2003,Feranec 2003
+Hemiauchenia macrocephala,no,5.04,Smith et al. 2003,Feranec 2003
+Hemiauchenia paradoxa,no,6,Smith et al. 2003,Feranec 2003
+Palaeolama mirifica,no,4.9,Smith et al. 2003,Feranec 2003
+Dusicyon australis,yes,4.699,Brook & Bowman 2004,Zrzavy & Rikankova 2003
+Dusicyon avus,no,4.11,Smith et al. 2003,Zrzavy & Rikankova 2003
+Isolobodon portoricensis,yes,3.1,"Nowak 1999, It is a conservative estimate as this species was probably larger than P. aedium",Woods et al. 2001
+Plagiodontia ipnaeum,yes,3.1,"Nowak 1999, It is a conservative estimate as this species was probably larger than P. aedium",Woods et al. 2001
+Hexolobodon phenax,yes,3.75,"Nowak 1999, It is suggested it was the size of Capromys pilorides",Woods et al. 2001
+Isolobodon montanus,yes,3.1,"Nowak 1999, reportedly Isolobodon was the same size of Plagiodontia",Woods et al. 2001
+Castoroides ohioensis,no,5.18,Smith et al. 2003,placed sister to C. fiber
+Praemegaceros cretensis,yes,4.9,based on size ratio as reported in Raia & Meiri 2006,"Croitor 2004, Raia & Meiri 2006"
+Praemegaceros ropalophorus,yes,4.476,based on size ratio as reported in Raia & Meiri 2006,"Croitor 2004, Raia & Meiri 2006"
+Praemegaceros cazioti,yes,4.845,estimate from Burness et al. 2001,"Croitor 2004, Raia & Meiri 2006"
+Megaloceros giganteus,no,5.59,"Meloro et al., 2007",Lister et al. 2005
+Cervus astylodon,yes,4.267,"Matsumoto & Otsuka 2000; Based on the cubic ratio of radius length as compared to Cervus nippon multiplied by the size of the latter. The morhotype used for comparison is  G4 , which is the stratigraphically youngest.",
+Cervalces scotti,no,5.8,Smith et al. 2003,placed sister to Alces
+Sinomegaceros yabei,yes,5.589,"van der Made & Tong 2008 state S. yabei is  large, possibly as large as  M. giganteus",
+Dasypus bellus,no,4.65,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Holmesina septentrionalis,no,5.4,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Holmesina occidentalis,no,5.3,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Holmesina paulacoutoi,no,5.1,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Pampatherium humboldtii,no,5.18,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Pampatherium typum,no,5.3,Smith et al. 2003,"Gaudin 2003, Vizcaino 2009"
+Kraglievichia paranense,no,4.653,Brook & Bowman 2004,"Gaudin 2003, Vizcaino 2009"
+Sarcophilus laniarius,no,4.08,Smith et al. 2003,placed sister to S. harrisi
+Daubentonia robusta,yes,4.7,Brook & Bowman 2004,name given to fossil remains of D. madagascarensis according to Wilson & Reeder (2003)
+Diprotodon minor,no,5.95,Smith et al. 2003,Black 2008
+Diprotodon optatum,no,6.18,Smith et al. 2003,Black 2008
+Euryzygoma dunese,no,5.7,Smith et al. 2003,Black 2008
+Hulitherium thomasettii,yes,5.14,Smith et al. 2003,Black 2008
+Kolopsis watutense,yes,5.48,Smith et al. 2003,Black 2008
+Maokopia ronaldi,yes,5,Smith et al. 2003,Black 2008
+Nototherium mitchelli,no,5.7,Smith et al. 2003,Black 2008
+Zygomaturus trilobus,no,5.88,Smith et al. 2003,Black 2008
+Boromys offella,yes,2.61,Turvey et al. 2007,Woods et al. 2001
+Boromys torrei,yes,2.29,Turvey et al. 2007,Woods et al. 2001
+Brotomys voratus,yes,2.86,Turvey et al. 2007,Woods et al. 2001
+Heteropsomys insulans,yes,3.34,Turvey et al. 2007,Woods et al. 2001
+Elephas namadicus,no,6.81,After measurements in Maglio (1973) it is apparent E.antiquus & E.namadicus were the same body size,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Elephas creutzburgi,yes,6.57,based on size ratio as reported in Raia & Meiri 2006,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Elephas cypriotes,yes,5.482,based on size ratio as reported in Raia & Meiri 2006,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Elephas mnaidriensis,yes,6.272,based on size ratio as reported in Raia & Meiri 2006,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Mammuthus lamarmorae,yes,5.812,based on size ratio as reported in Raia & Meiri 2006,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Palaeoloxodon naumanni,yes,6.348,estimated by using regression equations in Roth (1990) & average shoulder height of 225 cm reported in Kondo et al. 2001,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Elephas antiquus,no,6.81,"Meloro et al., 2007","Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Mammuthus columbi,no,6.9,Smith et al. 2003,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Mammuthus imperator,no,7,Smith et al. 2003,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Mammuthus primigenius,no,6.74,Smith et al. 2003,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Mammuthus exilis,yes,5.23,the cubed ratio of M.e. to Elephas falconeri's long bones multiplied by the estimated size of E.f.,"Thomas et al. 2000, Maglio 1973, Shoshani & Tassy 2005"
+Onohippidium sp,no,5.49,Stromberg 2006,Stromberg 2006
+Equus hydruntinus,no,5.32,"Meloro et al., 2007",Burke et al. 2003
+Hippidion principale,no,5.71,Smith et al. 2003,Stromberg 2006
+Hippidion saldiasi,no,5.42,Smith et al. 2003,Stromberg 2006
+Homotherium serum,no,5.43,Brook & Bowman 2004,Slater & Van Valkenburgh 2004
+Panthera atrox,no,5.63,Brook & Bowman 2004,Slater & Van Valkenburgh 2005
+Miracinonyx trumani,no,4.94,Smith et al. 2003,Slater & Van Valkenburgh 2006
+Smilodon fatalis,no,5.64,Smith et al. 2003,Slater & Van Valkenburgh 2007
+Smilodon populator,no,5.65,Smith et al. 2003,Slater & Van Valkenburgh 2007
+Giraffa gracilis,no,5.93,Smith et al. 2003,placed sister to G. camaleopardalis
+Chlamydotherium spp.,no,5.24,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Glyptodon clavipes,no,6.3,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Glyptodon reticulatus,no,5.94,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Glyptotherium floridanum,no,6.04,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Glyptotherium mexicanum,no,6.04,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Lomaphorus spp.,no,5.4,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Neosclerocalyptus spp.,no,5.3,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Neothoracophorus depressus,no,6.04,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Neothoracophorus elevatus,no,5.9,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Panochthus tuberculatus,no,6.03,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Plaxhaplous canaliculatus,no,6.11,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Sclerocalyptus ornatus,no,5.45,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Doedicurus clavicaudatus,no,6.17,Smith et al. 2003,"Gaudin 2003, Gaudin & Wible 2006, Vizcaino 2009"
+Cuvieronius hyodon,no,6.623,Brook & Bowman 2004,Shoshani & Tassy 2005
+Cuvieronius spp.,no,6.7,Smith et al. 2003,Shoshani & Tassy 2005
+Haplomastodon chimborazi,no,6.78,Smith et al. 2003,Shoshani & Tassy 2005
+Notiomastodon spp.,no,6.79,Smith et al. 2003,Shoshani & Tassy 2005
+Stegomastodon superbus,no,6.88,Smith et al. 2003,Shoshani & Tassy 2005
+Amblyrhiza inundata,yes,4.97,McFarlane et al. 1998,Flemming & MacPhee 1996
+Quemisia gravis,yes,4.14,"Nowak 1999, reportedly the same size of Elasmodontomys",Flemming & MacPhee 1996
+Clidomys osborni,yes,4.66,"Nowak 1999. Weight estimate obtained as the cubic ratio of this species to C. pyloroides body size, the latter taken 5650 grams & 450 mm in head-body length",Flemming & MacPhee 1996
+Clidomys parvus,yes,4.36,"Nowak 1999. Weight estimate obtained as the cubic ratio of this species to C. pyloroides body size, the latter taken 5650 grams & 450 mm in head-body length",Flemming & MacPhee 1996
+Elasmodontomys obliquus,yes,4.14,Smith et al. 2003,Flemming & MacPhee 1996
+Hippopotamus madagascariensis,yes,5.7,Brook & Bowman 2004,Boisserie 2005
+Hippopotamus lemerlei,yes,5.699,MOM-Mammals Version 3.61  (current as of January 2007) ,Boisserie 2005
+Hippopotamus creutzburgi,yes,5.741,Raia & Meiri 2006,Boisserie 2005
+Hippopotamus pentlandi,yes,6.182,Raia & Meiri 2006,Boisserie 2005
+Hippopotamus laloumena,yes,5.98,Smith et al. 2003,Boisserie 2005
+Neochoerus aesopi,no,4.79,Prevosti & Vizcaíno 2006,Prado et al. 1998
+Neochoerus pinckneyi,no,4.85,Smith et al. 2003,Prado et al. 1998
+Neochoerus sulcidens,no,5.18,Smith et al. 2003,Prado et al. 1998
+Archeolemur edwardsi,yes,4.34,Brook & Bowman 2004,Orlando et al. 2008
+Archeolemur majori,yes,4.23,Brook & Bowman 2004,Orlando et al. 2008
+Hadropithecus stenognathus,yes,4.45,Brook & Bowman 2004,Orlando et al. 2008
+Mesopropithecus dolichobrachion,yes,4.08,Brook & Bowman 2004,Orlando et al. 2008
+Mesopropithecus globiceps,yes,4,Brook & Bowman 2004,Orlando et al. 2008
+Mesopropithecus pithecoides,yes,4.04,Brook & Bowman 2004,Orlando et al. 2008
+Archaeoindris fontoynontii,yes,5.3,Smith et al. 2003,Orlando et al. 2008
+Pachylemur insignis,yes,4,Brook & Bowman 2004,Orlando et al. 2008
+Pachylemur jullyi,yes,4.08,Brook & Bowman 2004,Orlando et al. 2008
+Bohra paulae,no,4.54,Brook & Bowman 2004,Flannery & Szalay 1982 (basal to other macropodinae)
+Congruus gongruus,no,4.6,Brook & Bowman 2004,probably basal to other macropodinae according to Prideaux 2004
+Procoptodon goliath,no,5.4,Brook & Bowman 2004,Prideaux 2004
+Protemnodon nombe,no,4.6,Brook & Bowman 2004,Prideaux 2004
+Protemnodon tumbuna,no,4.7,Brook & Bowman 2004,Prideaux 2004
+Simosthenurus baileyi,no,4.74,Brook & Bowman 2004,Prideaux 2004
+Simosthenurus brachyselensis,no,4.85,Brook & Bowman 2004,Prideaux 2004
+Simosthenurus euryskaphus,no,4.74,Brook & Bowman 2004,Prideaux 2004
+Simosthenurus oreas,no,5,Brook & Bowman 2004,Prideaux 2004
+Sthenurus gilli,no,4.48,Brook & Bowman 2004,Prideaux 2004
+Procoptodon pusio,no,4.88,Smith et al. 2003,Prideaux 2004
+Procoptodon rapha,no,5.18,Smith et al. 2003,Prideaux 2004
+Protemnodon anak,no,5,Smith et al. 2003,Prideaux 2004
+Protemnodon brehus,no,5,Smith et al. 2003,Prideaux 2004
+Protemnodon hopei,yes,4.87,Smith et al. 2003,Prideaux 2004
+Protemnodon roechus,no,4.95,Smith et al. 2003,Prideaux 2004
+Simosthenurus brownei,no,4.7,Smith et al. 2003,Prideaux 2004
+Simosthenurus maddocki,no,4.7,Smith et al. 2003,Prideaux 2004
+Simosthenurus occidentalis,no,4.7,Smith et al. 2003,Prideaux 2004
+Sthenurus andersoni,no,4.7,Smith et al. 2003,Prideaux 2004
+Sthenurus atlas,no,5.18,Smith et al. 2003,Prideaux 2004
+Sthenurus stirlingi,no,5.18,Smith et al. 2003,Prideaux 2004
+Mammut americanum,no,6.66,Smith et al. 2003,Yang et al. 1996
+Megaladapis grandidieri,yes,4.72,Smith et al. 2003,Orlando et al. 2008
+Megaladapis madagascariensis,yes,4.72,Smith et al. 2003,Orlando et al. 2008
+Megalonyx jeffersonii,no,5.78,Smith et al. 2003,Gaudin 2004
+Acratocnus odontrigonus,yes,4.519,Brook & Bowman 2004,White & MacPhee 2001
+Meizonyx salvadorensis,no,5.778,Brook & Bowman 2004,White & MacPhee 2001
+Neocnus comes,yes,3.778,Brook & Bowman 2004,White & MacPhee 2001
+Parocnus serus,yes,4.845,Brook & Bowman 2004,White & MacPhee 2001
+Megalocnus rodens,yes,5.176,estimate from Burness et al. 2001,White & MacPhee 2001
+Megalocnus zile,yes,5.176,estimate from Burness et al. 2001,White & MacPhee 2001
+Acratocnus antillensis,yes,4.631,Estimated from post-cranial material in Arredondo & Arredondo 2000,White & MacPhee 2001
+Neocnus gliriformis,yes,4.078,Estimated from post-cranial material in Arredondo & Arredondo 2000,White & MacPhee 2001
+Neocnus major,yes,4.164,Estimated from post-cranial material in Arredondo & Arredondo 2000,White & MacPhee 2001
+Parocnus browni,yes,4.942,Estimated from post-cranial material in Arredondo & Arredondo 2000,White & MacPhee 2001
+Acratocnus simorhincus,yes,4.176,Rega et al. 2002,White & MacPhee 2001
+Valgipes spp.,no,5.3,Smith et al. 2003,White & MacPhee 2001
+Nothrotheriops shastensis,no,5.79,Brook & Bowman 2004,Gaudin 2004
+Eremotherium laurillardi,no,5.9,Smith et al. 2003,Gaudin 2004
+Eremotherium rusconii,no,6.54,Smith et al. 2003,Gaudin 2004
+Megatherium americanum,no,6.8,Smith et al. 2003,Gaudin 2004
+Nothropus spp.,no,5,Smith et al. 2003,Gaudin 2004
+Nothrotherium spp.,no,5.18,Smith et al. 2003,Gaudin 2004
+Ocnopus spp.,no,5.48,Smith et al. 2003,Gaudin 2004
+Paramegatherium spp.,no,6.54,Smith et al. 2003,Gaudin 2004
+Terricola melitensis,yes,1.339,"A. Kotsakis, pers. Comm. Estimated by multiplying upper tooth row ratio per body weight of M. duodecimcustatus (data kindly provided by F. Marcolini)",
+Meriones malatestai,yes,2.1,"A. Kotsakis, pers. Comm. Estimated by multiplying upper tooth row ratio per body weight of M. tristrami",
+Oryzomys nelsoni,yes,2.017,based on comparison with O. palustris. Both species measurements were taken from MAMMALIAN SPECIES accounts,
+Mus lopadusae,yes,1.611,Burgio & Catalisano 1994,
+Nesoryzomys swarthi,yes,1.97,Dowler et al. 2000,
+Mus minotaurus,yes,1.526,"Federica Marcolini, pers. Comm.",
+Rhagamys orthodon,yes,1.801,Gliozzi et al. 1984.  based on m1 length of Apodemus flavicollis,
+Spelaeomys florensis,yes,2.98,"Musser 1981, . Estimated multiplying the cubic ratio of m1-3 length with that of Rattus fuscipes",
+Paulamys naso,yes,2.09,Nowak 1999,
+Neotoma bunkeri,yes,2.57,Smith et al. 2003,Likely conspecific with N. lepida according to Wilson & Reeder (2003)
+Uromys imperator,yes,3,Smith et al. 2003,placed in the U. rex species group according to Wilson & Reeder (2003)
+Papagomys theodorverhoeveni,yes,3,"Zijlstra et al. 2008, Estimated for the cubic ratio of m1 length as compared with P. armandvillei multiplied by the size of the latter",
+Lutrogale cretensis,yes,4.041,estimate from Burness et al. 2001,placed in the European otter species group
+Sardolutra ichnusae,yes,4.031,Malatesta 1977,
+Algarolutra majori,yes,4.156,Malatesta et al. 1986,
+Lutra euxena,yes,3.944,"Willemsen 1992. Cubic ratio of m1 lengths as compared with L. lutra, multiplied by the weight of the latter",
+Lutra trinacrie,yes,4.051,"Willemsen 1992. Cubic ratio of m1 lengths as compared with L. lutra, multiplied by the weight of the latter",
+Megalenhydris barbaricina,yes,4.443,"Willemsen 1992. Cubic ratio of m1 lengths as compared with L. lutra, multiplied by the weight of the latter",
+Glossotherium harlani,no,6.3,Brook & Bowman 2004,Gaudin 2004
+Glossotherium myloides,no,6.08,Smith et al. 2003,Gaudin 2004
+Glossotherium robustum,no,6.23,Smith et al. 2003,Gaudin 2004
+Lestodon armatus,no,6.53,Smith et al. 2003,Gaudin 2004
+Mylodon listai,no,6,Smith et al. 2003,Gaudin 2004
+Scelidodon spp.,no,6,Smith et al. 2003,Gaudin 2004
+Scelidotherium leptocephalum,no,6.05,Smith et al. 2003,Gaudin 2004
+Eliomys morpheus,yes,2.4,Alcover et al. 2000,
+Muscardinus malatestai,yes,1.633,The cubed ratio of M1 length compared with M. avellanarius multplied by the size of the latter. Measurements in Gliozzi 1995,
+Nesophontes edithae,yes,2.32,Turvey et al. 2007,Asher 1999
+Nesophontes hypomicrus,yes,1.36,Turvey et al. 2007,Asher 1999
+Nesophontes micrus,yes,1.66,Turvey et al. 2007,Asher 1999
+Nesophontes paramicrus,yes,1.67,Turvey et al. 2007,Asher 1999
+Nesophontes zamicrus,yes,1,Turvey et al. 2007,Asher 1999
+Babakotia radofilai,yes,4.18,Smith et al. 2003,Orlando et al. 2008
+Palaeopropithecus ingens,yes,4.68,Smith et al. 2003,Orlando et al. 2008
+Palaeopropithecus maximus,yes,4.68,Smith et al. 2003,Orlando et al. 2008
+Palorchestes azael,no,5.7,Brook & Bowman 2004,Black 2008
+Palorchestes parvus,no,5,Smith et al. 2003,Black 2008
+Phascolarctos stirtoni,no,4.15,Smith et al. 2003,placed sister to P. cinereus
+Coelodonta antiquitatis,no,6.46,Brook & Bowman 2004,Cerdeno 1995
+Solenodon arredondoi,yes,2.97,Turvey et al. 2007,
+Nesiotites similis,yes,1.38,"A. Kotsakis, pers. Comm. Estimated by comparing upper tooth row length with that of A. hidalgo",
+Asoriculus hidalgo,yes,1.3,Alcover et al. 2000,
+Stegodon orientalis,no,6.3,estimate based on Van den Bergh ( 1997) size estimate of Javan S. trigonocephalus at 1.7 tons. S.t. is said to be slightly smaller than S. orientalis,
+Stegodon sp.,yes,5.54,"Van den Bergh, G.D. 1997. The Late Neogene. No measurements are available for  dwarf Stegodon  associated to Homo floresiensis. Possibly late-Pleistocene, truly dwarf Stegodon are known from Sumba & Timor. We used the mass estimate calculated on S. sampoensis",
+Metridiochoerus andrewsi,no,5.18,Brook & Bowman 2004,White & Harris 1977
+Metridiochoerus compactus,no,5.15,Smith et al. 2003,White & Harris 1977
+Zaglossus hacketti,no,4.48,Smith et al. 2003,sister to Z. bruijni
+Platygonus compressus,no,5.04,Smith et al. 2003,Wetzel et al. 1975
+Arctodus pristinus,no,5.48,Smith et al. 2003,McLellan & Rainer 2004
+Arctodus simus,no,5.86,Smith et al. 2003,McLellan & Rainer 2004
+Tremarctos floridanus,no,5.18,Smith et al. 2003,McLellan & Rainer 2004
+Microtus henseli,yes,1.301,"Gliozzi et al. 1984, based on M1 of M. savii",
+Phanourios minor,yes,5.58,Raia & Meiri 2006,placed sister to H. amphibious
+Megatapirus augustus,no,5.76,Tong 2005,

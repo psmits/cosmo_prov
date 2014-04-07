@@ -1,0 +1,632 @@
+Name,Status,Log10 mass (g),Area-corrected mass,Continent
+Acinonyx jubatus,S,4.668,-1.894,Africa
+Acratocnus odontrigonus,E,4.519,-1.924,Sth America
+Addax nasomaculatus,S,4.845,-1.718,Africa
+Aepyceros melampus,S,4.748,-1.815,Africa
+Ailuropoda melanoleuca,S,4.942,-1.621,Africa
+Ailurus fulgens,S,3.716,-2.981,Asia
+Alcelaphus buselaphus,S,5.132,-1.431,Africa
+Alcelaphus Lichtensteini,S,5.236,-1.327,Africa
+Alces alces,S,5.66,-0.856,Nth America
+Allouatta palliata,S,3.778,-2.664,Sth America
+Alopex lagopus,S,3.699,-2.817,Nth America
+Alouatta caraya,S,3.792,-2.65,Sth America
+Alouatta fusca,S,3.903,-2.539,Sth America
+Alouatta palliata,S,3.812,-2.631,Sth America
+Alouatta seniculus,S,3.765,-2.678,Sth America
+Alouatta villosa,S,3.903,-2.539,Sth America
+Ammodorcas clarkei,S,4.449,-2.114,Africa
+Amnotragus lervia,S,5.041,-1.521,Africa
+Anoa depressicornis,S,5.178,-1.519,Asia
+Antidorcas australis,E,4.477,-2.086,Africa
+Antidorcas bondi,E,4.531,-2.031,Africa
+Antidorcas marsupialis,S,4.591,-1.972,Africa
+Antilocapra americana,S,4.833,-1.684,Nth America
+Antilope cervicapra,S,4.568,-1.995,Africa
+Aonyx capensis,S,4.128,-2.435,Africa
+Archaeoindris fontoynontii,E,5.301,-0.371,Madagascar
+Archeolemur edwardsi,E,4.342,-1.329,Madagascar
+Archeolemur majori,E,4.23,-1.441,Madagascar
+Arctictis binturonga,S,4.204,-2.493,Asia
+Arctodus pristinus,E,5.477,-1.039,Nth America
+Arctodus simus,E,5.699,-0.817,Nth America
+Ateles belzebuth,S,3.699,-2.744,Sth America
+Ateles geoffroyi,S,3.903,-2.539,Sth America
+Ateles paniscus,S,3.954,-2.488,Sth America
+Axis axis,S,4.833,-1.864,Asia
+Babakotia radofilai,E,4.176,-1.496,Madagascar
+Babyrousa babyrussa,S,4.734,-1.963,Asia
+Bison antiquus,E,6.006,-0.51,Nth America
+Bison bison,S,5.625,-0.891,Nth America
+Bison bonasus,S,5.95,-0.747,Europe
+Bison latifrons,E,6.015,-0.501,Nth America
+Bison priscus,E,5.719,-0.978,Europe
+Blastoceros dichotomus,S,5.037,-1.405,Sth America
+Bohra paulae,E,4.544,-1.708,Australia
+Bootherium bombifrons,E,5.877,-0.639,Nth America
+Bos gaurus,S,5.866,-0.831,Asia
+Bos indicus,S,5.653,-1.044,Asia
+Bos javanicus,S,5.74,-0.956,Asia
+Bos mutus gunniens,S,5.556,-1.141,Asia
+Bos primigenius,S,5.43,-1.133,Africa
+Bos sauveli,S,5.903,-0.794,Asia
+Boselaphus tragocamelus,S,5.255,-1.308,Africa
+Brachyteles arachnoides,S,4.041,-2.401,Sth America
+Bubalis depressicornis,S,5.352,-1.345,Asia
+Bubalus arnee,S,5.797,-0.9,Asia
+Bubalus bubalis,S,5.653,-1.044,Asia
+Budorcas taxicolor,S,5.398,-1.299,Asia
+Camelops hesternus,E,5.998,-0.518,Nth America
+Camelus bactrianus,S,5.736,-0.826,Africa
+Camelus dromedarius,S,5.604,-0.959,Africa
+Camelus knoblochi,E,5.74,-0.956,Asia
+Camelus thomasi,E,5.602,-0.961,Africa
+Canis adustus,S,3.908,-2.654,Africa
+Canis aureus,S,3.968,-2.728,Asia
+Canis dirus,E,4.602,-1.914,Nth America
+Canis latrans,S,4.041,-2.475,Nth America
+Canis lupus,S,4.653,-2.044,Europe
+Canis mesomelas,S,3.874,-2.689,Africa
+Canis rufus,S,4.396,-2.167,Africa
+Capra aegagrus,S,4.778,-1.919,Asia
+Capra caucasica,S,4.74,-1.956,Asia
+Capra cylindricornis,S,4.875,-1.822,Asia
+Capra falconeri,S,4.948,-1.749,Asia
+Capra hircus,S,4.602,-2.095,Europe
+Capra ibex,S,4.964,-1.733,Europe
+Capreolus capreolus,S,4.505,-2.192,Asia
+Capreolus pygargus,S,4.641,-1.921,Africa
+Capricornis crispus,S,4.477,-2.22,Asia
+Capricornis sumatrensis,S,5.008,-1.689,Asia
+Capromeryx minor,E,4.322,-2.194,Nth America
+Castor canadensis,S,4.36,-2.156,Nth America
+Castor fiber,S,4.248,-2.449,Europe
+Castoroides ohioensis,E,5.255,-1.261,Nth America
+Catagonus wagneri,S,4.544,-1.898,Sth America
+Cephalophus callipygus,S,4.303,-2.26,Africa
+Cephalophus dorsalis,S,4.324,-2.238,Africa
+Cephalophus leucogaster,S,4.104,-2.459,Africa
+Cephalophus monticola,S,3.699,-2.864,Africa
+Cephalophus natalensis,S,4.146,-2.417,Africa
+Cephalophus niger,S,4.25,-2.312,Africa
+Cephalophus nigrifons,S,4.143,-2.42,Africa
+Cephalophus ogilbyi,S,4.301,-2.262,Africa
+Cephalophus rufilatus,S,4.083,-2.48,Africa
+Cephalophus spadix,S,4.756,-1.941,Asia
+Cephalophus sylvicultor,S,4.816,-1.747,Africa
+Ceratotherium simum,S,6.279,-0.284,Africa
+Cercocebus albigena,S,3.866,-2.697,Africa
+Cercocebus galeritus,S,3.892,-2.671,Africa
+Cercocebus torquatus,S,3.903,-2.66,Africa
+Cercopithecus ascanius,S,3.719,-2.844,Africa
+Cercopithecus diana,S,3.738,-2.825,Africa
+Cercopithecus hamlyni,S,3.845,-2.718,Africa
+Cercopithecus ihoesti,S,3.845,-2.718,Africa
+Cercopithecus mitis,S,3.781,-2.782,Africa
+Cercopithecus mona,S,3.699,-2.864,Africa
+Cercopithecus neglectus,S,3.74,-2.822,Africa
+Cercopithecus nictitans,S,3.732,-2.83,Africa
+Cerdocyon thous,S,3.845,-2.597,Sth America
+Cervalces scotti,E,5.687,-0.829,Nth America
+Cervus axis,S,4.739,-1.958,Asia
+Cervus canadensis,S,5.477,-1.039,Nth America
+Cervus dama,S,4.72,-1.977,Europe
+Cervus duvauceli,S,5.253,-1.444,Asia
+Cervus elaphus,S,5.699,-0.998,Asia
+Cervus eldii,S,5.088,-1.609,Asia
+Cervus marianus,S,5.244,-1.453,Asia
+Cervus nippon,S,4.681,-2.016,Asia
+Cervus porcinus,S,4.67,-2.027,Asia
+Cervus timorensis,S,4.799,-1.898,Asia
+Cervus unicolor,S,5.352,-1.345,Asia
+Cervus wapiti,S,5.699,-0.817,Nth America
+Choeropsis liberiensis,S,5.255,-1.442,Asia
+Choloepus didactylus,S,3.778,-2.664,Sth America
+Choloepus hoffmanni,S,3.778,-2.664,Sth America
+Chrysocyon brachyurus,S,4.364,-2.078,Sth America
+Civettictis civetta,S,4.079,-2.484,Africa
+Coelodonta antiquitatus,E,6.462,-0.234,Europe
+Coendou prehensilis,S,3.699,-2.744,Sth America
+Colobus badius,S,3.903,-2.66,Africa
+Colobus guereza,S,4.009,-2.554,Africa
+Colobus polykomos,S,4,-2.563,Africa
+Congruus gongruus,E,4.602,-1.65,Australia
+Connochaetes gnou,S,5.204,-1.359,Africa
+Connochaetes taurinus,S,5.217,-1.345,Africa
+Crocuta crocuta,E,4.845,-1.852,Asia
+Cryptoprocta ferox,S,3.845,-1.827,Madagascar
+Cuon alpinus,S,4.176,-2.521,Asia
+Cuveronius sp,E,6.623,0.181,Sth America
+Dama dama,S,4.845,-1.852,Asia
+Damaliscus dorcas,S,4.803,-1.759,Africa
+Damaliscus hunteri,S,5.201,-1.361,Africa
+Damaliscus lunatus,S,5.107,-1.456,Africa
+Dasypus bellus,E,4.653,-1.599,Australia
+Dasypus kappleri,S,4,-2.443,Sth America
+Dasypus novemcinctus,S,3.699,-2.744,Sth America
+Dasyurus maculatus,S,3.699,-2.554,Australia
+Daubentonia robusta,E,4.699,-0.973,Madagascar
+Dendrolagus bennettianus,S,4.114,-2.139,Australia
+Dendrolagus dorianus,S,3.982,-2.27,Australia
+Dendrolagus goodfellowi,S,3.875,-2.377,Australia
+Dendrolagus inustus,S,4.057,-2.196,Australia
+Dendrolagus lumholtzi,S,3.845,-2.407,Australia
+Dendrolagus matschiei,S,3.954,-2.298,Australia
+Dendrolagus ursinus,S,4.061,-2.192,Australia
+Dicerorhinus hemitoechus,E,6.204,-0.493,Europe
+Dicerorhinus kirchbergensis,E,6.204,-0.493,Asia
+Dicerorhinus sumatrensis,S,5.903,-0.794,Asia
+Diceros bicornis,S,6.042,-0.521,Africa
+Dinomys branickii,S,4.097,-2.346,Sth America
+Diprotodon minor,E,5.954,-0.298,Australia
+Diprotodon optatum,E,6.061,-0.192,Australia
+Doedicurus clavicaudatus,E,5.85,-0.592,Sth America
+Dorcatragus megalotis,S,3.954,-2.609,Africa
+Dorcopsis hageni,S,3.829,-2.423,Australia
+Dorcopsis luctuosa,S,3.699,-2.554,Australia
+Dorcopsis muelleri,S,3.771,-2.482,Australia
+Dorcopsis veterum,S,3.903,-2.349,Australia
+Dusicyon australis,E,4.699,-1.744,Sth America
+Dusicyon culpaeus,S,4.201,-2.241,Sth America
+Dusicyon griseus,S,3.918,-2.524,Sth America
+Dusicyon gymnocercus,S,4.201,-2.241,Sth America
+Dusicyon thous,S,3.716,-2.727,Sth America
+Elaphodus cephalophus,S,4.255,-2.442,Asia
+Elaphurus davidianus,S,5.279,-1.418,Asia
+Elasmotherium caucasium,E,6.653,-0.044,Asia
+Elephas maximus,S,6.512,-0.185,Asia
+Enhydra lutris,S,4.255,-2.261,Nth America
+Equus africanus,S,5.217,-1.345,Africa
+Equus altidens,E,5.55,-1.013,Africa
+Equus asinus,S,5.301,-1.262,Africa
+Equus burchelli,S,5.498,-1.064,Africa
+Equus caballus,S,5.525,-1.038,Africa
+Equus capensis,E,5.845,-0.718,Africa
+Equus complicatus,E,5.642,-0.874,Nth America
+Equus conversidens,E,5.486,-1.03,Nth America
+Equus ferus,S,5.398,-1.165,Africa
+Equus francisi,E,5.566,-0.95,Nth America
+Equus grevyi,S,5.591,-0.972,Africa
+Equus hemionus,S,5.161,-1.535,Asia
+Equus kiang,S,5.477,-1.22,Asia
+Equus niobrarensis,E,5.727,-0.789,Nth America
+Equus occidentalis,E,5.79,-0.727,Nth America
+Equus scotti,E,5.744,-0.772,Nth America
+Equus zebra,S,5.459,-1.103,Africa
+Eremotherium rusconii,E,6.477,0.035,Sth America
+Erethizon dorsatum,S,3.778,-2.664,Sth America
+Erythrocebus patas,S,3.885,-2.677,Africa
+Euceratherium collinum,E,5.698,-0.818,Nth America
+Eucladoceros giuli,E,5.585,-1.111,Europe
+Euphractus sexcinctus,S,3.699,-2.744,Sth America
+Euryzygoma dunense,E,5.699,-0.554,Australia
+Euwenia grata,E,5.699,-0.554,Australia
+Felis amnicola,E,3.845,-2.671,Nth America
+Felis aurata,S,4.025,-2.537,Africa
+Felis badia,S,3.839,-2.724,Africa
+Felis caracal,S,4.073,-2.489,Africa
+Felis chaus,S,3.732,-2.964,Asia
+Felis concolor,S,4.903,-1.613,Nth America
+Felis jacobita,S,3.962,-2.48,Sth America
+Felis onca,S,5.061,-1.382,Sth America
+Felis pardalis,S,4.114,-2.583,Europe
+Felis serval,S,4.025,-2.537,Africa
+Felis silvestris,S,3.699,-2.998,Europe
+Felis temminckii,S,3.959,-2.738,Asia
+Felis viverrina,S,3.954,-2.743,Asia
+Felis yagouaroundi,S,3.845,-2.597,Sth America
+Gazella atlantica,E,4.875,-1.688,Africa
+Gazella dama,S,4.863,-1.699,Africa
+Gazella dorcas,S,4.362,-2.201,Africa
+Gazella gazella,S,4.305,-2.392,Asia
+Gazella granti,S,4.74,-1.822,Africa
+Gazella rufifrons,S,4.431,-2.131,Africa
+Gazella rufina,E,4.699,-1.864,Africa
+Gazella subgutturosa,S,4.556,-2.141,Asia
+Gazella thomsoni,S,4.342,-2.22,Africa
+Giraffa cameloparalis,S,6.006,-0.557,Africa
+Glossotherium harlani,E,6.299,-0.217,Nth America
+Glossotherium robustum,E,6.017,-0.425,Sth America
+Glyptodon reticulatus,E,5.66,-0.783,Sth America
+Glyptotherium floridanum,E,5.823,-0.693,Nth America
+Gorilla gorilla,S,5.13,-1.432,Africa
+Guevei coeruleus,S,3.778,-2.785,Africa
+Gulo gulo,S,4.431,-2.085,Nth America
+Hadropithecus stenognathus,E,4.447,-1.225,Madagascar
+Helarctos malayanus,S,4.58,-2.117,Asia
+Hemiauchenia macrocephala,E,5.377,-1.14,Nth America
+Hemitragus alba,E,4.875,-1.822,Europe
+Hemitragus jayakari,S,4.167,-2.53,Asia
+Hemitragus jemlahicus,S,4.959,-1.738,Asia
+Hexaprotodon liberiensis,E,5.301,-1.262,Africa
+Hippidion principale,E,5.684,-0.759,Sth America
+Hippocamelus antisensis,S,4.836,-1.606,Sth America
+Hippocamelus bisulcus,S,4.845,-1.597,Sth America
+Hippopotamus amphibius,S,6.477,-0.086,Africa
+Hippopotamus aquaticus,E,6.477,-0.22,Asia
+Hippopotamus gorgops,E,6.398,-0.165,Africa
+Hippopotamus lemerlei,E,5.699,0.027,Madagascar
+Hippopotamus madagascariensis,E,5.699,0.027,Madagascar
+Hippotragus equinus,S,5.431,-1.131,Africa
+Hippotragus leucophaeus,E,5.699,-0.864,Africa
+Hippotragus niger,S,5.358,-1.205,Africa
+Holmesina septentrionalis,E,5.494,-1.022,Nth America
+Homotherium latidens,E,5.176,-1.521,Europe
+Homotherium serum,E,5.433,-1.083,Nth America
+Hulitherium thomasettii,E,5.176,-1.521,Asia
+Hyaena brunnea,S,4.601,-1.962,Africa
+Hyaena hyaena,E,4.602,-2.095,Asia
+Hydrochaerus hydrochaeris,S,4.538,-1.905,Sth America
+Hydropotes inermis,S,4.109,-2.588,Europe
+Hyemoschus aquaticus,S,4.033,-2.529,Africa
+Hylobates agilis,S,3.751,-2.946,Asia
+Hylobates lar,S,3.756,-2.941,Asia
+Hylobates moloch,S,3.875,-2.822,Asia
+Hylobates pileatus,S,3.74,-2.956,Asia
+Hylobates syndactylus,S,3.961,-2.735,Asia
+Hylochoerus meinertzhageni,S,5.146,-1.417,Africa
+Hystrix africaeaustralis,S,4.228,-2.335,Africa
+Hystrix brachyura,S,3.903,-2.66,Africa
+Hystrix crassispinis,S,3.736,-2.961,Asia
+Hystrix cristata,S,4.301,-2.262,Africa
+Hystrix indica,S,4.207,-2.49,Asia
+Hystrix javanica,S,4.362,-2.335,Asia
+Indri indri,S,3.845,-1.827,Madagascar
+Kangurus congrous,E,4.602,-1.65,Australia
+Kobus defassa,S,5.204,-1.359,Africa
+Kobus elipsiprimnus,S,5.322,-1.241,Africa
+Kobus kob,S,4.898,-1.665,Africa
+Kobus leche,S,4.968,-1.594,Africa
+Kobus megaceros,E,5.477,-1.086,Africa
+Kobus vardoni,S,4.845,-1.718,Africa
+Kolopsis watutense,E,5.477,-0.775,Australia
+Kraglievichia paranense,E,4.653,-1.789,Sth America
+Lagorchestes asomatus,S,3.699,-2.554,Australia
+Lagorchestes leporides,E,3.699,-2.554,Australia
+Lagostomus maximus,S,3.699,-2.744,Sth America
+Lagothrix lagothricha,S,3.875,-2.567,Sth America
+Lama guanicoe,S,5.041,-1.401,Sth America
+Lama pacos,S,4.778,-1.664,Sth America
+Lasiorhinus angustidens,E,4.699,-1.554,Australia
+Lasiorhinus krefftii,S,4.491,-1.761,Australia
+Lasiorhinus latifrons,S,4.415,-1.838,Australia
+Lestodon armatus,E,6.283,-0.16,Sth America
+Litocranius walleri,S,4.544,-2.019,Africa
+Loxodonta africana,S,6.565,0.002,Africa
+Lutra canadensis,S,4,-2.516,Nth America
+Lutra longicaudis,S,3.945,-2.497,Sth America
+Lutra lutra,S,3.871,-2.826,Asia
+Lutra perspicillata,S,3.954,-2.743,Asia
+Lutra sumatrana,S,3.74,-2.956,Asia
+Lycaon pictus,S,4.439,-2.123,Africa
+Lynx canadensis,S,3.996,-2.52,Nth America
+Lynx lynx,S,4.301,-2.396,Europe
+Lynx nebulosa,S,4.179,-2.518,Asia
+Lynx pardinus,S,4,-2.697,Europe
+Lynx rufus,S,4.255,-2.261,Nth America
+Macaca arctoides,S,3.875,-2.822,Asia
+Macaca assamensis,S,3.875,-2.822,Asia
+Macaca cyclopis,S,3.893,-2.804,Asia
+Macaca fascicularis,S,3.716,-2.981,Asia
+Macaca fuscata,S,4,-2.697,Asia
+Macaca maurus,S,3.862,-2.835,Asia
+Macaca mulatta,S,3.738,-2.959,Asia
+Macaca nemestrina,S,3.914,-2.783,Asia
+Macaca nigra,S,3.929,-2.767,Asia
+Macaca radiata,S,3.708,-2.989,Asia
+Macaca silenus,S,3.798,-2.899,Asia
+Macaca sinica,S,3.716,-2.981,Asia
+Macaca sylvanus,S,4.049,-2.648,Asia
+Macaca thibetana,S,3.967,-2.73,Asia
+Macrauchenia patachonica,E,5.893,-0.55,Sth America
+Macrogalidea musschenbroeckii,S,3.712,-2.985,Asia
+Macropus agilis,S,4.176,-2.076,Australia
+Macropus antilopinus,S,4.431,-1.821,Australia
+Macropus bernardus,S,4.23,-2.022,Australia
+Macropus dorsalis,S,4.041,-2.211,Australia
+Macropus eugenii,S,3.845,-2.407,Australia
+Macropus ferragus,E,5.176,-1.076,Australia
+Macropus fuliginosus,S,4.602,-1.65,Australia
+Macropus giganteus,S,4.69,-1.562,Australia
+Macropus greyi,S,3.845,-2.407,Australia
+Macropus irma,S,3.903,-2.349,Australia
+Macropus parma,S,3.699,-2.554,Australia
+Macropus parryi,S,4.114,-2.139,Australia
+Macropus pearsoni,E,5.176,-1.076,Australia
+Macropus piltonensis,E,4.477,-1.775,Australia
+Macropus robustus,S,4.544,-1.708,Australia
+Macropus rufogriseus,S,4.23,-2.022,Australia
+Macropus rufus,S,4.663,-1.59,Australia
+Macropus thor,E,4.477,-1.775,Australia
+Madoqua kirkii,S,3.699,-2.864,Africa
+Mammut americanum,E,6.76,0.244,Nth America
+Mammuthus columbi,E,6.778,0.262,Nth America
+Mammuthus imperator,E,6.778,0.262,Nth America
+Mammuthus primigenius,E,6.74,0.044,Europe
+Mammuthus primigenius,E,6.502,-0.015,Nth America
+Mandrillus leucophaeus,S,3.839,-2.724,Africa
+Mandrillus sphinx,S,4.261,-2.302,Africa
+Manis crassicaudata,S,4.045,-2.652,Asia
+Manis javanica,S,3.712,-2.985,Asia
+Maokopia ronaldi,E,5,-1.253,Australia
+Marmota caligata,S,3.859,-2.657,Nth America
+Marmota flaviventris,S,3.754,-2.762,Nth America
+Mazama americana,S,4.462,-1.98,Sth America
+Mazama gouazoubira,S,4.204,-2.238,Sth America
+Mazama rufina,S,3.903,-2.539,Sth America
+Megaladapsis edwardsi,E,4.875,-0.797,Madagascar
+Megaladapsis grandidieri,E,4.813,-0.859,Madagascar
+Megalibgwilia ramsayi,E,4,-1.672,Madagascar
+Megaloceras algericus,E,5.699,-0.864,Africa
+Megaloceros giganteus,E,5.845,-0.852,Europe
+Megalonyx jeffersonii,E,6.121,-0.396,Nth America
+Megalotragus priscus,E,5.778,-0.785,Africa
+Megantereon whitei,E,5,-1.563,Africa
+Megatapirus augustus,E,5.653,-1.044,Asia
+Megatherium americanum,E,6.405,-0.111,Nth America
+Meizonyx salvadorensis,E,5.778,-0.664,Sth America
+Meles meles,S,4,-2.697,Europe
+Mellivora capensis,S,3.98,-2.583,Africa
+Melursus ursinus,S,4.99,-1.707,Asia
+Mesopropithecus dolichobrachion,E,4.079,-1.593,Madagascar
+Mesopropithecus globiceps,E,4,-1.672,Madagascar
+Mesopropithecus pithecoides,E,4.041,-1.63,Madagascar
+Metridiochoerus andrewsi,E,5.176,-1.387,Africa
+Moschus chrysogaster,S,4.041,-2.655,Asia
+Moschus moschiferus,S,4.176,-2.521,Asia
+Muntiacus atherodes,S,4.149,-2.548,Asia
+Muntiacus crinifrons,S,4.558,-2.139,Asia
+Muntiacus feae,S,4.342,-2.354,Asia
+Muntiacus gongshanensis,S,4.299,-2.398,Asia
+Muntiacus muntjak,S,4.26,-2.437,Asia
+Muntiacus reevesi,S,4.17,-2.527,Asia
+Muntiacus rooseveltorum,S,4.305,-2.392,Asia
+Mylohyus fossilis,E,4.869,-1.647,Nth America
+Myocastor coypus,S,3.903,-2.613,Nth America
+Myrmecophaga tridactyla,S,4.352,-2.09,Sth America
+Nasalis larvatus,S,4.152,-2.545,Asia
+Nasua nasua,S,3.954,-2.488,Sth America
+Navahoceros fricki,E,5.348,-1.168,Nth America
+Nemorhaedus goral,S,4.544,-2.153,Asia
+Neochoerus pinkneyi,E,5.041,-1.475,Nth America
+Neofelis nebulosa,S,4.342,-2.354,Asia
+Neotragus moschatus,S,3.715,-2.848,Africa
+Neotragus pygmaeus,S,3.699,-2.864,Africa
+Nothrotheriops shastensis,E,5.788,-0.728,Nth America
+Notochoerus scotti,E,5.301,-1.262,Africa
+Nototherium mitchelli,E,5.699,-0.554,Australia
+Nototherium watanense,E,5.477,-0.775,Australia
+Nyctereutes procyonoides,S,3.821,-2.876,Asia
+Odocoileus hemionus,S,4.716,-1.8,Nth America
+Odocoileus virginianus,S,4.808,-1.709,Nth America
+Okapia johnstoni,S,5.398,-1.165,Africa
+Oncifelis geoffroyi,S,3.699,-2.744,Sth America
+Onychogalea fraenata,S,3.778,-2.474,Australia
+Onychogalea lunata,S,3.699,-2.554,Australia
+Onychogalea unguifera,S,3.823,-2.43,Australia
+Oreamnos americanus,S,4.959,-1.557,Nth America
+Oreamnos harringtoni,E,4.653,-1.863,Nth America
+Oreotragus oreotragus,S,4.079,-2.484,Africa
+Orycteropus afer,S,4.703,-1.859,Africa
+Oryx dammah,S,5.301,-1.396,Asia
+Oryx gazella,S,5.348,-1.214,Africa
+Oryx leucoryx,S,4.955,-1.742,Asia
+Ourebia ourebi,S,4.127,-2.436,Africa
+Ovibos moschatus,S,5.456,-1.06,Nth America
+Ovis ammon,S,4.58,-2.117,Asia
+Ovis aries,S,4.477,-2.22,Europe
+Ovis canadensis,S,5.101,-1.415,Nth America
+Ovis dalli,S,4.869,-1.647,Nth America
+Ovis nivicola,S,4.856,-1.841,Asia
+Ovis orientalis,S,4.505,-2.192,Asia
+Ozotoceros bezoarticus,S,4.602,-1.84,Sth America
+Pachylemur insignis,E,4,-1.672,Madagascar
+Pachylemur jullyi,E,4.079,-1.593,Madagascar
+Paeleopropithecus ingens,E,4.699,-0.973,Madagascar
+Palaeoloxodon antiquus,E,6.74,0.044,Europe
+Palaepropithecus maximus,E,4.74,-0.931,Madagascar
+Palea capreolus,S,4.362,-2.201,Africa
+Paleolama mirifica,E,5.389,-1.127,Nth America
+Palorchestes azael,E,5.699,-0.554,Australia
+Palorchestes parvus,E,5,-1.253,Australia
+Pampatherium,E,4.954,-1.488,Sth America
+Pan paniscus,S,4.531,-2.031,Africa
+Pan trogoldytes,S,4.613,-1.95,Africa
+Panochthus tuberculatus,E,5.846,-0.597,Sth America
+Panthera atrox,E,5.633,-0.883,Nth America
+Panthera gombaszogensis,E,5.009,-1.554,Africa
+Panthera leo,S,5.246,-1.317,Africa
+Panthera leo,E,5.301,-1.396,Europe
+Panthera onca,S,4.792,-1.65,Sth America
+Panthera pardus,E,4.954,-1.743,Europe
+Panthera spelaea,E,5.58,-1.117,Europe
+Panthera tigris,S,5.159,-1.538,Asia
+Panthera uncia,S,4.547,-2.15,Asia
+Pantholops hodgsonii,S,4.562,-2.135,Asia
+Papio anubis,S,4.22,-2.343,Africa
+Papio cynocephalus,S,4.15,-2.413,Africa
+Papio hamadryas,S,4.261,-2.302,Africa
+Papio ursinus,S,4.345,-2.218,Africa
+Parmularius atlanticus,E,4.699,-1.864,Africa
+Parocnus serus,E,4.845,-1.597,Sth America
+Pecari tajacu,S,4.477,-2.039,Nth America
+Pelea capreolus,S,4.398,-2.165,Africa
+Pelorovis antiquus,E,6.301,-0.262,Africa
+Petrogale assimilis,S,3.699,-2.554,Australia
+Petrogale godmani,S,3.699,-2.554,Australia
+Petrogale inornata,S,3.699,-2.554,Australia
+Petrogale lateralis,S,3.756,-2.497,Australia
+Petrogale penicillata,S,3.845,-2.407,Australia
+Petrogale persephone,S,3.778,-2.474,Australia
+Petrogale rothschildi,S,3.72,-2.532,Australia
+Petrogale xanthopus,S,3.954,-2.298,Australia
+Phacochoerus aethiopicus,S,4.839,-1.724,Africa
+Phascolarctos cinereus,S,3.699,-2.554,Australia
+Phascolomys medius,E,4.699,-1.554,Australia
+Phascolonus gigas,E,5.301,-0.952,Australia
+Phataginus temminckii,S,3.875,-2.688,Africa
+Philantomba maxwellii,S,3.938,-2.625,Africa
+Philantomba monticola,S,3.707,-2.856,Africa
+Platygonus compressus,E,4.724,-1.792,Nth America
+Platygonus vetus,E,4.816,-1.701,Nth America
+Pongo pygmaeus,S,4.753,-1.944,Asia
+Potamochoerus porcus,S,4.777,-1.785,Africa
+Potorous platyops,E,3.699,-2.554,Australia
+Presbytis aurata,S,3.988,-2.709,Asia
+Presbytis cristata,S,3.744,-2.953,Asia
+Presbytis entellus,S,4.161,-2.536,Asia
+Presbytis francoisi,S,3.925,-2.772,Asia
+Presbytis geei,S,3.753,-2.944,Asia
+Presbytis johnii,S,4.029,-2.667,Asia
+Presbytis melalophos,S,3.778,-2.919,Asia
+Presbytis obscura,S,3.792,-2.904,Asia
+Presbytis phayrei,S,3.82,-2.877,Asia
+Presbytis pileata,S,3.892,-2.805,Asia
+Presbytis vetulus,S,3.946,-2.751,Asia
+Priodontes maximus,S,4.431,-2.011,Sth America
+Procapra gutturosa,S,4.531,-2.165,Asia
+Procoptodon goliath,E,5.398,-0.855,Australia
+Procoptodon pusio,E,4.875,-1.377,Australia
+Procoptodon rapha,E,5.176,-1.076,Australia
+Procoptodon texasensis,E,5.176,-1.076,Australia
+Procyon cancrivorous,S,3.908,-2.534,Sth America
+Procyon lotor,S,3.699,-2.817,Nth America
+Propithecus verreauxi,S,3.699,-1.973,Madagascar
+Propleopus oscillans,E,4.602,-1.65,Australia
+Proteles cristatus,S,3.939,-2.624,Africa
+Proteles transvaalensis,E,4.097,-2.466,Africa
+Protemnodon anak,E,5,-1.253,Australia
+Protemnodon brehus,E,5,-1.253,Australia
+Protemnodon hopei,E,4.699,-1.554,Australia
+Protemnodon nombe,E,4.602,-1.65,Australia
+Protemnodon roechus,E,5,-1.253,Australia
+Protemnodon tumbuna,E,4.699,-1.554,Australia
+Protocyon texanus,E,4.301,-2.215,Nth America
+Pseudois nayaur,S,4.771,-1.926,Asia
+Pteronura brasiliensis,S,4.41,-2.033,Sth America
+Pudu mephistophilies,S,4.13,-2.312,Sth America
+Pudu pudu,S,4,-2.697,Europe
+Puma concolor,S,4.789,-1.727,Nth America
+Pygathrix avunculus,S,3.903,-2.794,Asia
+Pygathrix brelichi,S,4.217,-2.479,Asia
+Pygathrix nemaeus,S,3.936,-2.761,Asia
+Pygathrix roxellana,S,4.25,-2.446,Asia
+Ramsaya magna,E,5,-1.253,Australia
+Rangifer tarandus,S,4.785,-1.731,Nth America
+Raphiceros melanotis,S,4.017,-2.546,Africa
+Raphiceros sharpei,S,3.876,-2.687,Africa
+Raphicerus campestris,S,4.041,-2.521,Africa
+Redunca arundinum,S,4.826,-1.737,Africa
+Redunca fulvorufula,S,4.477,-2.086,Africa
+Redunca redunca,S,4.653,-1.91,Africa
+Rhinoceros sondaicus,S,6.114,-0.583,Asia
+Rhinoceros unicornis,S,6.267,-0.43,Asia
+Rupicapra rupicapra,S,4.602,-1.84,Sth America
+Saiga tartarica,S,4.633,-2.063,Asia
+Sangamona fugitiva,E,5.199,-1.317,Nth America
+Sarcophillus harrisii,S,3.699,-2.554,Australia
+Scelidotherium leptocephalum,E,5.801,-0.641,Sth America
+Selenarctos thibetanus,S,4.845,-1.671,Nth America
+Sigmoceros lichtensteinii,S,5.209,-1.354,Africa
+Simopithecus jonathani,E,4.477,-2.086,Africa
+Simopithecus oswaldi,E,4.813,-1.75,Africa
+Simosthenurus andersoni,E,4.699,-1.554,Australia
+Simosthenurus baileyi,E,4.74,-1.512,Australia
+Simosthenurus brachyselensis,E,4.845,-1.407,Australia
+Simosthenurus brownei,E,4.699,-1.554,Australia
+Simosthenurus euryskaphus,E,4.74,-1.512,Australia
+Simosthenurus gilli,E,4.477,-1.775,Australia
+Simosthenurus maddocki,E,4.699,-1.554,Australia
+Simosthenurus newtonae,E,5.176,-1.076,Australia
+Simosthenurus occidentalis,E,4.699,-1.554,Australia
+Simosthenurus oreas,E,5,-1.253,Australia
+Simosthenurus orientalis,E,4.875,-1.377,Australia
+Simosthenurus pales,E,5.176,-1.076,Australia
+Simosthenurus tindalei,E,5,-1.253,Australia
+Sivatherium  giganteum,E,5.699,-0.998,Asia
+Smilodon bonaerensis,E,5.54,-0.902,Sth America
+Smilodon fatalis,E,5.591,-0.925,Nth America
+Smilodon populators,E,5.176,-1.34,Nth America
+Soergelia minor,E,5.362,-1.335,Europe
+Speothos venaticus,S,3.699,-2.744,Sth America
+Spilocuscus rufoniger,S,3.778,-2.474,Australia
+Spirocerus kiakhtensis,E,5.898,-0.799,Europe
+Stegomastodon suberbus,E,6.452,0.009,Sth America
+Stephanorhinus hemitoechus,E,6.204,-0.493,Europe
+Stephanorhinus kirchbergensis,E,6.301,-0.396,Europe
+Sthenurus andersoni,E,4.699,-1.554,Australia
+Sthenurus atlas,E,5.176,-1.076,Australia
+Sthenurus gilli,E,4.477,-1.775,Australia
+Sthenurus oreas,E,5,-1.253,Australia
+Sthenurus stirlingi,E,5.176,-1.076,Australia
+Sthenurus tindalei,E,5,-1.253,Australia
+Stockoceros conklingi,E,4.724,-1.792,Nth America
+Stockoceros onusrogsagris,E,4.732,-1.784,Nth America
+Stylochoerus compactus,E,5.301,-1.262,Africa
+Sus barbatus,S,5.012,-1.685,Asia
+Sus salvanius,S,3.795,-2.902,Asia
+Sus scrofa,S,4.949,-1.747,Asia
+Sus verrucosus,S,5.057,-1.64,Asia
+Sylvicapra grimmia,S,4.207,-2.355,Africa
+Sylvilagus insonus,S,3.699,-2.817,Nth America
+Symbos cavifrons,E,5.602,-0.914,Nth America
+Syncerus caffer,S,5.767,-0.796,Africa
+Synocnus comes,E,3.778,-2.664,Sth America
+Tachyglossus aculeatus,S,3.699,-2.554,Australia
+Tamandua tetradactyla,S,3.699,-2.744,Sth America
+Tapirus bairdii,S,5.301,-1.396,Asia
+Tapirus indicus,S,5.471,-1.226,Asia
+Tapirus pinchaque,S,5.179,-1.264,Sth America
+Tapirus terrestris,S,5.179,-1.264,Sth America
+Tapirus veroensis,E,5.511,-1.006,Nth America
+Taurotragus oryx,S,5.72,-0.843,Africa
+Taxidea taxus,S,3.699,-2.817,Nth America
+Tayassu pecari,S,4.531,-1.911,Sth America
+Tayassu tajacu,S,4.301,-2.141,Sth America
+Tetracerus quadricornis,S,4.356,-2.341,Asia
+Tetrameryx shuleri,E,4.785,-1.731,Nth America
+Thalarctos maritimus,S,5.431,-1.085,Nth America
+Theropithecus gelada,S,4.15,-2.412,Africa
+Thylacaleo carnifex,E,5.301,-0.952,Australia
+Thylacinus cynocephalus,E,4.398,-1.855,Australia
+Thylogale billardierii,S,3.778,-2.474,Australia
+Thylogale stigmatica,S,3.699,-2.554,Australia
+Thylogale thetis,S,3.778,-2.474,Australia
+Toxodon platensis,E,6.076,-0.367,Sth America
+Tragelaphus angasii,S,5.057,-1.506,Africa
+Tragelaphus buxtoni,S,5.262,-1.3,Africa
+Tragelaphus derbianus,S,5.833,-0.73,Africa
+Tragelaphus euryceros,S,5.517,-1.046,Africa
+Tragelaphus imberbis,S,4.869,-1.694,Africa
+Tragelaphus oryx,S,5.56,-1.003,Africa
+Tragelaphus scriptus,S,4.699,-1.864,Africa
+Tragelaphus spekii,S,5,-1.563,Africa
+Tragelaphus strepsiceros,S,5.33,-1.232,Africa
+Tragulus meminna,S,3.736,-2.96,Asia
+Tragulus napu,S,3.699,-2.998,Asia
+Tremarctos floridanus,E,5.447,-1.069,Nth America
+Tremarctos ornatus,S,5,-1.443,Sth America
+Trogontherium cuvieri,E,4.398,-2.045,Sth America
+Troposodon minor,E,4.602,-1.65,Australia
+Uncia uncia,S,4.505,-2.192,Asia
+Urocyon cinereoargenteus,S,3.699,-2.817,Nth America
+Ursus americanus,S,5.255,-1.261,Nth America
+Ursus arctos,S,5.602,-0.914,Nth America
+Ursus maritimus,S,5.589,-1.108,Europe
+Ursus spelaeus,E,5.699,-0.998,Europe
+Ursus thibetanus,S,5,-1.697,Asia
+Varecia variegata,S,3.699,-1.973,Madagascar
+Vicuna  vicugna,S,4.699,-1.744,Sth America
+Viverra civetta,S,4.107,-2.456,Africa
+Viverra megaspila,S,3.954,-2.743,Asia
+Viverra viverra,S,3.813,-2.884,Asia
+Viverra zibetha,S,3.941,-2.756,Asia
+Vombatus hacketti,E,4.477,-1.775,Australia
+Vombatus ursinus,S,4.415,-1.838,Australia
+Vulpes vulpes,S,3.699,-2.998,Europe
+Wallabia bicolor,S,4.176,-2.076,Australia
+Wallabia kitcheneri,E,4.477,-1.775,Australia
+Warenja wakefieldi,E,4,-2.253,Australia
+Zaglossus bruijnii,S,3.892,-2.36,Australia
+Zaglossus hacketti,E,4.477,-1.775,Australia
+Zygomaturus trilobus,E,5.699,-0.554,Australia
