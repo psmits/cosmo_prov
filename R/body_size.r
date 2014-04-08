@@ -21,7 +21,10 @@ raia$mass <- 10^raia[, 3]
 
 # play with the pbdb measures
 #simple solution
-tooth.spec <- pbdb$species[(pbdb$position == 'm1' | pbdb$position == 'Lower m1') 
+# m1
+tooth.spec <- pbdb$species[(pbdb$position == 'm1' | 
+                            pbdb$position == 'Lower m1' |
+                            pbdb$position == 'Lower m1 ') 
                            & pbdb$measurement == 'area']
 mass.spec <- pbdb$species[pbdb$measurement == 'mass']
 update.mass <- tooth.spec[!(tooth.spec %in% mass.spec)]
@@ -31,7 +34,10 @@ tooth.mean <- ddply(update.block, .(species), summarize,
                     mean(as.numeric(mean)))
 tooth.mean$mass <- predmass(tooth.mean[, 2])
 
-upperM1 <- pbdb[(pbdb$position == 'M1' | pbdb$position == 'Upper M1'), ]
+# M1
+upperM1 <- pbdb[(pbdb$position == 'M1' | 
+                 pbdb$position == 'Upper M1' |
+                 pbdb$position == 'Upper M1 '), ]
 M1area <- which(upperM1$measurement == 'area')
 M1area.mass <- massM1(as.numeric(upperM1$mean[M1area]))
 M1len <- which(upperM1$measurement == 'length')
@@ -40,12 +46,33 @@ M1.mass <- cbind(species = c(upperM1$species[M1area], upperM1$species[M1len]),
                  mass = c(M1area.mass, M1len.mass))
 M1.mass <- M1.mass[!duplicated(M1.mass[, 1]), ]
 
-lowerm2 <- pbdb[(pbdb$position == 'm2' | pbdb$position == 'lower M2'), ]
+# m2
+lowerm2 <- pbdb[(pbdb$position == 'm2' | 
+                 pbdb$position == 'lower M2' | 
+                 pbdb$position == 'Lower m2'), ]
 m2len <- which(lowerm2$measurement == 'length')
 m2len.mass <- massm2len(as.numeric(lowerm2$mean[m2len]))
 m2.mass <- cbind(species = lowerm2$species[m2len],
                  mass = c(m2len.mass))
 m2.mass <- m2.mass[!duplicated(m2.mass[, 1]), ]
+
+# mandible length
+mandible <- pbdb[pbdb$position %in% c('mandible', 'length of mandible', 'Mandibular'), ]
+mandlen <- which(mandible$measurement == 'length')
+mllen.mass <- massML(as.numeric(mandible$mean[mandlen]))
+ml.mass <- cbind(species = mandible$species[mandlen],
+                 mass = c(mllen.mass))
+ml.mass <- ml.mass[!duplicated(ml.mass[, 1]), ]
+
+# skull length
+skull <- pbdb[pbdb$position %in% c('skull', 
+                                   'Entire skull length measured from 
+                                   I1 to occipital condyles'), ]
+sklen <- which(skull$measurement == 'length')
+sklen.mass <- massSL(as.numeric(skull$mean[sklen]))
+sk.mass <- cbind(species = skull$species[sklen],
+                 mass = c(sklen.mass))
+sk.mass <- sk.mass[!duplicated(sk.mass[, 1]), ]
 
 
 pbdb <- pbdb[pbdb$measurement == 'mass', ]
@@ -101,6 +128,11 @@ na.me <- rbind(na.me, get.val(M1.mass[, 1], dat$name.bi, M1.mass[, 2]))
 er.me <- rbind(er.me, get.val(M1.mass[, 1], eur$name.bi, M1.mass[, 2]))
 na.me <- rbind(na.me, get.val(m2.mass[, 1], dat$name.bi, m2.mass[, 2]))
 er.me <- rbind(er.me, get.val(m2.mass[, 1], eur$name.bi, m2.mass[, 2]))
+na.me <- rbind(na.me, get.val(ml.mass[, 1], dat$name.bi, ml.mass[, 2]))
+er.me <- rbind(er.me, get.val(ml.mass[, 1], eur$name.bi, ml.mass[, 2]))
+na.me <- rbind(na.me, get.val(sk.mass[, 1], dat$name.bi, sk.mass[, 2]))
+er.me <- rbind(er.me, get.val(sk.mass[, 1], eur$name.bi, sk.mass[, 2]))
+
 na.me <- na.me[!duplicated(na.me[, 1]), ]
 er.me <- er.me[!duplicated(er.me[, 1]), ]
 

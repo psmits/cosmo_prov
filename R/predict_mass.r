@@ -33,6 +33,20 @@ massm2len <- function(length) {
   mass
 }
 
+massML <- function(length) {
+  la <- log(length)
+  lnm <- la * 2.9677 - 5.6712
+  mass <- exp(lnm)
+  mass
+}
+
+massSL <- function(length) {
+  la <- log(length, base = 10)
+  lnm <- la * 3.68 - 3.83
+  mass <- 10^lnm
+  mass
+}
+
 #' Predict herbivore body mass from lower m1 area
 #'
 #' This is based on the work of S. Legrendre 1986 and is for herbivores.
