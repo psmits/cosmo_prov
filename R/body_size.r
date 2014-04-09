@@ -150,6 +150,7 @@ er.mass <- er.mass[!duplicated(er.mass[, 1]), ]
 missing.mass <- unique(dat$name[!(dat$name.bi %in% na.mass$name)],
                        eur$name.bi[!(eur$name.bi %in% er.mass$name)])
 write.csv(missing.mass, file = '../data/unknown_mass.csv')
+oops <- read.csv('../data/found_mass.csv', stringsAsFactors = FALSE)
 
 save(na.mass, er.mass,
      file = '../data/body_mass.rdata')

@@ -1,6 +1,7 @@
 library(plyr)
 library(reshape2)
 library(mapproj)
+library(stringr)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')
@@ -29,6 +30,7 @@ eur <- eur[!(is.na(eur$paleolatdec) | is.na(eur$paleolngdec)), ]
 # remove all the sp.-s
 #grep('sp', x = dat$occurence.species_name, perl = TRUE)
 eur <- eur[eur$occurrence.species_name != 'sp.', ]  # change to a grep 
+eur <- eur[is.na(str_match(eur$occurrence.species_name, '/')), ]
 
 binm <- with(eur, binom.make(occurrence.genus_name, occurrence.species_name))
 eur <- cbind(eur, name.bi = binm)
