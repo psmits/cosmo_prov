@@ -38,7 +38,11 @@ eur$name.bi <- as.character(eur$name.bi)
 
 # exclude aquatic and volant nonsense
 aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
+seal <- c('Odobenidae', 'Otariidae', 'Phocidae', 'Desmatophocidae')
+badgen <- c('Enaliarctos')
 eur <- eur[!(eur$order_name %in% aq), ]
+eur <- eur[!(eur$family_name %in% aq), ]
+eur <- eur[!(eur$occurrence.genus_name %in% badgen), ]
 lf <- c('amphibious', 'volant', 'aquatic', 'gliding')
 eur <- eur[!(eur$life_habit %in% lf), ]
 

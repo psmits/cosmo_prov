@@ -36,7 +36,11 @@ dat$name.bi <- as.character(dat$name.bi)
 
 # exclude aquatic and volant nonsense
 aq <- c('Cetacea', 'Desmostylia', 'Sirenia', 'Chiroptera')
+seal <- c('Odobenidae', 'Otariidae', 'Phocidae', 'Desmatophocidae')
+badgen <- c('Enaliarctos')
 dat <- dat[!(dat$order_name %in% aq), ]
+dat <- dat[!(dat$family_name %in% seal), ]
+dat <- dat[!(dat$occurrence.genus_name %in% badgen), ]
 lf <- c('amphibious', 'volant', 'aquatic', 'gliding')
 dat <- dat[!(dat$life_habit %in% lf), ]
 

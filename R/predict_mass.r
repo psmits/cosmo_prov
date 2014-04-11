@@ -8,32 +8,62 @@
 predmass <- function(area) {
   la <- log(area)
   lnm <- 1.827 * la + 1.810
+  # lnm <- 3.757 + la * 1.516
   mass <- exp(lnm)
   mass
 }
 
 massM1len <- function(length) {
+  # marsupials...
   la <- log(length)
-  lnm <- 2.475 + (la * 3.004)
+  lnm <- 1.796 + (la * 3.3)
+  mass <- exp(lnm)
+  mass
+}
+
+massm1len <- function(length) {
+  # susumu carnivores
+  la <- log(length)
+  lnm <- 1.681 + (la * 2.97)
+  mass <- exp(lnm)
+  mass
+}
+
+massm1len.lago <- function(length) {
+  # susumu lagomorphs
+  la <- log(length)
+  lnm <- 3.002 + (la * 4.468)
   mass <- exp(lnm)
   mass
 }
 
 massM1 <- function(area) {
+  # slater from bloch et al 1998
   la <- log(area)
-  lnm <- 2.792 + (la * 1.518)
+  lnm <- 0.886 + (la * 1.714)
   mass <- exp(lnm)
   mass
 }
 
 massm2len <- function(length) {
+  # susumu
   la <- log(length)
   lnm <- 2.355 + (la * 3.076)
   mass <- exp(lnm)
   mass
 }
 
+massM2area <- function(area) {
+  # susumu ungulates
+  la <- log(area)
+  lnm <- 2.792 + (la * 1.518)
+  mass <- exp(lnm)
+  mass
+}
+
 massML <- function(length) {
+  # mandible length
+  # slater from foster 2009
   la <- log(length)
   lnm <- la * 2.9677 - 5.6712
   mass <- exp(lnm)
@@ -41,11 +71,23 @@ massML <- function(length) {
 }
 
 massSL <- function(length) {
+  # skull length
+  # slater from Luo et al. 2001
   la <- log(length, base = 10)
   lnm <- la * 3.68 - 3.83
   mass <- 10^lnm
   mass
 }
+
+mass.ltrl <- function(length) {
+  # ungulates
+  # susumu
+  la <- log(length)
+  lnm <- -1.374 + (3.113 * la)
+  mass <- exp(lnm)
+  mass
+}
+
 
 #' Predict herbivore body mass from lower m1 area
 #'
