@@ -57,7 +57,7 @@ bc <- function(graph, l.small = TRUE) {
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @references
 #' @examples
-endemic <- function(graph, l.small = TRUE) {
+endemic <- function(graph, membership, l.small = TRUE) {
   bip <- bipartite.projection(graph)
   len <- lapply(bip, function(x) length(V(x)))
   ws <- which.min(unlist(len))
@@ -71,12 +71,21 @@ endemic <- function(graph, l.small = TRUE) {
     tx <- V(bip[[ws]])$name
   }
 
-  nei <- lapply(tx, function(x) neighbors(graph, x))
-  tps <- table(unlist(nei))
-  ende <- which(unlist(lapply(nei, length)) == 1)
-  locs <- table(unlist(nei[ende]))
-  ww <- match(names(locs), names(tps))
-  avg.end <- sum(locs / tps[ww]) / length(st)
+  tx.mem <- membership[V(graph)$name %in% tx]
+  loc.mem <- membership[!(V(graph)$name %in% tx)]
+
+  nei <- lapply(st, function(x) neighbors(graph, x))
+  mem.nei <- split(nei, loc.mem)
+  oo <- lapply(mem.nei, function(x) unique(unlist(x)))
+  uni <- list()
+  for (ii in seq(length(oo))) {
+    shared <- oo[[ii]] %in% unique(unlist(oo[-ii]))
+    uni[[ii]] <- oo[[ii]][!shared]
+  }
+
+  prop <- unlist(Map(function(x, y) length(x) / length(y), uni, oo))
+  num <- sum(prop)
+  avg.end <- num / length(oo)
 
   avg.end
 }
@@ -143,7 +152,7 @@ corefind <- function(nei){
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @references
 #' @examples
-avgocc <- function(graph, l.small = TRUE) {
+avgocc <- function(graph, membership, l.small = TRUE) {
   bip <- bipartite.projection(graph)
 
   len <- lapply(bip, function(x) length(V(x)))
@@ -158,13 +167,17 @@ avgocc <- function(graph, l.small = TRUE) {
     st <- V(bip[[wm]])$name
   }
 
-  # ask the neighbors of all the taxa
-  nei <- lapply(taxa, function(x) neighbors(graph, x))
-  # (sum l / L) / N
-  occ <- lapply(lapply(nei, length), function(x) x / length(st))
-  ao <- mean(unlist(occ))
+  tx.mem <- membership[V(graph)$name %in% taxa]
+  loc.mem <- membership[!(V(graph)$name %in% taxa)]
 
-  ao
+  nei <- lapply(st, function(x) neighbors(graph, x)) # taxa per grid cell
+  mem.nei <- split(nei, loc.mem) # taxa per biome
+  oo <- lapply(mem.nei, function(x) unique(unlist(x))) # taxa that occur in biome
+  occ <- table(unlist(oo)) # number of biomes per taxon
+  relocc <- occ/length(oo)
+
+  avg.occ <- mean(relocc) # average relative number of biome occurrences.
+  avg.occ
 }
 
 

@@ -13,14 +13,27 @@ source('../R/window.r')
 # with explicit bins
 wdth <- 2
 taxawin <- network.bin(dat, bin = 'bins', taxa = 'name.bi', loc = 'gid')
-win.bg <- lapply(biogeosum, function(x) {
-                 lapply(taxawin, x)})
-#win.phy <- lapply(taxawin, mean.coph, data = dat)
-#win.bg$phy <- lapply(win.phy, mean)
+biocom <- lapply(taxawin, infomap.community)
+biomes <- Map(contract.vertices, taxawin, lapply(biocom, membership))
+biomes <- lapply(biomes, function(x){
+                 x$weight = 1
+                 x})
+biomes <- lapply(biomes, simplify)
+mem <- lapply(biocom, function(x) x$membership)
+win.bg <- list(bc = lapply(taxawin, bc),
+               end = Map(endemic, graph = taxawin, membership = mem),
+               avgcoc = Map(avgocc, graph = taxawin, membership = mem),
+               code = lapply(taxawin, code))
 
 eurwin <- network.bin(eur, bin = 'bins', taxa = 'name.bi', loc = 'gid')
-eurwin.bg <- lapply(biogeosum, function(x) {
-                    lapply(eurwin, x)})
-#eur.phy <- lapply(eurwin, mean.coph, data = eur)
-#eurwin.bg$phy <- lapply(eur.phy, mean)
-
+eurcom <- lapply(eurwin, infomap.community)
+eurmes <- Map(contract.vertices, eurwin, lapply(eurcom, membership))
+eurmes <- lapply(eurmes, function(x){
+                 x$weight = 1
+                 x})
+eurmes <- lapply(eurmes, simplify)
+mem <- lapply(eurcom, function(x) x$membership)
+eur.bg <- list(bc = lapply(eurwin, bc),
+               end = Map(endemic, graph = eurwin, membership = mem),
+               avgcoc = Map(avgocc, graph = eurwin, membership = mem),
+               code = lapply(eurwin, code))
