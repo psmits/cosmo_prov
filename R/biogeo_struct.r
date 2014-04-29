@@ -50,14 +50,16 @@ bc <- function(graph, l.small = TRUE) {
 #' TODO check for bipartite property
 #'
 #' @param graph object of class igraph (bipartite)
+#' @param membership vector of biome membership
 #' @param l.small logical if smaller part of bipartite projection is locality information
+#' @param trait vector of trait values
 #' @return
 #' @export
 #' @keywords
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @references
 #' @examples
-endemic <- function(graph, membership, l.small = TRUE) {
+endemic <- function(graph, membership, l.small = TRUE, trait = NULL) {
   bip <- bipartite.projection(graph)
   len <- lapply(bip, function(x) length(V(x)))
   ws <- which.min(unlist(len))
@@ -83,9 +85,25 @@ endemic <- function(graph, membership, l.small = TRUE) {
     uni[[ii]] <- oo[[ii]][!shared]
   }
 
-  prop <- unlist(Map(function(x, y) length(x) / length(y), uni, oo))
-  num <- sum(prop)
-  avg.end <- num / length(oo)
+  if(!(is.null(trait))) {
+    uni.trait <- lapply(uni, function(x) trait[x])
+    uni.tot <- lapply(uni.trait, table)
+
+    other.trait <- lapply(oo, function(x) trait[x])
+    other.tot <- lapply(other.trait, table)
+
+    tt <- list()
+    for (ii in seq(length(uni.tot))) {
+      ww <- match(names(uni.tot[[ii]]), names(other.tot[[ii]]))
+      tt[[ii]] <- uni.tot[[ii]] / other.tot[[ii]][ww]
+    }
+    prop <- split(unlist(tt), names(unlist(tt)))
+    avg.end <- lapply(prop, mean)
+  } else {
+    prop <- unlist(Map(function(x, y) length(x) / length(y), uni, oo))
+    num <- sum(prop)
+    avg.end <- num / length(oo)
+  }
 
   avg.end
 }
@@ -145,14 +163,16 @@ corefind <- function(nei){
 #' How many localities do taxa appear in on average?
 #'
 #' @param graph object of class igraph (bipartite)
+#' @param membership vector of biome memberships
 #' @param l.small logical if smaller part of bipartite projection is locality information
+#' @param trait partition based on trait information (vector)
 #' @return
 #' @export
 #' @keywords
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @references
 #' @examples
-avgocc <- function(graph, membership, l.small = TRUE) {
+avgocc <- function(graph, membership, l.small = TRUE, trait = NULL) {
   bip <- bipartite.projection(graph)
 
   len <- lapply(bip, function(x) length(V(x)))
@@ -176,7 +196,13 @@ avgocc <- function(graph, membership, l.small = TRUE) {
   occ <- table(unlist(oo)) # number of biomes per taxon
   relocc <- occ/length(oo)
 
-  avg.occ <- mean(relocc) # average relative number of biome occurrences.
+  if(!(is.null(trait))) {
+    spl <- split(relocc, trait)
+    avg.occ <- lapply(spl, mean)
+  } else {
+    avg.occ <- mean(relocc) # average relative number of biome occurrences.
+  }
+
   avg.occ
 }
 

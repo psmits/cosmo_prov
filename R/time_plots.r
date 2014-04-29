@@ -7,8 +7,6 @@ source('../R/na_mung.r')
 source('../R/europe_mung.r')
 
 source('../R/cosmo_prov.r')
-source('../R/diet_dynamics.r')
-source('../R/life_dynamics.r')
 source('../R/oxygen_curve.r')
 
 theme_set(theme_bw())
@@ -29,7 +27,6 @@ ggsave(file = '../doc/figure/zachos.png',
        width = 15, height = 10, plot = ggzac)
 
 # standard bin
-win.bg <- win.bg[1:4]
 cont <- list(na = win.bg, eur = eurwin.bg)
 bin.dat <- melt(cont)
 bin.dat$L3 <- as.numeric(bin.dat$L3)
@@ -59,32 +56,57 @@ ggsave(file = '../doc/figure/gen_bin.png',
        width = 15, height = 10, plot = ggdat)
 
 
+shrink.trait <- function(trait, loc = 'NA', key = 'insect') {
+  nat <- lapply(trait, melt)
+  ord <- lapply(nat, function(x) {
+                apply(x, 2, function(y) any(key %in% y))})
+  mat <- Map(function(x, y) {
+             names(x)[y] <- 'cat'
+             x}, nat, ord)
+  mat <- lapply(mat, function(x) {
+                oo <- order(x$cat)
+                x <- x[oo, ]
+                oth <- names(x)[names(x) != 'cat']
+                x[, c(oth, 'cat')]})
+  mat <- lapply(mat, function(x) {
+                names(x) <- c('value', 'age', 'trait')
+                x})
+  mat <- Map(function(x, y) cbind(x, stat = rep(y, nrow(x))), mat, names(mat))
+  mat <- Reduce(rbind, mat)
+  mat <- cbind(mat, loc = rep(loc, nrow(mat)))
+
+  mat
+}
+
 # diet
-dietdf <- list(na = dtwin.bg, eur = dteur.bg)
-dietdf <- melt(dietdf)
-dietdf$L4 <- as.numeric(dietdf$L4)
-ggdiet <- ggplot(dietdf, aes(x = L4, y = value, colour = L2))
+dietdf <- list(na = shrink.trait(na.trait$diet),
+               eur = shrink.trait(er.trait$diet, 'Eur'))
+dietdf <- Reduce(rbind, dietdf)
+dietdf$age <- as.numeric(dietdf$age)
+
+ggdiet <- ggplot(dietdf, aes(x = age, y = value, colour = trait))
 ggdiet <- ggdiet + geom_line()
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 ggdiet <- ggdiet + labs(x = 'Time (My)')
-ggdiet <- ggdiet + facet_grid(L3 ~ L1, scales = 'free')
+ggdiet <- ggdiet + facet_grid(loc ~ stat, scales = 'free')
 ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
 # just NA
-nadt <- melt(dtwin.bg)
-nadt$L3 <- as.numeric(nadt$L3)
-nadt$L2[nadt$L2 == 'bc'] <- 'BC'
-nadt$L2[nadt$L2 == 'end'] <- 'E'
-nadt$L2[nadt$L2 == 'avgcoc'] <- 'Occ'
-nadt$L2[nadt$L2 == 'code'] <- 'Code length'
+nadt <- shrink.trait(na.trait$diet)
+nadt$age <- as.numeric(nadt$age)
+nadt$stat <- as.character(nadt$stat)
+nadt$stat[nadt$stat == 'bc'] <- 'BC'
+nadt$stat[nadt$stat == 'end'] <- 'E'
+nadt$stat[nadt$stat == 'avgcoc'] <- 'Occ'
+nadt$stat[nadt$stat == 'code'] <- 'Code length'
 
-ggnad <- ggplot(nadt, aes(x = L3, y = value, colour = L1))
+ggnad <- ggplot(nadt, aes(x = age, y = value, colour = trait))
 ggnad <- ggnad + geom_line()
 #ggnad <- ggnad + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggnad <- ggnad + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggnad <- ggnad + labs(x = 'Time (My)')
-ggnad <- ggnad + facet_wrap(~ L2, scales = 'free')
+ggnad <- ggnad + facet_wrap(~ stat, scales = 'free')
 ggnad <- ggnad + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
@@ -94,20 +116,20 @@ ggnad <- ggnad + theme(axis.title.y = element_text(angle = 0),
 ggsave(file = '../doc/figure/na_dt.png', width = 15, height = 10, plot = ggnad)
 
 # just Eur
-erdt <- melt(dteur.bg)
-erdt$L3 <- as.numeric(erdt$L3)
-erdt$L2[erdt$L2 == 'bc'] <- 'BC'
-erdt$L2[erdt$L2 == 'end'] <- 'E'
-erdt$L2[erdt$L2 == 'avgcoc'] <- 'Occ'
-erdt$L2[erdt$L2 == 'code'] <- 'Code length'
+erdt <- shrink.trait(er.trait$diet, 'Eur')
+erdt$age <- as.numeric(erdt$age)
+erdt$stat <- as.character(erdt$stat)
+erdt$stat[erdt$stat == 'bc'] <- 'BC'
+erdt$stat[erdt$stat == 'end'] <- 'E'
+erdt$stat[erdt$stat == 'avgcoc'] <- 'Occ'
 
-ggerd <- ggplot(erdt, aes(x = L3, y = value, colour = L1))
+ggerd <- ggplot(erdt, aes(x = age, y = value, colour = trait))
 ggerd <- ggerd + geom_line()
 #ggerd <- ggerd + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggerd <- ggerd + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 ggerd <- ggerd + labs(x = 'Time (My)')
-ggerd <- ggerd + facet_wrap(~ L2, scales = 'free')
+ggerd <- ggerd + facet_wrap(~ stat, scales = 'free')
 ggerd <- ggerd + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
@@ -118,31 +140,34 @@ ggsave(file = '../doc/figure/er_dt.png', width = 15, height = 10, plot = ggerd)
 
 
 # locomotor
-locodf <- list(na = lfwin.bg, eur = lfeur.bg)
-locodf <- melt(locodf)
-locodf$L4 <- as.numeric(locodf$L4)
-ggloco <- ggplot(locodf, aes(x = L4, y = value, colour = L2))
+locodf <- list(na = shrink.trait(na.trait$life, key = 'arboreal'),
+               eur = shrink.trait(er.trait$life, 'Eur', key = 'arboreal'))
+locodf <- Reduce(rbind, locodf)
+locodf$age <- as.numeric(locodf$age)
+
+ggloco <- ggplot(locodf, aes(x = age, y = value, colour = trait))
 ggloco <- ggloco + geom_line()
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
-ggloco <- ggloco + facet_grid(L3 ~ L1, scales = 'free')
+ggloco <- ggloco + facet_grid(loc ~ stat, scales = 'free')
 ggsave(file = '../doc/figure/locos.png', width = 15, height = 10, plot = ggloco)
 
 # just NA
-nalf <- melt(lfwin.bg)
-nalf$L3 <- as.numeric(nalf$L3)
-nalf$L2[nalf$L2 == 'bc'] <- 'BC'
-nalf$L2[nalf$L2 == 'end'] <- 'E'
-nalf$L2[nalf$L2 == 'avgcoc'] <- 'Occ'
-nalf$L2[nalf$L2 == 'code'] <- 'Code length'
+nalf <- shrink.trait(na.trait$life, key = 'arboreal')
+nalf$age <- as.numeric(nalf$age)
+nalf$stat <- as.character(nalf$stat)
+nalf$stat[nalf$stat == 'bc'] <- 'BC'
+nalf$stat[nalf$stat == 'end'] <- 'E'
+nalf$stat[nalf$stat == 'avgcoc'] <- 'Occ'
+nalf$stat[nalf$stat == 'code'] <- 'Code length'
 
-ggnal <- ggplot(nalf, aes(x = L3, y = value, colour = L1))
+ggnal <- ggplot(nalf, aes(x = age, y = value, colour = trait))
 ggnal <- ggnal + geom_line()
 #ggnal <- ggnal + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggnal <- ggnal + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggnal <- ggnal + labs(x = 'Time (My)')
-ggnal <- ggnal + facet_wrap(~ L2, scales = 'free')
+ggnal <- ggnal + facet_wrap(~ stat, scales = 'free')
 ggnal <- ggnal + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
@@ -152,20 +177,21 @@ ggnal <- ggnal + theme(axis.title.y = element_text(angle = 0),
 ggsave(file = '../doc/figure/na_lf.png', width = 15, height = 10, plot = ggnal)
 
 # just Eur
-erlf <- melt(lfeur.bg)
-erlf$L3 <- as.numeric(erlf$L3)
-erlf$L2[erlf$L2 == 'bc'] <- 'BC'
-erlf$L2[erlf$L2 == 'end'] <- 'E'
-erlf$L2[erlf$L2 == 'avgcoc'] <- 'Occ'
-erlf$L2[erlf$L2 == 'code'] <- 'Code length'
+erlf <- shrink.trait(er.trait$life, key = 'arboreal')
+erlf$age <- as.numeric(erlf$age)
+erlf$stat <- as.character(erlf$stat)
+erlf$stat[erlf$stat == 'bc'] <- 'BC'
+erlf$stat[erlf$stat == 'end'] <- 'E'
+erlf$stat[erlf$stat == 'avgcoc'] <- 'Occ'
+erlf$stat[erlf$stat == 'code'] <- 'Code length'
 
-ggerl <- ggplot(erlf, aes(x = L3, y = value, colour = L1))
+ggerl <- ggplot(erlf, aes(x = age, y = value, colour = trait))
 ggerl <- ggerl + geom_line()
 #ggerl <- ggerl + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggerl <- ggerl + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 ggerl <- ggerl + labs(x = 'Time (My)')
-ggerl <- ggerl + facet_wrap(~ L2, scales = 'free')
+ggerl <- ggerl + facet_wrap(~ stat, scales = 'free')
 ggerl <- ggerl + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
                        axis.title = element_text(size = 20),
