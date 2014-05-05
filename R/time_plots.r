@@ -91,6 +91,22 @@ ggdiet <- ggdiet + labs(x = 'Time (My)')
 ggdiet <- ggdiet + facet_grid(loc ~ stat, scales = 'free')
 ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
+
+composition <- dietdf[dietdf$stat %in% c('end', 'avgcoc'), ]
+composition$stat <- as.character(composition$stat)
+composition$stat[composition$stat == 'end'] <- 'E'
+composition$stat[composition$stat == 'avgcoc'] <- 'Occ'
+composition$loc <- as.character(composition$loc)
+composition$loc[composition$loc == 'Eur'] <- 'Europe'
+ggcomp <- ggplot(composition, aes(x = age, y = value, colour = trait))
+ggcomp <- ggcomp + geom_line()
+ggcomp <- ggcomp + scale_color_manual(values = cbp,
+                                      name = 'Dietary\nCategory')
+ggcomp <- ggcomp + labs(x = 'Time (My)')
+ggcomp <- ggcomp + facet_grid(loc ~ stat, scales = 'free')
+ggsave(file = '../doc/figure/comp_diet.png', width = 15, height = 10, plot = ggcomp)
+
+
 # just NA
 nadt <- shrink.trait(na.trait$diet)
 nadt$age <- as.numeric(nadt$age)
@@ -151,6 +167,21 @@ ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
 ggloco <- ggloco + facet_grid(loc ~ stat, scales = 'free')
 ggsave(file = '../doc/figure/locos.png', width = 15, height = 10, plot = ggloco)
+
+grouping <- locodf[locodf$stat %in% c('end', 'avgcoc'), ]
+grouping$stat <- as.character(grouping$stat)
+grouping$stat[grouping$stat == 'end'] <- 'E'
+grouping$stat[grouping$stat == 'avgcoc'] <- 'Occ'
+grouping$loc <- as.character(grouping$loc)
+grouping$loc[grouping$loc == 'Eur'] <- 'Europe'
+ggroup <- ggplot(grouping, aes(x = age, y = value, colour = trait))
+ggroup <- ggroup + geom_line()
+ggroup <- ggroup + scale_color_manual(values = cbp,
+                                      name = 'Locomotor\nCategory')
+ggroup <- ggroup + labs(x = 'Time (My)')
+ggroup <- ggroup + facet_grid(loc ~ stat, scales = 'free')
+ggsave(file = '../doc/figure/comp_loco.png', width = 15, height = 10, plot = ggroup)
+
 
 # just NA
 nalf <- shrink.trait(na.trait$life, key = 'arboreal')
