@@ -60,6 +60,22 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Modes of extinction}
+
+  \hspace{\stretch{0.4}} Field of Bullets 
+  \hspace{\stretch{0.5}} \textbf{--} 
+  \hspace{\stretch{0.5}} Wanton 
+  \hspace{\stretch{0.5}} \textbf{--} 
+  \hspace{\stretch{0.5}} Fair Game 
+  \hspace{\stretch{1}}
+
+  \bigskip
+
+  \tiny{\attrib{Raup 1991 \underline{Extinction: Bad Genes or Bad Luck?}}}
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Van Valen's observation}
 
   \begin{center}
@@ -84,10 +100,10 @@
 
   \begin{block}{Questions}
     \begin{itemize}
-      \item Do traits related to environmental preference have different distributions of taxonomic duration? 
+      \item Do interactions involved in environmental preference predict differential survival?
         \begin{itemize}
-          \item Is survival best modeled by a single trait or multiple? 
-          \item How do other factors, such as climate, affect these patterns? 
+          \item Is survival best modeled by a single interactor or multiple interactors? 
+          \item How do factors, such as climate, contribute? 
         \end{itemize}
       \item Is extinction taxon-age independent or dependent?
       \item Do genera and species have fundamentally different survival distributions?
@@ -96,83 +112,166 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Survival}
-  % theoretical survival curve(s)
-\end{frame}
+  \frametitle{Survival analysis}
 
-\begin{frame}
-  \frametitle{Important terms}
+  \begin{definition}
+    Analysis of \alert{time till event data}.
 
-  \(S(t)\): probability of survival till age \(t\)
+    i.e. Time from origination to extinction (\textbf{duration, \(T\)}).
+  \end{definition}
 
-  \(h(t)\): instantaneous failure rate at \(t\), \\does not have to constant or monotonic 
-
-  \(f(t) = h(t)S(t)\): probability density function
 \end{frame}
 
 \begin{frame}
   \frametitle{Formalization of Van Valen}
-  \begin{block}{Law of Constant Extinction}
-    Hazard is constant with respect to time (\alert{exponential survival}).
-  \end{block}
 
-    \begin{align*}
-      h(t) &= \lambda \iff S(t) = \exp^{-\lambda t}
-    \end{align*}
+  \begin{block}{Law of Constant Extinction}
+    \begin{center}
+      \begin{tabular}{@{}l@{}}\(T \sim Exp(\lambda)\)\end{tabular}
+      \hspace{1.5cm}
+      \begin{tabular}{@{}l@{}}\(T\): survival time\\\(\lambda\): expected number of \\extinctions per unit time\end{tabular}
+    \end{center}
+  \end{block}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Study system}
+  \frametitle{Mammals}
+  \includegraphics[height = 0.9\textheight, width = \textwidth, keepaspectratio = true]{figure/aom}
+
+  \tiny{\attrib{Yale Peabody Museum}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Regions}
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      \begin{center}
-        \includegraphics[height = 0.8\textheight, width = \textwidth, keepaspectratio = true]{figure/annyong}
-      \end{center}
+      \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/na_map}
     \end{column}
     \begin{column}{0.5\textwidth}
+      \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio=true]{figure/euro}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.2cm}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      North America: \\2366 species, 1003 genera 
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      Europe: \\1767 species, 658 genera
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Diet}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/dietdiv}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/jernvall}
+    \end{column}
+  \end{columns}
+
+  \begin{center}
+      carnivore, herbivore, omnivore, insectivore
+      
+      \vspace{0.2cm}
+
+      herbivore \(>\) carnivore \hspace{0.3cm} omnivore \(\simeq\) carnivore \hspace{0.5cm} insectivore ?
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Locomotion}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      ground dwelling, scansorial, arboreal
+
+      \vspace{0.3cm}
+
       \begin{itemize}
-        \item Mammals
-          \begin{itemize}
-            \item North America: \\1003 genera, 2366 species
-            \item Europe: \\658 genera, 1767 species
-          \end{itemize}
-        \item Cenozoic (\(\sim 65\) My)
-        \item traits
-          \begin{itemize}
-            \item diet: carnivore, herbivore, omnivore, insectivore
-            \item locomotion: \\ground dwelling, \\arboreal, scansorial
-            \item body size
-          \end{itemize}
+        \item ground dwelling \(>\) arboreal
+          \vspace{0.2cm}
+        \item scansorial \(\simeq\) ground dwelling 
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Approach}
+  \frametitle{Body size}
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      
+      \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio=true]{figure/liowmam}
+
+      \includegraphics[height=0.4\textheight,width=\textwidth,keepaspectratio=true]{figure/susumu}
     \end{column}
     \begin{column}{0.5\textwidth}
-      
+      \(\uparrow\) mass, \(\uparrow\) range size, \(\uparrow\) survival
+
+      \vspace{0.3cm}
+
+      \textbf{OR}
+
+      \vspace{0.3cm}
+
+      \(\uparrow\) mass, \(\downarrow\) reproductive rate, \(\downarrow\) survival
+
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Predictions}
-  % herbivores > carnivores. ? omnivores ? insectivores
-  % ground dwelling taxa > arboreal. ? scansorial
-  % either big > small or big < small or big = small
+  \frametitle{The Elephant in the Range}
+
+  % some kind of image 
+
+  mean, CV occupancy
+
+  \(\uparrow\) occupancy, \(\uparrow\) duration
+
 \end{frame}
 
 \begin{frame}
-  \frametitle{Results}
-  % KM curves
-  % parametric curves
+  \frametitle{Climate}
+
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/stromberg}
+
+  \tiny{\attrib{Str\"{o}mberg \textit{et al.} 2013 \textit{Nature Com.}}}
 \end{frame}
 
+% plot the ``raw'' data?
+
+\begin{frame}
+  \frametitle{Model selection}
+  % parameter ``importance'' as sum of weights
+  % best model
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{``Best'' model}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parameter interpretations}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions, future work}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Acknowledgements}
@@ -189,22 +288,38 @@
         \item Discussion
           \begin{itemize}
             \item David Bapst, Megan Boatright, Ben Frable, Colin Kyle, Darcy Ross, Liz Sander
-            \item John Alroy, Graeme Lloyd, Carl Simpson, Graham Slater
+            \item John Alroy, Graeme Lloyd, Kathleen Ritterbush, Carl Simpson, Graham Slater
           \end{itemize}
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \includegraphics[height = 0.3\textheight, keepaspectratio = true]{figure/chicago} \\
-      \includegraphics[height = 0.3\textheight, width = 0.5\textwidth, keepaspectratio = true]{figure/field} \\
+      \includegraphics[height = 0.3\textheight, keepaspectratio = true]{figure/chicago} 
+      \includegraphics[width = 0.4\textwidth, keepaspectratio = true]{figure/field}
 
-      \vspace{0.5cm}
+      \includegraphics[height = 0.3\textheight, width = 0.5\textwidth, keepaspectratio = true]{figure/fossilworks}
+      \includegraphics[width = 0.5\textwidth, keepaspectratio = true]{figure/paleodb}
 
-      \small{Hinds Evolutionary Biology \\Grad Student Research Award}
+      \includegraphics[height = 0.3\textheight, width = 0.5\textwidth, keepaspectratio = true]{figure/now}
     \end{column}
   \end{columns}
 \end{frame}
 
 \appendix
+
+\begin{frame}
+  \frametitle{(Informal) phylogeny}
+  \begin{center}
+    \includegraphics[height = 0.8\textheight, width = \textwidth,  keepaspectratio = true]{figure/na_phylo_diet}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Analytical approach}
+
+  frailty coefficient 
+
+  conditional autoregressive prior
+\end{frame}
 
 \begin{frame}
   \frametitle{Differential preservation and survival}

@@ -104,6 +104,12 @@ ggcomp <- ggcomp + scale_color_manual(values = cbp,
                                       name = 'Dietary\nCategory')
 ggcomp <- ggcomp + labs(x = 'Time (My)')
 ggcomp <- ggcomp + facet_grid(loc ~ stat, scales = 'free')
+ggcomp <- ggcomp + theme(axis.title.y = element_text(angle = 0),
+                         axis.text = element_text(size = 17),
+                         axis.title = element_text(size = 20),
+                         legend.text = element_text(size = 15),
+                         legend.title = element_text(size = 16),
+                         strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/comp_diet.png', width = 15, height = 10, plot = ggcomp)
 
 
@@ -180,6 +186,12 @@ ggroup <- ggroup + scale_color_manual(values = cbp,
                                       name = 'Locomotor\nCategory')
 ggroup <- ggroup + labs(x = 'Time (My)')
 ggroup <- ggroup + facet_grid(loc ~ stat, scales = 'free')
+ggroup <- ggroup + theme(axis.title.y = element_text(angle = 0),
+                         axis.text = element_text(size = 17),
+                         axis.title = element_text(size = 20),
+                         legend.text = element_text(size = 15),
+                         legend.title = element_text(size = 16),
+                         strip.text = element_text(size = 15))
 ggsave(file = '../doc/figure/comp_loco.png', width = 15, height = 10, plot = ggroup)
 
 
