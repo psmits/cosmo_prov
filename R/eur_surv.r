@@ -21,6 +21,13 @@ ecol <- cbind(data.frame(taxa = eur$name.bi, stringsAsFactors = FALSE),
 ecol <- ecol[order(ecol$taxa), ]
 er.ecol <- ecol[!duplicated(ecol$taxa), ]
 
+#er.ecol <- er.ecol[er.ecol$taxa %in% er.mass$name, ]
+#er.ecol <- cbind(er.ecol, mass = er.mass$value)
+#erdur <- erdur[erdur$name.bi %in% er.mass$name, ]
+#gg <- er.mass$value != 0
+#er.ecol <- er.ecol[gg, ]
+#erdur <- erdur[gg, ]
+
 # exclude taxa that origierte after cutoff
 young <- which(erdur[, 3] <= 2)
 erdur <- erdur[-young, ]
