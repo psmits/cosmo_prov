@@ -5,63 +5,14 @@
 #' @param area numeric; length x width from lower m1
 #' @return mass in grams
 #' @export
-predmass <- function(area) {
+general.m1area <- function(area) {
   la <- log(area)
   lnm <- 1.827 * la + 1.810
-  # lnm <- 3.757 + la * 1.516
   mass <- exp(lnm)
   mass
 }
 
-massM1len <- function(length) {
-  # marsupials...
-  la <- log(length)
-  lnm <- 1.796 + (la * 3.3)
-  mass <- exp(lnm)
-  mass
-}
-
-massm1len <- function(length) {
-  # susumu carnivores
-  la <- log(length)
-  lnm <- 1.681 + (la * 2.97)
-  mass <- exp(lnm)
-  mass
-}
-
-massm1len.lago <- function(length) {
-  # susumu lagomorphs
-  la <- log(length)
-  lnm <- 3.002 + (la * 4.468)
-  mass <- exp(lnm)
-  mass
-}
-
-massM1 <- function(area) {
-  # slater from bloch et al 1998
-  la <- log(area)
-  lnm <- 0.886 + (la * 1.714)
-  mass <- exp(lnm)
-  mass
-}
-
-massm2len <- function(length) {
-  # susumu
-  la <- log(length)
-  lnm <- 2.355 + (la * 3.076)
-  mass <- exp(lnm)
-  mass
-}
-
-massM2area <- function(area) {
-  # susumu ungulates
-  la <- log(area)
-  lnm <- 2.792 + (la * 1.518)
-  mass <- exp(lnm)
-  mass
-}
-
-massML <- function(length) {
+general.mandible <- function(length) {
   # mandible length
   # slater from foster 2009
   la <- log(length)
@@ -70,7 +21,7 @@ massML <- function(length) {
   mass
 }
 
-massSL <- function(length) {
+general.skull <- function(length) {
   # skull length
   # slater from Luo et al. 2001
   la <- log(length, base = 10)
@@ -79,13 +30,216 @@ massSL <- function(length) {
   mass
 }
 
-mass.ltrl <- function(length) {
+general.mass <- function(species, measures) {
+  gen.mea <- measures[measures$species %in% species, ]
+
+  gen.m1 <- gen.mea[gen.mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                gen.mea$measure == 'area', ]
+  gen.m1$mass <- general.m1area(gen.m1$value)
+
+  gen.mandib <- gen.mea[gen.mea$part %in% c('mandible', 'length of mandible', 
+                                            'Mandibular') & 
+                        gen.mea$measure == 'length', ]
+  gen.mandib$mass <- general.mandible(gen.mandib$value)
+
+  gen.skull <- gen.mea[gen.mea$part %in% c('skull', 'Entire skull length measured 
+                                           from I1 to occipital condyles') & 
+                       gen.mea$measure == 'length', ]
+  gen.skull$mass <- general.skull(gen.skull$value)
+
+  out <- rbind(gen.m1, gen.mandib, gen.skull)
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+# ungulates
+ungulates.m1area <- function(area) {
+  la <- log(area)
+  lnm <- 3.757 + 1.516 * la
+  mass <- exp(lnm)
+  mass
+}
+
+ungulates.m2length <- function(len) {
+  la <- log(len)
+  lnm <- 2.366 + 3.076 * la
+  mass <- exp(lnm)
+  mass
+}
+
+ungulates.M2length <- function(len) {
+  la <- log(len)
+  lnm <- 2.475 + 3.004 * la
+  mass <- exp(lnm)
+  mass
+}
+
+ungulates.M2area <- function(area) {
+  la <- log(area)
+  lnm <- 2.792 + 1.518 * la
+  mass <- exp(lnm)
+  mass
+}
+
+ungulates.ltrl <- function(length) {
   # ungulates
   # susumu
   la <- log(length)
   lnm <- -1.374 + (3.113 * la)
   mass <- exp(lnm)
   mass
+}
+
+ungulate.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  m1 <- mea[mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                mea$measure == 'area', ]
+  m1$mass <- ungulates.m1area(m1$value)
+
+  m2 <- mea[mea$part %in% c('m2', 'Lower m2', 'lower M2') & 
+                mea$measure == 'length', ]
+  m2$mass <- ungulates.m2length(m2$value)
+
+  um2a <- mea[mea$part %in% c('M2') & 
+              mea$measure == 'area', ]
+  um2a$mass <- ungulates.M2area(um2a$value)
+
+  um2l <- mea[mea$part %in% c('M2') & 
+              mea$measure == 'length', ]
+  um2l$mass <- ungulates.M2length(um2l$value)
+
+  ltrl <- mea[mea$part %in% c('LTRL') & 
+              mea$measure == 'length', ]
+  ltrl$mass <- ungulates.ltrl(ltrl$value)
+
+  out <- rbind(m1, m2, um2a, um2l, ltrl)
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+# carnivores
+carnivore.m1length <- function(len) {
+  la <- log(len)
+  lnm <- 1.681 + 2.97 * la
+  mass <- exp(lnm)
+  mass
+}
+
+carnivore.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  m1 <- mea[mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                mea$measure == 'length', ]
+  m1$mass <- carnivore.m1length(m1$value) 
+
+  out <- m1
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+lagomorph.larl <- function(larl) {
+  la <- log(larl)
+  lnm <- -2.671 + 3.671 * la
+  mass <- exp(lnm)
+  mass
+}
+
+lagomorph.m1length <- function(len) {
+  la <- log(len)
+  lnm <- 3.002 + 4.468 * la
+  mass <- exp(lnm)
+  mass
+}
+
+lagomorph.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  m1 <- mea[mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                mea$measure == 'length', ]
+  m1$mass <- lagomorph.m1length(m1$value) 
+
+  out <- m1
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+# insectivores
+insectivore.m1area <- function(area) {
+  la <- log(area)
+  lnm <- 1.726 + 1.628 * la
+  mass <- exp(lnm)
+  mass
+}
+
+insectivore.M1area <- function(area) {
+  # slater from bloch et al 1998
+  la <- log(area)
+  lnm <- 0.886 + (la * 1.714)
+  mass <- exp(lnm)
+  mass
+}
+
+insectivore.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  m1 <- mea[mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                mea$measure == 'area', ]
+  m1$mass <- insectivore.m1area(m1$value) 
+  um1 <- mea[mea$part %in% c('M1', 'Upper M1', 'Upper M1 ') &
+                mea$measure == 'area', ]
+  um1$mass <- insectivore.M1area(um1$value) 
+
+  out <- rbind(m1, um1)
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+# rodents
+rodentia.m1area <- function(area) {
+  la <- log(area)
+  lnm <- 2.172 + 1.767 * la
+  mass <- log(lnm)
+  mass
+}
+
+rodentia.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  m1 <- mea[mea$part %in% c('m1', 'Lower m1', 'Lower m1 ') & 
+                mea$measure == 'area', ]
+  m1$mass <- rodentia.m1area(m1$value) 
+
+  out <- m1
+  out <- out[!duplicated(out$species), ]
+
+  out
+}
+
+marsupial.M1length <- function(len) {
+  # marsupials...
+  la <- log(len)
+  lnm <- 1.796 + (la * 3.3)
+  mass <- exp(lnm)
+  mass
+}
+
+marsupial.mass <- function(species, measures) {
+  mea <- measures[measures$species %in% species, ]
+
+  um1 <- mea[mea$part %in% c('M1', 'Upper M1', 'Upper M1 ') &
+                mea$measure == 'length', ]
+  um1$mass <- marsupial.M1length(um1$value) 
+
+  out <- um1
+  out <- out[!duplicated(out$species), ]
+
+  out
 }
 
 
