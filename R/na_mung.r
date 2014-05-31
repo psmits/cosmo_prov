@@ -90,26 +90,4 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 dat <- Reduce(rbind, uu)
-
-# taxonomic information
-# get for all unique genera
-#gen <- unique(dat$occurrence.genus_name)
-#un <- unique(dat$name.bi)
-
-#gen <- gen[-which(gen %in% c('Vulpes'))]
-
-#new.tax <- grab.heir(gen, key = eol.key)
-#new.tax <- apply(new.tax, 2, function(x) {
-#                 gsub(pattern = '\\s(.*)', x = x, 
-#                      perl = TRUE, replacement = '')})
-#bad.orders <- unique(new.tax[, 1])[13:length(unique(new.tax[, 1]))]
-#new.tax <- new.tax[!(new.tax[, 1] %in% bad.orders), ]
-
-#for(ii in seq(nrow(new.tax))) {
-#  rp <- which(dat$occurrence.genus_name == new.tax[ii, 3])
-#  dat[rp, 'order_name'] <- new.tax[ii, 1]
-#  dat[rp, 'family_name'] <- new.tax[ii, 2]
-
-#  rfa <- which(dat$family_name == new.tax[ii, 2])
-#  dat[rfa, 'order_name'] <- new.tax[ii, 1]
-#}
+dat <- dat[-grep('[0-9\\.]', dat$name.bi, perl = TRUE), ]

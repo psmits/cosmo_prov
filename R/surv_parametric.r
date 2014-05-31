@@ -4,7 +4,7 @@ library(MuMIn)
 source('../R/na_surv.r')
 source('../R/eur_surv.r')
 
-#na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
+na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 #er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
 
 

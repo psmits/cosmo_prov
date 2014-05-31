@@ -20,9 +20,9 @@ ecol <- cbind(data.frame(taxa = dat$name.bi, stringsAsFactors = FALSE),
 ecol <- ecol[order(ecol$taxa), ]
 na.ecol <- ecol[!duplicated(ecol$taxa), ]
 
-#na.ecol <- na.ecol[na.ecol$taxa %in% na.mass$name, ]
-#na.ecol <- cbind(na.ecol, mass = na.mass$value)
-#nadur <- nadur[nadur$name.bi %in% na.mass$name, ]
+na.ecol <- na.ecol[na.ecol$taxa %in% na.mass$name, ]
+na.ecol <- cbind(na.ecol, mass = na.mass$value)
+nadur <- nadur[nadur$name.bi %in% na.mass$name, ]
 
 # exclude taxa that originate after cutoff
 young <- which(nadur[, 3] <= 2)
