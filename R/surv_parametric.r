@@ -39,6 +39,37 @@ na.exp <- ups
 
 na.mod <- c(na.wei, na.exp)
 
+# genera
+vars <- names(na.genecol)[-c(1,4)]
+mod <- list()
+nll <- nagen.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
+
+surv.wei <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'weibull')
+ups <- list()
+ups[[1]] <- surv.wei
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
+                                      paste(mod[[ii - 1]], collapse = ' + ')))
+}
+nagen.wei <- ups
+
+surv.exp <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'exponential')
+ups <- list()
+ups[[1]] <- surv.exp
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
+                                      paste(mod[[ii - 1]], collapse = ' + ')))
+}
+nagen.exp <- ups
+
+nagen.mod <- c(nagen.wei, nagen.exp)
+
+
 # just europe
 # species
 vars <- names(er.ecol)[-1]
@@ -68,3 +99,34 @@ for(ii in seq(from = 2, to = (length(mod) + 1))) {
 er.exp <- ups
 
 er.mod <- c(er.wei, er.exp)
+
+
+# genera
+vars <- names(er.genecol)[-1]
+mod <- list()
+nll <- ergen.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
+
+surv.wei <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'weibull')
+ups <- list()
+ups[[1]] <- surv.wei
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
+                                      paste(mod[[ii - 1]], collapse = ' + ')))
+}
+ergen.wei <- ups
+
+surv.exp <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'exponential')
+ups <- list()
+ups[[1]] <- surv.exp
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
+                                      paste(mod[[ii - 1]], collapse = ' + ')))
+}
+ergen.exp <- ups
+
+ergen.mod <- c(ergen.wei, ergen.exp)
