@@ -11,7 +11,7 @@ cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
          '#1F78B4', '#33A02C', '#E31A1C', '#FF7F00', '#6A3D9A', '#B15928')
 
 # north america
-nacurve <- predict(na.exp, 
+nacurve <- predict(na.exp[[1]], 
                    type = 'quantile',
                    p = seq(0.0, 0.99, by = 0.01),
                    se.fit = TRUE)
@@ -35,8 +35,9 @@ na <- na + theme(axis.title.y = element_text(angle = 0),
 ggsave(filename = '../doc/figure/para_na.png', plot = na,
        width = 15, height = 10)
 
+
 # diet
-ndcurve <- predict(nad.exp, newdata = data.frame(diet = c('carni',
+ndcurve <- predict(na.exp[[2]], newdata = data.frame(diet = c('carni',
                                                           'herb',
                                                           'insect',
                                                           'omni')),
@@ -71,7 +72,7 @@ ggsave(filename = '../doc/figure/para_na_diet.png', plot = nd,
        width = 15, height = 10)
 
 # locomotor
-nlcurve <- predict(nal.exp, newdata = data.frame(move = c('arboreal',
+nlcurve <- predict(na.exp[[3]], newdata = data.frame(move = c('arboreal',
                                                           'ground dwelling',
                                                           'scansorial')),
                    type = 'quantile',
