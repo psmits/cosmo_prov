@@ -4,7 +4,7 @@ library(scales)
 library(reshape2)
 source('../R/step_ribbon.r')
 
-source('../R/surv_nonpara.r')
+#source('../R/surv_nonpara.r')
 
 theme_set(theme_bw())
 cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
@@ -31,6 +31,12 @@ gspec <- gspec + scale_color_manual(values = cbp,
                                     name = 'Region')
 gspec <- gspec + scale_fill_manual(values = cbp,
                                    name = 'Region')
+gspec <- gspec + labs(x = 'Duration (My)', y = 'P(T > t)')
+gspec <- gspec + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 20),
+                       axis.title = element_text(size = 23),
+                       legend.text = element_text(size = 17),
+                       legend.title = element_text(size = 19))
 #gspec <- gspec + scale_y_continuous(trans = log_trans())
 ggsave(filename = '../doc/figure/kms_region.png', plot = gspec,
        height = 10, width = 15)
@@ -53,6 +59,12 @@ ggen <- ggen + scale_color_manual(values = cbp,
                                   name = 'Region')
 ggen <- ggen + scale_fill_manual(values = cbp,
                                  name = 'Region')
+ggen <- ggen + labs(x = 'Duration (My)', y = 'P(T > t)')
+ggen <- ggen + theme(axis.title.y = element_text(angle = 0),
+                     axis.text = element_text(size = 20),
+                     axis.title = element_text(size = 23),
+                     legend.text = element_text(size = 17),
+                     legend.title = element_text(size = 19))
 #ggen <- ggen + scale_y_continuous(trans = log_trans())
 ggsave(filename = '../doc/figure/kmg_region.png', plot = ggen,
        height = 10, width = 15)
@@ -90,6 +102,12 @@ gdiet <- gdiet + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 gdiet <- gdiet + scale_fill_manual(values = cbp,
                                    name = 'Dietary\nCategory')
+gdiet <- gdiet + labs(x = 'Duration (My)', y = 'P(T > t)')
+gdiet <- gdiet + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 20),
+                       axis.title = element_text(size = 23),
+                       legend.text = element_text(size = 17),
+                       legend.title = element_text(size = 19))
 ggsave(filename = '../doc/figure/diet_sp_region.png', plot = gdiet,
        height = 10, width = 15)
 
@@ -124,6 +142,12 @@ gdietg <- gdietg + scale_color_manual(values = cbp,
                                     name = 'Dietary\nCategory')
 gdietg <- gdietg + scale_fill_manual(values = cbp,
                                    name = 'Dietary\nCategory')
+gdietg <- gdietg + labs(x = 'Duration (My)', y = 'P(T > t)')
+gdietg <- gdietg + theme(axis.title.y = element_text(angle = 0),
+                         axis.text = element_text(size = 20),
+                         axis.title = element_text(size = 23),
+                         legend.text = element_text(size = 17),
+                         legend.title = element_text(size = 19))
 ggsave(filename = '../doc/figure/diet_gen_region.png', plot = gdietg,
        height = 10, width = 15)
 
@@ -158,6 +182,12 @@ gloco <- gloco + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 gloco <- gloco + scale_fill_manual(values = cbp,
                                    name = 'Locomotor\nCategory')
+gloco <- gloco + labs(x = 'Duration (My)', y = 'P(T > t)')
+gloco <- gloco + theme(axis.title.y = element_text(angle = 0),
+                       axis.text = element_text(size = 20),
+                       axis.title = element_text(size = 23),
+                       legend.text = element_text(size = 17),
+                       legend.title = element_text(size = 19))
 ggsave(filename = '../doc/figure/loco_sp_region.png', plot = gloco,
        height = 10, width = 15)
 
@@ -190,5 +220,11 @@ glocog <- glocog + scale_color_manual(values = cbp,
                                     name = 'Locomotor\nCategory')
 glocog <- glocog + scale_fill_manual(values = cbp,
                                    name = 'Locomotor\nCategory')
+glocog <- glocog + labs(x = 'Duration (My)', y = 'P(T > t)')
+glocog <- glocog + theme(axis.title.y = element_text(angle = 0),
+                         axis.text = element_text(size = 20),
+                         axis.title = element_text(size = 23),
+                         legend.text = element_text(size = 17),
+                         legend.title = element_text(size = 19))
 ggsave(filename = '../doc/figure/loco_gen_region.png', plot = glocog,
        height = 10, width = 15)
