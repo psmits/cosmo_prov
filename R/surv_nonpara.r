@@ -4,28 +4,84 @@ library(MuMIn)
 source('../R/na_surv.r')
 source('../R/eur_surv.r')
 
-# just north america
-# species
-na.km <- survfit(formula = na.surv ~ 1)
-na.kmd <- survfit(formula = na.surv ~ diet, data = na.ecol)
-na.kml <- survfit(formula = na.surv ~ move, data = na.ecol)
-na.kmdl <- survfit(formula = na.surv ~ diet + move, data = na.ecol)
+na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
+#er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
 
-# genus
-nag.km <- survfit(formula = nagen.surv ~ 1)
-nag.kmd <- survfit(formula = nagen.surv ~ diet, data = na.genecol)
-nag.kml <- survfit(formula = nagen.surv ~ move, data = na.genecol)
-nag.kmdl <- survfit(formula = nagen.surv ~ diet + move, data = na.genecol)
+# north america
+# species
+vars <- names(na.ecol)[-1]
+mod <- list()
+nll <- na.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
+
+nakm <- survfit(formula = na.surv ~ 1, data = na.ecol)
+ups <- list()
+ups[[1]] <- nakm
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(nakm, paste('. ~ . +', 
+                                  paste(mod[[ii - 1]], collapse = ' + ')))
+}
+na.species <- ups
+
+# genera
+vars <- names(na.genecol)[-1]
+mod <- list()
+nll <- nagen.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
+
+nakm <- survfit(formula = nagen.surv ~ 1, data = na.genecol)
+ups <- list()
+ups[[1]] <- nakm
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(nakm, paste('. ~ . +', 
+                                  paste(mod[[ii - 1]], collapse = ' + ')))
+}
+na.genera <- ups
+
 
 # europe
 # species
-er.km <- survfit(formula = er.surv ~ 1)
-er.kmd <- survfit(formula = er.surv ~ diet, data = er.ecol)
-er.kml <- survfit(formula = er.surv ~ move, data = er.ecol)
-er.kmdl <- survfit(formula = er.surv ~ diet + move, data = er.ecol)
+vars <- names(er.ecol)[-1]
+mod <- list()
+nll <- er.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
 
-# genus
-erg.km <- survfit(formula = ergen.surv ~ 1)
-erg.kmd <- survfit(formula = ergen.surv ~ diet, data = er.genecol)
-erg.kml <- survfit(formula = ergen.surv ~ move, data = er.genecol)
-erg.kmdl <- survfit(formula = ergen.surv ~ diet + move, data = er.genecol)
+erkm <- survfit(formula = er.surv ~ 1, data = er.ecol)
+ups <- list()
+ups[[1]] <- erkm
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(erkm, paste('. ~ . +', 
+                                  paste(mod[[ii - 1]], collapse = ' + ')))
+}
+er.species <- ups
+
+# genera
+vars <- names(er.genecol)[-1]
+mod <- list()
+nll <- ergen.surv ~ 1
+for(ii in seq(length(vars))) {
+  cc <- combn(vars, ii, simplify = FALSE)
+  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
+}
+mod <- unlist(mod, recursive = FALSE)
+
+erkm <- survfit(formula = ergen.surv ~ 1, data = er.genecol)
+ups <- list()
+ups[[1]] <- erkm
+for(ii in seq(from = 2, to = (length(mod) + 1))) {
+  ups[[ii]] <- update(erkm, paste('. ~ . +', 
+                                  paste(mod[[ii - 1]], collapse = ' + ')))
+}
+er.genera <- ups

@@ -51,6 +51,5 @@ ergen.surv <- paleosurv(fad = ergen[, 2], lad = ergen[, 3], start = 66, end = 2)
 er.genecol <- cbind(er.ecol, genus = erdur$genus)
 er.genecol <- ddply(er.genecol, .(genus), summarize,
                     diet = names(which.max(table(diet))),
-                    move = names(which.max(table(move))),
-                    mass = mean(mass))
+                    move = names(which.max(table(move))))
 
