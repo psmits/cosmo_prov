@@ -148,8 +148,8 @@ er.est <- get.val(est.mass$species, eur$name.bi, est.mass$value)
 na.mass <- rbind(na.mass, na.est)
 er.mass <- rbind(er.mass, er.est)
 
-na.missing <- unique(dat$name.bi[!(dat$name.bi %in% est.mass$species)])
-eur.missing <- unique(eur$name.bi[!(eur$name.bi %in% est.mass$species)])
+na.missing <- unique(dat$name.bi[!(dat$name.bi %in% na.mass$name)])
+eur.missing <- unique(eur$name.bi[!(eur$name.bi %in% er.mass$name)])
 missing.taxa <- sort(unique(c(eur.missing, na.missing)))
 #write.csv(missing.taxa, '../data/unknown_mass.csv', row.names = FALSE)
 
