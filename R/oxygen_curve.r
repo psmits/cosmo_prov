@@ -13,3 +13,18 @@ for(ii in seq(length(bin) - 1)) {
 }
 
 names(oo) <- (bin + 2)[seq(length(bin) - 1)]
+
+#' Get climate proxy for duration of a taxon
+#'
+#' Given the Zachos et al 2008 dO^18 get all isotope values from a taxon's duration.
+#'
+#' @param fad numeric first apperance date. Now is 0.
+#' @param lad numeric last apperance date. Now is 0.
+#' @export
+#' @return vector of isotope values
+getclimate <- function(fad, lad) {
+  times <- zachos$age
+
+  isotope <- zachos$d18o[times <= fad & times >= lad]
+  isotope
+}

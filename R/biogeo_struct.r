@@ -213,3 +213,47 @@ code <- function(x, l.small = TRUE) {
   code.length(y)
 }
 biogeosum <- list(bc = bc, end = endemic, avgcoc = avgocc, code = code)
+
+
+#' Number of BU occurrences per taxa
+#'
+#' Get the number of BUs that each taxa occurs in for a given network.
+#' This is very similar to the avgcooc function except it is not reletavized
+#' or averaged.
+#'
+#' @param graph object of class igraph (bipartite)
+#' @param membership vector of biome memberships
+#' @param l.small logical if smaller part of bipartite projection is locality information
+#' @return
+#' @export
+#' @keywords
+#' @author Peter D Smits <psmits@uchicago.edu>
+#' @references
+#' @examples
+occupancy <- function(graph, membership, l.small = TRUE) {
+  bip <- bipartite.projection(graph)
+
+  len <- lapply(bip, function(x) length(V(x)))
+  ws <- which.min(unlist(len))
+  wm <- which.max(unlist(len))
+
+  if(l.small) {
+    taxa <- V(bip[[wm]])$name
+    st <- V(bip[[ws]])$name
+  } else if(!l.small) {
+    taxa <- V(bip[[ws]])$name
+    st <- V(bip[[wm]])$name
+  }
+
+  tx.mem <- membership[V(graph)$name %in% taxa]
+  loc.mem <- membership[!(V(graph)$name %in% taxa)]
+
+  nei <- lapply(st, function(x) neighbors(graph, x)) # taxa per grid cell
+  mem.nei <- split(nei, loc.mem) # taxa per biome
+  oo <- lapply(mem.nei, function(x) unique(unlist(x))) # taxa that occur in biome
+  occ <- table(unlist(oo)) # number of biomes per taxon
+  out <- as.data.frame(cbind(occ, taxa))
+  out$occ <- as.numeric(as.character(out$occ))
+
+  out
+}

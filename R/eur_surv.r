@@ -4,6 +4,7 @@ library(plyr)
 source('../R/paleo_surv.r')
 
 source('../R/europe_mung.r')
+#source('../R/cosmo_prov.r')
 
 erdur <- read.csv('../data/euro-ranges.csv', stringsAsFactors = FALSE)
 names(erdur) <- c('genus', 'species', 'fad', 'lad', 
