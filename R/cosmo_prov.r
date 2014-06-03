@@ -32,6 +32,15 @@ eurwin <- network.bin(eur, bin = 'bins', taxa = 'name.bi', loc = 'gid')
 eurwin.bg <- biogeo(eurwin)  # europe
 
 
+# generic level
+naocc.mat <- unique(dat[, c('occurrence.genus_name', 'bins', 'gid')])
+nagenwin <- network.bin(naocc.mat, bin = 'bins', 
+                        taxa = 'occurrence.genus_name', loc = 'gid')
+erocc.mat <- unique(eur[, c('occurrence.genus_name', 'bins', 'gid')])
+ergenwin <- network.bin(erocc.mat, bin = 'bins', 
+                        taxa = 'occurrence.genus_name', loc = 'gid')
+
+
 # need to do this for traits
 biogeo.trait <- function(taxawin, dat) {
   biocom <- lapply(taxawin, infomap.community)

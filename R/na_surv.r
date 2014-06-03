@@ -70,6 +70,21 @@ nagen <- ddply(nadur, .(genus), summarize,
 nagen.surv <- paleosurv(fad = nagen[, 2], lad = nagen[, 3], start = 66, end = 2)
 
 
+# occupancy
+taxa.occ <- lapply(nagenwin, function(x) {
+                   occupancy(x, membership = membership(infomap.community(x)))})
+taxa.occ <- Reduce(rbind, taxa.occ)
+rewrite <- order(as.character(taxa.occ$taxa))
+taxa.occ <- taxa.occ[rewrite, ]
+sp.occ <- split(taxa.occ, taxa.occ$taxa)
+mean.occ <- melt(lapply(sp.occ, function(x) mean(x[, 1])))
+names(mean.occ) <- c('occ', 'taxa')
+mean.occ <- mean.occ[order(mean.occ$taxa), ]
+cv.occ <- melt(lapply(sp.occ, function(x) var(x[, 1]) / mean(x[, 1])))
+names(cv.occ) <- c('cv.occ', 'taxa')
+cv.occ <- cv.occ[order(cv.occ$taxa), ]
+
+# climate
 generic.isotope <- Map(getclimate, nagen$fad, nagen$lad)
 names(generic.isotope) <- nagen$genus
 gmean.climate <- melt(lapply(generic.isotope, function(x) mean(x, na.rm = TRUE)))
