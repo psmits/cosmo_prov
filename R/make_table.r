@@ -45,5 +45,6 @@ get.vals <- function(model) {
               df = df, 
               #logLik = ll, 
               AICc = aic)
+  out
 }
 

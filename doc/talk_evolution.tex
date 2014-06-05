@@ -53,13 +53,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{In context of this study}
-  \begin{block}{Rephrased}
-    How does a taxon's \alert{adaptive zone} affect \alert{extinction risk?}
-  \end{block}
-\end{frame}
-
-\begin{frame}
   \frametitle{Modes of extinction}
 
   \hspace{\stretch{0.4}} Field of Bullets 
@@ -76,23 +69,38 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{In context of this study}
+  \begin{block}{Rephrased}
+    How does a taxon's \alert{adaptive zone} affect \alert{extinction risk?}
+  \end{block}
+\end{frame}
+
+\begin{frame}
   \frametitle{Van Valen's observation}
 
+  \begin{alertblock}{Law of Constant Extinction}
+    Extinction rate, in a given adaptive zone, is taxon--age independent.
+
+    \tiny{\attrib{Van Valen 1973 \textit{Evol. Theory}}}
+  \end{alertblock}
+
   \begin{center}
-    \includegraphics[height = 0.7\textheight, keepaspectratio = true]{figure/liow}
+    \includegraphics[height = 0.5\textheight, keepaspectratio = true]{figure/liow}
 
     \tiny{\attrib{Liow et al. 2011 \textit{TREE}}}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Law of Constant Extinction}
+  \frametitle{Formalization of Van Valen}
 
-  \begin{definition}
-    Extinction rate, in a given adaptive zone, is taxon--age independent.
-
-    \tiny{\attrib{Van Valen 1973 \textit{Evol. Theory}}}
-  \end{definition}
+  \begin{block}{Law of Constant Extinction}
+    \begin{center}
+      \begin{tabular}{@{}l@{}}\(T \sim Exp(\lambda)\)\end{tabular}
+      \hspace{1.5cm}
+      \begin{tabular}{@{}l@{}}\(T\): survival time\\\(\lambda\): expected number of \\extinctions per unit time\end{tabular}
+    \end{center}
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -121,18 +129,6 @@
 %  \end{definition}
 %
 %\end{frame}
-
-\begin{frame}
-  \frametitle{Formalization of Van Valen}
-
-  \begin{block}{Law of Constant Extinction}
-    \begin{center}
-      \begin{tabular}{@{}l@{}}\(T \sim Exp(\lambda)\)\end{tabular}
-      \hspace{1.5cm}
-      \begin{tabular}{@{}l@{}}\(T\): survival time\\\(\lambda\): expected number of \\extinctions per unit time\end{tabular}
-    \end{center}
-  \end{block}
-\end{frame}
 
 \begin{frame}
   \frametitle{Mammals}
@@ -179,13 +175,13 @@
   \end{columns}
 
   \begin{center}
-      carnivore, herbivore, omnivore, insectivore
-      
-      \vspace{0.2cm}
+    carnivore, herbivore, omnivore, insectivore
 
-      herbivore \(>\) carnivore \hspace{0.3cm} omnivore \(\simeq\) carnivore \hspace{0.5cm} insectivore ?
+    \vspace{0.2cm}
 
-    \end{center}
+    herbivore \(>\) carnivore \hspace{0.3cm} omnivore \(\simeq\) carnivore \hspace{0.5cm} insectivore ?
+
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -226,16 +222,46 @@
 
       \(\uparrow\) mass, \(\downarrow\) reproductive rate, \(\downarrow\) survival
 
+      \vspace{0.3cm}
+
+      \textbf{OR}
+
+      \vspace{0.3cm}
+
+      no effect
+
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{NP regional survival curves}
+
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/kms_region}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Model selection}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variable importance}
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/rel_imp}
+
+% randomize for ``base line'' importance
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parameter interpretations}
+
 \end{frame}
 
 \begin{frame}
   \frametitle{The Elephant in the Range}
 
   % some kind of image 
-
-  mean, CV occupancy
 
   \(\uparrow\) occupancy, \(\uparrow\) duration
 
@@ -247,42 +273,22 @@
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/stromberg}
 
   \tiny{\attrib{Str\"{o}mberg \textit{et al.} 2013 \textit{Nature Com.}}}
-  % mean, CV, abs(diff)
 \end{frame}
 
 \begin{frame}
-  \frametitle{Regional nonparametric survival curves}
+  \frametitle{Future modeling work}
 
-  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/kms_region}
-\end{frame}
-% plot the ``raw'' data?
+  currently \(\hat{k} = c\), future \(\hat{k} \approx\) CV climate and/or occupancy
 
-\begin{frame}
-  \frametitle{Model selection}
-  % parameter ``importance'' as sum of weights
-  % best model
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{``Best'' model}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Parameter interpretations}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Conclusions, future work}
-
+  generic level properties 
   \begin{itemize}
-    \item nonconstant shape parameter 
-      \begin{itemize}
-        \item CV range, climate
-      \end{itemize}
+    \item species:genus
+    \item trait dispersion (\(H(\text{diet})\), Var(mass), etc.)
   \end{itemize}
+
+  CAR prior on frailty using phylogenetic distance/VCV matrix
+
+  incorporate duration uncertainty due to sampling 
 
 \end{frame}
 
@@ -316,51 +322,5 @@
     \end{column}
   \end{columns}
 \end{frame}
-
-\appendix
-
-\begin{frame}
-  \frametitle{(Informal) phylogeny}
-  \begin{center}
-    \includegraphics[height = 0.8\textheight, width = \textwidth,  keepaspectratio = true]{figure/na_phylo_diet}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Analytical approach}
-
-  frailty coefficient 
-
-  conditional autoregressive prior
-\end{frame}
-
-\begin{frame}
-  \frametitle{Differential preservation and survival}
-
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{center}
-        \includegraphics[height = 0.4\textheight, width = \textwidth, keepaspectratio = true]{figure/raup}
-
-        \tiny{\attrib{Raup 1975 \textit{Paleobio.}}}
-
-        \includegraphics[height = 0.4\textheight, width = \textwidth, keepaspectratio = true]{figure/sepkoski}
-
-        \tiny{\attrib{Sepkoski 1975 \textit{Paleobio.}}}
-      \end{center}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      two groups in four scenarios
-      \begin{itemize}
-        \item \(=\) birth, death; \\\(=\)preservation
-        \item \(=\) birth, death; \\\(!=\)preservation
-        \item \(!=\) birth, death; \\\(=\) preservation
-        \item \(!=\) birth, death; \\\(!=\)preservation
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-% any preliminary results?
 
 \end{document}

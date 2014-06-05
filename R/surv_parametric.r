@@ -6,6 +6,8 @@ source('../R/eur_surv.r')
 
 na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 #er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
+na.genecol$mass <- log(as.numeric(as.character(na.genecol$mass)))
+#er.genecol$mass <- log(as.numeric(as.character(er.genecol$mass)))
 
 
 # just north america

@@ -54,16 +54,6 @@ cv.climate <- melt(lapply(isotope.match, function(x) {
 names(cv.climate) <- c('cv.climate', 'taxa')
 
 # exclude taxa that originate after cutoff
-young <- which(nadur[, 3] <= 2)
-nadur <- nadur[-young, ]
-na.ecol <- na.ecol[-young, ]
-
-# remove 0 survival times
-rms <- which(abs(nadur[, 3] - nadur[, 4]) <= 0.1)
-nadur <- nadur[-rms, ]
-na.ecol <- na.ecol[-rms, ]
-
-# exclude taxa that origierte after cutoff
 young <- which(erdur[, 3] <= 2)
 erdur <- erdur[-young, ]
 er.ecol <- er.ecol[-young, ]
