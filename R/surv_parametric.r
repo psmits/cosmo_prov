@@ -1,5 +1,6 @@
 library(survival)
 library(MuMIn)
+source('../R/model_sel.r')
 
 source('../R/na_surv.r')
 source('../R/eur_surv.r')
@@ -9,126 +10,116 @@ na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 na.genecol$mass <- log(as.numeric(as.character(na.genecol$mass)))
 #er.genecol$mass <- log(as.numeric(as.character(er.genecol$mass)))
 
+nsim <- 1000
 
 # just north america
 # species
 vars <- names(na.ecol)[-1]
-mod <- list()
-nll <- na.surv ~ 1
-for(ii in seq(length(vars))) {
-  cc <- combn(vars, ii, simplify = FALSE)
-  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
-}
-mod <- unlist(mod, recursive = FALSE)
+mods <- create.model(vars = vars)
 
 surv.wei <- survreg(na.surv ~ 1, data = na.ecol, dist = 'weibull')
-ups <- list()
-ups[[1]] <- surv.wei
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+na.wei <- fit.models(surv.wei, mods, data = na.ecol, dist = 'weibull')
+
+pna.wei <- list()
+for(ii in seq(nsim)) {
+  pna.wei[[ii]] <- var.imp(model.base(na.surv, mods = mods, 
+                                      datas = na.ecol, 
+                                      distribution = 'weibull'))
 }
-na.wei <- ups
 
 surv.exp <- survreg(na.surv ~ 1, data = na.ecol, dist = 'exponential')
-ups <- list()
-ups[[1]] <- surv.exp
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+na.exp <- fit.models(surv.exp, mods, data = na.ecol, dist = 'exponential')
+
+pna.exp <- list()
+for(ii in seq(nsim)) {
+  pna.exp[[ii]] <- var.imp(model.base(na.surv, mods = mods, 
+                                      datas = na.ecol, 
+                                      distribution = 'weibull'))
 }
-na.exp <- ups
 
 na.mod <- c(na.wei, na.exp)
+pna.mod <- c(pna.wei, pna.exp)
 
 # genera
-vars <- names(na.genecol)[-c(1,4)]
-mod <- list()
-nll <- nagen.surv ~ 1
-for(ii in seq(length(vars))) {
-  cc <- combn(vars, ii, simplify = FALSE)
-  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
-}
-mod <- unlist(mod, recursive = FALSE)
+vars <- names(na.genecol)[-c(1)]
+mods <- create.model(vars = vars)
 
 surv.wei <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'weibull')
-ups <- list()
-ups[[1]] <- surv.wei
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+nagen.wei <- fit.models(surv.wei, mods, data = na.genecol, dist = 'weibull')
+
+pnagen.wei <- list()
+for(ii in seq(nsim)) {
+  pnagen.wei[[ii]] <- var.imp(model.base(nagen.surv, mods = mods, 
+                                         datas = na.genecol, 
+                                         distribution = 'weibull'))
 }
-nagen.wei <- ups
 
 surv.exp <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'exponential')
-ups <- list()
-ups[[1]] <- surv.exp
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+nagen.exp <- fit.models(surv.wei, mods, data = na.genecol, dist = 'exponential')
+
+pnagen.exp <- list()
+for(ii in seq(nsim)) {
+  pnagen.exp[[ii]] <- var.imp(model.base(nagen.surv, mods = mods, 
+                                         datas = na.genecol, 
+                                         distribution = 'exponential'))
 }
-nagen.exp <- ups
 
 nagen.mod <- c(nagen.wei, nagen.exp)
+pnagen.mod <- c(pnagen.wei, pnagen.exp)
 
 
 # just europe
 # species
 vars <- names(er.ecol)[-1]
-mod <- list()
-for(ii in seq(length(vars))) {
-  cc <- combn(vars, ii, simplify = FALSE)
-  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
-}
-mod <- unlist(mod, recursive = FALSE)
+mods <- create.model(vars = vars)
 
 surv.wei <- survreg(er.surv ~ 1, data = er.ecol, dist = 'weibull')
-ups <- list()
-ups[[1]] <- surv.wei
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+er.wei <- fit.models(surv.wei, mods, data = er.ecol, dist = 'weibull')
+
+per.wei <- list()
+for(ii in seq(nsim)) {
+  per.wei[[ii]] <- var.imp(model.base(er.surv, mods = mods, 
+                                      datas = er.ecol, 
+                                      distribution = 'weibull'))
 }
-er.wei <- ups
 
 surv.exp <- survreg(er.surv ~ 1, data = er.ecol, dist = 'exponential')
-ups <- list()
-ups[[1]] <- surv.exp
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+er.exp <- fit.models(surv.exp, mods, data = er.ecol, dist = 'exponential')
+
+per.exp <- list()
+for(ii in seq(nsim)) {
+  per.exp[[ii]] <- var.imp(model.base(er.surv, mods = mods, 
+                                      datas = er.ecol, 
+                                      distribution = 'exponential'))
 }
-er.exp <- ups
 
 er.mod <- c(er.wei, er.exp)
+per.mod <- c(per.wei, per.exp)
 
 
 # genera
 vars <- names(er.genecol)[-1]
-mod <- list()
-nll <- ergen.surv ~ 1
-for(ii in seq(length(vars))) {
-  cc <- combn(vars, ii, simplify = FALSE)
-  mod[[ii]] <- cc #lapply(cc, function(x) paste(x, collapse = ' + '))
-}
-mod <- unlist(mod, recursive = FALSE)
+mods <- create.model(vars = vars)
 
 surv.wei <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'weibull')
-ups <- list()
-ups[[1]] <- surv.wei
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.wei, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+ergen.wei <- fit.models(surv.wei, mods, data = er.genecol, dist = 'weibull')
+
+pergen.wei <- list()
+for(ii in seq(nsim)) {
+  pergen.wei[[ii]] <- var.imp(model.base(ergen.surv, mods = mods, 
+                                         datas = er.genecol, 
+                                         distribution = 'weibull'))
 }
-ergen.wei <- ups
 
 surv.exp <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'exponential')
-ups <- list()
-ups[[1]] <- surv.exp
-for(ii in seq(from = 2, to = (length(mod) + 1))) {
-  ups[[ii]] <- update(surv.exp, paste('. ~ . +', 
-                                      paste(mod[[ii - 1]], collapse = ' + ')))
+ergen.exp <- fit.models(surv.exp, mods, data = er.genecol, dist = 'exponential')
+
+pergen.exp <- list()
+for(ii in seq(nsim)) {
+  pergen.exp[[ii]] <- var.imp(model.base(ergen.surv, mods = mods, 
+                                         datas = er.genecol, 
+                                         distribution = 'exponential'))
 }
-ergen.exp <- ups
 
 ergen.mod <- c(ergen.wei, ergen.exp)
+pergen.mod <- c(pergen.wei, pergen.exp)
