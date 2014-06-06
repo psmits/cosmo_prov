@@ -235,6 +235,17 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Survival analytical framework}
+
+  age \(\sim\) Exponential or Weibull
+
+  \(\lambda \propto\) traits, \(k\) constant
+
+  range in/out taxa right censored
+
+\end{frame}
+
+\begin{frame}
   \frametitle{NP regional survival curves}
 
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/kms_region}
@@ -254,25 +265,16 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Parameter interpretations}
+  \frametitle{Time dependence}
 
-  % NA: while weibull distribution is ``best'', k \approx 1, so exponential arguably safer
-  %
-  % Eur: both cases strongly favoring Weibull model over exponential
-  
-  % model averaged estimate of \(k\) (?)
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/shape_est}
-
 
 \end{frame}
 
 \begin{frame}
   \frametitle{The Elephant in the Range}
 
-  % some kind of image 
-  % NA/Eur species BU occupancy
-
-  \(\uparrow\) occupancy, \(\uparrow\) duration
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/occ_dist}
 
 \end{frame}
 
@@ -285,19 +287,18 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Future modeling work}
+  \frametitle{Laundry list of model improvements}
 
-  currently \(\hat{k} = c\), future \(\hat{k} \approx\) CV climate and/or occupancy
-
-  generic level properties 
   \begin{itemize}
-    \item species:genus
-    \item trait dispersion (\(H(\text{diet})\), Var(mass), etc.)
+    \item currently \(\hat{k} = c\), future \(\hat{k} \approx\) CV climate and/or occupancy
+    \item generic level properties 
+      \begin{itemize}
+        \item species:genus
+        \item trait dispersion (\(H(\text{diet})\), Var(mass), etc.)
+      \end{itemize}
+    \item CAR prior on frailty using phylogenetic distance/VCV matrix
+    \item incorporate duration uncertainty due to sampling 
   \end{itemize}
-
-  CAR prior on frailty using phylogenetic distance/VCV matrix
-
-  incorporate duration uncertainty due to sampling 
 
 \end{frame}
 

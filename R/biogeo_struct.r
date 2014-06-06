@@ -230,19 +230,16 @@ biogeosum <- list(bc = bc, end = endemic, avgcoc = avgocc, code = code)
 #' @author Peter D Smits <psmits@uchicago.edu>
 #' @references
 #' @examples
-occupancy <- function(graph, membership, l.small = TRUE) {
+occupancy <- function(graph, membership) {
   bip <- bipartite.projection(graph)
 
-  len <- lapply(bip, function(x) length(V(x)))
-  ws <- which.min(unlist(len))
-  wm <- which.max(unlist(len))
-
-  if(l.small) {
-    taxa <- V(bip[[wm]])$name
-    st <- V(bip[[ws]])$name
-  } else if(!l.small) {
-    taxa <- V(bip[[ws]])$name
-    st <- V(bip[[wm]])$name
+  # find which half is the taxa
+  if(any(grepl('[0-9]', V(bip[[1]])$name))) {
+    taxa <- V(bip[[2]])$name
+    st <- V(bip[[1]])$name 
+  } else {
+    taxa <- V(bip[[1]])$name
+    st <- V(bip[[2]])$name 
   }
 
   tx.mem <- membership[V(graph)$name %in% taxa]

@@ -35,23 +35,23 @@ taxa.occ <- lapply(eurwin, function(x) {
                    occupancy(x, membership = membership(infomap.community(x)))})
 taxa.occ <- Reduce(rbind, taxa.occ)
 rewrite <- order(as.character(taxa.occ$taxa))
-taxa.occ <- taxa.occ[rewrite, ]
+er.taxa.occ <- taxa.occ <- taxa.occ[rewrite, ]
 sp.occ <- split(taxa.occ, taxa.occ$taxa)
 mean.occ <- melt(lapply(sp.occ, function(x) mean(x[, 1])))
 names(mean.occ) <- c('occ', 'taxa')
-mean.occ <- mean.occ[order(mean.occ$taxa), ]
+er.mean.occ <- mean.occ[order(mean.occ$taxa), ]
 cv.occ <- melt(lapply(sp.occ, function(x) var(x[, 1]) / mean(x[, 1])))
 names(cv.occ) <- c('cv.occ', 'taxa')
-cv.occ <- cv.occ[order(cv.occ$taxa), ]
+er.cv.occ <- cv.occ[order(cv.occ$taxa), ]
 
 # climate
 isotope.match <- Map(getclimate, erdur$fad, erdur$lad)
 names(isotope.match) <- erdur$name.bi
 mean.climate <- melt(lapply(isotope.match, function(x) mean(x, na.rm = TRUE)))
 names(mean.climate) <- c('climate', 'taxa')
-cv.climate <- melt(lapply(isotope.match, function(x) {
+er.cv.climate <- melt(lapply(isotope.match, function(x) {
                            var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
-names(cv.climate) <- c('cv.climate', 'taxa')
+names(er.cv.climate) <- c('cv.climate', 'taxa')
 
 # exclude taxa that originate after cutoff
 young <- which(erdur[, 3] <= 2)
@@ -79,22 +79,23 @@ taxa.occ <- lapply(ergenwin, function(x) {
                    occupancy(x, membership = membership(infomap.community(x)))})
 taxa.occ <- Reduce(rbind, taxa.occ)
 rewrite <- order(as.character(taxa.occ$taxa))
-taxa.occ <- taxa.occ[rewrite, ]
+erg.taxa.occ <- taxa.occ <- taxa.occ[rewrite, ]
 sp.occ <- split(taxa.occ, taxa.occ$taxa)
 mean.occ <- melt(lapply(sp.occ, function(x) mean(x[, 1])))
 names(mean.occ) <- c('occ', 'taxa')
-mean.occ <- mean.occ[order(mean.occ$taxa), ]
+erg.mean.occ <- mean.occ[order(mean.occ$taxa), ]
 cv.occ <- melt(lapply(sp.occ, function(x) var(x[, 1]) / mean(x[, 1])))
 names(cv.occ) <- c('cv.occ', 'taxa')
+erg.cv.occ <- cv.occ[order(cv.occ$taxa), ]
 
 # climate
 generic.isotope <- Map(getclimate, ergen$fad, ergen$lad)
 names(generic.isotope) <- ergen$genus
-gmean.climate <- melt(lapply(generic.isotope, function(x) mean(x, na.rm = TRUE)))
-names(gmean.climate) <- c('climate', 'taxa')
-gcv.climate <- melt(lapply(generic.isotope, function(x) {
+erg.mean.climate <- melt(lapply(generic.isotope, function(x) mean(x, na.rm = TRUE)))
+names(erg.mean.climate) <- c('climate', 'taxa')
+erg.cv.climate <- melt(lapply(generic.isotope, function(x) {
                             var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
-names(gcv.climate) <- c('cv.climate', 'taxa')
+names(erg.cv.climate) <- c('cv.climate', 'taxa')
 
 
 er.genecol <- cbind(er.ecol, genus = erdur$genus)

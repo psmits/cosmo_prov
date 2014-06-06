@@ -31,23 +31,23 @@ taxa.occ <- lapply(taxawin, function(x) {
                    occupancy(x, membership = membership(infomap.community(x)))})
 taxa.occ <- Reduce(rbind, taxa.occ)
 rewrite <- order(as.character(taxa.occ$taxa))
-taxa.occ <- taxa.occ[rewrite, ]
+na.taxa.occ <- taxa.occ <- taxa.occ[rewrite, ]
 sp.occ <- split(taxa.occ, taxa.occ$taxa)
 mean.occ <- melt(lapply(sp.occ, function(x) mean(x[, 1])))
 names(mean.occ) <- c('occ', 'taxa')
-mean.occ <- mean.occ[order(mean.occ$taxa), ]
+na.mean.occ <- mean.occ[order(mean.occ$taxa), ]
 cv.occ <- melt(lapply(sp.occ, function(x) var(x[, 1]) / mean(x[, 1])))
 names(cv.occ) <- c('cv.occ', 'taxa')
-cv.occ <- cv.occ[order(cv.occ$taxa), ]
+na.cv.occ <- cv.occ[order(cv.occ$taxa), ]
 
 # climate
 isotope.match <- Map(getclimate, nadur$fad, nadur$lad)
 names(isotope.match) <- nadur$name.bi
-mean.climate <- melt(lapply(isotope.match, function(x) mean(x, na.rm = TRUE)))
-names(mean.climate) <- c('climate', 'taxa')
-cv.climate <- melt(lapply(isotope.match, function(x) {
+na.mean.climate <- melt(lapply(isotope.match, function(x) mean(x, na.rm = TRUE)))
+names(na.mean.climate) <- c('climate', 'taxa')
+na.cv.climate <- melt(lapply(isotope.match, function(x) {
                            var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
-names(cv.climate) <- c('cv.climate', 'taxa')
+names(na.cv.climate) <- c('cv.climate', 'taxa')
 
 # exclude taxa that originate after cutoff
 young <- which(nadur[, 3] <= 2)
@@ -75,23 +75,23 @@ taxa.occ <- lapply(nagenwin, function(x) {
                    occupancy(x, membership = membership(infomap.community(x)))})
 taxa.occ <- Reduce(rbind, taxa.occ)
 rewrite <- order(as.character(taxa.occ$taxa))
-taxa.occ <- taxa.occ[rewrite, ]
+nag.taxa.occ <- taxa.occ <- taxa.occ[rewrite, ]
 sp.occ <- split(taxa.occ, taxa.occ$taxa)
 mean.occ <- melt(lapply(sp.occ, function(x) mean(x[, 1])))
 names(mean.occ) <- c('occ', 'taxa')
-mean.occ <- mean.occ[order(mean.occ$taxa), ]
+nag.mean.occ <- mean.occ[order(mean.occ$taxa), ]
 cv.occ <- melt(lapply(sp.occ, function(x) var(x[, 1]) / mean(x[, 1])))
 names(cv.occ) <- c('cv.occ', 'taxa')
-cv.occ <- cv.occ[order(cv.occ$taxa), ]
+nag.cv.occ <- cv.occ[order(cv.occ$taxa), ]
 
 # climate
 generic.isotope <- Map(getclimate, nagen$fad, nagen$lad)
 names(generic.isotope) <- nagen$genus
-gmean.climate <- melt(lapply(generic.isotope, function(x) mean(x, na.rm = TRUE)))
-names(gmean.climate) <- c('climate', 'taxa')
-gcv.climate <- melt(lapply(generic.isotope, function(x) {
-                            var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
-names(gcv.climate) <- c('cv.climate', 'taxa')
+nag.mean.climate <- melt(lapply(generic.isotope, function(x) mean(x, na.rm = TRUE)))
+names(nag.mean.climate) <- c('climate', 'taxa')
+nag.cv.climate <- melt(lapply(generic.isotope, function(x) {
+                              var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
+names(nag.cv.climate) <- c('cv.climate', 'taxa')
 
 
 na.genecol <- cbind(na.ecol, genus = nadur$genus)
