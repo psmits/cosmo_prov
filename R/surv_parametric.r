@@ -2,8 +2,8 @@ library(survival)
 library(MuMIn)
 source('../R/model_sel.r')
 
-source('../R/na_surv.r')
-source('../R/eur_surv.r')
+#source('../R/na_surv.r')
+#source('../R/eur_surv.r')
 
 na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 #er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
@@ -55,7 +55,7 @@ for(ii in seq(nsim)) {
 }
 
 surv.exp <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'exponential')
-nagen.exp <- fit.models(surv.wei, mods, data = na.genecol, dist = 'exponential')
+nagen.exp <- fit.models(surv.exp, mods, data = na.genecol, dist = 'exponential')
 
 pnagen.exp <- list()
 for(ii in seq(nsim)) {

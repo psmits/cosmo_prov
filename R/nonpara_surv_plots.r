@@ -4,7 +4,7 @@ library(scales)
 library(reshape2)
 source('../R/step_ribbon.r')
 
-#source('../R/surv_nonpara.r')
+source('../R/surv_nonpara.r')
 
 theme_set(theme_bw())
 cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
@@ -24,7 +24,7 @@ erkm <- cbind(data.frame(time = er.species[[1]]$time),
               loc = rep('Europe', length(er.species[[1]]$time)))
 species <- rbind(nakm, erkm)
 gspec <- ggplot(species, aes(x = time, y = surv, colour = loc))
-gspec <- gspec + geom_step()
+gspec <- gspec + geom_step(size = 1)
 gspec <- gspec + geom_ribbon(aes(x = time, ymax = upper, ymin = lower, fill = loc),
                              stat = 'stepribbon', alpha = 0.3, colour = NA)
 gspec <- gspec + scale_color_manual(values = cbp,

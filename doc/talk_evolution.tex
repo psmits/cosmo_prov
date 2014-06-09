@@ -188,6 +188,7 @@
   \frametitle{Locomotion}
   \begin{columns}
     \begin{column}{0.5\textwidth}
+      % need an image about this. people don't talk about this, sadly.
     \end{column}
     \begin{column}{0.5\textwidth}
       ground dwelling, scansorial, arboreal
@@ -235,13 +236,22 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Survival analytical framework}
+  \frametitle{Analysis and inference}
 
-  age \(\sim\) Exponential or Weibull
-
-  \(\lambda \propto\) traits, \(k\) constant
-
-  range in/out taxa right censored
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item PBDB occurrences
+        \item age \(\sim\) Exponential or Weibull
+        \item \(\lambda \propto\) traits, \(k\) constant
+        \item range in/out taxa \\right censored
+        \item maxLik approach, \\multi-model inference
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      % model selection
+    \end{column}
+  \end{columns}
 
 \end{frame}
 
@@ -252,17 +262,32 @@
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Model selection}
-
-\end{frame}
+%\begin{frame}
+%  \frametitle{Model selection}
+%
+%\end{frame}
 
 \begin{frame}
   \frametitle{Variable importance}
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/rel_imp_com}
 
-% randomize for ``base line'' importance
 \end{frame}
+
+\begin{frame}
+  \frametitle{Effect of diet}
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/para_diet}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Effect of locomotion}
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/para_move}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Effect of mass}
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/para_mass}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Time dependence}
@@ -291,7 +316,7 @@
 
   \begin{itemize}
     \item currently \(\hat{k} = c\), future \(\hat{k} \approx\) CV climate and/or occupancy
-    \item generic level properties 
+    \item emergent roperties 
       \begin{itemize}
         \item species:genus
         \item trait dispersion (\(H(\text{diet})\), Var(mass), etc.)
