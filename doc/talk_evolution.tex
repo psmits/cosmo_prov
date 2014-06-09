@@ -119,46 +119,11 @@
   \end{block}
 \end{frame}
 
-%\begin{frame}
-%  \frametitle{Survival analysis}
-%
-%  \begin{definition}
-%    Analysis of \alert{time till event data}.
-%
-%    i.e. Time from origination to extinction (\textbf{duration, \(T\)}).
-%  \end{definition}
-%
-%\end{frame}
-
 \begin{frame}
   \frametitle{Mammals}
   \includegraphics[height = 0.9\textheight, width = \textwidth, keepaspectratio = true]{figure/aom}
 
   \tiny{\attrib{Yale Peabody Museum}}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Regions}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/na_map}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio=true]{figure/euro}
-    \end{column}
-  \end{columns}
-
-  \vspace{0.2cm}
-
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      North America: \\2366 species, 1003 genera 
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      Europe: \\1767 species, 658 genera
-    \end{column}
-  \end{columns}
-
 \end{frame}
 
 \begin{frame}
@@ -236,20 +201,26 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Analysis and inference}
+  \frametitle{Regions}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/na_map}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[height=0.7\textheight,width=\textwidth,keepaspectratio=true]{figure/euro}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.2cm}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item PBDB occurrences
-        \item age \(\sim\) Exponential or Weibull
-        \item \(\lambda \propto\) traits, \(k\) constant
-        \item range in/out taxa \\right censored
-        \item maxLik approach, \\multi-model inference
-      \end{itemize}
+      North America: \\1805 species, 835 genera \\
+      diet, locomotor, mass      
     \end{column}
     \begin{column}{0.5\textwidth}
-      % model selection
+      Europe: \\1727 species, 658 genera\\
+      diet, locomotor
     \end{column}
   \end{columns}
 
@@ -262,14 +233,23 @@
 
 \end{frame}
 
-%\begin{frame}
-%  \frametitle{Model selection}
-%
-%\end{frame}
+\begin{frame}
+  \frametitle{Model selection}
+
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/sel_wts}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Variable importance}
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/rel_imp_com}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time dependence}
+
+  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/shape_est}
 
 \end{frame}
 
@@ -286,14 +266,6 @@
 \begin{frame}
   \frametitle{Effect of mass}
   \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/para_mass}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Time dependence}
-
-  \includegraphics[height=0.8\textheight,width=\textwidth,keepaspectratio=true]{figure/shape_est}
-
 \end{frame}
 
 \begin{frame}
@@ -315,8 +287,8 @@
   \frametitle{Laundry list of model improvements}
 
   \begin{itemize}
-    \item currently \(\hat{k} = c\), future \(\hat{k} \approx\) CV climate and/or occupancy
-    \item emergent roperties 
+    \item currently \(\hat{k} = c\), future \(\hat{k} \propto\) CV climate and/or occupancy
+    \item emergent properties 
       \begin{itemize}
         \item species:genus
         \item trait dispersion (\(H(\text{diet})\), Var(mass), etc.)
