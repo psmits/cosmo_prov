@@ -4,8 +4,8 @@ library(reshape2)
 source('../R/surv_selection.r')
 
 theme_set(theme_bw())
-cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
-         '#1F78B4', '#33A02C', '#E31A1C', '#FF7F00', '#6A3D9A', '#B15928')
+cbp <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
+         "#D55E00", "#CC79A7")
 
 # model selection bars
 mod.names <- function(mods) {
@@ -46,6 +46,8 @@ gsel <- gsel + theme(axis.title.y = element_text(angle = 0),
                      legend.text = element_text(size = 10),
                      legend.title = element_text(size = 19),
                      strip.text = element_text(size = 20))
+ggsave(filename = '../doc/figure/sel_wts.png', plot = gsel, 
+       width = 15, height = 10)
 
 
 # relative variable importance
@@ -102,7 +104,7 @@ impc <- rbind(cbind(imp, heir = rep('species', nrow(imp))),
               cbind(impg, heir = rep('genera', nrow(impg))))
 gimpc <- ggplot(impc, aes(x = pred, y = imp, fill = loc))
 gimpc <- gimpc + geom_bar(stat = 'identity', position = 'dodge')
-gimpc <- gimpc + scale_fill_manual(values = cbp, name = 'Region')
+gimpc <- gimpc + scale_fill_manual(values = cbp[-1], name = 'Region')
 gimpc <- gimpc + geom_errorbar(aes(x = pred, y = base, 
                                    ymax = base, ymin = base),
                                linetype = 'dashed',

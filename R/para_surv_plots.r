@@ -7,14 +7,14 @@ source('../R/step_ribbon.r')
 source('../R/surv_parametric.r')
 
 theme_set(theme_bw())
-cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
-         '#1F78B4', '#33A02C', '#E31A1C', '#FF7F00', '#6A3D9A', '#B15928')
+cbp <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
+         "#D55E00", "#CC79A7")
 
 # north america and europe
 # species
 nacurve <- predict(na.exp[[1]], 
                    type = 'quantile',
-                   p = seq(0.0, 0.99, by = 0.01),
+                   p = seq(0.01, 0.99, by = 0.01),
                    se.fit = TRUE)
 nacurve <- lapply(nacurve, function(x) x[1, ])
 nacurve <- lapply(nacurve, t)
@@ -24,7 +24,7 @@ nacurve[, 1] <- (100 - nacurve[, 1]) / 100
 
 ercurve <- predict(er.wei[[1]], 
                    type = 'quantile',
-                   p = seq(0.0, 0.99, by = 0.01),
+                   p = seq(0.01, 0.99, by = 0.01),
                    se.fit = TRUE)
 ercurve <- lapply(ercurve, function(x) x[1, ])
 ercurve <- lapply(ercurve, t)
@@ -35,7 +35,7 @@ ercurve[, 1] <- (100 - ercurve[, 1]) / 100
 # genus
 nagcurve <- predict(nagen.exp[[1]], 
                     type = 'quantile',
-                    p = seq(0.0, 0.99, by = 0.01),
+                    p = seq(0.01, 0.99, by = 0.01),
                     se.fit = TRUE)
 nagcurve <- lapply(nagcurve, function(x) x[1, ])
 nagcurve <- lapply(nagcurve, t)
@@ -45,7 +45,7 @@ nagcurve[, 1] <- (100 - nagcurve[, 1]) / 100
 
 ergcurve <- predict(ergen.wei[[1]], 
                     type = 'quantile',
-                    p = seq(0.0, 0.99, by = 0.01),
+                    p = seq(0.01, 0.99, by = 0.01),
                     se.fit = TRUE)
 ergcurve <- lapply(ergcurve, function(x) x[1, ])
 ergcurve <- lapply(ergcurve, t)
@@ -69,9 +69,10 @@ reg <- reg + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
 reg <- reg + coord_flip()
 reg <- reg + facet_grid(. ~ heir)
 reg <- reg + labs(y = 'Time', x = 'P(T > t)')
-reg <- reg + scale_color_manual(values = cbp,
+reg <- reg + scale_x_continuous(trans = log10_trans())
+reg <- reg + scale_color_manual(values = cbp[-1],
                                 name = 'Dietary\nCategory')
-reg <- reg + scale_fill_manual(values = cbp,
+reg <- reg + scale_fill_manual(values = cbp[-1],
                                name = 'Dietary\nCategory')
 reg <- reg + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),
@@ -90,7 +91,7 @@ nd <- predict(na.exp[[2]], newdata = data.frame(diet = c('carni',
                                                          'insect',
                                                          'omni')),
               type = 'quantile',
-              p = seq(0.0, 0.99, by = 0.01),
+              p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(nd$fit) <- rownames(nd$se.fit) <- c('carni',
                                              'herb',
@@ -106,7 +107,7 @@ ed <- predict(er.wei[[2]], newdata = data.frame(diet = c('carni',
                                                          'insect',
                                                          'omni')),
               type = 'quantile',
-              p = seq(0.0, 0.99, by = 0.01),
+              p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(ed$fit) <- rownames(ed$se.fit) <- c('carni',
                                              'herb',
@@ -123,7 +124,7 @@ ndg <- predict(nagen.exp[[2]], newdata = data.frame(diet = c('carni',
                                                              'insect',
                                                              'omni')),
                type = 'quantile',
-               p = seq(0.0, 0.99, by = 0.01),
+               p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
 rownames(ndg$fit) <- rownames(ndg$se.fit) <- c('carni',
                                                'herb',
@@ -139,7 +140,7 @@ edg <- predict(ergen.wei[[2]], newdata = data.frame(diet = c('carni',
                                                              'insect',
                                                              'omni')),
                type = 'quantile',
-               p = seq(0.0, 0.99, by = 0.01),
+               p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
 rownames(edg$fit) <- rownames(edg$se.fit) <- c('carni',
                                                'herb',
@@ -165,10 +166,11 @@ die <- die + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 die <- die + coord_flip()
 die <- die + facet_grid(loc ~ heir)
+die <- die + scale_x_continuous(trans = log10_trans())
 die <- die + labs(y = 'Time', x = 'P(T > t)')
-die <- die + scale_color_manual(values = cbp,
+die <- die + scale_color_manual(values = cbp[-1],
                                 name = 'Dietary\nCategory')
-die <- die + scale_fill_manual(values = cbp,
+die <- die + scale_fill_manual(values = cbp[-1],
                                name = 'Dietary\nCategory')
 die <- die + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),
@@ -185,7 +187,7 @@ nl <- predict(na.exp[[3]], newdata = data.frame(move = c('arboreal',
                                                          'ground dwelling',
                                                          'scansorial')),
               type = 'quantile',
-              p = seq(0.0, 0.99, by = 0.01),
+              p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(nl$fit) <- rownames(nl$se.fit) <- c('arboreal',
                                              'ground dwelling',
@@ -199,7 +201,7 @@ el <- predict(er.wei[[3]], newdata = data.frame(move = c('arboreal',
                                                          'ground dwelling',
                                                          'scansorial')),
               type = 'quantile',
-              p = seq(0.0, 0.99, by = 0.01),
+              p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(el$fit) <- rownames(el$se.fit) <- c('arboreal',
                                              'ground dwelling',
@@ -214,7 +216,7 @@ nlg <- predict(nagen.exp[[3]], newdata = data.frame(move = c('arboreal',
                                                              'ground dwelling',
                                                              'scansorial')),
                type = 'quantile',
-               p = seq(0.0, 0.99, by = 0.01),
+               p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
 rownames(nlg$fit) <- rownames(nlg$se.fit) <- c('arboreal',
                                                'ground dwelling',
@@ -228,7 +230,7 @@ elg <- predict(ergen.wei[[3]], newdata = data.frame(move = c('arboreal',
                                                              'ground dwelling',
                                                              'scansorial')),
                type = 'quantile',
-               p = seq(0.0, 0.99, by = 0.01),
+               p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
 rownames(elg$fit) <- rownames(elg$se.fit) <- c('arboreal',
                                                'ground dwelling',
@@ -253,10 +255,11 @@ loc <- loc + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 loc <- loc + coord_flip()
 loc <- loc + facet_grid(loc ~ heir)
+loc <- loc + scale_x_continuous(trans = log10_trans())
 loc <- loc + labs(y = 'Time', x = 'P(T > t)')
-loc <- loc + scale_color_manual(values = cbp,
+loc <- loc + scale_color_manual(values = cbp[-1],
                                 name = 'Locomotor\nCategory')
-loc <- loc + scale_fill_manual(values = cbp,
+loc <- loc + scale_fill_manual(values = cbp[-1],
                                name = 'Locomotor\nCategory')
 loc <- loc + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),
@@ -276,7 +279,7 @@ masses <- data.frame(mass = c(min(na.ecol$mass),
                               max(na.ecol$mass)))
 nm <- predict(na.exp[[4]], newdata = masses,
               type = 'quantile',
-              p = seq(0.0, 0.99, by = 0.01),
+              p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(nm$fit) <- rownames(nm$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
 nm <- lapply(nm, t)
@@ -292,7 +295,7 @@ gmasses <- data.frame(mass = c(min(na.genecol$mass),
                                max(na.genecol$mass)))
 nmg <- predict(nagen.exp[[4]], newdata = gmasses,
                type = 'quantile',
-               p = seq(0.0, 0.99, by = 0.01),
+               p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
 rownames(nmg$fit) <- rownames(nmg$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
 nmg <- lapply(nmg, t)
@@ -309,9 +312,10 @@ gma <- gma + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
 gma <- gma + coord_flip()
 gma <- gma + facet_grid(. ~ heir)
 gma <- gma + labs(y = 'Time', x = 'P(T > t)')
-gma <- gma + scale_color_manual(values = cbp,
+gma <- gma + scale_x_continuous(trans = log10_trans())
+gma <- gma + scale_color_manual(values = cbp[-1],
                                 name = 'Quantile\nlog(Mass)')
-gma <- gma + scale_fill_manual(values = cbp,
+gma <- gma + scale_fill_manual(values = cbp[-1],
                                name = 'Quantile\nlog(Mass)')
 gma <- gma + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),

@@ -5,8 +5,8 @@ library(scales)
 source('../R/surv_selection.r')
 
 theme_set(theme_bw())
-cbp <- c('#A6CEE3', '#B2DF8A', '#FB9a99', '#FDBF6F', '#CAB2D6', '#FFFF99',
-         '#1F78B4', '#33A02C', '#E31A1C', '#FF7F00', '#6A3D9A', '#B15928')
+cbp <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
+         "#D55E00", "#CC79A7")
 
 # occupancy
 spec.occ <- rbind(cbind(na.taxa.occ, loc = rep('NA', nrow(na.taxa.occ))),
@@ -18,7 +18,7 @@ occup <- rbind(cbind(spec.occ, heir = rep('species', nrow(spec.occ))),
                cbind(gen.occ, heir = rep('genera', nrow(gen.occ))))
 
 go <- ggplot(occup, aes(x = occ))
-go <- go + geom_histogram()
+go <- go + geom_histogram(binwidth = 1)
 go <- go + labs(x = 'Mean BU occupancy')
 go <- go + facet_grid(loc ~ heir)
 go <- go + theme(axis.title.y = element_text(angle = 0),

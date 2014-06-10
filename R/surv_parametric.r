@@ -2,8 +2,8 @@ library(survival)
 library(MuMIn)
 source('../R/model_sel.r')
 
-#source('../R/na_surv.r')
-#source('../R/eur_surv.r')
+source('../R/na_surv.r')
+source('../R/eur_surv.r')
 
 na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 #er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
