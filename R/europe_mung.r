@@ -91,4 +91,4 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 eur <- Reduce(rbind, uu)
-eur <- eur[-grep('[0-9\\.]', eur$name.bi, perl = TRUE), ]
+eur <- eur[-grep('[0-9\\.\\-]', eur$name.bi, perl = TRUE), ]

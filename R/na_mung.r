@@ -90,4 +90,4 @@ uu <- lapply(uu, function(x) {
              x[!rms]})
 uu <- lapply(uu, function(x) Reduce(rbind, x))
 dat <- Reduce(rbind, uu)
-dat <- dat[-grep('[0-9\\.]', dat$name.bi, perl = TRUE), ]
+dat <- dat[-grep('[0-9\\-\\.]', dat$name.bi, perl = TRUE), ]

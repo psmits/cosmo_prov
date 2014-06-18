@@ -222,9 +222,15 @@ rodentia.mass <- function(species, measures) {
 }
 
 marsupial.M1length <- function(len) {
-  # marsupials...
   la <- log(len)
-  lnm <- 1.796 + (la * 3.3)
+  lnm <- 1.83 + (la * 3.284)
+  mass <- exp(lnm)
+  mass
+}
+
+marsupial.M1area <- function(area) {
+  la <- log(area)
+  lnm <- 1.571 + (la * 1.733)
   mass <- exp(lnm)
   mass
 }
@@ -232,11 +238,15 @@ marsupial.M1length <- function(len) {
 marsupial.mass <- function(species, measures) {
   mea <- measures[measures$species %in% species, ]
 
+  m1 <- mea[mea$part %in% c('M1', 'Upper M1', 'Upper M1 ') &
+            mea$measure == 'area', ]
+  m1$mass <- marsupial.M1area(m1$value) 
+
   um1 <- mea[mea$part %in% c('M1', 'Upper M1', 'Upper M1 ') &
                 mea$measure == 'length', ]
   um1$mass <- marsupial.M1length(um1$value) 
 
-  out <- um1
+  out <- rbind(m1, um1)
   out <- out[!duplicated(out$species), ]
 
   out
