@@ -34,7 +34,7 @@ pna.exp <- list()
 for(ii in seq(nsim)) {
   pna.exp[[ii]] <- var.imp(model.base(na.surv, mods = mods, 
                                       datas = na.ecol, 
-                                      distribution = 'weibull'))
+                                      distribution = 'exponential'))
 }
 
 na.mod <- c(na.wei, na.exp)
