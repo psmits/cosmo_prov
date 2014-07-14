@@ -52,6 +52,12 @@ names(mean.climate) <- c('climate', 'taxa')
 er.cv.climate <- melt(lapply(isotope.match, function(x) {
                            var(x, na.rm = TRUE) / abs(mean(x, na.rm = TRUE))}))
 names(er.cv.climate) <- c('cv.climate', 'taxa')
+no.climate <- is.na(mean.climate[, 1])
+erdur <- erdur[!no.climate, ]
+er.ecol <- er.ecol[!no.climate, ]
+er.ecol$climate <- mean.climate[!no.climate, 1]
+er.ecol$cv.li <- er.cv.climate[!no.climate, 1]
+
 
 # exclude taxa that originate after cutoff
 young <- which(erdur[, 3] <= 2)
@@ -59,7 +65,7 @@ erdur <- erdur[-young, ]
 er.ecol <- er.ecol[-young, ]
 
 # remove 0 survival times
-rms <- which(abs(erdur[, 3] - erdur[, 4]) <= 0.1)
+rms <- which(abs(erdur[, 3] - erdur[, 4]) < 0.1)
 erdur <- erdur[-rms, ]
 er.ecol <- er.ecol[-rms, ]
 
@@ -102,4 +108,5 @@ er.genecol <- cbind(er.ecol, genus = erdur$genus)
 er.genecol <- ddply(er.genecol, .(genus), summarize,
                     diet = names(which.max(table(diet))),
                     move = names(which.max(table(move))))
-
+er.genecol$climate <- erg.mean.climate[, 1]
+er.genecol$cv.li <- erg.cv.climate[, 1]

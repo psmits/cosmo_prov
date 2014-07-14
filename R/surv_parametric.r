@@ -14,7 +14,7 @@ nsim <- 1000
 
 # just north america
 # species
-vars <- names(na.ecol)[-1]
+vars <- names(na.ecol)[-length(names(na.ecol))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(na.surv ~ 1, data = na.ecol, dist = 'weibull')
@@ -42,6 +42,7 @@ pna.mod <- c(pna.wei, pna.exp)
 
 # genera
 vars <- names(na.genecol)[-c(1)]
+vars <- names(na.genecol)[-length(names(na.genecol))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'weibull')
@@ -70,7 +71,7 @@ pnagen.mod <- c(pnagen.wei, pnagen.exp)
 
 # just europe
 # species
-vars <- names(er.ecol)[-1]
+vars <- names(er.ecol)[-length(names(er.ecol))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(er.surv ~ 1, data = er.ecol, dist = 'weibull')
@@ -98,7 +99,7 @@ per.mod <- c(per.wei, per.exp)
 
 
 # genera
-vars <- names(er.genecol)[-1]
+vars <- names(er.genecol)[-length(names(er.genecol))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'weibull')
