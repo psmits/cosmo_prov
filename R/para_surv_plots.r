@@ -325,3 +325,98 @@ gma <- gma + theme(axis.title.y = element_text(angle = 0),
                    strip.text = element_text(size = 20))
 ggsave(filename = '../doc/figure/para_mass.png', plot = gma,
        width = 15, height = 10)
+
+
+# climate
+# species
+nclim <- data.frame(climate = c(min(na.ecol$climate),
+                                quantile(na.ecol$climate, .25),
+                                quantile(na.ecol$climate, .5),
+                                quantile(na.ecol$climate, .75),
+                                max(na.ecol$climate)))
+ncli <- predict(na.exp[[5]], newdata = nclim,
+                type = 'quantile',
+                p = seq(0.01, 0.99, by = 0.01),
+                se.fit = TRUE)
+rownames(ncli$fit) <- rownames(ncli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+ncli <- lapply(ncli, t)
+ncli <- lapply(ncli, melt)
+ncli <- cbind(fit = ncli$fit, se = ncli$se.fit$value)
+ncli[, 1] <- (100 - ncli[, 1]) / 100
+
+eclim <- data.frame(climate = c(min(er.ecol$climate),
+                                quantile(er.ecol$climate, .25),
+                                quantile(er.ecol$climate, .5),
+                                quantile(er.ecol$climate, .75),
+                                max(er.ecol$climate)))
+ecli <- predict(er.wei[[4]], newdata = eclim,
+                type = 'quantile',
+                p = seq(0.01, 0.99, by = 0.01),
+                se.fit = TRUE)
+rownames(ecli$fit) <- rownames(ecli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+ecli <- lapply(ecli, t)
+ecli <- lapply(ecli, melt)
+ecli <- cbind(fit = ecli$fit, se = ecli$se.fit$value)
+ecli[, 1] <- (100 - ecli[, 1]) / 100
+
+# genera
+ngclim <- data.frame(climate = c(min(na.genecol$climate),
+                                 quantile(na.genecol$climate, .25),
+                                 quantile(na.genecol$climate, .5),
+                                 quantile(na.genecol$climate, .75),
+                                 max(na.genecol$climate)))
+ngcli <- predict(nagen.exp[[5]], newdata = ngclim,
+                 type = 'quantile',
+                 p = seq(0.01, 0.99, by = 0.01),
+                 se.fit = TRUE)
+rownames(ngcli$fit) <- rownames(ngcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+ngcli <- lapply(ngcli, t)
+ngcli <- lapply(ngcli, melt)
+ngcli <- cbind(fit = ngcli$fit, se = ngcli$se.fit$value)
+ngcli[, 1] <- (100 - ngcli[, 1]) / 100
+
+egclim <- data.frame(climate = c(min(er.genecol$climate),
+                                 quantile(er.genecol$climate, .25),
+                                 quantile(er.genecol$climate, .5),
+                                 quantile(er.genecol$climate, .75),
+                                 max(er.genecol$climate)))
+egcli <- predict(ergen.wei[[4]], newdata = egclim,
+                 type = 'quantile',
+                 p = seq(0.01, 0.99, by = 0.01),
+                 se.fit = TRUE)
+rownames(egcli$fit) <- rownames(egcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+egcli <- lapply(egcli, t)
+egcli <- lapply(egcli, melt)
+egcli <- cbind(fit = egcli$fit, se = egcli$se.fit$value)
+egcli[, 1] <- (100 - egcli[, 1]) / 100
+
+# combine
+c.cur <- rbind(cbind(ncli, loc = rep('NA', nrow(ncli))),
+               cbind(ecli, loc = rep('Eur', nrow(ecli))))
+gc.cur <- rbind(cbind(ngcli, loc = rep('NA', nrow(ngcli))),
+                cbind(egcli, loc = rep('Eur', nrow(egcli))))
+
+cli <- rbind(cbind(c.cur, heir = rep('species', nrow(c.cur))),
+             cbind(gc.cur, heir = rep('genera', nrow(gc.cur))))
+
+
+gcl <- ggplot(cli, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
+gcl <- gcl + geom_line(aes(colour = fit.Var2), size = 1)
+gcl <- gcl + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
+                         alpha = 0.3)
+gcl <- gcl + coord_flip()
+gcl <- gcl + facet_grid(loc ~ heir)
+gcl <- gcl + labs(y = 'Time', x = 'P(T > t)')
+gcl <- gcl + scale_x_continuous(trans = log10_trans())
+gcl <- gcl + scale_color_manual(values = cbp[-1],
+                                name = 'Quantile\ndelta O^18')
+gcl <- gcl + scale_fill_manual(values = cbp[-1],
+                               name = 'Quantile\ndelta O^18')
+gcl <- gcl + theme(axis.title.y = element_text(angle = 0),
+                   axis.text = element_text(size = 20),
+                   axis.title = element_text(size = 23),
+                   legend.text = element_text(size = 17),
+                   legend.title = element_text(size = 19),
+                   strip.text = element_text(size = 20))
+ggsave(filename = '../doc/figure/para_clim.png', plot = gcl,
+       width = 15, height = 10)

@@ -2,8 +2,7 @@ library(survival)
 library(MuMIn)
 source('../R/model_sel.r')
 
-source('../R/na_surv.r')
-source('../R/eur_surv.r')
+source('../R/surv_setup.r')
 
 na.ecol$mass <- log(as.numeric(as.character(na.ecol$mass)))
 #er.ecol$mass <- log(as.numeric(as.character(er.ecol$mass)))
@@ -14,7 +13,7 @@ nsim <- 1000
 
 # just north america
 # species
-vars <- names(na.ecol)[-length(names(na.ecol))]
+vars <- names(na.ecol)[-c(1, length(names(na.ecol)))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(na.surv ~ 1, data = na.ecol, dist = 'weibull')
@@ -41,8 +40,7 @@ na.mod <- c(na.wei, na.exp)
 pna.mod <- c(pna.wei, pna.exp)
 
 # genera
-vars <- names(na.genecol)[-c(1)]
-vars <- names(na.genecol)[-length(names(na.genecol))]
+vars <- names(na.genecol)[-c(1, length(names(na.genecol)))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(nagen.surv ~ 1, data = na.genecol, dist = 'weibull')
@@ -71,7 +69,7 @@ pnagen.mod <- c(pnagen.wei, pnagen.exp)
 
 # just europe
 # species
-vars <- names(er.ecol)[-length(names(er.ecol))]
+vars <- names(er.ecol)[-c(1, length(names(er.ecol)))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(er.surv ~ 1, data = er.ecol, dist = 'weibull')
@@ -99,7 +97,7 @@ per.mod <- c(per.wei, per.exp)
 
 
 # genera
-vars <- names(er.genecol)[-length(names(er.genecol))]
+vars <- names(er.genecol)[-c(1, length(names(er.genecol)))]
 mods <- create.model(vars = vars)
 
 surv.wei <- survreg(ergen.surv ~ 1, data = er.genecol, dist = 'weibull')
