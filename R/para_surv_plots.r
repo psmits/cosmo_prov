@@ -1,10 +1,11 @@
 library(survival)
+library(grid)
 library(ggplot2)
 library(scales)
 library(reshape2)
 source('../R/step_ribbon.r')
 
-#source('../R/surv_parametric.r')
+source('../R/surv_parametric.r')
 
 theme_set(theme_bw())
 cbp <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
@@ -150,8 +151,8 @@ edg <- cbind(fit = edg$fit, se = edg$se.fit$value)
 edg[, 1] <- (100 - edg[, 1]) / 100
 
 # combine
-d.cur <- rbind(cbind(nd, loc = rep('NA', nrow(nd))),
-               cbind(ed, loc = rep('Eur', nrow(ed))))
+d.cur <- rbind(cbind(nd, loc = rep('N. America', nrow(nd))),
+               cbind(ed, loc = rep('Europe', nrow(ed))))
 gd.cur <- rbind(cbind(ndg, loc = rep('NA', nrow(ndg))),
                 cbind(edg, loc = rep('Eur', nrow(edg))))
 
@@ -173,6 +174,7 @@ die <- die + theme(axis.title.y = element_text(angle = 0),
                    axis.title = element_text(size = 33),
                    legend.text = element_text(size = 27),
                    legend.title = element_text(size = 29),
+                   legend.key.size = unit(2, 'cm'),
                    strip.text = element_text(size = 30))
 ggsave(filename = '../doc/figure/para_diet.png', plot = die,
        width = 15, height = 10)
@@ -186,7 +188,7 @@ nl <- predict(na.exp[[3]], newdata = data.frame(move = c('arboreal',
               p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(nl$fit) <- rownames(nl$se.fit) <- c('arboreal',
-                                             'ground dwelling',
+                                             'ground\ndwelling',
                                              'scansorial')
 nl <- lapply(nl, t)
 nl <- lapply(nl, melt)
@@ -200,7 +202,7 @@ el <- predict(er.wei[[3]], newdata = data.frame(move = c('arboreal',
               p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
 rownames(el$fit) <- rownames(el$se.fit) <- c('arboreal',
-                                             'ground dwelling',
+                                             'ground\ndwelling',
                                              'scansorial')
 el <- lapply(el, t)
 el <- lapply(el, melt)
@@ -237,8 +239,8 @@ elg <- cbind(fit = elg$fit, se = elg$se.fit$value)
 elg[, 1] <- (100 - elg[, 1]) / 100
 
 
-l.cur <- rbind(cbind(nl, loc = rep('NA', nrow(nl))),
-               cbind(el, loc = rep('Eur', nrow(el))))
+l.cur <- rbind(cbind(nl, loc = rep('N. America', nrow(nl))),
+               cbind(el, loc = rep('Europe', nrow(el))))
 gl.cur <- rbind(cbind(nlg, loc = rep('NA', nrow(nlg))),
                 cbind(elg, loc = rep('Eur', nrow(elg))))
 
@@ -260,6 +262,7 @@ loc <- loc + theme(axis.title.y = element_text(angle = 0),
                    axis.title = element_text(size = 33),
                    legend.text = element_text(size = 27),
                    legend.title = element_text(size = 29),
+                   legend.key.size = unit(2, 'cm'),
                    strip.text = element_text(size = 30))
 ggsave(filename = '../doc/figure/para_move.png', plot = loc,
        width = 15, height = 10)

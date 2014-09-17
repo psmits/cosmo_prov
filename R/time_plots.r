@@ -3,7 +3,7 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 
-#source('../R/cosmo_prov.r')
+source('../R/cosmo_prov.r')
 source('../R/oxygen_curve.r')
 
 theme_set(theme_bw())
@@ -107,6 +107,7 @@ ggdiet <- ggdiet + theme(axis.title.y = element_text(angle = 0),
                          axis.title = element_text(size = 30),
                          legend.text = element_text(size = 25),
                          legend.title = element_text(size = 26),
+                         legend.key.size = unit(2, 'cm'),
                          strip.text = element_text(size = 25))
 ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
