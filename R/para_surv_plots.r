@@ -4,7 +4,7 @@ library(scales)
 library(reshape2)
 source('../R/step_ribbon.r')
 
-source('../R/surv_parametric.r')
+#source('../R/surv_parametric.r')
 
 theme_set(theme_bw())
 cbp <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
@@ -63,17 +63,15 @@ regions <- rbind(cbind(reg.cur, heir = rep('species', nrow(reg.cur))),
                  cbind(greg.cur, heir = rep('genera', nrow(greg.cur))))
 
 reg <- ggplot(regions, aes(x = fit.Var2, y = fit.value, fill = loc))
-reg <- reg + geom_line(aes(colour = loc), size = 1)
+reg <- reg + geom_line(aes(linetype = loc), size = 1)
 reg <- reg + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 reg <- reg + coord_flip()
 reg <- reg + facet_grid(. ~ heir)
 reg <- reg + labs(y = 'Time', x = 'P(T > t)')
 reg <- reg + scale_x_continuous(trans = log10_trans())
-reg <- reg + scale_color_manual(values = cbp[-1],
-                                name = 'Dietary\nCategory')
-reg <- reg + scale_fill_manual(values = cbp[-1],
-                               name = 'Dietary\nCategory')
+reg <- reg + scale_linetype(name = 'Dietary\nCategory')
+reg <- reg + scale_fill_grey(name = 'Dietary\nCategory')
 reg <- reg + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),
                    axis.title = element_text(size = 23),
@@ -93,10 +91,10 @@ nd <- predict(na.exp[[2]], newdata = data.frame(diet = c('carni',
               type = 'quantile',
               p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
-rownames(nd$fit) <- rownames(nd$se.fit) <- c('carni',
-                                             'herb',
-                                             'insect',
-                                             'omni')
+rownames(nd$fit) <- rownames(nd$se.fit) <- c('carnivore',
+                                             'herbivore',
+                                             'insectivore',
+                                             'omnivore')
 nd <- lapply(nd, t)
 nd <- lapply(nd, melt)
 nd <- cbind(fit = nd$fit, se = nd$se.fit$value)
@@ -109,10 +107,10 @@ ed <- predict(er.wei[[2]], newdata = data.frame(diet = c('carni',
               type = 'quantile',
               p = seq(0.01, 0.99, by = 0.01),
               se.fit = TRUE)
-rownames(ed$fit) <- rownames(ed$se.fit) <- c('carni',
-                                             'herb',
-                                             'insect',
-                                             'omni')
+rownames(ed$fit) <- rownames(ed$se.fit) <- c('carnivore',
+                                             'herbivore',
+                                             'insectivore',
+                                             'omnivore')
 ed <- lapply(ed, t)
 ed <- lapply(ed, melt)
 ed <- cbind(fit = ed$fit, se = ed$se.fit$value)
@@ -126,10 +124,10 @@ ndg <- predict(nagen.exp[[2]], newdata = data.frame(diet = c('carni',
                type = 'quantile',
                p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
-rownames(ndg$fit) <- rownames(ndg$se.fit) <- c('carni',
-                                               'herb',
-                                               'insect',
-                                               'omni')
+rownames(ndg$fit) <- rownames(ndg$se.fit) <- c('carnivore',
+                                               'herbivore',
+                                               'insectivore',
+                                               'omnivore')
 ndg <- lapply(ndg, t)
 ndg <- lapply(ndg, melt)
 ndg <- cbind(fit = ndg$fit, se = ndg$se.fit$value)
@@ -142,10 +140,10 @@ edg <- predict(ergen.wei[[2]], newdata = data.frame(diet = c('carni',
                type = 'quantile',
                p = seq(0.01, 0.99, by = 0.01),
                se.fit = TRUE)
-rownames(edg$fit) <- rownames(edg$se.fit) <- c('carni',
-                                               'herb',
-                                               'insect',
-                                               'omni')
+rownames(edg$fit) <- rownames(edg$se.fit) <- c('carnivore',
+                                               'herbivore',
+                                               'insectivore',
+                                               'omnivore')
 edg <- lapply(edg, t)
 edg <- lapply(edg, melt)
 edg <- cbind(fit = edg$fit, se = edg$se.fit$value)
@@ -160,24 +158,22 @@ gd.cur <- rbind(cbind(ndg, loc = rep('NA', nrow(ndg))),
 diets <- rbind(cbind(d.cur, heir = rep('species', nrow(d.cur))),
                cbind(gd.cur, heir = rep('genera', nrow(gd.cur))))
 
-die <- ggplot(diets, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
-die <- die + geom_line(aes(colour = fit.Var2), size = 1)
+die <- ggplot(d.cur, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
+die <- die + geom_line(aes(linetype = fit.Var2), size = 1)
 die <- die + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 die <- die + coord_flip()
-die <- die + facet_grid(loc ~ heir)
+die <- die + facet_grid(loc ~ .)
 die <- die + scale_x_continuous(trans = log10_trans())
 die <- die + labs(y = 'Time', x = 'P(T > t)')
-die <- die + scale_color_manual(values = cbp[-1],
-                                name = 'Dietary\nCategory')
-die <- die + scale_fill_manual(values = cbp[-1],
-                               name = 'Dietary\nCategory')
+die <- die + scale_linetype(name = 'Dietary\nCategory')
+die <- die + scale_fill_grey(name = 'Dietary\nCategory')
 die <- die + theme(axis.title.y = element_text(angle = 0),
-                   axis.text = element_text(size = 20),
-                   axis.title = element_text(size = 23),
-                   legend.text = element_text(size = 17),
-                   legend.title = element_text(size = 19),
-                   strip.text = element_text(size = 20))
+                   axis.text = element_text(size = 30),
+                   axis.title = element_text(size = 33),
+                   legend.text = element_text(size = 27),
+                   legend.title = element_text(size = 29),
+                   strip.text = element_text(size = 30))
 ggsave(filename = '../doc/figure/para_diet.png', plot = die,
        width = 15, height = 10)
 
@@ -249,24 +245,22 @@ gl.cur <- rbind(cbind(nlg, loc = rep('NA', nrow(nlg))),
 moves <- rbind(cbind(l.cur, heir = rep('species', nrow(l.cur))),
                cbind(gl.cur, heir = rep('genera', nrow(gl.cur))))
 
-loc <- ggplot(moves, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
-loc <- loc + geom_line(aes(colour = fit.Var2), size = 1)
+loc <- ggplot(l.cur, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
+loc <- loc + geom_line(aes(linetype = fit.Var2), size = 1)
 loc <- loc + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 loc <- loc + coord_flip()
-loc <- loc + facet_grid(loc ~ heir)
+loc <- loc + facet_grid(loc ~ .)
 loc <- loc + scale_x_continuous(trans = log10_trans())
 loc <- loc + labs(y = 'Time', x = 'P(T > t)')
-loc <- loc + scale_color_manual(values = cbp[-1],
-                                name = 'Locomotor\nCategory')
-loc <- loc + scale_fill_manual(values = cbp[-1],
-                               name = 'Locomotor\nCategory')
+loc <- loc + scale_linetype(name = 'Locomotor\nCategory')
+loc <- loc + scale_fill_grey(name = 'Locomotor\nCategory')
 loc <- loc + theme(axis.title.y = element_text(angle = 0),
-                   axis.text = element_text(size = 20),
-                   axis.title = element_text(size = 23),
-                   legend.text = element_text(size = 17),
-                   legend.title = element_text(size = 19),
-                   strip.text = element_text(size = 20))
+                   axis.text = element_text(size = 30),
+                   axis.title = element_text(size = 33),
+                   legend.text = element_text(size = 27),
+                   legend.title = element_text(size = 29),
+                   strip.text = element_text(size = 30))
 ggsave(filename = '../doc/figure/para_move.png', plot = loc,
        width = 15, height = 10)
 
@@ -306,17 +300,15 @@ nmg[, 1] <- (100 - nmg[, 1]) / 100
 mas <- rbind(cbind(nm, heir = rep('species', nrow(nm))),
              cbind(nmg, heir = rep('genera', nrow(nmg))))
 gma <- ggplot(mas, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
-gma <- gma + geom_line(aes(colour = fit.Var2), size = 1)
+gma <- gma + geom_line(aes(linetype = fit.Var2), size = 1)
 gma <- gma + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
                          alpha = 0.3)
 gma <- gma + coord_flip()
 gma <- gma + facet_grid(. ~ heir)
 gma <- gma + labs(y = 'Time', x = 'P(T > t)')
 gma <- gma + scale_x_continuous(trans = log10_trans())
-gma <- gma + scale_color_manual(values = cbp[-1],
-                                name = 'Quantile\nlog(Mass)')
-gma <- gma + scale_fill_manual(values = cbp[-1],
-                               name = 'Quantile\nlog(Mass)')
+gma <- gma + scale_linetype(name = 'Quantile\nlog(Mass)')
+gma <- gma + scale_fill_grey(name = 'Quantile\nlog(Mass)')
 gma <- gma + theme(axis.title.y = element_text(angle = 0),
                    axis.text = element_text(size = 20),
                    axis.title = element_text(size = 23),
@@ -327,96 +319,96 @@ ggsave(filename = '../doc/figure/para_mass.png', plot = gma,
        width = 15, height = 10)
 
 
-# climate
-# species
-nclim <- data.frame(climate = c(min(na.ecol$climate),
-                                quantile(na.ecol$climate, .25),
-                                quantile(na.ecol$climate, .5),
-                                quantile(na.ecol$climate, .75),
-                                max(na.ecol$climate)))
-ncli <- predict(na.exp[[5]], newdata = nclim,
-                type = 'quantile',
-                p = seq(0.01, 0.99, by = 0.01),
-                se.fit = TRUE)
-rownames(ncli$fit) <- rownames(ncli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
-ncli <- lapply(ncli, t)
-ncli <- lapply(ncli, melt)
-ncli <- cbind(fit = ncli$fit, se = ncli$se.fit$value)
-ncli[, 1] <- (100 - ncli[, 1]) / 100
-
-eclim <- data.frame(climate = c(min(er.ecol$climate),
-                                quantile(er.ecol$climate, .25),
-                                quantile(er.ecol$climate, .5),
-                                quantile(er.ecol$climate, .75),
-                                max(er.ecol$climate)))
-ecli <- predict(er.wei[[4]], newdata = eclim,
-                type = 'quantile',
-                p = seq(0.01, 0.99, by = 0.01),
-                se.fit = TRUE)
-rownames(ecli$fit) <- rownames(ecli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
-ecli <- lapply(ecli, t)
-ecli <- lapply(ecli, melt)
-ecli <- cbind(fit = ecli$fit, se = ecli$se.fit$value)
-ecli[, 1] <- (100 - ecli[, 1]) / 100
-
-# genera
-ngclim <- data.frame(climate = c(min(na.genecol$climate),
-                                 quantile(na.genecol$climate, .25),
-                                 quantile(na.genecol$climate, .5),
-                                 quantile(na.genecol$climate, .75),
-                                 max(na.genecol$climate)))
-ngcli <- predict(nagen.exp[[5]], newdata = ngclim,
-                 type = 'quantile',
-                 p = seq(0.01, 0.99, by = 0.01),
-                 se.fit = TRUE)
-rownames(ngcli$fit) <- rownames(ngcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
-ngcli <- lapply(ngcli, t)
-ngcli <- lapply(ngcli, melt)
-ngcli <- cbind(fit = ngcli$fit, se = ngcli$se.fit$value)
-ngcli[, 1] <- (100 - ngcli[, 1]) / 100
-
-egclim <- data.frame(climate = c(min(er.genecol$climate),
-                                 quantile(er.genecol$climate, .25),
-                                 quantile(er.genecol$climate, .5),
-                                 quantile(er.genecol$climate, .75),
-                                 max(er.genecol$climate)))
-egcli <- predict(ergen.wei[[4]], newdata = egclim,
-                 type = 'quantile',
-                 p = seq(0.01, 0.99, by = 0.01),
-                 se.fit = TRUE)
-rownames(egcli$fit) <- rownames(egcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
-egcli <- lapply(egcli, t)
-egcli <- lapply(egcli, melt)
-egcli <- cbind(fit = egcli$fit, se = egcli$se.fit$value)
-egcli[, 1] <- (100 - egcli[, 1]) / 100
-
-# combine
-c.cur <- rbind(cbind(ncli, loc = rep('NA', nrow(ncli))),
-               cbind(ecli, loc = rep('Eur', nrow(ecli))))
-gc.cur <- rbind(cbind(ngcli, loc = rep('NA', nrow(ngcli))),
-                cbind(egcli, loc = rep('Eur', nrow(egcli))))
-
-cli <- rbind(cbind(c.cur, heir = rep('species', nrow(c.cur))),
-             cbind(gc.cur, heir = rep('genera', nrow(gc.cur))))
-
-
-gcl <- ggplot(cli, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
-gcl <- gcl + geom_line(aes(colour = fit.Var2), size = 1)
-gcl <- gcl + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
-                         alpha = 0.3)
-gcl <- gcl + coord_flip()
-gcl <- gcl + facet_grid(loc ~ heir)
-gcl <- gcl + labs(y = 'Time', x = 'P(T > t)')
-gcl <- gcl + scale_x_continuous(trans = log10_trans())
-gcl <- gcl + scale_color_manual(values = cbp[-1],
-                                name = 'Quantile\ndelta O^18')
-gcl <- gcl + scale_fill_manual(values = cbp[-1],
-                               name = 'Quantile\ndelta O^18')
-gcl <- gcl + theme(axis.title.y = element_text(angle = 0),
-                   axis.text = element_text(size = 20),
-                   axis.title = element_text(size = 23),
-                   legend.text = element_text(size = 17),
-                   legend.title = element_text(size = 19),
-                   strip.text = element_text(size = 20))
-ggsave(filename = '../doc/figure/para_clim.png', plot = gcl,
-       width = 15, height = 10)
+## climate
+## species
+#nclim <- data.frame(climate = c(min(na.ecol$climate),
+#                                quantile(na.ecol$climate, .25),
+#                                quantile(na.ecol$climate, .5),
+#                                quantile(na.ecol$climate, .75),
+#                                max(na.ecol$climate)))
+#ncli <- predict(na.exp[[5]], newdata = nclim,
+#                type = 'quantile',
+#                p = seq(0.01, 0.99, by = 0.01),
+#                se.fit = TRUE)
+#rownames(ncli$fit) <- rownames(ncli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+#ncli <- lapply(ncli, t)
+#ncli <- lapply(ncli, melt)
+#ncli <- cbind(fit = ncli$fit, se = ncli$se.fit$value)
+#ncli[, 1] <- (100 - ncli[, 1]) / 100
+#
+#eclim <- data.frame(climate = c(min(er.ecol$climate),
+#                                quantile(er.ecol$climate, .25),
+#                                quantile(er.ecol$climate, .5),
+#                                quantile(er.ecol$climate, .75),
+#                                max(er.ecol$climate)))
+#ecli <- predict(er.wei[[4]], newdata = eclim,
+#                type = 'quantile',
+#                p = seq(0.01, 0.99, by = 0.01),
+#                se.fit = TRUE)
+#rownames(ecli$fit) <- rownames(ecli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+#ecli <- lapply(ecli, t)
+#ecli <- lapply(ecli, melt)
+#ecli <- cbind(fit = ecli$fit, se = ecli$se.fit$value)
+#ecli[, 1] <- (100 - ecli[, 1]) / 100
+#
+## genera
+#ngclim <- data.frame(climate = c(min(na.genecol$climate),
+#                                 quantile(na.genecol$climate, .25),
+#                                 quantile(na.genecol$climate, .5),
+#                                 quantile(na.genecol$climate, .75),
+#                                 max(na.genecol$climate)))
+#ngcli <- predict(nagen.exp[[5]], newdata = ngclim,
+#                 type = 'quantile',
+#                 p = seq(0.01, 0.99, by = 0.01),
+#                 se.fit = TRUE)
+#rownames(ngcli$fit) <- rownames(ngcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+#ngcli <- lapply(ngcli, t)
+#ngcli <- lapply(ngcli, melt)
+#ngcli <- cbind(fit = ngcli$fit, se = ngcli$se.fit$value)
+#ngcli[, 1] <- (100 - ngcli[, 1]) / 100
+#
+#egclim <- data.frame(climate = c(min(er.genecol$climate),
+#                                 quantile(er.genecol$climate, .25),
+#                                 quantile(er.genecol$climate, .5),
+#                                 quantile(er.genecol$climate, .75),
+#                                 max(er.genecol$climate)))
+#egcli <- predict(ergen.wei[[4]], newdata = egclim,
+#                 type = 'quantile',
+#                 p = seq(0.01, 0.99, by = 0.01),
+#                 se.fit = TRUE)
+#rownames(egcli$fit) <- rownames(egcli$se.fit) <- c('Min', 'Q1', 'Median', 'Q3', 'Max')
+#egcli <- lapply(egcli, t)
+#egcli <- lapply(egcli, melt)
+#egcli <- cbind(fit = egcli$fit, se = egcli$se.fit$value)
+#egcli[, 1] <- (100 - egcli[, 1]) / 100
+#
+## combine
+#c.cur <- rbind(cbind(ncli, loc = rep('NA', nrow(ncli))),
+#               cbind(ecli, loc = rep('Eur', nrow(ecli))))
+#gc.cur <- rbind(cbind(ngcli, loc = rep('NA', nrow(ngcli))),
+#                cbind(egcli, loc = rep('Eur', nrow(egcli))))
+#
+#cli <- rbind(cbind(c.cur, heir = rep('species', nrow(c.cur))),
+#             cbind(gc.cur, heir = rep('genera', nrow(gc.cur))))
+#
+#
+#gcl <- ggplot(cli, aes(x = fit.Var1, y = fit.value, fill = fit.Var2))
+#gcl <- gcl + geom_line(aes(colour = fit.Var2), size = 1)
+#gcl <- gcl + geom_ribbon(aes(ymin = fit.value - se, ymax = fit.value + se),
+#                         alpha = 0.3)
+#gcl <- gcl + coord_flip()
+#gcl <- gcl + facet_grid(loc ~ heir)
+#gcl <- gcl + labs(y = 'Time', x = 'P(T > t)')
+#gcl <- gcl + scale_x_continuous(trans = log10_trans())
+#gcl <- gcl + scale_color_manual(values = cbp[-1],
+#                                name = 'Quantile\ndelta O^18')
+#gcl <- gcl + scale_fill_manual(values = cbp[-1],
+#                               name = 'Quantile\ndelta O^18')
+#gcl <- gcl + theme(axis.title.y = element_text(angle = 0),
+#                   axis.text = element_text(size = 20),
+#                   axis.title = element_text(size = 23),
+#                   legend.text = element_text(size = 17),
+#                   legend.title = element_text(size = 19),
+#                   strip.text = element_text(size = 20))
+#ggsave(filename = '../doc/figure/para_clim.png', plot = gcl,
+#       width = 15, height = 10)

@@ -82,11 +82,32 @@ dietdf <- list(na = shrink.trait(na.trait$diet),
 dietdf <- Reduce(rbind, dietdf)
 dietdf$age <- as.numeric(dietdf$age)
 
+dietdf$trait[dietdf$trait == 'carni'] <- 'carnivore'
+dietdf$trait[dietdf$trait == 'omni'] <- 'omnivore'
+dietdf$trait[dietdf$trait == 'insect'] <- 'insectivore'
+dietdf$trait[dietdf$trait == 'herb'] <- 'herbivore'
+
+dietdf$stat <- as.character(dietdf$stat)
+dietdf$stat[dietdf$stat == 'end'] <- 'E'
+dietdf$stat[dietdf$stat == 'code'] <- 'Code length'
+dietdf$stat[dietdf$stat == 'bc'] <- 'BC'
+dietdf$stat[dietdf$stat == 'avgcoc'] <- 'Occ'
+
+dietdf$loc <- as.character(dietdf$loc)
+dietdf$loc[dietdf$loc == 'Eur'] <- 'Europe'
+dietdf$loc[dietdf$loc == 'NA'] <- 'North America'
+
 ggdiet <- ggplot(dietdf, aes(x = age, y = value, linetype = trait))
 ggdiet <- ggdiet + geom_line()
-ggdiet <- ggdiet + scale_color_manual(values = cbp)
+ggdiet <- ggdiet + scale_linetype(name = 'Dietary\nCategory')
 ggdiet <- ggdiet + labs(x = 'Time (My)')
 ggdiet <- ggdiet + facet_grid(stat ~ loc, scales = 'free')
+ggdiet <- ggdiet + theme(axis.title.y = element_text(angle = 0),
+                         axis.text = element_text(size = 27),
+                         axis.title = element_text(size = 30),
+                         legend.text = element_text(size = 25),
+                         legend.title = element_text(size = 26),
+                         strip.text = element_text(size = 25))
 ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
 
@@ -98,8 +119,7 @@ composition$loc <- as.character(composition$loc)
 composition$loc[composition$loc == 'Eur'] <- 'Europe'
 ggcomp <- ggplot(composition, aes(x = age, y = value, linetype = trait))
 ggcomp <- ggcomp + geom_line()
-ggcomp <- ggcomp + scale_color_manual(values = cbp,
-                                      name = 'Dietary\nCategory')
+ggcomp <- ggcomp + scale_linetype(name = 'Dietary\nCategory')
 ggcomp <- ggcomp + labs(x = 'Time (My)')
 ggcomp <- ggcomp + facet_grid(loc ~ stat, scales = 'free')
 ggcomp <- ggcomp + theme(axis.title.y = element_text(angle = 0),
@@ -108,7 +128,7 @@ ggcomp <- ggcomp + theme(axis.title.y = element_text(angle = 0),
                          legend.text = element_text(size = 15),
                          legend.title = element_text(size = 16),
                          strip.text = element_text(size = 15))
-ggsave(file = '../doc/figure/comp_diet.png', width = 15, height = 10, plot = ggcomp)
+#ggsave(file = '../doc/figure/comp_diet.png', width = 15, height = 10, plot = ggcomp)
 
 
 # just NA
@@ -123,8 +143,7 @@ nadt$stat[nadt$stat == 'code'] <- 'Code length'
 ggnad <- ggplot(nadt, aes(x = age, y = value, linetype = trait))
 ggnad <- ggnad + geom_line()
 #ggnad <- ggnad + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
-ggnad <- ggnad + scale_color_manual(values = cbp,
-                                    name = 'Dietary\nCategory')
+ggnad <- ggnad + scale_linetype(name = 'Dietary\nCategory')
 ggnad <- ggnad + labs(x = 'Time (My)')
 ggnad <- ggnad + facet_wrap(~ stat, scales = 'free')
 ggnad <- ggnad + theme(axis.title.y = element_text(angle = 0),
@@ -146,8 +165,7 @@ erdt$stat[erdt$stat == 'avgcoc'] <- 'Occ'
 ggerd <- ggplot(erdt, aes(x = age, y = value, linetype = trait))
 ggerd <- ggerd + geom_line()
 #ggerd <- ggerd + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
-ggerd <- ggerd + scale_color_manual(values = cbp,
-                                    name = 'Dietary\nCategory')
+ggerd <- ggerd + scale_linetype(name = 'Dietary\nCategory')
 ggerd <- ggerd + labs(x = 'Time (My)')
 ggerd <- ggerd + facet_wrap(~ stat, scales = 'free')
 ggerd <- ggerd + theme(axis.title.y = element_text(angle = 0),
@@ -167,7 +185,7 @@ locodf$age <- as.numeric(locodf$age)
 
 ggloco <- ggplot(locodf, aes(x = age, y = value, linetype = trait))
 ggloco <- ggloco + geom_line()
-ggloco <- ggloco + scale_color_manual(values = cbp)
+ggloco <- ggloco + scale_linetype(name = 'Locomotor\nCategory')
 ggloco <- ggloco + labs(x = 'Time (My)')
 ggloco <- ggloco + facet_grid(stat ~ loc, scales = 'free')
 ggsave(file = '../doc/figure/locos.png', width = 15, height = 10, plot = ggloco)
@@ -180,8 +198,7 @@ grouping$loc <- as.character(grouping$loc)
 grouping$loc[grouping$loc == 'Eur'] <- 'Europe'
 ggroup <- ggplot(grouping, aes(x = age, y = value, linetype = trait))
 ggroup <- ggroup + geom_line()
-ggroup <- ggroup + scale_color_manual(values = cbp,
-                                      name = 'Locomotor\nCategory')
+ggroup <- ggroup + scale_linetype(name = 'Locomotor\nCategory')
 ggroup <- ggroup + labs(x = 'Time (My)')
 ggroup <- ggroup + facet_grid(loc ~ stat, scales = 'free')
 ggroup <- ggroup + theme(axis.title.y = element_text(angle = 0),
