@@ -3,10 +3,7 @@ library(reshape2)
 library(ggplot2)
 library(scales)
 
-source('../R/na_mung.r')
-source('../R/europe_mung.r')
-
-source('../R/cosmo_prov.r')
+#source('../R/cosmo_prov.r')
 source('../R/oxygen_curve.r')
 
 theme_set(theme_bw())
@@ -44,7 +41,8 @@ ggdat <- ggplot(bin.dat, aes(x = L3, y = value, linetype = L1)) + geom_line()
 ggdat <- ggdat + labs(x = 'Time (My)')
 ggdat <- ggdat + scale_linetype_manual(values = c(1,2),
                                        name = 'Region')
-ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
+ggdat <- ggdat + stat_smooth(method = 'loess', se = FALSE, 
+                             na.rm = TRUE, colour = 'darkgrey')
 ggdat <- ggdat + facet_wrap(~ L2, scales = 'free_y')
 ggdat <- ggdat + theme(axis.title.y = element_text(angle = 0),
                        axis.text = element_text(size = 17),
@@ -84,11 +82,11 @@ dietdf <- list(na = shrink.trait(na.trait$diet),
 dietdf <- Reduce(rbind, dietdf)
 dietdf$age <- as.numeric(dietdf$age)
 
-ggdiet <- ggplot(dietdf, aes(x = age, y = value, colour = trait))
+ggdiet <- ggplot(dietdf, aes(x = age, y = value, linetype = trait))
 ggdiet <- ggdiet + geom_line()
 ggdiet <- ggdiet + scale_color_manual(values = cbp)
 ggdiet <- ggdiet + labs(x = 'Time (My)')
-ggdiet <- ggdiet + facet_grid(loc ~ stat, scales = 'free')
+ggdiet <- ggdiet + facet_grid(stat ~ loc, scales = 'free')
 ggsave(file = '../doc/figure/diets.png', width = 15, height = 10, plot = ggdiet)
 
 
@@ -98,7 +96,7 @@ composition$stat[composition$stat == 'end'] <- 'E'
 composition$stat[composition$stat == 'avgcoc'] <- 'Occ'
 composition$loc <- as.character(composition$loc)
 composition$loc[composition$loc == 'Eur'] <- 'Europe'
-ggcomp <- ggplot(composition, aes(x = age, y = value, colour = trait))
+ggcomp <- ggplot(composition, aes(x = age, y = value, linetype = trait))
 ggcomp <- ggcomp + geom_line()
 ggcomp <- ggcomp + scale_color_manual(values = cbp,
                                       name = 'Dietary\nCategory')
@@ -122,7 +120,7 @@ nadt$stat[nadt$stat == 'end'] <- 'E'
 nadt$stat[nadt$stat == 'avgcoc'] <- 'Occ'
 nadt$stat[nadt$stat == 'code'] <- 'Code length'
 
-ggnad <- ggplot(nadt, aes(x = age, y = value, colour = trait))
+ggnad <- ggplot(nadt, aes(x = age, y = value, linetype = trait))
 ggnad <- ggnad + geom_line()
 #ggnad <- ggnad + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggnad <- ggnad + scale_color_manual(values = cbp,
@@ -145,7 +143,7 @@ erdt$stat[erdt$stat == 'bc'] <- 'BC'
 erdt$stat[erdt$stat == 'end'] <- 'E'
 erdt$stat[erdt$stat == 'avgcoc'] <- 'Occ'
 
-ggerd <- ggplot(erdt, aes(x = age, y = value, colour = trait))
+ggerd <- ggplot(erdt, aes(x = age, y = value, linetype = trait))
 ggerd <- ggerd + geom_line()
 #ggerd <- ggerd + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggerd <- ggerd + scale_color_manual(values = cbp,
@@ -167,11 +165,11 @@ locodf <- list(na = shrink.trait(na.trait$life, key = 'arboreal'),
 locodf <- Reduce(rbind, locodf)
 locodf$age <- as.numeric(locodf$age)
 
-ggloco <- ggplot(locodf, aes(x = age, y = value, colour = trait))
+ggloco <- ggplot(locodf, aes(x = age, y = value, linetype = trait))
 ggloco <- ggloco + geom_line()
 ggloco <- ggloco + scale_color_manual(values = cbp)
 ggloco <- ggloco + labs(x = 'Time (My)')
-ggloco <- ggloco + facet_grid(loc ~ stat, scales = 'free')
+ggloco <- ggloco + facet_grid(stat ~ loc, scales = 'free')
 ggsave(file = '../doc/figure/locos.png', width = 15, height = 10, plot = ggloco)
 
 grouping <- locodf[locodf$stat %in% c('end', 'avgcoc'), ]
@@ -180,7 +178,7 @@ grouping$stat[grouping$stat == 'end'] <- 'E'
 grouping$stat[grouping$stat == 'avgcoc'] <- 'Occ'
 grouping$loc <- as.character(grouping$loc)
 grouping$loc[grouping$loc == 'Eur'] <- 'Europe'
-ggroup <- ggplot(grouping, aes(x = age, y = value, colour = trait))
+ggroup <- ggplot(grouping, aes(x = age, y = value, linetype = trait))
 ggroup <- ggroup + geom_line()
 ggroup <- ggroup + scale_color_manual(values = cbp,
                                       name = 'Locomotor\nCategory')
@@ -204,7 +202,7 @@ nalf$stat[nalf$stat == 'end'] <- 'E'
 nalf$stat[nalf$stat == 'avgcoc'] <- 'Occ'
 nalf$stat[nalf$stat == 'code'] <- 'Code length'
 
-ggnal <- ggplot(nalf, aes(x = age, y = value, colour = trait))
+ggnal <- ggplot(nalf, aes(x = age, y = value, linetype = trait))
 ggnal <- ggnal + geom_line()
 #ggnal <- ggnal + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggnal <- ggnal + scale_color_manual(values = cbp,
@@ -228,7 +226,7 @@ erlf$stat[erlf$stat == 'end'] <- 'E'
 erlf$stat[erlf$stat == 'avgcoc'] <- 'Occ'
 erlf$stat[erlf$stat == 'code'] <- 'Code length'
 
-ggerl <- ggplot(erlf, aes(x = age, y = value, colour = trait))
+ggerl <- ggplot(erlf, aes(x = age, y = value, linetype = trait))
 ggerl <- ggerl + geom_line()
 #ggerl <- ggerl + stat_smooth(method = 'loess', se = FALSE, na.rm = TRUE)
 ggerl <- ggerl + scale_color_manual(values = cbp,
