@@ -19,26 +19,22 @@ parameters {
   real beta_inter;
   vector[2] beta;
   vector[D] beta_diet;
-  vector[M] beta_move;
   real<lower=0> alpha;
 }
 model {
   beta_inter ~ normal(0, 100);
   beta ~ normal(0, 100);
   beta_diet ~ normal(0, 100);
-  beta_move ~ normal(0, 100);
 
   alpha ~ gamma(1, 0.0001);
 
   dur_unc ~ weibull(alpha, exp(-(beta_inter +
           beta[1] * occ_unc + 
           beta[2] * size_unc + 
-          diet_unc * beta_diet + 
-          move_unc * beta_move) / alpha));
+          diet_unc * beta_diet) / alpha));
   increment_log_prob(weibull_ccdf_log(dur_cen, alpha, 
         exp(-(beta_inter +
             beta[1] * occ_cen + 
             beta[2] * size_cen + 
-            diet_cen * beta_diet + 
-            move_cen * beta_move) / alpha)));
+            diet_cen * beta_diet) / alpha)));
 }

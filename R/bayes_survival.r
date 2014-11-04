@@ -8,6 +8,7 @@ RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 
 # compile model
+zero.weibull <- stan(file = '../stan/zero_weibull.stan')
 weibull.model <- stan(file = '../stan/weibull_survival.stan')
 
 # set up variables
@@ -55,6 +56,16 @@ data$samp_unc <- seq(data$N_unc)
 data$samp_cen <- seq(from = data$N_unc + 1, 
                      to = data$N_unc + data$N_cen, 
                      by = 1)
+
+## zero model 
+zerolist <- mclapply(1:4, mc.cores = detectCores(),
+                     function(x) stan(fit = zero.weibull, 
+                                      seed = seed,
+                                      data = data,
+                                      chains = 1, chain_id = x,
+                                      refresh = -1))
+
+zfit <- sflist2stanfit(zerolist)
 
 ## weibull
 weilist <- mclapply(1:4, mc.cores = detectCores(),
