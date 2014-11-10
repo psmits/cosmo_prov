@@ -59,11 +59,12 @@ young <- which(nadur[, 3] <= 2)
 nadur <- nadur[-young, ]
 na.ecol <- na.ecol[-young, ]
 
-# remove 0 survival times
-rms <- which(abs(nadur[, 3] - nadur[, 4]) < 0.1)
-nadur <- nadur[-rms, ]
-na.ecol <- na.ecol[-rms, ]
+bin.range <- ddply(dat, .(name.bi), summarize, 
+                   old <- max(bins),
+                   young <- min(bins))
 
-na.ecol$occ <- na.mean.occ[na.mean.occ[, 2] %in% na.ecol$taxa, 1]
-na.surv <- paleosurv(fad = nadur[, 3], lad = nadur[, 4],
-                     start = 66, end = 2)
+bin.range <- bin.range[bin.range[, 1] %in% na.ecol$taxa,]
+dur <- (bin.range[, 2] - bin.range[, 3]) / 2 + 1
+ext <- as.numeric(bin.range[, 3] != 2)
+
+occ <- na.mean.occ[na.mean.occ[, 2] %in% bin.range[, 1], 1]

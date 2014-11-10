@@ -17,24 +17,30 @@ data {
 }
 parameters {
   real beta_inter;
-  vector[2] beta;
-  vector[D] beta_diet;
+  real beta[2];
   real<lower=0> alpha;
+  vector[M] beta_move;
+  vector[D] beta_diet;
 }
 model {
   beta_inter ~ normal(0, 100);
   beta ~ normal(0, 100);
-  beta_diet ~ normal(0, 100);
+  for(i in 1:M) {
+    beta_move[i] ~ normal(0, 100);
+  }
+  for(i in 1:D) {
+    beta_diet[i] ~ normal(0, 100);
+  }
 
   alpha ~ gamma(1, 0.0001);
 
   dur_unc ~ weibull(alpha, exp(-(beta_inter +
-          beta[1] * occ_unc + 
-          beta[2] * size_unc + 
-          diet_unc * beta_diet) / alpha));
+          beta[1] * occ_unc + beta[2] * size_unc + 
+          diet_unc * beta_diet +
+          move_unc * beta_move) / alpha));
   increment_log_prob(weibull_ccdf_log(dur_cen, alpha, 
         exp(-(beta_inter +
-            beta[1] * occ_cen + 
-            beta[2] * size_cen + 
-            diet_cen * beta_diet) / alpha)));
+            beta[1] * occ_cen + beta[2] * size_cen + 
+            diet_cen * beta_diet +
+            move_cen * beta_move) / alpha)));
 }

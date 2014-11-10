@@ -12,12 +12,12 @@ zero.weibull <- stan(file = '../stan/zero_weibull.stan')
 weibull.model <- stan(file = '../stan/weibull_survival.stan')
 
 # set up variables
-duration <- na.surv[, 1]
-extinct <- na.surv[, 2]
+duration <- dur
+extinct <- ext
 
 # continuous variables
 size <- na.ecol$mass
-occ <- na.ecol$occ
+occ <- occ
 
 data <- list(duration = duration,
              size = log(size),
@@ -44,20 +44,23 @@ data <- list(dur_unc = unc$duration,
              move_cen = cen$move,
              N_cen = length(cen$duration))
 
-data$diet_unc <- model.matrix( ~ data$diet_unc - 1)
-data$diet_cen <- model.matrix( ~ data$diet_cen - 1)
-data$move_unc <- model.matrix( ~ data$move_unc - 1)
-data$move_cen <- model.matrix( ~ data$move_cen - 1)
+data$diet_unc <- model.matrix( ~ data$diet_unc - 1)[, -1]
+data$diet_cen <- model.matrix( ~ data$diet_cen - 1)[, -1]
+data$move_unc <- model.matrix( ~ data$move_unc - 1)[, -1]
+data$move_cen <- model.matrix( ~ data$move_cen - 1)[, -1]
 
-data$D <- length(unique(na.ecol$diet))
-data$M <- length(unique(na.ecol$move))
+data$D <- length(unique(na.ecol$diet)) - 1
+data$M <- length(unique(na.ecol$move)) - 1
 data$N <- data$N_unc + data$N_cen
+data$L <- min(c(data$dur_unc, data$dur_cen))
 data$samp_unc <- seq(data$N_unc)
 data$samp_cen <- seq(from = data$N_unc + 1, 
                      to = data$N_unc + data$N_cen, 
                      by = 1)
 
-## zero model 
+exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
+
+# zero model 
 zerolist <- mclapply(1:4, mc.cores = detectCores(),
                      function(x) stan(fit = zero.weibull, 
                                       seed = seed,
@@ -67,12 +70,12 @@ zerolist <- mclapply(1:4, mc.cores = detectCores(),
 
 zfit <- sflist2stanfit(zerolist)
 
-## weibull
-weilist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = weibull.model, 
-                                     seed = seed,
-                                     data = data,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-
-wfit <- sflist2stanfit(weilist)
+## larger
+#modlist <- mclapply(1:4, mc.cores = detectCores(),
+#                     function(x) stan(fit = weibull.model, 
+#                                      seed = seed,
+#                                      data = data,
+#                                      chains = 1, chain_id = x,
+#                                      refresh = -1))
+#
+#mfit <- sflist2stanfit(modlist)
