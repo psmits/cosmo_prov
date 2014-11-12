@@ -55,16 +55,13 @@ na.ecol$climate <- na.mean.climate[!no.climate, 1]
 na.ecol$cv.li <- na.cv.climate[!no.climate, 1]
 
 # exclude taxa that originate after cutoff
-young <- which(nadur[, 3] <= 2)
-nadur <- nadur[-young, ]
-na.ecol <- na.ecol[-young, ]
-
 bin.range <- ddply(dat, .(name.bi), summarize, 
                    old <- max(bins),
                    young <- min(bins))
-
 bin.range <- bin.range[bin.range[, 1] %in% na.ecol$taxa,]
+
 dur <- (bin.range[, 2] - bin.range[, 3]) / 2 + 1
 ext <- as.numeric(bin.range[, 3] != 2)
-
 occ <- na.mean.occ[na.mean.occ[, 2] %in% bin.range[, 1], 1]
+
+cohort <- bin.range[, 2] / 2  # find the cohorts

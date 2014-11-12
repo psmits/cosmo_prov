@@ -10,12 +10,18 @@ parameters {
   real<lower=0> alpha;
 }
 model {
-  sigma ~ gamma(1, 0.0001);
-  alpha ~ gamma(1, 0.0001);
+  sigma ~ cauchy(0, 2.5);
+  alpha ~ cauchy(0, 2.5);
 
   for(i in 1:N_unc) {
-    dur_unc[i] ~ weibull(alpha, sigma) T[L,];
+    if(dur_unc[i] == L) {
+      increment_log_prob(weibull_cdf_log(dur_unc[i], alpha, sigma));
+    } else {
+      dur_unc[i] ~ weibull(alpha, sigma);
+    }
   }
-  increment_log_prob(weibull_ccdf_log(dur_cen, alpha, sigma));
+  for(i in 1:N_cen) {
+    increment_log_prob(weibull_ccdf_log(dur_cen[i], alpha, sigma));
+  }
 }
 
