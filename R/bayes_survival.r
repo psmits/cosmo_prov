@@ -94,11 +94,12 @@ for(i in 1:1000) {
                  scale = sample(zpost$sigma, 1))
   mm[[i]] <- oo
 }
-tp <- sum(laply(mm, mean) > mean(dur))
+tp <- sum(laply(mm, mean) > mean(duration))
+br <- seq(0, max(ceiling(laply(mm, max))), 1)
 par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(dur)
+hist(duration, breaks = br)
 for(s in 1:19)
-  hist(mm[[s]])
+  hist(mm[[s]], breaks = br)
 
 
 # larger
@@ -119,11 +120,10 @@ dd <- rbind(data$diet_unc, data$diet_cen)
 mo <- rbind(data$move_unc, data$move_cen)
 
 mm <- list()
-for(i in 1:1000) {
+for(i in 1:100) {
   n <- length(duration)
-
   alp <- sample(mpost$alpha, 1)
-  inc <- sample(mpost$beta_inter, 1)
+  inc <- mpost$beta_inter[sample(nrow(mpost$beta_inter), 1), ]
   oc <- sample(mpost$beta_occ, 1)
   sz <- sample(mpost$beta_size, 1)
   mv <- mpost$beta_move[sample(nrow(mpost$beta_move), 1), ]
@@ -131,23 +131,26 @@ for(i in 1:1000) {
 
   oo <- c()
   for(j in seq(n)) {
-    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
+    reg <- inc[coh[j]] + oc * dat[j, 1] + sz * dat[j, 2] + 
            sum(di * dd[j, ]) + sum(mv * mo[j, ])
-    oo[j] <- rweibull(length(dur), 
+    oo[j] <- rweibull(length(duration), 
                     scale = exp(-reg) / alp,
                     shape = alp)
   }
   mm[[i]] <- oo
 }
-plot(dur - mm[[1]])
 
-hist(laply(mm, function(x) mean(dur - x)))
-sum(laply(mm, function(x) mean(x)) > mean(dur))
-sum(laply(mm, function(x) quantile(x, .40)) > quantile(dur, .40))
-sum(laply(mm, function(x) quantile(x, .75)) > quantile(dur, .75))
+hist(laply(mm, function(x) mean(duration - x)))
+
+# feel like i should be using pmin or right now..
+
+sum(laply(mm, function(x) mean(x)) > mean(duration))
+hist(laply(mm, function(x) mean(x))); abline(v = mean(duration))
+
+sum(laply(mm, function(x) quantile(x, .75)) > quantile(duration, .75))
 
 br <- seq(0, max(ceiling(laply(mm, max))), 1)
 par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(dur, breaks = br)
+hist(duration, breaks = br)
 for(s in 1:19)
   hist(mm[[s]], breaks = br)

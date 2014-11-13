@@ -1,0 +1,67 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{graphicx,hyperref}
+\usepackage{microtype, parskip}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{lineno}
+\usepackage{docmute}
+\usepackage[font=small]{caption}
+\usepackage{subcaption, multirow, morefloats}
+\usepackage{wrapfig}
+\usepackage{titlesec}
+\usepackage{authblk, attrib, fullpage}
+\usepackage{lineno}
+
+\frenchspacing
+
+\captionsetup[subfigure]{position = top, labelfont = bf, textfont = normalfont, singlelinecheck = off, justification = raggedright}
+
+\begin{document}
+\section{Methods}
+
+\subsection{Bioprovince occupancy}
+
+\subsection{Survival model}
+
+\begin{equation}
+  p(\theta|y) \propto p(y|\theta) p(\theta)
+  \label{eq:bayes}
+\end{equation}
+
+\subsubsection{Sampling distribution}
+
+\(\alpha \in \mathbb{R}^{+}\)
+
+\(\sigma \in \mathbb{R}^{+}\)
+
+\(y \in [0, \infty)\)
+
+\begin{align}
+  p(y|\alpha, \sigma) &= \mathrm{Weibull}(y|\alpha, \sigma) \nonumber \\ 
+  &= \frac{\alpha}{\sigma} \left(\frac{y}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y}{\sigma}\right)^{\alpha}\right)
+  \label{eq:weibull}
+\end{align}
+
+
+\begin{equation}
+  \sigma = \frac{\exp(-(\beta_{0} + \sum_{i = 1}^{I} \beta_{i} X_{i}))}{\alpha}
+  \label{eq:reg}
+\end{equation}
+
+\subsubsection{Censoring}
+
+Right censored
+
+Left censored
+
+\subsubsection{Priors}
+
+\begin{align*}
+  \beta_{0} &= \mathrm{Normal}(0, 100) \\
+  \beta_{i} &= \mathrm{Normal}(0, 10) \\
+  \alpha &= \mathrm{Half\ Cauchy}(0, 2.5)
+\end{align*}
+
+
+\end{document}
