@@ -77,80 +77,79 @@ data$samp_cen <- seq(from = data$N_unc + 1,
 
 exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
 
-# zero model 
-zerolist <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = zero.weibull, 
-                                      seed = seed,
-                                      data = data,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-
-zfit <- sflist2stanfit(zerolist)
-
-zpost <- extract(zfit, permuted = TRUE)
-mm <- list()
-for(i in 1:1000) {
-  oo <- rweibull(length(duration), shape = sample(zpost$alpha, 1), 
-                 scale = sample(zpost$sigma, 1))
-  mm[[i]] <- oo
-}
-tp <- sum(laply(mm, mean) > mean(duration))
-br <- seq(0, max(ceiling(laply(mm, max))), 1)
-par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(duration, breaks = br)
-for(s in 1:19)
-  hist(mm[[s]], breaks = br)
-
-
+## zero model 
+#zerolist <- mclapply(1:4, mc.cores = detectCores(),
+#                     function(x) stan(fit = zero.weibull, 
+#                                      seed = seed,
+#                                      data = data,
+#                                      chains = 1, chain_id = x,
+#                                      refresh = -1))
+#
+#zfit <- sflist2stanfit(zerolist)
+#
+#zpost <- extract(zfit, permuted = TRUE)
+#mm <- list()
+#for(i in 1:1000) {
+#  oo <- rweibull(length(duration), shape = sample(zpost$alpha, 1), 
+#                 scale = sample(zpost$sigma, 1))
+#  mm[[i]] <- oo
+#}
+#tp <- sum(laply(mm, mean) > mean(duration))
+#br <- seq(0, max(ceiling(laply(mm, max))), 1)
+#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
+#hist(duration, breaks = br)
+#for(s in 1:19)
+#  hist(mm[[s]], breaks = br)
+#
+#
 # larger
-modlist <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = weibull.model, 
-                                      seed = seed,
-                                      data = data,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-
-mfit <- sflist2stanfit(modlist)
-
-mpost <- extract(mfit, permuted = TRUE)
-  
-dat <- cbind(c(data$occ_unc, data$occ_cen), 
-             c(data$size_unc, data$size_cen))
-dd <- rbind(data$diet_unc, data$diet_cen)
-mo <- rbind(data$move_unc, data$move_cen)
-
-mm <- list()
-for(i in 1:100) {
-  n <- length(duration)
-  alp <- sample(mpost$alpha, 1)
-  inc <- mpost$beta_inter[sample(nrow(mpost$beta_inter), 1), ]
-  oc <- sample(mpost$beta_occ, 1)
-  sz <- sample(mpost$beta_size, 1)
-  mv <- mpost$beta_move[sample(nrow(mpost$beta_move), 1), ]
-  di <- mpost$beta_diet[sample(nrow(mpost$beta_diet), 1), ]
-
-  oo <- c()
-  for(j in seq(n)) {
-    reg <- inc[coh[j]] + oc * dat[j, 1] + sz * dat[j, 2] + 
-           sum(di * dd[j, ]) + sum(mv * mo[j, ])
-    oo[j] <- rweibull(length(duration), 
-                    scale = exp(-reg) / alp,
-                    shape = alp)
-  }
-  mm[[i]] <- oo
-}
-
-hist(laply(mm, function(x) mean(duration - x)))
-
-# feel like i should be using pmin or right now..
-
-sum(laply(mm, function(x) mean(x)) > mean(duration))
-hist(laply(mm, function(x) mean(x))); abline(v = mean(duration))
-
-sum(laply(mm, function(x) quantile(x, .75)) > quantile(duration, .75))
-
-br <- seq(0, max(ceiling(laply(mm, max))), 1)
-par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(duration, breaks = br)
-for(s in 1:19)
-  hist(mm[[s]], breaks = br)
+#modlist <- mclapply(1:4, mc.cores = detectCores(),
+#                     function(x) stan(fit = weibull.model, 
+#                                      seed = seed,
+#                                      data = data,
+#                                      chains = 1, chain_id = x,
+#                                      refresh = -1))
+#
+#mfit <- sflist2stanfit(modlist)
+#
+#mpost <- extract(mfit, permuted = TRUE)
+#  
+#dat <- cbind(c(data$occ_unc, data$occ_cen), 
+#             c(data$size_unc, data$size_cen))
+#dd <- rbind(data$diet_unc, data$diet_cen)
+#mo <- rbind(data$move_unc, data$move_cen)
+#
+#dead <- duration
+#mm <- list()
+#for(i in 1:100) {
+#  n <- length(dead)
+#  alp <- sample(mpost$alpha, 1)
+#  inc <- sample(mpost$beta_inter, 1)
+#  oc <- sample(mpost$beta_occ, 1)
+#  sz <- sample(mpost$beta_size, 1)
+#  mv <- mpost$beta_move[sample(nrow(mpost$beta_move), 1), ]
+#  di <- mpost$beta_diet[sample(nrow(mpost$beta_diet), 1), ]
+#  ff <- mpost$frailty[sample(nrow(mpost$frailty), 1), ]
+#
+#  oo <- c()
+#  for(j in seq(n)) {
+#    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
+#           sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
+#    oo[j] <- rweibull(1, scale = exp(-reg) / alp,
+#                      shape = alp)
+#  }
+#  mm[[i]] <- oo
+#}
+#
+#sum(laply(mm, function(x) mean(x)) > mean(dead))
+#hist(laply(mm, function(x) mean(x))); abline(v = mean(dead))
+#sum(laply(mm, function(x) quantile(x, .5)) > quantile(dead, .5))
+#hist(laply(mm, function(x) quantile(x, .5))); abline(v = quantile(dead, .5))
+#sum(laply(mm, function(x) quantile(x, .75)) > quantile(dead, .75))
+#hist(laply(mm, function(x) quantile(x, .75))); abline(v = quantile(dead, .75))
+#
+#br <- seq(0, max(ceiling(laply(mm, max))), 1)
+#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
+#hist(dead, breaks = br)
+#for(s in 1:19)
+#  hist(mm[[s]], breaks = br)

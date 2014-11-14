@@ -22,6 +22,7 @@
 
 \subsection{Bioprovince occupancy}
 
+
 \subsection{Survival model}
 
 \begin{equation}
@@ -49,19 +50,30 @@
   \label{eq:reg}
 \end{equation}
 
+
 \subsubsection{Censoring}
 
-Right censored
+% Figure explaining censoring.
 
-Left censored
+Right censored observations are observations where the point of extinction has not yet been observed. In this case, this means taxa that are still extant. For each right censored observation, the log probability is incremented by the complementary cummulative density function evaluated at the observed duration.
+
+Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cummulative density function evaluated at the observed duration.
+
 
 \subsubsection{Priors}
 
 \begin{align*}
-  \beta_{0} &= \mathrm{Normal}(0, 100) \\
+  \beta_{0} &= \mathrm{Normal}(0, 10) \\
   \beta_{i} &= \mathrm{Normal}(0, 10) \\
-  \alpha &= \mathrm{Half\ Cauchy}(0, 2.5)
+  \alpha &= \mathrm{half\ Cauchy}(0, 2.5)
 \end{align*}
+
+
+\subsubsection{Posterior inference}
+
+
+\subsubsection{Posterior predictive checks}
+
 
 
 \end{document}
