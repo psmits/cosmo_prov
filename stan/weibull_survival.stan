@@ -27,7 +27,7 @@ parameters {
   vector[M] beta_move;
   vector[D] beta_diet;
   real<lower=0> fv;
-  real frailty[C];
+  real rando[C];
 }
 model {
   beta_inter ~ normal(0, 10);
@@ -42,7 +42,7 @@ model {
 
   fv ~ cauchy(0, 2.5);
   for(i in 1:C) {
-    frailty[i] ~ normal(0, fv);
+    rando[i] ~ normal(0, fv);
   }
 
   alpha ~ cauchy(0, 2.5);
@@ -55,7 +55,7 @@ model {
                 beta_size * size_unc[i] + 
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
-                frailty[coh_unc[i]]) / alpha)));
+                rando[coh_unc[i]]) / alpha)));
     } else {
       increment_log_prob(weibull_log(dur_unc[i], alpha,
             exp(-(beta_inter +
@@ -63,7 +63,7 @@ model {
                 beta_size * size_unc[i] + 
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
-                frailty[coh_unc[i]]) / alpha)));
+                rando[coh_unc[i]]) / alpha)));
     }
   }
   for(i in 1:N_cen) {
@@ -73,6 +73,6 @@ model {
               beta_size * size_cen[i] + 
               diet_cen[i] * beta_diet +
               move_cen[i] * beta_move +
-              frailty[coh_cen[i]]) / alpha)));
+              rando[coh_cen[i]]) / alpha)));
   }
 }
