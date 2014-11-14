@@ -22,13 +22,18 @@
 
 \subsection{Bioprovince occupancy}
 
+Bipartite network of species occurrence and spatial unit. Spatial units were defined was 2x2 latitude--longitude grid cells.
 
 \subsection{Survival model}
+
+Marginal posterior of the parameter estimates given the data.
 
 \begin{equation}
   p(\theta|y) \propto p(y|\theta) p(\theta)
   \label{eq:bayes}
 \end{equation}
+
+\(\theta\) is a vector of parameters.
 
 \subsubsection{Sampling distribution}
 
@@ -44,11 +49,15 @@
   \label{eq:weibull}
 \end{align}
 
-
 \begin{equation}
-  \sigma = \frac{\exp(-(\beta_{0} + \sum_{i = 1}^{I} \beta_{i} X_{i}))}{\alpha}
+  \sigma_{ij} = \frac{\exp(-(r_{j} + \beta_{0} + \sum_{b = 1}^{B} \beta_{b} X_{i,b}))}{\alpha}
   \label{eq:reg}
 \end{equation}
+
+The effect of origination cohort (\(j\)) was included as a random effect \(r\) in the parameterization of \(\sigma\). The most recent temporal bin, 0 - 2 Mya, was excluded, leaving 32 different cohorts. 
+
+Each cohort was considered exchangable samples of a shared general ``cohort effect.'' The individual cohort effects was estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by setting a hyperprior on the scale parameter of the prior on \(r\).
+
 
 
 \subsubsection{Censoring}
@@ -63,17 +72,28 @@ Left censored observations, on the other hand, correspond to observations that w
 \subsubsection{Priors}
 
 \begin{align*}
-  \beta_{0} &= \mathrm{Normal}(0, 10) \\
-  \beta_{i} &= \mathrm{Normal}(0, 10) \\
-  \alpha &= \mathrm{half\ Cauchy}(0, 2.5)
+  \tau &\sim \mathrm{half\ Cauchy}(0, 2.5) \\
+  r_{j} &\sim \mathrm{Normal}(0, \tau) \\
+  \beta_{0} &\sim \mathrm{Normal}(0, 10) \\
+  \beta_{b} &\sim \mathrm{Normal}(0, 10) \\
+  \alpha &\sim \mathrm{half\ Cauchy}(0, 2.5)
 \end{align*}
 
 
 \subsubsection{Posterior inference}
 
+The joint and marginal posteriors of all parameters were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language CITATION. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler CITATION. 
+
+Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\) CITATION. Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed CITATION.
+
+Each chain was evaluated for 2000 steps, with the first 1000 used as warm-up and the last 1000 as samples from the posterior. In total, this yields 4000 samples from the posterior for all estimated parameters. 
+
 
 \subsubsection{Posterior predictive checks}
 
+\(y\)
+
+\(y^{rep}\)
 
 
 \end{document}
