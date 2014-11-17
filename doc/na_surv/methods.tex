@@ -22,7 +22,12 @@
 
 \subsection{Bioprovince occupancy}
 
-Bipartite network of species occurrence and spatial unit. Spatial units were defined was 2x2 latitude--longitude grid cells.
+For each 2 My time bin, a bipartite biogeographic network was created between species occurrences and spatial units. Spatial units were defined was 2x2 latitude--longitude grid cells. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Taxa are not linked to each other, nor are localities linked. 
+
+Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation CITATION. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. 
+
+The number of bioprovinces occupied per time bin was determined for each species.
+
 
 \subsection{Survival model}
 
@@ -37,11 +42,7 @@ Marginal posterior of the parameter estimates given the data.
 
 \subsubsection{Sampling distribution}
 
-\(\alpha \in \mathbb{R}^{+}\)
-
-\(\sigma \in \mathbb{R}^{+}\)
-
-\(y \in [0, \infty)\)
+I assumed a parametric survival model where the observations followed a Weibull distribution (Eq. \ref{eq:weibull}) with the shape \(\alpha\) and the scale \(\sigma\) defined as in a regression model (Eq. \ref{eq:reg}).
 
 \begin{align}
   p(y|\alpha, \sigma) &= \mathrm{Weibull}(y|\alpha, \sigma) \nonumber \\ 
@@ -50,17 +51,17 @@ Marginal posterior of the parameter estimates given the data.
 \end{align}
 
 \begin{equation}
-  \sigma_{ij} = \frac{\exp(-(r_{j} + \beta_{0} + \sum_{b = 1}^{B} \beta_{b} X_{i,b}))}{\alpha}
+  \sigma_{ij} = \frac{\exp(-(r_{j} + \beta_{0} + \sum_{b = 1}^{B} \beta_{b} \mathbf{X}_{i,b}))}{\alpha}  % there has to be a prettier way of writing this
   \label{eq:reg}
 \end{equation}
+
+\(\mathbf{X}\) is \(n x B\) a matrix of predictor variables, each column getting its own \(\beta\) coefficient. These predictors are as follows.
+
+Log of mean occupancy and log body size (g) were used as continuous predictors. For modeling discrete predictors in a regression model, the vector of states is transformed into a \(n x (k - 1)\) matrix where each column is a series of 1's and 0's indicating the observed's category. \(k\) is the number of categories of the predictor and only \(k - 1\) columns are necessary as the intercept \(\beta_{0}\) takes on the remaining value. This was done for dietary and locomotor category. In total, this is 5 binary predictors.
 
 The effect of origination cohort (\(j\)) was included as a random effect \(r\) in the parameterization of \(\sigma\). The most recent temporal bin, 0 - 2 Mya, was excluded, leaving 32 different cohorts. 
 
 Each cohort was considered exchangable samples of a shared general ``cohort effect.'' The individual cohort effects was estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by setting a hyperprior on the scale parameter of the prior on \(r\).
-
-
-
-\subsubsection{Censoring}
 
 % Figure explaining censoring.
 
@@ -68,8 +69,6 @@ Right censored observations are observations where the point of extinction has n
 
 Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cummulative density function evaluated at the observed duration.
 
-
-\subsubsection{Priors}
 
 \begin{align*}
   \tau &\sim \mathrm{half\ Cauchy}(0, 2.5) \\
