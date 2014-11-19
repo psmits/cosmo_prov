@@ -15,18 +15,6 @@ make.tree <- function(taxo) {
   tree
 }
 
-#' make a tree of all the taxa
-#'
-#' @param data df; needs order, family, genus, binomial name
-#' @return object of class phylo, all edges length 1
-#' @export
-big.tree <- function(data) {
-  taxa <- unique(data[, c('order_name', 'family_name', 
-                          'occurrence.genus_name', 'name.bi')])
-  big.tree <- make.tree(taxa)
-  big.tree$edge.length <- rep(1, nrow(big.tree$edge))
-  big.tree
-}
 
 #' get the taxa for every locality
 #'
@@ -53,3 +41,47 @@ node.taxo <- function(graph, l.small = TRUE) {
   occ <- lapply(pres, function(x) tx[x])
   occ                                  
 }
+
+
+extract.genus <- function(string) {
+  g <- str_extract(string, '^[^_ ]*')
+  g
+}
+clean.taxon <- function(string) {
+  g <- str_replace(string, '[_ ]', ' ')
+  g
+}
+ext.clade <- function(tree, label) {
+  # extract a clade that actually works
+  root <- length(tree$tip.label) + which(tree$node.label == label)
+  clade <- getDescendants(tree, root)
+  global.root <- length(tree$tip.label) + 1
+  tips <- clade[clade < global.root]
+  excl <- ape::drop.tip(tree, seq(global.root - 1)[-tips])
+  excl
+}
+labeled.subclades <- function(tree, name, fam) {
+  # grab a labeled sublcade of your choice
+  nono <- which(!(clean.taxon(tree$tip.label) %in% name))
+  small <- drop.tip(tree, nono)
+  
+  # node matches
+  ord <- small$node.label[small$node.label != '']
+
+  matchs <- sort(unique(c(fam[which(fam %in% ord)])))
+  subs <- llply(matchs, function(x) ext.clade(small, x))
+  names(subs) <- matchs
+  subs
+}
+is.bad <- function(string) {
+  # find the problem trees
+  first <- any(str_detect(string, '[\\.0-9]'))
+
+  if(first) {
+    return(first) 
+  } else {
+    second <- any(!str_detect(string, '_'))
+    return(second)
+  }
+}
+

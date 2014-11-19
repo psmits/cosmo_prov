@@ -1,78 +1,82 @@
-library(paleotree)
 library(plyr)
-library(geiger)
-
-source('../R/phylo_gen.r')
+library(phytools)
+library(stringr)
 
 load('../data/update_taxonomy.rdata')
-
+source('../R/phylo_gen.r')
 source('../R/na_mung.r')
+load('../data/many_trees.rdata')
 
+raia.tree <- read.tree('../data/raia_tree.txt')
+tom.tree <- read.nexus('../data/tomiya_tree.nex')
+
+not.clean <- laply(lapply(mam.flat, function(x) x$tip.label), is.bad)
+
+to.clean <- mam.flat[not.clean]
+
+scrub <- function(tree) {
+  tree <- collapse.singles(tree)
+
+  if(any(is.na(tree$tip.label)) | any(tree$tip.label == '')) return(NULL)
+
+  tester <- drop.tip(tree, which(str_detect(tree$tip.label, '\\.')))
+  if(sum(str_detect(tester$tip.label, '_')) == 1) {
+    return(NULL)
+  } else if (is.null(tester)) { 
+    return(NULL)
+  } else {
+    tester <- drop.tip(tester, which(!str_detect(tester$tip.label, '_')))
+  }
+
+  if(!is.null(tester)) {
+     tester$tip.label <- str_replace(tester$tip.label, '^([^_]*_[^_]*)_.*$', '\\1')
+  }
+  tester
+}
+
+
+clean.out <- llply(to.clean, scrub)
+
+class(mam.flat) <- 'NULL'
+mam.flat[not.clean] <- clean.out
+rmd <- which(laply(mam.flat, is.null))
+
+final.trees <- mam.flat[-rmd]
+no.extinct <- laply(final.trees, function(x) {
+                    nar <- clean.taxon(x$tip.label)
+                    o <- nar %in% unique(dat$name.bi)
+                    any(o)})
+
+my.trees <- final.trees[no.extinct]
+my.trees[[length(my.trees)]] <- raia.tree
+
+# make taxonomy tree of what i have
 # north america
 no.fam <- which(na.tax$family_name == '')
 no.ord <- which(na.tax$order_name == '')
 rms <- unique(c(no.fam, no.ord))
 clean.na <- na.tax[-rms, ]
-na.tree <- big.tree(clean.na[, c('occurrence.genus_name', 
-                                 'family_name', 
-                                 'order_name', 
-                                 'name.bi')])
-time.data <- clean.na[, c('name.bi', 'ma_max', 'ma_min')]
-time.data <- ddply(time.data, .(name.bi), summarize,
-                   FAD = max(ma_max),
-                   LAD = min(ma_min))
-rownames(time.data) <- time.data[, 1]
-time.data <- time.data[, 2:3]
-na.tree <- timePaleoPhy(na.tree, time.data,
-                        type = 'mbl', vartime = 0.01)
+uni.tax <- unique(clean.na[, 1:4])
 
+new.tax <- replace.taxonomy(dat, uni.tax[, 1:3])
+new.tax$order_name[new.tax$order_name == ''] <- 'Unk'
+new.tax$family_name[new.tax$family_name == ''] <- 'Unk'
+for(ii in seq(nrow(new.tax))) {
+  if(new.tax$order_name[ii] == 'Artiodactyla') {
+    new.tax$order_name[ii] <- 'Cetartiodactyla'
+  }
+  if(new.tax$family_name[ii] == 'Unk') {
+    new.tax$family_name[ii] <- paste0(new.tax$order_name[ii], 
+                                      new.tax$family_name[ii])
+  }
+}
 
-# europe
-no.fam <- which(er.tax$family_name == '')
-no.ord <- which(er.tax$order_name == '')
-rms <- unique(c(no.fam, no.ord))
-clean.er <- er.tax[-rms, ]
-er.tree <- big.tree(clean.er[, c('occurrence.genus_name', 
-                                 'family_name', 
-                                 'order_name', 
-                                 'name.bi')])
+my.taxonomy <- new.tax[, c('order_name', 'family_name', 
+                           'occurrence.genus_name', 'name.bi')]
+my.taxonomy <- unique(my.taxonomy)
+na.tree <- make.tree(my.taxonomy)
 
-time.data <- clean.er[, c('name.bi', 'ma_max', 'ma_min')]
-time.data <- ddply(time.data, .(name.bi), summarize,
-                   FAD = max(ma_max),
-                   LAD = min(ma_min))
-rownames(time.data) <- time.data[, 1]
-time.data <- time.data[, 2:3]
-time.data[time.data[, 1] < time.data[, 2], ] <- 
-  time.data[time.data[, 1] < time.data[, 2], 2:1]
-er.tree <- timePaleoPhy(er.tree, time.data,
-                        type = 'mbl', vartime = 0.01)
+my.trees[[length(my.trees)]] <- na.tree
 
-
-# make some plots
-uti <- dat[, c('name.bi', 'comdiet', 'comlife')]
-uti <- uti[!(duplicated(uti$name.bi)), ]
-miss.match <- name.check(na.tree, data.names = uti$name.bi)
-prune <- ape::drop.tip(na.tree, miss.match$tree_not_data)
-sm <- uti[!(uti$name.bi %in% miss.match$data_not_tree), ]
-sm <- sm[match(prune$tip.label, sm$name.bi), ]
-sm$name.bi <- as.character(sm$name.bi)
-
-dit <- sm$comdiet
-cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
-         '#0072B2', '#D55E00', '#CC79A7')
-dit[dit == 'carni'] <- cbp[1]
-dit[dit == 'herb'] <- cbp[2]
-dit[dit == 'insect'] <- cbp[3]
-dit[dit == 'omni'] <- cbp[4]
-
-pdf(file = '../doc/figure/na_phylo_diet.pdf')
-par(mar = c(0, 0, 0, 0))
-plot.phylo(prune, type = 'fan', show.tip.label = FALSE)
-tiplabels(pch = 21, cex = 0.5, col = dit, bg = dit)
-legend('bottomright', legend = unique(sm$comdiet),
-       col = cbp[1:4], pch = 19, ncol = 1, cex = 1)
-dev.off()
-
-save(na.tree, er.tree,
-     file = '../data/taxon_trees.rdata')
+class(my.trees) <- 'multiPhylo'
+#my.super <- mrp.supertree(my.trees)
