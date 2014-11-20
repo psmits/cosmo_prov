@@ -34,7 +34,6 @@ scrub <- function(tree) {
   tester
 }
 
-
 clean.out <- llply(to.clean, scrub)
 
 class(mam.flat) <- 'NULL'
