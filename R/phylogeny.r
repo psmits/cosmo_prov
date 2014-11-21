@@ -47,7 +47,7 @@ no.extinct <- laply(final.trees, function(x) {
                     any(o)})
 
 my.trees <- final.trees[no.extinct]
-my.trees[[length(my.trees)]] <- raia.tree
+my.trees[[length(my.trees) + 1]] <- raia.tree
 
 # make taxonomy tree of what i have
 # north america
@@ -75,7 +75,7 @@ my.taxonomy <- new.tax[, c('order_name', 'family_name',
 my.taxonomy <- unique(my.taxonomy)
 na.tree <- make.tree(my.taxonomy)
 
-my.trees[[length(my.trees)]] <- na.tree
+my.trees[[length(my.trees) + 1]] <- na.tree
 
 class(my.trees) <- 'multiPhylo'
-#my.super <- mrp.supertree(my.trees)
+my.super <- mrp.supertree(my.trees)

@@ -69,6 +69,7 @@ diet <- diet + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 diet <- diet + facet_grid(Var2 ~ .)
 diet <- diet + labs(x = 'Value', y = 'Prob. Density')
 
+# effect of body size and occupancy
 
 
 # histogram of variance in cohort effect

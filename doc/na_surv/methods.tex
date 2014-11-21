@@ -20,22 +20,29 @@
 \begin{document}
 \section{Methods}
 
-\subsection{Fossil occurrence information}
+\subsection{Species information}
 
-Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filted so that only occurrences identified to the species level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitiude and longitude information were excluded.
+Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filtered so that only occurrences identified to the species level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitude and longitude information were excluded.
 
 Using the dietary and locomotor category assignments from the PBDB were then reassigned into coarser categories. This was done to improve interpretability, increase sample size per category, and make these results comparable to previous studies CITATION.
 
+% present this as a table?
+% probably the best thing to do
 DIET assignment
 
 LOCOMOTION assignment
+
+Fossil occurrences were assigned to 2 My bins ranging through the entire Cenozoic. Taxon duration was measured as the number of bins from the first bin of occurrence to the last bin of occurrence, inclusive.
+
+Species body size estimates were sourced from a large selection of primary literature and compilations, principally the PBDB, PanTHERIA \citep{Jones2009c}, the Neogene Old World Mammal database (Now; \url{http://www.helsinki.fi/science/now/}), and other large scale data collection efforts \citep{Smith2004c, Raia2012f, Brook2004a, Freudenthal2013, McKenna2011} CITATION. % further details and full list in a supplement
+
 
 
 \subsection{Bioprovince occupancy}
 
 For each 2 My time bin, a bipartite biogeographic network was created between species occurrences and spatial units. Spatial units were defined was 2x2 latitude--longitude grid cells. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Taxa are not linked to each other, nor are localities linked. 
 
-Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation CITATION. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. 
+Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. 
 
 The number of bioprovinces occupied per time bin was then determined for each species.
 
@@ -44,11 +51,10 @@ The number of bioprovinces occupied per time bin was then determined for each sp
 
 Because there exists no phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and many published phylogenies.
 
-The taxonomic information from the PBDB served as the basis for additional revision. The taxonomy of many species was updated using information from the Encyclopedia of Life (\url{http://eol.org/}), which collects and coallates this information into a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}.
+The taxonomic information from the PBDB served as the basis for additional revision. The taxonomy of many species was updated using the Encyclopedia of Life (\url{http://eol.org/}), which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}.
 
-Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled.
+Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. This was supplemented with various published phylogenies and taxonomies of fossil mammals \citep{Raia2012f,Janis1998,Janis2008} MORE CITATIONS.
 
-RAIA CITATION tree
 
 MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
 
@@ -59,18 +65,17 @@ I implemented a fully Bayesian model of taxon durations. For the sampling distri
 
 \begin{align}
   p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma) \nonumber \\ 
-  &= \frac{\alpha}{\sigma} \left(\frac{y}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y}{\sigma}\right)^{\alpha}\right) \label{eq:weibull}\\
+  &= \frac{\alpha}{\sigma} \left(\frac{y_{i}}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma}\right)^{\alpha}\right) \label{eq:weibull}\\
   \sigma &= \exp\left(\frac{-(h_{i} + r_{j | i} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right) \label{eq:reg}
 \end{align}
 
-These predictors are as follows. Log of mean occupancy and log body size (g) were used as continuous predictors. For modeling discrete predictors in a regression model, the vector of states is transformed into a \(n \times (k - 1)\) matrix where each column is a series of 1's and 0's indicating the observed's category, \(k\) being the number of categories. Only \(k - 1\) columns are necessary as the intercept takes on the remaining value. This was done for dietary and locomotor category. In total, this is 5 binary predictors. Finally, a 1 was included in the predictor matrix \(\mathbf{X}\) and the corresponding \(\beta\) coeffcient represents the intercept.
+These predictors are as follows. Log of mean occupancy and log body size (g) were used as continuous predictors. For modeling discrete predictors in a regression model, the vector of states is transformed into a \(n \times (k - 1)\) matrix where each column is a series of 1's and 0's indicating the observed's category, \(k\) being the number of categories. Only \(k - 1\) columns are necessary as the intercept takes on the remaining value. This was done for dietary and locomotor category. In total, this is 5 binary predictors. Finally, a 1 was included in the predictor matrix \(\mathbf{X}\), the corresponding \(\beta\) coefficient being the intercept.
 
 All \(\beta\) coefficients were given a different, diffuse informative normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary predictors. In all cases, posterior inference was not effected by changes to this choice of prior.
 
-The impact of origination cohort (\(j\)) was included as a random effect \(r\) in the parameterization of \(\sigma\). The most recent temporal bin, 0 - 2 Mya, was excluded, leaving 32 different cohorts. Each cohort was considered an exchangable sample of a shared general ``cohort effect.'' The individual cohort effects were estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by giving \(r\) a normally distributed prior centered at 0 with scale \(\tau\) which is then estimated from the data. \(\tau\) is given a diffuse half-Cauchy hyperprior following GELMAN CITATION.
+The impact of origination cohort (\(j\)) was included as a random effect \(r\) in the parameterization of \(\sigma\). Origination cohort is defined as the taxa which all originated during the same temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. Each cohort was considered an exchangeable sample of a shared general ``cohort effect.'' The individual cohort effects were estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by giving \(r\) a normally distributed prior centered at 0 with scale \(\tau\) which is then estimated from the data. \(\tau\) is given a diffuse half-Cauchy hyperprior following \citet{Gelman2006a}.
 
-The impact of shared evolutionary history, or phylogeny, was also included as an individual random effect \(h\), wihch is given a multivariate normal prior centered at 0. The covariance matrix of prior distribution of \(h\) is assumed known from the phylogenetic variance-covariance matrix (\(\mathbf{VCV}_{phy}\)) up to a constant \(\upsilon\). % how is VCV_{phy} calculated?
-This constant was given a diffuse half-Cauchy prior.
+The impact of shared evolutionary history, or phylogeny, was also included as an multivariate normal random effect \(h\). The covariance matrix of \(h\) was assumed known, up to a constant \(\upsilon\), from the phylogenetic variance-covariance matrix (\(\mathbf{VCV}_{phy}\)) \citep{Lynch1991,Housworth2004}. \(\mathbf{VCV}_{phy}\) was calculated assuming a Brownian motion model of evolution. The constant \(\upsilon\) was given a diffuse half-Cauchy prior.
 
 The shape parameter \(\alpha\) was assumed constant and was given a diffuse half-Cauchy prior. This is standard practice in survival analysis.
 
@@ -85,23 +90,23 @@ Below is a summary of the priors used for each estimated parameter
 \end{align*}
 
 
-An important part of survival analysis is the inclusion of ``censored'' observations. These are observations where the failure time was not directly observed. In this way both duration and event information are modeled simultaneously, as opposed to just duration or event as in linear and logistic regression, respectively. 
+An important part of survival analysis is the inclusion of ``censored'' observations. These are observations where the failure time has not occurred during the period of interest. In this way both duration and event information are modeled simultaneously, as opposed to just duration or event as in linear and logistic regression, respectively. 
 
-The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. For each right censored observation, the log probability is incremented by the complementary cummulative density function evaluated at the observed duration.
+The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. For each right censored observation, the log probability is incremented by the complementary cumulative density function evaluated at the observed duration.
 
-Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cummulative density function evaluated at the observed duration.
+Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cumulative density function evaluated at the observed duration.
 
-The joint and marginal posteriors of all parameters were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler CITATION. 
+The joint and marginal posteriors of all parameters were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. 
 
-Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\) CITATION. Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed CITATION.
+Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
 
 Each chain was evaluated for 2000 steps, with the first 1000 used as warm-up and the last 1000 as samples from the posterior. In total, this yields 4000 samples from the posterior for all estimated parameters. 
 
 
 \subsubsection{Posterior predictive checks}
 
-The most basic assessement of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed\(y\). This was done both graphically and numerically.
+The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed\(y\). This was done both graphically and numerically.
 
-
+% WAIC
 
 \end{document}
