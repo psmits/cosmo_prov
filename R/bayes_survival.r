@@ -95,16 +95,16 @@ for(i in 1:1000) {
   zz[[i]] <- oo
 }
 
-par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-for(i in 1:20)
-    plot((duration- zz[[i]]) / sd(zz[[i]]))
-
-tp <- sum(laply(zz, mean) > mean(duration))
-br <- seq(0, max(ceiling(laply(zz, max))), 1)
-par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(duration, breaks = br)
-for(s in 1:19)
-  hist(zz[[s]], breaks = br)
+#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
+#for(i in 1:20)
+#    plot((duration- zz[[i]]) / sd(zz[[i]]))
+#
+#tp <- sum(laply(zz, mean) > mean(duration))
+#br <- seq(0, max(ceiling(laply(zz, max))), 1)
+#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
+#hist(duration, breaks = br)
+#for(s in 1:19)
+#  hist(zz[[s]], breaks = br)
 
 
 # larger
@@ -118,7 +118,7 @@ modlist <- mclapply(1:4, mc.cores = detectCores(),
 mfit <- sflist2stanfit(modlist)
 
 mpost <- extract(mfit, permuted = TRUE)
-hist(mpost$fv, breaks = 20)
+#hist(mpost$fv, breaks = 20)
   
 dat <- cbind(c(data$occ_unc, data$occ_cen), 
              c(data$size_unc, data$size_cen))
@@ -147,19 +147,19 @@ for(i in 1:100) {
   mm[[i]] <- oo
 }
 
-par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
-for(i in 1:12)
-    plot((dead - mm[[i]]) / sd(mm[[i]]))
-
-sum(laply(mm, function(x) mean(x)) > mean(dead))
-hist(laply(mm, function(x) mean(x))); abline(v = mean(dead))
-sum(laply(mm, function(x) quantile(x, .5)) > quantile(dead, .5))
-hist(laply(mm, function(x) quantile(x, .5))); abline(v = quantile(dead, .5))
-sum(laply(mm, function(x) quantile(x, .75)) > quantile(dead, .75))
-hist(laply(mm, function(x) quantile(x, .75))); abline(v = quantile(dead, .75))
-
-br <- seq(0, max(ceiling(laply(mm, max))), 1)
-par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
-hist(dead, breaks = br)
-for(s in 1:11)
-  hist(mm[[s]], breaks = br)
+#par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
+#for(i in 1:12)
+#    plot((dead - mm[[i]]) / sd(mm[[i]]))
+#
+#sum(laply(mm, function(x) mean(x)) > mean(dead))
+#hist(laply(mm, function(x) mean(x))); abline(v = mean(dead))
+#sum(laply(mm, function(x) quantile(x, .5)) > quantile(dead, .5))
+#hist(laply(mm, function(x) quantile(x, .5))); abline(v = quantile(dead, .5))
+#sum(laply(mm, function(x) quantile(x, .75)) > quantile(dead, .75))
+#hist(laply(mm, function(x) quantile(x, .75))); abline(v = quantile(dead, .75))
+#
+#br <- seq(0, max(ceiling(laply(mm, max))), 1)
+#par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
+#hist(dead, breaks = br)
+#for(s in 1:11)
+#  hist(mm[[s]], breaks = br)
