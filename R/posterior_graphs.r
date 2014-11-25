@@ -4,6 +4,7 @@ library(scales)
 library(hexbin)
 library(stringr)
 library(grid)
+library(survival)
 
 
 theme_set(theme_bw())
@@ -57,7 +58,10 @@ ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 
 
 # survival function
-emp.surv <- survfit(Surv(duration, extinct) ~ 1)
+condition <- extinct
+condition[extinct == 1 & duration == 1] <- 2
+emp.surv <- survfit(Surv(time = duration, time2 = duration, 
+                         event = condition, type = 'interval') ~ 1)
 emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
 emp.surv <- rbind(c(0, 1), emp.surv)
 
@@ -79,6 +83,7 @@ soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
 
 # marginal posteriors
 melted <- melt(mpost)
+scale.melted <- melt(scale.mpost)
 ns <- length(mpost$lp__)
 
 # create the different combinations
@@ -139,10 +144,18 @@ diet <- diet + labs(x = 'Value', y = 'Prob. Density')
 size.eff <- melted[melted$L1 == 'beta_size', 'value']  # base line
 occ.eff <- melted[melted$L1 == 'beta_occ', 'value']  # base line
 oth.eff <- melt(cbind(size.eff, occ.eff))
+oth.eff$label <- rep('unstandardized', nrow(oth.eff))
+sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']  # base line
+sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']  # base line
+sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
+sc.oth.eff$label <- rep('standardized', nrow(sc.oth.eff))
+
+oth.eff <- rbind(oth.eff, sc.oth.eff)
+
 other <- ggplot(oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 other <- other + geom_histogram(aes(y = ..density..))
-other <- other + facet_grid(Var2 ~ .)
+other <- other + facet_grid(Var2 ~ label)
 other <- other + labs(x = 'Value', y = 'Prob. Density')
 #ggsave(other, filename = '../doc/figure/other_est.png',
 #       width = 15, height = 10)

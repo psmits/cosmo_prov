@@ -1,5 +1,5 @@
 library(rstan)
-library(boot)
+library(arm)
 library(parallel)
 library(truncdist)
 
@@ -7,6 +7,7 @@ source('../R/surv_setup.r')
 
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
+
 
 # compile model
 zero.weibull <- stan(file = '../stan/zero_weibull.stan')
@@ -75,6 +76,12 @@ data$samp_cen <- seq(from = data$N_unc + 1,
                      to = data$N_unc + data$N_cen, 
                      by = 1)
 
+scale.data <- data
+scale.data$size_unc <- rescale(scale.data$size_unc)
+scale.data$size_cen <- rescale(scale.data$size_cen)
+scale.data$occ_unc <- rescale(scale.data$occ_unc)
+scale.data$occ_cen <- rescale(scale.data$occ_cen)
+
 exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
 
 # zero model 
@@ -109,17 +116,27 @@ for(i in 1:1000) {
 
 # larger
 modlist <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = weibull.model, 
-                                      seed = seed,
-                                      data = data,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
+                    function(x) stan(fit = weibull.model, 
+                                     seed = seed,
+                                     data = data,
+                                     chains = 1, chain_id = x,
+                                     refresh = -1))
 
 mfit <- sflist2stanfit(modlist)
 
+scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
+                          function(x) stan(fit = weibull.model, 
+                                           seed = seed,
+                                           data = scale.data,
+                                           chains = 1, chain_id = x,
+                                           refresh = -1))
+
+scale.mfit <- sflist2stanfit(scale.modlist)
+
 mpost <- extract(mfit, permuted = TRUE)
+scale.mpost <- extract(scale.mfit, permuted = TRUE)
 #hist(mpost$fv, breaks = 20)
-  
+
 dat <- cbind(c(data$occ_unc, data$occ_cen), 
              c(data$size_unc, data$size_cen))
 dd <- rbind(data$diet_unc, data$diet_cen)
@@ -140,16 +157,16 @@ for(i in 1:100) {
   oo <- c()
   for(j in seq(n)) {
     reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-           sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
+    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
     oo[j] <- rweibull(1, scale = exp(-reg) / alp,
                       shape = alp)
   }
   mm[[i]] <- oo
 }
 
-#par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
-#for(i in 1:12)
-#    plot((dead - mm[[i]]) / sd(mm[[i]]))
+par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
+for(i in 1:12)
+    plot((dead - mm[[i]]) / sd(mm[[i]]))
 #
 #sum(laply(mm, function(x) mean(x)) > mean(dead))
 #hist(laply(mm, function(x) mean(x))); abline(v = mean(dead))
@@ -158,8 +175,8 @@ for(i in 1:100) {
 #sum(laply(mm, function(x) quantile(x, .75)) > quantile(dead, .75))
 #hist(laply(mm, function(x) quantile(x, .75))); abline(v = quantile(dead, .75))
 #
-#br <- seq(0, max(ceiling(laply(mm, max))), 1)
-#par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
-#hist(dead, breaks = br)
-#for(s in 1:11)
-#  hist(mm[[s]], breaks = br)
+br <- seq(0, max(ceiling(laply(mm, max))), 1)
+par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
+hist(dead, breaks = br)
+for(s in 1:11)
+  hist(mm[[s]], breaks = br)
