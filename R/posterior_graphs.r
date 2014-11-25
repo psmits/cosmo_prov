@@ -5,6 +5,23 @@ library(hexbin)
 library(stringr)
 library(grid)
 library(survival)
+library(GGally)
+
+pairwise.diffs <- function(x) {
+  #stopifnot(is.matrix(x))
+  # create column combination pairs
+  prs <- cbind(rep(1:ncol(x), each = ncol(x)), 1:ncol(x))
+  col.diffs <- prs[prs[, 1] < prs[, 2], , drop = FALSE]
+  # do pairwise differences 
+  result <- x[, col.diffs[, 1]] - x[, col.diffs[, 2], drop = FALSE]
+  # set colnames
+  if(is.null(colnames(x)))
+    colnames(x) <- 1:ncol(x)
+  
+  colnames(result) <- paste(colnames(x)[col.diffs[, 1]], ".vs.", 
+                            colnames(x)[col.diffs[, 2]], sep = "")
+  result
+}
 
 
 theme_set(theme_bw())
@@ -95,13 +112,7 @@ diet.eff <- melted[melted$L1 == 'beta_diet', ]  # diet effect
 # make fancy versions of these
 # lower values, lower risk
 # these are particularilty useful for summary statistics
-hist(c(base.inter$value + move.eff$value)[1:ns] - base.inter$value) # ground - arb
-hist(c(base.inter$value + move.eff$value)[(ns+1):(2*ns)] - base.inter$value) # scan - arb 
-hist(c(base.inter$value + move.eff$value)[(ns+1):(2*ns)] - 
-     c(base.inter$value + move.eff$value[1:ns])) # scan - ground
-
 # effect of locomotor category
-# better to compare as differences?
 arb.eff <- base.inter$value
 grd.eff <- base.inter$value + move.eff$value[1:ns]
 scn.eff <- base.inter$value + move.eff$value[(ns + 1):(2 * ns)]
@@ -114,17 +125,16 @@ loco <- loco + labs(x = 'Value', y = 'Prob. Density')
 #ggsave(loco, filename = '../doc/figure/loco_est.png',
 #       width = 15, height = 10)
 
+# better to compare as differences?
+loco.diff <- melt(pairwise.diffs(cbind(arb.eff, grd.eff, scn.eff)))
+lodf <- ggplot(loco.diff, aes(x = value))
+lodf <- lodf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
+lodf <- lodf + geom_histogram(aes(y = ..density..))
+lodf <- lodf + facet_grid(Var2 ~ .)
+lodf <- lodf + labs(x = 'Value', y = 'Prob. Density')
+#ggsave(loco, filename = '../doc/figure/loco_diff_est.png',
+#       width = 15, height = 10)
 
-hist(c(base.inter$value + diet.eff$value)[1:ns] - 
-     base.inter$value)  # herb - carn
-hist(c(base.inter$value + diet.eff$value)[(ns+1):(2*ns)] - 
-     base.inter$value) # insect - carn
-hist(c(base.inter$value + diet.eff$value)[(2*ns+1):(3*ns)] - 
-     base.inter$value) # omni - carn
-hist(c(base.inter$value + diet.eff$value)[(2*ns+1):(3*ns)] - 
-     c(base.inter$value + diet.eff$value)[1:ns]) # omni - herb
-hist(c(base.inter$value + diet.eff$value)[(2*ns+1):(3*ns)] - 
-     c(base.inter$value + diet.eff$value)[(ns+1):(2*ns)]) # omni - insect
 
 # effect of dietary category
 crn.eff <- base.inter$value
@@ -140,6 +150,17 @@ diet <- diet + labs(x = 'Value', y = 'Prob. Density')
 #ggsave(diet, filename = '../doc/figure/diet_est.png',
 #       width = 15, height = 10)
 
+# better to compare as differences?
+diet.diff <- melt(pairwise.diffs(cbind(crn.eff, hrb.eff, ist.eff, omn.eff)))
+didf <- ggplot(diet.diff, aes(x = value))
+didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
+didf <- didf + geom_histogram(aes(y = ..density..))
+didf <- didf + facet_grid(Var2 ~ .)
+didf <- didf + labs(x = 'Value', y = 'Prob. Density')
+#ggsave(loco, filename = '../doc/figure/diet_diff_est.png',
+#       width = 15, height = 10)
+
+
 # effect of body size and occupancy
 size.eff <- melted[melted$L1 == 'beta_size', 'value']  # base line
 occ.eff <- melted[melted$L1 == 'beta_occ', 'value']  # base line
@@ -150,6 +171,7 @@ sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']  # base line
 sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
 sc.oth.eff$label <- rep('standardized', nrow(sc.oth.eff))
 
+sc.oth.eff$Var2 <- oth.eff$Var2
 oth.eff <- rbind(oth.eff, sc.oth.eff)
 
 other <- ggplot(oth.eff, aes(x = value))
