@@ -90,13 +90,28 @@ sim.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
                               x = sim.surv, y = seq(length(sim.surv))))
 sim.surv <- sim.surv[sim.surv$label %in% 1:100, ]
 
+exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
+exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time, 
+                                                         surv = x$surv)))
+exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
+exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
+                              x = exp.surv, y = seq(length(exp.surv))))
+exp.surv <- exp.surv[exp.surv$label %in% 1:100, ]
+
+mix.surv <- rbind(cbind(sim.surv, lab = rep('wei', nrow(sim.surv))),
+                  cbind(exp.surv, lab = rep('exp', nrow(exp.surv))))
+
 soft <- ggplot(emp.surv, aes(x = time, y = surv))
-soft <- soft + geom_step(data = sim.surv, aes(x = time, y = surv, group = label), 
+soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
                          colour = 'grey', alpha = 0.1)
 soft <- soft + geom_step(size = 1, direction = 'hv')
 soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
+soft <- soft + facet_grid(. ~ lab)
+soft <- soft + labs(x = 'Duration', y = 'P(T > t)')
 #ggsave(soft, filename = '../doc/figure/survival_function.png',
 #       width = 15, height = 10)
+
+
 
 # marginal posteriors
 melted <- melt(mpost)

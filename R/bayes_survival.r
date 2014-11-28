@@ -103,17 +103,6 @@ for(i in 1:1000) {
   zz[[i]] <- oo
 }
 
-#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-#for(i in 1:20)
-#    plot((duration- zz[[i]]) / sd(zz[[i]]))
-#
-#tp <- sum(laply(zz, mean) > mean(duration))
-#br <- seq(0, max(ceiling(laply(zz, max))), 1)
-#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-#hist(duration, breaks = br)
-#for(s in 1:19)
-#  hist(zz[[s]], breaks = br)
-
 
 # larger
 modlist <- mclapply(1:4, mc.cores = detectCores(),
@@ -148,7 +137,6 @@ efit <- sflist2stanfit(explist)
 
 mpost <- extract(mfit, permuted = TRUE)
 scale.mpost <- extract(scale.mfit, permuted = TRUE)
-#hist(mpost$fv, breaks = 20)
 
 dat <- cbind(c(data$occ_unc, data$occ_cen), 
              c(data$size_unc, data$size_cen))
@@ -177,8 +165,30 @@ for(i in 1:100) {
   mm[[i]] <- oo
 }
 
-br <- seq(0, max(ceiling(laply(mm, max))), 1)
-par(mfrow = c(4, 3), mar = c(4, 4, 2, 2))
-hist(dead, breaks = br)
-for(s in 1:11)
-  hist(mm[[s]], breaks = br)
+
+
+epost <- extract(efit, permuted = TRUE)
+dat <- cbind(c(data$occ_unc, data$occ_cen), 
+             c(data$size_unc, data$size_cen))
+dd <- rbind(data$diet_unc, data$diet_cen)
+mo <- rbind(data$move_unc, data$move_cen)
+
+dead <- duration
+ee <- list()
+for(i in 1:100) {
+  n <- length(dead)
+  inc <- sample(epost$beta_inter, 1)
+  oc <- sample(epost$beta_occ, 1)
+  sz <- sample(epost$beta_size, 1)
+  mv <- epost$beta_move[sample(nrow(epost$beta_move), 1), ]
+  di <- epost$beta_diet[sample(nrow(epost$beta_diet), 1), ]
+  ff <- epost$rando[sample(nrow(epost$rando), 1), ]
+
+  oo <- c()
+  for(j in seq(n)) {
+    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
+    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
+    oo[j] <- rexp(1, rate = exp(reg))
+  }
+  ee[[i]] <- oo
+}
