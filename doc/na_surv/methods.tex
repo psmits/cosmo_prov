@@ -24,19 +24,34 @@
 
 Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filtered so that only occurrences identified to the species level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitude and longitude information were excluded.
 
-Using the dietary and locomotor category assignments from the PBDB were then reassigned into coarser categories. This was done to improve interpretability, increase sample size per category, and make these results comparable to previous studies CITATION.
+Species dietary and locomotor category assignments were done using the assignments in initial the PBDB which were then reasigned into coarser categories (Table \ref{tab:trait_cats}). This was done to improve interpretability, increase sample size per category, and make these results comparable to previous studies CITATION.
 
-% present this as a table?
-% probably the best thing to do
-DIET assignment
+\begin{table}
+  \centering
+  \begin{tabular}[ht]{| l | l | l |}
+    \hline
+    \multicolumn{2}{ | c | }{This study} & PBDB categories \\
+    \hline \hline
+    \multirow{4}{*}{Diet} & Carnivore & \\
+    & Herbivore & \\
+    & Insectivore & \\
+    & Omnivore & \\ 
+    \hline
+    \multirow{3}{*}{Locomotor} & Arboreal & \\
+    & Ground dwelling & \\
+    & Scansorial & \\
+    \hline
+  \end{tabular}
+  \caption{Species trait assignments in this study are a coarser version of the information available in the PBDB. Information was coarsened to improve per category sample size and uniformity and followed this table.}
+  \label{tab:trait_cats}
+\end{table}
 
-LOCOMOTION assignment
 
 Fossil occurrences were assigned to 2 My bins ranging through the entire Cenozoic. Taxon duration was measured as the number of bins from the first bin of occurrence to the last bin of occurrence, inclusive.
 
 Species body size estimates were sourced from a large selection of primary literature and compilations, principally the PBDB, PanTHERIA \citep{Jones2009c}, the Neogene Old World Mammal database (Now; \url{http://www.helsinki.fi/science/now/}), and other large scale data collection efforts \citep{Smith2004c, Raia2012f, Brook2004a, Freudenthal2013, McKenna2011} CITATION. % further details and full list in a supplement
 
-In many cases species body mass was estimated from anatomical dimensions, principally dental measurements. These estimates were made using a variety of published regession equations. % equations in a giant table/appendix section
+In many cases, species body mass was estimated from anatomical dimensions such as tooth size. These estimates were made using a variety of published regression equations. % equations in a giant table/appendix section
 
 
 \subsection{Bioprovince occupancy}
@@ -45,7 +60,7 @@ For each 2 My time bin, a bipartite biogeographic network was created between sp
 
 Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. 
 
-The number of bioprovinces occupied per time bin was then determined for each species.
+The number of bioprovinces occupied per time bin was then determined for each species. Additionally, the coefficient of variation (CV) of occupancy was also calculated.
 
 
 \subsection{Semi-formal supertree}
@@ -105,7 +120,7 @@ Each chain was evaluated for 2000 steps, with the first 1000 used as warm-up and
 
 \subsubsection{Posterior predictive checks}
 
-The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \(y\). This was done both graphically and numerically.
+The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \(y\) \citep{Gelman2013d}. This was done both graphically and numerically.
 
 The model described above was the final model at the end of a continuous model development framework where the sampling and prior distributions were modified to best reflect knowledge of the data, the inclusion of important and necessary covariates, and actually fit the data.
 
