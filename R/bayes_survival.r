@@ -2,6 +2,7 @@ library(rstan)
 library(arm)
 library(parallel)
 library(truncdist)
+library(xtable)
 
 source('../R/surv_setup.r')
 
@@ -94,6 +95,9 @@ zerolist <- mclapply(1:4, mc.cores = detectCores(),
                                       refresh = -1))
 
 zfit <- sflist2stanfit(zerolist)
+zfit.table <- xtable(summary(zfit)[[1]], label = 'zfit_tab')
+print.xtable(zfit.table, 
+             file = '../doc/na_surv/zfit_table_raw.tex')
 
 zpost <- extract(zfit, permuted = TRUE)
 zz <- list()
@@ -113,6 +117,9 @@ modlist <- mclapply(1:4, mc.cores = detectCores(),
                                      refresh = -1))
 
 mfit <- sflist2stanfit(modlist)
+mfit.table <- xtable(summary(mfit)[[1]], label = 'weifit_tab')
+print.xtable(mfit.table, 
+             file = '../doc/na_surv/mfit_table_raw.tex')
 
 
 scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
@@ -123,6 +130,9 @@ scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
                                            refresh = -1))
 
 scale.mfit <- sflist2stanfit(scale.modlist)
+scalefit.table <- xtable(summary(scale.mfit)[[1]], label = 'scalefit_tab')
+print.xtable(scalefit.table, 
+             file = '../doc/na_surv/scalefit_table_raw.tex')
 
 
 explist <- mclapply(1:4, mc.cores = detectCores(),
@@ -133,6 +143,9 @@ explist <- mclapply(1:4, mc.cores = detectCores(),
                                      refresh = -1))
 
 efit <- sflist2stanfit(explist)
+efit.table <- xtable(summary(efit)[[1]], label = 'efit_tab')
+print.xtable(efit.table, 
+             file = '../doc/na_surv/efit_table_raw.tex')
 
 
 mpost <- extract(mfit, permuted = TRUE)
