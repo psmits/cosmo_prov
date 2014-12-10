@@ -32,10 +32,12 @@ di <- factor(na.ecol$diet[-plio])
 mo <- factor(na.ecol$move[-plio])
 inr <- interaction(di, mo)
 
-tax.nam <- str_replace(na.ecol[, 1], ' ', '_')
+# prepare the vcv
+tax.nam <- str_replace(na.ecol[-plio, 1], ' ', '_')
 to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
 na.tree <- drop.tip(na.scale, to.drop)
 tree.vcv <- vcv(na.tree)
+#cov2cor(tree.vcv)
 
 data <- list(duration = duration,
              size = log(size),
@@ -85,6 +87,8 @@ data$samp_unc <- seq(data$N_unc)
 data$samp_cen <- seq(from = data$N_unc + 1, 
                      to = data$N_unc + data$N_cen, 
                      by = 1)
+data$vcv <- tree.vcv
+
 
 scale.data <- data
 scale.data$size_unc <- rescale(scale.data$size_unc)
