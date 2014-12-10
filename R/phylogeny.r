@@ -1,6 +1,7 @@
 library(plyr)
 library(phytools)
 library(stringr)
+library(paleotree)
 
 load('../data/update_taxonomy.rdata')
 source('../R/phylo_gen.r')
@@ -88,6 +89,19 @@ my.taxonomy <- new.tax[, c('order_name', 'family_name',
 my.taxonomy <- unique(my.taxonomy)
 na.tree <- make.tree(my.taxonomy)
 na.tree$tip.label <- str_replace(na.tree$tip.label, ' ', '_')
+fad <- ddply(dat, .(name.bi), summarize, max(bins))
+lad <- ddply(dat, .(name.bi), summarize, min(bins))
+fad[, 1] <- str_replace(fad[, 1], ' ', '_')
+lad[, 1] <- str_replace(lad[, 1], ' ', '_')
+fad <- fad[match(na.tree$tip.label, fad[, 1]), ]
+lad <- lad[match(na.tree$tip.label, lad[, 1]), ]
+datmat <- cbind(fad[, 2], lad[, 2])
+rownames(datmat) <- fad[, 1]
+
+na.tree <- multi2di(na.tree)
+na.scale <- timePaleoPhy(na.tree, timeData = datmat, 
+                         type = 'mbl', vartime = 1)
+save(na.scale, file = '../data/taxonomy_tree.rdata')
 
 my.trees[[length(my.trees) + 1]] <- na.tree
 
@@ -107,4 +121,4 @@ class(genera.trees) <- 'multiPhylo'
 class(big.genera) <- 'multiPhylo'
 #my.super <- mrp.supertree(my.trees)
 #genera.super <- mrp.supertree(genera.trees)
-big.super <- mrp.supertree(big.genera)
+#big.super <- mrp.supertree(big.genera)

@@ -3,8 +3,11 @@ library(arm)
 library(parallel)
 library(truncdist)
 library(xtable)
+library(ape)
+library(stringr)
 
 source('../R/surv_setup.r')
+load('../data/taxonomy_tree.rdata')
 
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
@@ -28,6 +31,11 @@ occ <- occ[-plio]
 di <- factor(na.ecol$diet[-plio])
 mo <- factor(na.ecol$move[-plio])
 inr <- interaction(di, mo)
+
+tax.nam <- str_replace(na.ecol[, 1], ' ', '_')
+to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
+na.tree <- drop.tip(na.scale, to.drop)
+tree.vcv <- vcv(na.tree)
 
 data <- list(duration = duration,
              size = log(size),
