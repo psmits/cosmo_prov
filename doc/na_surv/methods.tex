@@ -28,18 +28,18 @@ Species dietary and locomotor category assignments were done using the assignmen
 
 \begin{table}
   \centering
-  \begin{tabular}[ht]{| l | l | l |}
+  \begin{tabular}[ht]{ l | l | l }
     \hline
-    \multicolumn{2}{ | c | }{This study} & PBDB categories \\
+    \multicolumn{2}{ c |}{This study} & PBDB categories \\
     \hline \hline
-    \multirow{4}{*}{Diet} & Carnivore & \\
-    & Herbivore & \\
-    & Insectivore & \\
-    & Omnivore & \\ 
+    \multirow{4}{*}{Diet} & Carnivore & Carnivore \\
+    & Herbivore & Browser, folivore, granivore, grazer, herbivore. \\
+    & Insectivore & Insectivore. \\
+    & Omnivore & Frugivore, omnivore. \\ 
     \hline
-    \multirow{3}{*}{Locomotor} & Arboreal & \\
-    & Ground dwelling & \\
-    & Scansorial & \\
+    \multirow{3}{*}{Locomotor} & Arboreal & Arboreal.\\
+    & Ground dwelling & Fossorial, ground dwelling, semifossorial, saltatorial. \\
+    & Scansorial & Scansorial. \\
     \hline
   \end{tabular}
   \caption{Species trait assignments in this study are a coarser version of the information available in the PBDB. Information was coarsened to improve per category sample size and uniformity and followed this table.}
@@ -71,13 +71,19 @@ The taxonomic information from the PBDB served as the basis for additional revis
 
 Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. This was supplemented with various published phylogenies and taxonomies of fossil mammals \citep{Raia2012f,Janis1998,Janis2008} MORE CITATIONS.
 
-
 MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
+
+The resulting tree was time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My. Additionally, polytomies were resolved resolved with respect to the order of their appearance. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is an imporant covenience for compuation (see below). 
+% Because I'm not doing the Chol decomposition exactly, can I just include the ZLBs?
+% Is 1 My what I actually want to use?
+While other time scaling approaches might be possible (Hedman, Bapst, CITATION), this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
+% I really wish I was using the Hedman approach.
+
 
 
 \subsection{Survival model}
 
-I implemented a fully Bayesian model of taxon durations. For the sampling distribution or likelihood, I assumed a parametric survival model where the observations followed a Weibull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) defined as in a regression model with \(\mathbf{X}\) being a matrix of predictor variables (Eq. \ref{eq:reg}).
+I implemented a fully Bayesian model of taxon durations. For the sampling distribution or likelihood, I assumed a parametric survival model where the observations followed a Weibull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) defined as in a regression model with \(\mathbf{X}\) being a matrix of predictor variables (Eq. \ref{eq:reg}).  % I also have an exponential model for illustration purposes.
 
 \begin{align}
   p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma) \nonumber \\ 
@@ -89,11 +95,21 @@ These predictors are as follows. Log of mean occupancy and log body size (g) wer
 
 All \(\beta\) coefficients were given a different, diffuse informative normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary predictors. In all cases, posterior inference was not effected by changes to this choice of prior.
 
+Note that regression coefficients (\(\beta\)-s) are not nececssary directly comparable. Standardizing input variables to have equal standard deviations allows for direct comparison of variables in terms of change in standard deviation \citep{Schielzeth2010}. Because there is a mix of continuous and categorical predictors in the above model, standardization is done slighly differently. The expected standard deviation for a binary variable is 0.5, so to make comparisons between binary and continuous variables the continuous inputs must be divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs.
+
 The impact of origination cohort (\(j\)) was included as a random effect \(r\) in the parameterization of \(\sigma\). Origination cohort is defined as the taxa which all originated during the same temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. Each cohort was considered an exchangeable sample of a shared general ``cohort effect.'' The individual cohort effects were estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by giving \(r\) a normally distributed prior centered at 0 with scale \(\tau\) which is then estimated from the data. \(\tau\) is given a diffuse half-Cauchy hyperprior following \citet{Gelman2006a}.
 
-The impact of shared evolutionary history, or phylogeny, was also included as an multivariate normal random effect \(h\). The covariance matrix of \(h\) was assumed known, up to a constant \(\upsilon\), from the phylogenetic variance-covariance matrix (\(\mathbf{VCV}_{phy}\)) \citep{Lynch1991,Housworth2004}. \(\mathbf{VCV}_{phy}\) was calculated assuming a Brownian motion model of evolution. The constant \(\upsilon\) was given a diffuse half-Cauchy prior.
+The impact of shared evolutionary history, or phylogeny, was also included as an multivariate normal random effect \(h\). The covariance matrix of \(h\) was assumed known, up to a constant \(\upsilon\), from the phylogenetic covariance matrix (\(\mathbf{VCV}_{phy}\)) \citep{Lynch1991,Housworth2004}. \(\mathbf{VCV}_{phy}\) was calculated as the amount of shared branch length between taxa. The constant \(\upsilon\) was given a diffuse half-Cauchy prior. The phylogenetic heritability was then calculated as \(h_{phy}^{2} = \frac{\upsilon}{\upsilon + \sigma_{e}}\) where \(\sigma_{e}\) is the variance of the residuals \citep{Housworth2004}. \(h_{phy}^{2}\) is an estimate of the percent of the total observed variance explained by shared common ancestry.
 
-The shape parameter \(\alpha\) was assumed constant and was given a diffuse half-Cauchy prior. This is standard practice in survival analysis.
+The shape parameter \(\alpha\) was assumed constant, as is standard practice in survival analysis, and was given a diffuse half-Cauchy prior. 
+
+% Krushke-style diagram of the entire model, minus censoring.
+
+An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Kleinbaum2005}. These are observations where the failure time has not occurred during the period of interest. In this way both duration and event information are modeled simultaneously, as opposed to just duration or event as in linear and logistic regression, respectively. 
+
+The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. For each right censored observation, the log probability is incremented by the complementary cumulative density function evaluated at the observed duration.
+
+Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cumulative density function evaluated at the observed duration.
 
 Below is a summary of the priors used for each estimated parameter 
 \begin{align*}
@@ -105,15 +121,10 @@ Below is a summary of the priors used for each estimated parameter
   \alpha &\sim \mathrm{half\ Cauchy}(2.5)
 \end{align*}
 
-An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Kleinbaum2005}. These are observations where the failure time has not occurred during the period of interest. In this way both duration and event information are modeled simultaneously, as opposed to just duration or event as in linear and logistic regression, respectively. 
-
-The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. For each right censored observation, the log probability is incremented by the complementary cumulative density function evaluated at the observed duration.
-
-Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. For each left censored observation, the log probability is incremented by the cumulative density function evaluated at the observed duration.
-
-Note that regression coefficients (\(\beta\)-s) are not nececssary directly comparable. Standardizing input variables to have equal standard deviations allows for direct comparison of variables in terms of change in standard deviation \citep{Schielzeth2010}. Because there is a mix of continuous and categorical predictors in the above model, standardization is done slighly differently. The expected standard deviation for a binary variable is 0.5, meaning that to make comparisons between binary and continuous variables the continuous inputs must be divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs.
 
 The parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
+
+Inverting a very large covariance matrix, is a memory intense procedure. Because the phylogenetic covariance matrix is only assumed known up to a constant, every iteration of the MCMC would involve solving a very large matrix which is not ideal. In order to speed up the MCMC routine, this aspect of the model had to be reparameterized for efficiency purposes. One way of doing this is by using a Cholesky parameterized version of the multivariate normal distribution with a Cholesky decomposed covariance matrix. A similar approach was implemented in this study (see Appendix:Code).
 
 Each chain was evaluated for 2000 steps, with the first 1000 used as warm-up and the last 1000 as samples from the posterior. In total, this yields 4000 samples from the posterior for all estimated parameters. 
 
@@ -122,8 +133,9 @@ Each chain was evaluated for 2000 steps, with the first 1000 used as warm-up and
 
 The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \(y\) \citep{Gelman2013d}. This was done both graphically and numerically.
 
-The model described above was the final model at the end of a continuous model development framework where the sampling and prior distributions were modified to best reflect knowledge of the data, the inclusion of important and necessary covariates, and actually fit the data.
+An example posterior predictive check used in this study is a graphical comparison of the Kaplan-Meier (K-M) survival curve estimated from the observed data with the survival curves from 1000 simulations. K-M survival curves are non-parametric estimates of the function \(S(t)\) or the probablity of a species going extinct given that it has lived to time \(t\).
 
-% WAIC
+The model described above was the final model at the end of a continuous model development framework where the sampling and prior distributions were modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and to fit the data.
+
 
 \end{document}

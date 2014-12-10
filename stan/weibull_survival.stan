@@ -23,10 +23,10 @@ data {
   matrix[N, N] vcv;
 }
 transformed data {
- matrix[N, N] vcv_chol;
+ matrix[N, N] vcv_inv;
  vector[N] mumu;
 
- vcv_chol <- cholesky_decompose(vcv);
+ vcv_inv <- inverse(vcv);
 
  for(i in 1:N) mumu[i] <- 0;
 }
@@ -59,7 +59,10 @@ model {
   }
 
   sigma_phy ~ cauchy(0, 2.5);
-  phy ~ multi_normal_cholesky(mumu, sqrt(sigma_phy) * vcv_chol);
+  // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
+  lp__ <- lp__ - 0.5 * N * log(sigma_phy);  
+  // log of kernal of mulinorm
+  lp__ <- lp__ - (phy' * vcv_inv * phy) / (2 * sigma_phy);  
 
   alpha ~ cauchy(0, 2.5);
 
