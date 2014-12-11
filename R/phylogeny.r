@@ -98,12 +98,9 @@ lad <- lad[match(na.tree$tip.label, lad[, 1]), ]
 datmat <- cbind(fad[, 2], lad[, 2])
 rownames(datmat) <- fad[, 1]
 
-na.tree <- multi2di(na.tree)
-#na.tree <- timeLadderTree(na.tree, timeData = datmat))
+na.tree <- timeLadderTree(na.tree, timeData = datmat)
 na.scale <- timePaleoPhy(na.tree, timeData = datmat, 
-                         type = 'mbl', vartime = 1)
-#na.scale <- timePaleoPhy(na.tree, timeData = datmat, 
-#                         type = 'mbl', vartime = 0.1)
+                         type = 'mbl', vartime = 0.1)
 save(na.scale, file = '../data/taxonomy_tree.rdata')
 
 my.trees[[length(my.trees) + 1]] <- na.tree

@@ -3,7 +3,6 @@ library(plyr)
 library(igraph)
 
 source('../R/paleo_surv.r')
-
 source('../R/cosmo_prov.r')
 source('../R/oxygen_curve.r')
 
@@ -29,6 +28,10 @@ nadur <- nadur[nadur$name.bi %in% na.mass$name, ]
 # occupancy
 taxa.occ <- lapply(taxawin, function(x) {
                    occupancy(x, membership = membership(infomap.community(x)))})
+max.occ <- lapply(taxawin, function(x) length(infomap.community(x)))
+taxa.occ <- Map(function(x, y) {
+                x[, 1] <- x[, 1] / y
+                x}, x = taxa.occ, y = max.occ)
 taxa.occ <- Reduce(rbind, taxa.occ)
 rewrite <- order(as.character(taxa.occ$taxa))
 na.taxa.occ <- taxa.occ <- taxa.occ[rewrite, ]

@@ -18,6 +18,17 @@ data {
   matrix[N_cen, M] move_cen;
   int coh_unc[N_unc];
   int coh_cen[N_cen];
+  int samp_unc[N_unc];
+  int samp_cen[N_cen];
+  matrix[N, N] vcv;
+}
+transformed data {
+ matrix[N, N] vcv_fancy;
+ vector[N] mumu;
+
+ vcv_fancy <- transpose(cholesky_decompose(inverse(vcv)));
+
+ for(i in 1:N) mumu[i] <- 0;
 }
 parameters {
   real beta_inter;
@@ -28,6 +39,14 @@ parameters {
   vector[D] beta_diet;
   real<lower=0> fv;
   real rando[C];
+  real<lower=0> sigma_phy;
+  vector[N] phy;
+}
+transformed parameters {
+  vector[N] v;
+  real sum_of_squares;
+  v <- vcv_fancy * phy;
+  sum_of_squares <- dot_product(v, v);
 }
 model {
   beta_inter ~ normal(0, 10);
@@ -45,6 +64,12 @@ model {
     rando[i] ~ normal(0, fv);
   }
 
+  sigma_phy ~ cauchy(0, 2.5);
+  // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
+  increment_log_prob(-0.5 * N * log(sigma_phy));
+  // log of kernal of mulinorm
+  increment_log_prob(-(sum_of_squares) / (2 * sigma_phy));
+
   alpha ~ cauchy(0, 2.5);
 
   for(i in 1:N_unc) {
@@ -55,7 +80,7 @@ model {
                 beta_size * size_unc[i] + 
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
-                rando[coh_unc[i]]) / alpha)));
+                rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
     } else {
       increment_log_prob(weibull_log(dur_unc[i], alpha,
             exp(-(beta_inter +
@@ -63,7 +88,7 @@ model {
                 beta_size * size_unc[i] + 
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
-                rando[coh_unc[i]]) / alpha)));
+                rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
     }
   }
   for(i in 1:N_cen) {
@@ -73,6 +98,6 @@ model {
               beta_size * size_cen[i] + 
               diet_cen[i] * beta_diet +
               move_cen[i] * beta_move +
-              rando[coh_cen[i]]) / alpha)));
+              rando[coh_cen[i]] + phy[samp_cen[i]]) / alpha)));
   }
 }

@@ -16,6 +16,7 @@ seed <- 420
 # compile model
 zero.weibull <- stan(file = '../stan/zero_weibull.stan')
 weibull.model <- stan(file = '../stan/weibull_survival.stan')
+phywei.model <- stan(file = '../stan/weibull_phy_surv.stan')
 exponential.model <- stan(file = '../stan/exp_survival.stan')
 
 plio <- which(cohort == 1)
@@ -37,11 +38,14 @@ tax.nam <- str_replace(na.ecol[-plio, 1], ' ', '_')
 to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
 na.tree <- drop.tip(na.scale, to.drop)
 tree.vcv <- vcv(na.tree)
+split.tax <- rev(split(tax.nam, extinct))
+cor.ord <- match(unlist(split.tax), colnames(tree.vcv))
+tree.vcv <- tree.vcv[cor.ord, cor.ord]
 #cov2cor(tree.vcv)
 
 data <- list(duration = duration,
              size = log(size),
-             occ = log(occ),
+             occ = logit(occ),
              diet = di,
              move = mo,
              rac = inr,
@@ -217,3 +221,22 @@ for(i in 1:100) {
   }
   ee[[i]] <- oo
 }
+
+
+# phylogenetic random effect models
+#phylist <- mclapply(1:4, mc.cores = detectCores(),
+#                    function(x) stan(fit = phywei.model, 
+#                                     seed = seed,
+#                                     data = data,
+#                                     chains = 1, chain_id = x,
+#                                     refresh = -1))
+#phy.mfit <- sflist2stanfit(phylist)
+
+#scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
+#                    function(x) stan(fit = phywei.model, 
+#                                     seed = seed,
+#                                     data = scale.data,
+#                                     chains = 1, chain_id = x,
+#                                     refresh = -1))
+#phy.scalemfit <- sflist2stanfit(scale.phylist)
+
