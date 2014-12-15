@@ -37,6 +37,7 @@ inr <- interaction(di, mo)
 tax.nam <- str_replace(na.ecol[-plio, 1], ' ', '_')
 to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
 na.tree <- drop.tip(na.scale, to.drop)
+na.tree$edge.length <- na.tree$edge.length / max(diag(vcv(na.tree)))
 tree.vcv <- vcv(na.tree)
 split.tax <- rev(split(tax.nam, extinct))
 cor.ord <- match(unlist(split.tax), colnames(tree.vcv))
@@ -237,19 +238,17 @@ for(i in 1:nsim) {
 #                    function(x) stan(fit = phywei.model, 
 #                                     seed = seed,
 #                                     data = data,
-#                                     iter = 4000,
 #                                     chains = 1, chain_id = x,
 #                                     refresh = -1))
 #phy.mfit <- sflist2stanfit(phylist)
 #
-#scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
-#                    function(x) stan(fit = phywei.model, 
-#                                     seed = seed,
-#                                     data = scale.data,
-#                                     iter = 4000,
-#                                     chains = 1, chain_id = x,
-#                                     refresh = -1))
-#phy.scalemfit <- sflist2stanfit(scale.phylist)
+scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
+                    function(x) stan(fit = phywei.model, 
+                                     seed = seed,
+                                     data = scale.data,
+                                     chains = 1, chain_id = x,
+                                     refresh = -1))
+phy.scalemfit <- sflist2stanfit(scale.phylist)
 #
 #set.seed(seed)
 #phypost <- extract(phy.scalemfit, permuted = TRUE)
