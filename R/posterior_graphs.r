@@ -7,6 +7,8 @@ library(grid)
 library(survival)
 library(GGally)
 
+nsim <- 100
+
 pairwise.diffs <- function(x) {
   # create column combination pairs
   prs <- cbind(rep(1:ncol(x), each = ncol(x)), 1:ncol(x))
@@ -71,12 +73,12 @@ ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
-mean.res <- laply(mm, function(x) mean((duration - x) / sd(x)))
-var.res <- laply(mm, function(x) var((duration - x) / sd(x)))
+mean.res <- laply(mm, function(x) mean(duration - x))
+var.res <- laply(mm, function(x) var(duration - x))
 res.sum <- melt(cbind(mean.res, var.res))
 res.sum$Var2 <- as.character(res.sum$Var2)
 res.sum$Var2[res.sum$Var2 == 'mean.res'] <- 'residual mean'
-res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual variance'
+res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual sd'
 ppc.sum <- ggplot(res.sum, aes(x = value))
 ppc.sum <- ppc.sum + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 ppc.sum <- ppc.sum + geom_histogram(aes(y = ..density..))
@@ -100,7 +102,7 @@ sim.surv <- llply(sim.surv, function(x) data.frame(cbind(time = x$time,
 sim.surv <- llply(sim.surv, function(x) rbind(c(0, 1), x))
 sim.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
                               x = sim.surv, y = seq(length(sim.surv))))
-sim.surv <- sim.surv[sim.surv$label %in% 1:100, ]
+sim.surv <- sim.surv[sim.surv$label %in% 1:nsim, ]
 
 exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
 exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time, 
@@ -108,14 +110,14 @@ exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time,
 exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
 exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
                               x = exp.surv, y = seq(length(exp.surv))))
-exp.surv <- exp.surv[exp.surv$label %in% 1:100, ]
+exp.surv <- exp.surv[exp.surv$label %in% 1:nsim, ]
 
 mix.surv <- rbind(cbind(sim.surv, lab = rep('wei', nrow(sim.surv))),
                   cbind(exp.surv, lab = rep('exp', nrow(exp.surv))))
 
 soft <- ggplot(emp.surv, aes(x = time, y = surv))
 soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
-                         colour = 'grey', alpha = 0.2)
+                         colour = 'grey', alpha = .2)
 soft <- soft + geom_step(size = 1, direction = 'hv')
 soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
 soft <- soft + facet_grid(. ~ lab)
@@ -223,4 +225,32 @@ cohort <- cohort + geom_pointrange()
 cohort <- cohort + scale_x_continuous(breaks = seq(from = 0, to = 65, by = 5))
 cohort <- cohort + labs(x = 'Time (My)', y = 'Cohort effect')
 ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
+       width = 15, height = 10)
+
+
+# estimate of alpha
+wei.haz <- function(time, scale, alpha) {
+  # lambda is the inverse-scale parameter
+  tt <- time**(alpha - 1)
+  scale * alpha * tt
+}
+
+xx <- seq(0, 12, by = 0.01)
+wz <- list()
+for(ii in seq(nsim)) {
+  wz[[ii]] <- wei.haz(xx, 1/2, sample(mpost$alpha, 1))
+}
+
+mid.haz <- wei.haz(xx, 1/2, median(mpost$alpha, 1))
+mid.haz <- data.frame(time = xx, hazard = mid.haz)
+
+wzm <- llply(wz, function(x) data.frame(time = xx, hazard = x))
+wzm <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))), 
+                         x = wzm, y = seq(length(wzm))))
+haz <- ggplot(mid.haz, aes(x = time, y = hazard))
+haz <- haz + geom_line(data = wzm, aes(x = time, y = hazard, group = label),
+                       colour = 'darkgrey', alpha = 0.2)
+haz <- haz + geom_line(colour = 'blue')
+haz <- haz + labs(x = 'Duration', y = 'h(t)')
+ggsave(haz, filename = '../doc/na_surv/figure/haz_est.png',
        width = 15, height = 10)

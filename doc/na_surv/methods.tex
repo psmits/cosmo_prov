@@ -54,16 +54,14 @@ Species body size estimates were sourced from a large selection of primary liter
 In many cases, species body mass was estimated from anatomical dimensions such as tooth size. These estimates were made using a variety of published regression equations. % equations in a giant table/appendix section
 
 
-\subsection{Bioprovince occupancy}
+\subsubsection{Bioprovince occupancy}
 
-For each 2 My time bin, a bipartite biogeographic network was created between species occurrences and spatial units. Spatial units were defined was 2x2 latitude--longitude grid cells. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Taxa are not linked to each other, nor are localities linked. 
+For each 2 My time bin, a bipartite biogeographic network was created between species occurrences and spatial units. Spatial units were defined was 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Taxa are not linked to each other, nor are localities linked. Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. 
 
-Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. 
-
-The number of bioprovinces occupied per time bin was then determined for each species. Additionally, the coefficient of variation (CV) of occupancy was also calculated.
+The relative number of bioprovinces occupied per time bin was then determined for each species. %Additionally, the coefficient of variation (CV) of occupancy was also calculated.
 
 
-\subsection{Semi-formal supertree}
+\subsubsection{Semi-formal supertree}
 
 Because there exists no phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and many published phylogenies.
 

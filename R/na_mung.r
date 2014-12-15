@@ -74,7 +74,7 @@ for (ii in seq(nrow(bins))) {
 # get rid of anything that is missing
 # 2x2, 5x5, 10x10 
 dat$gid <- as.character(with(dat, grid.id(paleolatdec, paleolngdec, 
-                                          2, 'mercator')))
+                                          2, 'azequalarea')))
 # relevel the factor
 dat$gid <- factor(dat$gid, unique(dat$gid))
 

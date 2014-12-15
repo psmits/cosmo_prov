@@ -93,7 +93,7 @@ data$samp_cen <- seq(from = data$N_unc + 1,
                      by = 1)
 data$vcv <- tree.vcv
 
-
+# rescale following gelman
 scale.data <- data
 scale.data$size_unc <- rescale(scale.data$size_unc)
 scale.data$size_cen <- rescale(scale.data$size_cen)
@@ -115,6 +115,8 @@ zfit.table <- xtable(summary(zfit)[[1]], label = 'zfit_tab')
 print.xtable(zfit.table, 
              file = '../doc/na_surv/zfit_table_raw.tex')
 
+
+# posterior data set simulations
 set.seed(seed)
 zpost <- extract(zfit, permuted = TRUE)
 zz <- list()
@@ -125,7 +127,7 @@ for(i in 1:nsim) {
 }
 
 
-# larger
+# weibull model minus phylogeny
 modlist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = weibull.model, 
                                      seed = seed,
@@ -139,6 +141,7 @@ print.xtable(mfit.table,
              file = '../doc/na_surv/mfit_table_raw.tex')
 
 
+# same with scaled data
 scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
                           function(x) stan(fit = weibull.model, 
                                            seed = seed,
@@ -152,6 +155,8 @@ print.xtable(scalefit.table,
              file = '../doc/na_surv/scalefit_table_raw.tex')
 
 
+# exponential model minus phylogeny
+# for comparison with weibull to see if value of alpha merited
 explist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = exponential.model, 
                                      seed = seed,
@@ -165,6 +170,7 @@ print.xtable(efit.table,
              file = '../doc/na_surv/efit_table_raw.tex')
 
 
+# weibull - phylo posterior data set simulations
 mpost <- extract(mfit, permuted = TRUE)
 scale.mpost <- extract(scale.mfit, permuted = TRUE)
 
@@ -197,6 +203,7 @@ for(i in 1:nsim) {
 }
 
 
+# same as above with exponential
 set.seed(seed)
 epost <- extract(efit, permuted = TRUE)
 dat <- cbind(c(data$occ_unc, data$occ_cen), 
