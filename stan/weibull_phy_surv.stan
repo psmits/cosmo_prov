@@ -23,12 +23,9 @@ data {
   matrix[N, N] vcv;
 }
 transformed data {
- matrix[N, N] vcv_fancy;
- vector[N] mumu;
+ matrix[N, N] vcv_inv;
 
- vcv_fancy <- transpose(cholesky_decompose(inverse(vcv)));
-
- for(i in 1:N) mumu[i] <- 0;
+ vcv_inv <- inverse(vcv);
 }
 parameters {
   real beta_inter;
@@ -41,12 +38,6 @@ parameters {
   real rando[C];
   real<lower=0> sigma_phy;
   vector[N] phy;
-}
-transformed parameters {
-  vector[N] v;
-  real sum_of_squares;
-  v <- vcv_fancy * phy;
-  sum_of_squares <- dot_product(v, v);
 }
 model {
   beta_inter ~ normal(0, 10);
@@ -68,7 +59,7 @@ model {
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
   increment_log_prob(-0.5 * N * log(sigma_phy));
   // log of kernal of mulinorm
-  increment_log_prob(-(sum_of_squares) / (2 * sigma_phy));
+  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sigma_phy));
 
   alpha ~ cauchy(0, 2.5);
 

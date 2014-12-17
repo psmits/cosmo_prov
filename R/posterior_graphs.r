@@ -6,6 +6,7 @@ library(stringr)
 library(grid)
 library(survival)
 library(GGally)
+library(moments)
 
 nsim <- 100
 
@@ -68,16 +69,16 @@ std.res <- melt(llply(mm, function(x) (duration - x) / sd(x)))
 std.res <- std.res[std.res$L1 %in% 1:12, ]
 std.res$index <- rep(seq(1:1921), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
-ppc.res <- ppc.res + geom_point()
+ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1)
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
-mean.res <- laply(mm, function(x) mean(duration - x))
+skew.res <- laply(mm, function(x) moments::skewness(duration - x))
 var.res <- laply(mm, function(x) var(duration - x))
-res.sum <- melt(cbind(mean.res, var.res))
+res.sum <- melt(cbind(skew.res, var.res))
 res.sum$Var2 <- as.character(res.sum$Var2)
-res.sum$Var2[res.sum$Var2 == 'mean.res'] <- 'residual mean'
+res.sum$Var2[res.sum$Var2 == 'skew.res'] <- 'residual skew'
 res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual sd'
 ppc.sum <- ggplot(res.sum, aes(x = value))
 ppc.sum <- ppc.sum + geom_vline(xintercept = 0, colour = 'grey', size = 2)
@@ -222,7 +223,7 @@ rands$bin <- (rands$bin * 2) + 1
 cohort <- ggplot(rands, aes(x = bin, y = med, ymin = bot, ymax = top))
 cohort <- cohort + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 cohort <- cohort + geom_pointrange()
-cohort <- cohort + scale_x_continuous(breaks = seq(from = 0, to = 65, by = 5))
+cohort <- cohort + scale_x_reverse(breaks = seq(from = 0, to = 65, by = 5))
 cohort <- cohort + labs(x = 'Time (My)', y = 'Cohort effect')
 ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
        width = 15, height = 10)

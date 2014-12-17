@@ -242,13 +242,13 @@ for(i in 1:nsim) {
 #                                     refresh = -1))
 #phy.mfit <- sflist2stanfit(phylist)
 #
-scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = phywei.model, 
-                                     seed = seed,
-                                     data = scale.data,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-phy.scalemfit <- sflist2stanfit(scale.phylist)
+#scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
+#                    function(x) stan(fit = phywei.model, 
+#                                     seed = seed,
+#                                     data = scale.data,
+#                                     chains = 1, chain_id = x,
+#                                     refresh = -1))
+#phy.scalemfit <- sflist2stanfit(scale.phylist)
 #
 #set.seed(seed)
 #phypost <- extract(phy.scalemfit, permuted = TRUE)
