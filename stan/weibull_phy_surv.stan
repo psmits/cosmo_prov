@@ -39,6 +39,11 @@ parameters {
   real<lower=0> sigma_phy;
   vector[N] phy;
 }
+transformed parameters {
+  real<lower = 0> sq_sig;
+
+  sq_sig <- sigma_phy^2;  # make a variance, keeping sigma_phy as a standard deviation
+}
 model {
   beta_inter ~ normal(0, 10);
   beta_occ ~ normal(0, 10);
@@ -57,9 +62,9 @@ model {
 
   sigma_phy ~ cauchy(0, 2.5);
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
-  increment_log_prob(-0.5 * N * log(sigma_phy));
+  increment_log_prob(-0.5 * N * log(sq_sigma));
   // log of kernal of mulinorm
-  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sigma_phy));
+  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sq_sigma));
 
   alpha ~ cauchy(0, 2.5);
 
