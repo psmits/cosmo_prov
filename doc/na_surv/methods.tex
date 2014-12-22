@@ -97,7 +97,7 @@ Note that regression coefficients (\(\beta\)-s) are not nececssary directly comp
 
 The impact of origination cohort (\(j\)) was included as a random effect \(\eta\) in the parameterization of \(\sigma\). Origination cohort is defined as the taxa which all originated during the same temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. Each cohort was considered an exchangeable sample of a shared general ``cohort effect.'' The individual cohort effects were estimated in a hierarchical framework where the between cohort variance constrained the individual cohort effect estimate. This is done by giving \(\eta\) a normally distributed prior centered at 0 with scale \(\tau\) which is then estimated from the data. \(\tau\) is given a diffuse half-Cauchy hyperprior following \citet{Gelman2006a}.
 
-The impact of shared evolutionary history, or phylogeny, was also included as an multivariate normal random effect \(h\). The covariance matrix of \(h\) was assumed known, up to a constant \(\upsilon\), from the phylogenetic covariance matrix (\(\mathbf{VCV}_{phy}\)) \citep{Lynch1991,Housworth2004}. \(\mathbf{VCV}_{phy}\) was calculated as the amount of shared branch length between taxa. The constant \(\upsilon\) was given a diffuse half-Cauchy prior. 
+The impact of shared evolutionary history, or phylogeny, was also included as an multivariate normal random effect \(h\). The covariance matrix of \(h\) was assumed known, up to a constant \(\upsilon\), from the phylogenetic covariance matrix (\(\mathbf{V}_{phy}\)) \citep{Lynch1991,Housworth2004}. \(\mathbf{V}_{phy}\) was calculated as the amount of shared branch length between taxa. The constant \(\upsilon\) was given a diffuse half-Cauchy prior. 
 
 The mixed effects approach used here for estimating phylogenetic effect partitions variance into phylogenetic and nonphylogenetic components. The percent of total variance described by phylogeny is called the phylogenetic heritability, \(h^{2}_{phy}\) \citep{Housworth2004}, which was calculated as \(h^{2}_{phy} = \frac{\upsilon}{\upsilon + \sigma_{e}}\). \(\sigma_{e}\) is the variance of the residuals as calculated from the posterior predictive checks (below) and is the nonphylogenetic changes associated uniquely with a species.
 
@@ -116,7 +116,7 @@ Below is a summary of the priors used for each estimated parameter
   \tau &\sim \mathrm{half\ Cauchy}(2.5) \\
   \eta &\sim \mathrm{Normal}(0, \tau) \\
   \upsilon &\sim \mathrm{half\ Cauchy}(2.5) \\
-  h &\sim \mathrm{MultiNormal}(0, \upsilon \times \mathbf{VCV}_{phy}) \\
+  h &\sim \mathrm{MultiNormal}(0, \upsilon \times \mathbf{V}_{phy}) \\
   \beta &\sim \mathrm{Normal}(0, 10) \\
   \alpha &\sim \mathrm{half\ Cauchy}(2.5)
 \end{align*}

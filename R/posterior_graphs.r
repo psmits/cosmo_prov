@@ -45,9 +45,9 @@ hist.sim <- hist.sim[hist.sim$L1 %in% 1:12, ]
 ppc.hist <- ggplot(hist.sim, aes(x = value))
 ppc.hist <- ppc.hist + geom_histogram(data = base.dur, 
                                       aes(x = dur, y = ..density..),
-                                      binwidth = 1, fill = 'grey', alpha = 0.5,
+                                      binwidth = .2, fill = 'grey', alpha = 0.5,
                                       colour = 'darkgrey')
-ppc.hist <- ppc.hist + geom_histogram(aes(y = ..density..), binwidth = 1, 
+ppc.hist <- ppc.hist + geom_histogram(aes(y = ..density..), binwidth = .2, 
                                       fill = 'blue', alpha = 0.4)
 ppc.hist <- ppc.hist + labs(x = 'Duration', y = 'Prob. Density')
 ppc.hist <- ppc.hist + facet_wrap( ~ L1, nrow = 3, ncol = 4)
@@ -57,18 +57,43 @@ ggsave(ppc.hist, filename = '../doc/na_surv/figure/histogram_ppc.png',
 means <- laply(mm, mean)
 mean.dur <- mean(duration)
 ppc.mean <- ggplot(data.frame(x = means), aes(x = x))
-ppc.mean <- ppc.mean + geom_histogram(aes(y = ..density..), binwidth = 1)
+ppc.mean <- ppc.mean + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.mean <- ppc.mean + geom_vline(xintercept = mean.dur, 
                                   colour = 'blue', size = 2)
 ppc.mean <- ppc.mean + labs(x = 'Duration', y = 'Prob. Density')
 ggsave(ppc.mean, filename = '../doc/na_surv/figure/mean_ppc.png',
        width = 15, height = 10)
 
+quant <- laply(mm, function(x) c(mean = mean(x), quantile(x, c(.25, .5, .75))))
+quant <- melt(quant)
+quant.dur <- c(mean = mean(duration), quantile(duration, c(.25, .5, .75)))
+quant.dur <- melt(quant.dur)
+quant.dur$Var2 <- rownames(quant.dur)
+
+ppc.quant <- ggplot(quant, aes(x = value))
+ppc.quant <- ppc.quant + geom_histogram(aes(y = ..density..), binwidth = .2)
+ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value), 
+                                    colour = 'blue', size = 2)
+ppc.quant <- ppc.quant + labs(x = 'Duration', y = 'Prob. Density')
+ppc.quant <- ppc.quant + facet_grid(Var2 ~ .)
+ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
+       width = 5, height = 10)
+
 # standardized residuals: mean and var? 
+# do weibull residuals need to be special?
+# something like: res = alpha * (ln(duration) - ln(x))
 std.res <- melt(llply(mm, function(x) (duration - x) / sd(x)))
 std.res <- std.res[std.res$L1 %in% 1:12, ]
 std.res$index <- rep(seq(1:1921), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
+ppc.res <- ppc.res + geom_hline(aes(yintercept = 0), 
+                                colour = 'darkgrey', size = 1)
+ppc.res <- ppc.res + geom_hline(aes(yintercept = 2), 
+                                colour = 'darkgrey', size = 1, 
+                                linetype = 'dashed')
+ppc.res <- ppc.res + geom_hline(aes(yintercept = -2), 
+                                colour = 'darkgrey', size = 1, 
+                                linetype = 'dashed')
 ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1)
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
@@ -82,7 +107,7 @@ res.sum$Var2[res.sum$Var2 == 'skew.res'] <- 'residual skew'
 res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual sd'
 ppc.sum <- ggplot(res.sum, aes(x = value))
 ppc.sum <- ppc.sum + geom_vline(xintercept = 0, colour = 'grey', size = 2)
-ppc.sum <- ppc.sum + geom_histogram(aes(y = ..density..))
+ppc.sum <- ppc.sum + geom_histogram(aes(y = ..density..), binwidth = 0.2)
 ppc.sum <- ppc.sum + facet_grid(Var2 ~ .)
 ppc.sum <- ppc.sum + labs(x = 'value', y = 'Prob. Density')
 ggsave(ppc.sum, filename = '../doc/na_surv/figure/res_sum_plot.png',
