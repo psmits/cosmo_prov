@@ -16,8 +16,11 @@ set.seed(seed)
 source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
 
-poisson.mod <- stan(file = '../stan/degree_model.stan') # 
 # TO DO Negative Binomial distribution / overdispersion
+poisson.mod <- stan(file = '../stan/degree_model.stan') # 
+pois.phy.mod <- stan(file = '../stan/degree_phy_model.stan') # 
+pois.spt.mod <- stan(file = '../stan/degree_spt_model.stan') # 
+pois.ful.mod <- stan(file = '../stan/degree_full_model.stan') # 
 
 species.graph <- function(bipartite) {
   bip <- bipartite.projection(bipartite)
@@ -122,6 +125,11 @@ for(ii in 1:nsim) {
   }
   mu[[ii]] <- oo
 }
+
+par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
+hist(deg[[1]])
+for(s in 1:19)
+  hist(mu[[s]])
 
 
 # probably need to switch to a negative binomial, duh :P
