@@ -7,6 +7,7 @@ library(plyr)
 library(igraph)
 library(ape)
 
+
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
@@ -14,6 +15,9 @@ nsim <- 1000
 set.seed(seed)
 source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
+
+poisson.mod <- stan(file = '../stan/degree_model.stan') # 
+# TO DO Negative Binomial distribution / overdispersion
 
 species.graph <- function(bipartite) {
   bip <- bipartite.projection(bipartite)
@@ -46,6 +50,13 @@ ecol <- llply(name, function(x) {
               tt <- na.ecol[na.ecol$taxa %in% x, ]
               tt[match(x, tt[, 1]), ]
               tt})
+ecol <- llply(ecol, function(x) {
+              x$mass <- rescale(log(x$mass))
+              x})
+
+diet <- llply(ecol, function(x) model.matrix( ~ x$diet - 1)[, -1])
+move <- llply(ecol, function(x) model.matrix( ~ x$move - 1)[, -1])
+
 
 
 # prepare the phylo vcv
@@ -69,3 +80,48 @@ for(ii in seq(length(name))) {
   vcv.s[[ii]] <- temp.vcv  
 }
 
+degfit <- list()
+for(ii in seq(length(adj))) {
+
+  data <- list(N = size[[ii]],
+               D = ncol(diet[[ii]]),
+               M = ncol(move[[ii]]),
+               degree = deg[[ii]],
+               mass = ecol[[ii]]$mass,
+               diet = diet[[ii]],
+               move = move[[ii]],
+               vcv = vcv.s[[ii]],
+               adj = adj[[ii]])
+
+  degmod <- mclapply(1:4, mc.cores = detectCores(),
+                     function(x) stan(fit = poisson.mod, 
+                                      seed = seed,
+                                      data = data, 
+                                      chains = 1, chain_id = x,
+                                      refresh = -1))
+  degfit[[ii]] <- sflist2stanfit(degmod)
+}
+
+deg.coef <- extract(degfit[[1]], permuted = TRUE)
+
+names(deg.coef)
+
+mu <- list()
+for(ii in 1:nsim) {
+  n <- size[[1]]
+  inc <- sample(deg.coef$beta_inter, 1)
+  sz <- sample(deg.coef$beta_mass, 1)
+  mv <- deg.coef$beta_move[sample(size[[1]], 1), ]
+  di <- deg.coef$beta_diet[sample(size[[1]], 1), ]
+
+  oo <- c()
+  for(jj in seq(size[[1]])) {
+    reg <- inc + sz * ecol[[1]]$mass[jj] + 
+           sum(mv * move[[1]][jj, ]) + sum(di * diet[[1]][jj, ])
+    oo[jj] <- rpois(1, lambda = exp(reg))
+  }
+  mu[[ii]] <- oo
+}
+
+
+# probably need to switch to a negative binomial, duh :P

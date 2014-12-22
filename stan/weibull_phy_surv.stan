@@ -42,7 +42,7 @@ parameters {
 transformed parameters {
   real<lower = 0> sq_sig;
 
-  sq_sig <- sigma_phy^2;  # make a variance, keeping sigma_phy as a standard deviation
+  sq_sig <- sigma_phy^2;  // make a variance, keeping sigma_phy as a standard deviation
 }
 model {
   beta_inter ~ normal(0, 10);
