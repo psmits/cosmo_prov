@@ -1,47 +1,48 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main_doc.aux
+A level-1 auxiliary file: zfit_table.aux
 The style file: abbrvnat.bst
 Database file #1: biblio.bib
 Database file #2: packages.bib
-You've used 25 entries,
+You've used 28 entries,
             2773 wiz_defined-function locations,
-            776 strings with 9710 characters,
-and the built_in function-call counts, 12595 in all, are:
-= -- 1104
-> -- 887
-< -- 17
-+ -- 301
-- -- 276
-* -- 1087
-:= -- 2024
-add.period$ -- 94
-call.type$ -- 25
-change.case$ -- 162
-chr.to.int$ -- 25
-cite$ -- 50
-duplicate$ -- 503
-empty$ -- 889
-format.name$ -- 317
-if$ -- 2565
+            810 strings with 10527 characters,
+and the built_in function-call counts, 14169 in all, are:
+= -- 1270
+> -- 946
+< -- 19
++ -- 322
+- -- 294
+* -- 1233
+:= -- 2268
+add.period$ -- 112
+call.type$ -- 28
+change.case$ -- 178
+chr.to.int$ -- 28
+cite$ -- 56
+duplicate$ -- 567
+empty$ -- 1023
+format.name$ -- 338
+if$ -- 2892
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 26
-newline$ -- 152
-num.names$ -- 100
-pop$ -- 300
+missing$ -- 30
+newline$ -- 176
+num.names$ -- 112
+pop$ -- 317
 preamble$ -- 1
-purify$ -- 142
+purify$ -- 154
 quote$ -- 0
-skip$ -- 413
+skip$ -- 452
 stack$ -- 0
-substring$ -- 370
-swap$ -- 42
+substring$ -- 474
+swap$ -- 47
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 250
+type$ -- 283
 warning$ -- 0
-while$ -- 101
+while$ -- 119
 width$ -- 0
-write$ -- 369
+write$ -- 427

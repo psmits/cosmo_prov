@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd R
-R CMD BATCH --vanilla ../R/bayes_survival.r &
+R CMD BATCH --vanilla ../R/surv_fit.r &
