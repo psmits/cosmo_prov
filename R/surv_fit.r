@@ -117,17 +117,6 @@ print.xtable(zfit.table,
              file = '../doc/na_surv/zfit_table_raw.tex')
 
 
-# posterior data set simulations
-set.seed(seed)
-zpost <- extract(zfit, permuted = TRUE)
-zz <- list()
-for(i in 1:nsim) {
-  oo <- rweibull(length(duration), shape = sample(zpost$alpha, 1), 
-                 scale = sample(zpost$sigma, 1))
-  zz[[i]] <- oo
-}
-
-
 # weibull model minus phylogeny
 modlist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = weibull.model, 
@@ -171,112 +160,23 @@ print.xtable(efit.table,
              file = '../doc/na_surv/efit_table_raw.tex')
 
 
-# weibull - phylo posterior data set simulations
-mpost <- extract(mfit, permuted = TRUE)
-scale.mpost <- extract(scale.mfit, permuted = TRUE)
-
-dat <- cbind(c(data$occ_unc, data$occ_cen), 
-             c(data$size_unc, data$size_cen))
-dd <- rbind(data$diet_unc, data$diet_cen)
-mo <- rbind(data$move_unc, data$move_cen)
-
-set.seed(seed)
-dead <- duration
-mm <- list()
-for(i in 1:nsim) {
-  n <- length(dead)
-  alp <- sample(mpost$alpha, 1)
-  inc <- sample(mpost$beta_inter, 1)
-  oc <- sample(mpost$beta_occ, 1)
-  sz <- sample(mpost$beta_size, 1)
-  mv <- mpost$beta_move[sample(nrow(mpost$beta_move), 1), ]
-  di <- mpost$beta_diet[sample(nrow(mpost$beta_diet), 1), ]
-  ff <- mpost$rando[sample(nrow(mpost$rando), 1), ]
-
-  oo <- c()
-  for(j in seq(n)) {
-    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
-    oo[j] <- rweibull(1, scale = exp(-reg) / alp,
-                      shape = alp)
-  }
-  mm[[i]] <- oo
-}
-
-
-# same as above with exponential
-set.seed(seed)
-epost <- extract(efit, permuted = TRUE)
-dat <- cbind(c(data$occ_unc, data$occ_cen), 
-             c(data$size_unc, data$size_cen))
-dd <- rbind(data$diet_unc, data$diet_cen)
-mo <- rbind(data$move_unc, data$move_cen)
-
-dead <- duration
-ee <- list()
-for(i in 1:nsim) {
-  n <- length(dead)
-  inc <- sample(epost$beta_inter, 1)
-  oc <- sample(epost$beta_occ, 1)
-  sz <- sample(epost$beta_size, 1)
-  mv <- epost$beta_move[sample(nrow(epost$beta_move), 1), ]
-  di <- epost$beta_diet[sample(nrow(epost$beta_diet), 1), ]
-  ff <- epost$rando[sample(nrow(epost$rando), 1), ]
-
-  oo <- c()
-  for(j in seq(n)) {
-    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
-    oo[j] <- rexp(1, rate = exp(reg))
-  }
-  ee[[i]] <- oo
-}
-
-
 # phylogenetic random effect models
-#phylist <- mclapply(1:4, mc.cores = detectCores(),
-#                    function(x) stan(fit = phywei.model, 
-#                                     seed = seed,
-#                                     data = data,
-#                                     chains = 1, chain_id = x,
-#                                     refresh = -1))
-#phy.mfit <- sflist2stanfit(phylist)
-#
-#scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
-#                    function(x) stan(fit = phywei.model, 
-#                                     seed = seed,
-#                                     data = scale.data,
-#                                     chains = 1, chain_id = x,
-#                                     refresh = -1))
-#phy.scalemfit <- sflist2stanfit(scale.phylist)
-#
-#set.seed(seed)
-#phypost <- extract(phy.scalemfit, permuted = TRUE)
-#
-#dat <- cbind(c(data$occ_unc, data$occ_cen), 
-#             c(data$size_unc, data$size_cen))
-#dd <- rbind(data$diet_unc, data$diet_cen)
-#mo <- rbind(data$move_unc, data$move_cen)
-#
-#dead <- duration
-#pm <- list()
-#for(i in 1:100) {
-#  n <- length(dead)
-#  alp <- sample(phypost$alpha, 1)
-#  inc <- sample(phypost$beta_inter, 1)
-#  oc <- sample(phypost$beta_occ, 1)
-#  sz <- sample(phypost$beta_size, 1)
-#  mv <- phypost$beta_move[sample(nrow(phypost$beta_move), 1), ]
-#  di <- phypost$beta_diet[sample(nrow(phypost$beta_diet), 1), ]
-#  ff <- phypost$rando[sample(nrow(phypost$rando), 1), ]
-#  pp <- phypost$phy
-#
-#  oo <- c()
-#  for(j in seq(n)) {
-#    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-#    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]] + pp[j]
-#    oo[j] <- rweibull(1, scale = exp(-reg) / alp,
-#                      shape = alp)
-#  }
-#  pm[[i]] <- oo
-#}
+phylist <- mclapply(1:4, mc.cores = detectCores(),
+                    function(x) stan(fit = phywei.model, 
+                                     seed = seed,
+                                     data = data,
+                                     iter = 4000,
+                                     chains = 1, chain_id = x,
+                                     refresh = -1))
+phy.mfit <- sflist2stanfit(phylist)
+
+scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
+                    function(x) stan(fit = phywei.model, 
+                                     seed = seed,
+                                     data = scale.data,
+                                     iter = 4000,
+                                     chains = 1, chain_id = x,
+                                     refresh = -1))
+phy.scalemfit <- sflist2stanfit(scale.phylist)
+
+save.image(file = '../data/survival_out.rdata')
