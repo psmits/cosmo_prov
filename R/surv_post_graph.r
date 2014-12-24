@@ -34,7 +34,7 @@ theme_update(axis.text = element_text(size = 20),
              legend.text = element_text(size = 25),
              legend.title = element_text(size = 26),
              legend.key.size = unit(2, 'cm'),
-             strip.text = element_text(size = 25))
+             strip.text = element_text(size = 20))
 
 # bioprovinces through time?
 
@@ -75,9 +75,9 @@ ppc.quant <- ppc.quant + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value), 
                                     colour = 'blue', size = 2)
 ppc.quant <- ppc.quant + labs(x = 'Duration', y = 'Prob. Density')
-ppc.quant <- ppc.quant + facet_grid(Var2 ~ .)
+ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
 ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
-       width = 5, height = 10)
+       width = 15, height = 10)
 
 # standardized residuals: mean and var? 
 # do weibull residuals need to be special?
@@ -96,6 +96,9 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = -2),
                                 linetype = 'dashed')
 ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1)
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
+ppc.res <- ppc.res + labs(x = '', y = '(y - y_rep) / sd(y_rep)')
+ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
+                           axis.text.x = element_blank())
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
@@ -138,8 +141,8 @@ exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
                               x = exp.surv, y = seq(length(exp.surv))))
 exp.surv <- exp.surv[exp.surv$label %in% 1:nsim, ]
 
-mix.surv <- rbind(cbind(sim.surv, lab = rep('wei', nrow(sim.surv))),
-                  cbind(exp.surv, lab = rep('exp', nrow(exp.surv))))
+mix.surv <- rbind(cbind(sim.surv, lab = rep('Weibull', nrow(sim.surv))),
+                  cbind(exp.surv, lab = rep('Exponential', nrow(exp.surv))))
 
 soft <- ggplot(emp.surv, aes(x = time, y = surv))
 soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
@@ -168,10 +171,10 @@ diet.eff <- scale.melted[scale.melted$L1 == 'beta_diet', ]  # diet effect
 # lower values, lower risk
 # these are particularilty useful for summary statistics
 # effect of locomotor category
-arb.eff <- base.inter$value
-grd.eff <- base.inter$value + move.eff$value[1:ns]
-scn.eff <- base.inter$value + move.eff$value[(ns + 1):(2 * ns)]
-loceff <- melt(cbind(arb.eff, grd.eff, scn.eff))
+arb <- base.inter$value
+grd <- base.inter$value + move.eff$value[1:ns]
+scn <- base.inter$value + move.eff$value[(ns + 1):(2 * ns)]
+loceff <- melt(cbind(arb, grd, scn))
 loco <- ggplot(loceff, aes(x = value))
 loco <- loco + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 loco <- loco + geom_histogram(aes(y = ..density..))
@@ -181,7 +184,7 @@ ggsave(loco, filename = '../doc/na_surv/figure/loco_est.png',
        width = 15, height = 10)
 
 # better to compare as differences?
-loco.diff <- melt(pairwise.diffs(cbind(arb.eff, grd.eff, scn.eff)))
+loco.diff <- melt(pairwise.diffs(cbind(arb, grd, scn)))
 lodf <- ggplot(loco.diff, aes(x = value))
 lodf <- lodf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 lodf <- lodf + geom_histogram(aes(y = ..density..))
@@ -192,11 +195,11 @@ ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
 
 
 # effect of dietary category
-crn.eff <- base.inter$value
-hrb.eff <- base.inter$value + diet.eff$value[1:ns]
-ist.eff <- base.inter$value + diet.eff$value[(ns + 1):(2 * ns)]
-omn.eff <- base.inter$value + diet.eff$value[(2 * ns + 1):(3 * ns)]
-deteff <- melt(cbind(crn.eff, hrb.eff, ist.eff, omn.eff))
+crn <- base.inter$value
+hrb <- base.inter$value + diet.eff$value[1:ns]
+ist <- base.inter$value + diet.eff$value[(ns + 1):(2 * ns)]
+omn <- base.inter$value + diet.eff$value[(2 * ns + 1):(3 * ns)]
+deteff <- melt(cbind(crn, hrb, ist, omn))
 diet <- ggplot(deteff, aes(x = value))
 diet <- diet + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 diet <- diet + geom_histogram(aes(y = ..density..))
@@ -206,7 +209,7 @@ ggsave(diet, filename = '../doc/na_surv/figure/diet_est.png',
        width = 15, height = 10)
 
 # better to compare as differences?
-diet.diff <- melt(pairwise.diffs(cbind(crn.eff, hrb.eff, ist.eff, omn.eff)))
+diet.diff <- melt(pairwise.diffs(cbind(crn, hrb, ist, omn)))
 didf <- ggplot(diet.diff, aes(x = value))
 didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 didf <- didf + geom_histogram(aes(y = ..density..))
