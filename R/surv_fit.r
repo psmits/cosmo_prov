@@ -165,7 +165,8 @@ phylist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = phywei.model, 
                                      seed = seed,
                                      data = data,
-                                     iter = 4000,
+                                     iter = 10000,
+                                     thin = 10,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 phy.mfit <- sflist2stanfit(phylist)
@@ -174,9 +175,11 @@ scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = phywei.model, 
                                      seed = seed,
                                      data = scale.data,
-                                     iter = 4000,
+                                     iter = 10000,
+                                     thin = 10,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 phy.scalemfit <- sflist2stanfit(scale.phylist)
 
 save.image(file = '../data/survival_out.rdata')
+

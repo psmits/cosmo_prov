@@ -25,6 +25,10 @@ pairwise.diffs <- function(x) {
   result
 }
 
+weibull.variance <- function(scale, shape) {
+  scale**2 * (gamma(1 + (2 / shape)) - (gamma(1 + (1 / shape))**2))
+}
+
 
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
