@@ -112,9 +112,6 @@ zerolist <- mclapply(1:4, mc.cores = detectCores(),
                                       refresh = -1))
 
 zfit <- sflist2stanfit(zerolist)
-zfit.table <- xtable(summary(zfit)[[1]], label = 'zfit_tab')
-print.xtable(zfit.table, 
-             file = '../doc/na_surv/zfit_table_raw.tex')
 
 
 # weibull model minus phylogeny
@@ -122,13 +119,11 @@ modlist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = weibull.model, 
                                      seed = seed,
                                      data = data,
+                                     iter = 1000,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 
 mfit <- sflist2stanfit(modlist)
-mfit.table <- xtable(summary(mfit)[[1]], label = 'weifit_tab')
-print.xtable(mfit.table, 
-             file = '../doc/na_surv/mfit_table_raw.tex')
 
 
 # same with scaled data
@@ -136,13 +131,11 @@ scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
                           function(x) stan(fit = weibull.model, 
                                            seed = seed,
                                            data = scale.data,
+                                           iter = 1000,
                                            chains = 1, chain_id = x,
                                            refresh = -1))
 
 scale.mfit <- sflist2stanfit(scale.modlist)
-scalefit.table <- xtable(summary(scale.mfit)[[1]], label = 'scalefit_tab')
-print.xtable(scalefit.table, 
-             file = '../doc/na_surv/scalefit_table_raw.tex')
 
 
 # exponential model minus phylogeny
@@ -151,13 +144,11 @@ explist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = exponential.model, 
                                      seed = seed,
                                      data = data,
+                                     iter = 1000,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 
 efit <- sflist2stanfit(explist)
-efit.table <- xtable(summary(efit)[[1]], label = 'efit_tab')
-print.xtable(efit.table, 
-             file = '../doc/na_surv/efit_table_raw.tex')
 
 
 # phylogenetic random effect models
@@ -165,20 +156,20 @@ phylist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = phywei.model, 
                                      seed = seed,
                                      data = data,
-                                     iter = 10000,
-                                     thin = 10,
+                                     iter = 20000,
+                                     thin = 20,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 phy.mfit <- sflist2stanfit(phylist)
 
 scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = phywei.model, 
-                                     seed = seed,
-                                     data = scale.data,
-                                     iter = 10000,
-                                     thin = 10,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
+                          function(x) stan(fit = phywei.model, 
+                                           seed = seed,
+                                           data = scale.data,
+                                           iter = 20000,
+                                           thin = 20,
+                                           chains = 1, chain_id = x,
+                                           refresh = -1))
 phy.scalemfit <- sflist2stanfit(scale.phylist)
 
 save.image(file = '../data/survival_out.rdata')

@@ -7,6 +7,7 @@ library(grid)
 library(survival)
 library(GGally)
 library(moments)
+library(plyr)
 
 nsim <- 100
 
@@ -40,7 +41,6 @@ theme_update(axis.text = element_text(size = 20),
              legend.key.size = unit(2, 'cm'),
              strip.text = element_text(size = 20))
 
-# bioprovinces through time?
 
 # posterior predictive checks
 base.dur <- data.frame(dur = duration)
@@ -244,7 +244,14 @@ other <- other + labs(x = 'Value', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
        width = 15, height = 10)
 
-# histogram of variance in cohort effect?
+
+# bioprovinces through time?
+
+# histogram cohort effect variance 
+# histogram phylogeny effect variance
+# variance ratios
+# interclass correlations
+
 # for cohort effect, do point range with 80% quartile
 top <- apply(mpost$rando, 2, function(x) quantile(x, .8))
 bot <- apply(mpost$rando, 2, function(x) quantile(x, .2))
