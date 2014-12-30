@@ -26,8 +26,26 @@ pairwise.diffs <- function(x) {
   result
 }
 
-weibull.variance <- function(scale, shape) {
-  scale**2 * (gamma(1 + (2 / shape)) - (gamma(1 + (1 / shape))**2))
+wei.surv <- function(time, scale, shape) {
+  tt <- time**shape
+  exp(-(scale) * tt)
+}
+
+cum.haz <- function(time, scale, shape) {
+  -log(wei.surv(time, scale, shape))
+}
+
+martingale.res <- function(time, scale, shape, inclusion) {
+  inclusion - cum.haz(time, scale, shape)
+}
+
+deviance.res <- function(time, scale, shape, inclusion) {
+  martin <- martingale.res(time, scale, shape, inclusion)
+  si <- sign(martin)
+  inn <- martin + (inclusion * log(inclusion - martin))
+  under <- -2 * inn
+  out <- si * sqrt(under)
+  out
 }
 
 
@@ -251,6 +269,9 @@ ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
 # histogram phylogeny effect variance
 # variance ratios
 # interclass correlations
+hist(mpost$fv)
+
+
 
 # for cohort effect, do point range with 80% quartile
 top <- apply(mpost$rando, 2, function(x) quantile(x, .8))
@@ -278,10 +299,11 @@ wei.haz <- function(time, scale, alpha) {
 xx <- seq(0, 12, by = 0.01)
 wz <- list()
 for(ii in seq(nsim)) {
-  wz[[ii]] <- wei.haz(xx, 1/2, sample(mpost$alpha, 1))
+  wz[[ii]] <- wei.haz(xx, exp(-sample(mpost$beta_inter, 1)), 
+                      sample(mpost$alpha, 1))
 }
 
-mid.haz <- wei.haz(xx, 1/2, median(mpost$alpha, 1))
+mid.haz <- wei.haz(xx, exp(-median(mpost$beta_inter, 1)), median(mpost$alpha, 1))
 mid.haz <- data.frame(time = xx, hazard = mid.haz)
 
 wzm <- llply(wz, function(x) data.frame(time = xx, hazard = x))

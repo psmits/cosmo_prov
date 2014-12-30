@@ -116,7 +116,11 @@ with \(\sigma_{p}\) also given a half-Cauchy hyperprior and \(\mathbf{V}_{phy}\)
 
 Both \(\eta\) and \(h\) were centered at 0 so that these effects can be interpreted as differences from the intercept of the model. 
 
-In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The sample variance \(\sigma_{y}^{2}\) is approximated as the variance of the residuals. I used ratios of the variances and intraclass correlations to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citet{Housworth2004}, is effectively identical to the intraclass correlation of the phylogenetic effect, \(\frac{\sigma_{p}^{2}}{\sigma_{y}^{2} + \sigma_{c}^{2} + \sigma_{p}^{2}}\).
+In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The sample variance \(\sigma_{y}^{2}\) is approximated as the variance of the deviance residuals.
+
+\uppercase{define deviance residuals}
+
+I used ratios of the variances and intraclass correlations to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citet{Housworth2004}, is effectively identical to the intraclass correlation of the phylogenetic effect, \(\frac{\sigma_{p}^{2}}{\sigma_{y}^{2} + \sigma_{c}^{2} + \sigma_{p}^{2}}\).
 
 
 
