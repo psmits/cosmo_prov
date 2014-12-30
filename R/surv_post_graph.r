@@ -26,27 +26,6 @@ pairwise.diffs <- function(x) {
   result
 }
 
-wei.surv <- function(time, scale, shape) {
-  tt <- time**shape
-  exp(-(scale) * tt)
-}
-
-cum.haz <- function(time, scale, shape) {
-  -log(wei.surv(time, scale, shape))
-}
-
-martingale.res <- function(time, scale, shape, inclusion) {
-  inclusion - cum.haz(time, scale, shape)
-}
-
-deviance.res <- function(time, scale, shape, inclusion) {
-  martin <- martingale.res(time, scale, shape, inclusion)
-  si <- sign(martin)
-  inn <- martin + (inclusion * log(inclusion - martin))
-  under <- -2 * inn
-  out <- si * sqrt(under)
-  out
-}
 
 
 theme_set(theme_bw())
@@ -99,12 +78,12 @@ ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value),
 ppc.quant <- ppc.quant + labs(x = 'Duration', y = 'Prob. Density')
 ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
 ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 # standardized residuals: mean and var? 
 # do weibull residuals need to be special?
 # something like: res = alpha * (ln(duration) - ln(x))
-std.res <- melt(llply(mm, function(x) (duration - x) / sd(x)))
+std.res <- melt(mm.res)
 std.res <- std.res[std.res$L1 %in% 1:12, ]
 std.res$index <- rep(seq(1:1921), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
@@ -118,18 +97,18 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = -2),
                                 linetype = 'dashed')
 ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1)
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
-ppc.res <- ppc.res + labs(x = '', y = '(y - y_rep) / sd(y_rep)')
+ppc.res <- ppc.res + labs(x = '', y = 'deviance residuals')
 ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
                            axis.text.x = element_blank())
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
-skew.res <- laply(mm, function(x) moments::skewness(duration - x))
-var.res <- laply(mm, function(x) var(duration - x))
+skew.res <- laply(mm.res, moments::skewness)
+var.res <- laply(mm.res, function(x) var(x))
 res.sum <- melt(cbind(skew.res, var.res))
 res.sum$Var2 <- as.character(res.sum$Var2)
-res.sum$Var2[res.sum$Var2 == 'skew.res'] <- 'residual skew'
-res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual sd'
+res.sum$Var2[res.sum$Var2 == 'skew.res'] <- 'residual skewness'
+res.sum$Var2[res.sum$Var2 == 'var.res'] <- 'residual variance'
 ppc.sum <- ggplot(res.sum, aes(x = value))
 ppc.sum <- ppc.sum + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 ppc.sum <- ppc.sum + geom_histogram(aes(y = ..density..), binwidth = 0.2)
@@ -268,9 +247,22 @@ ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
 # histogram cohort effect variance 
 # histogram phylogeny effect variance
 # variance ratios
-# interclass correlations
-hist(mpost$fv)
+# interclass correlations/VPC
+s.y <- laply(mm.res, var)
+s.c <- mpost$fv
+#s.p <- mpost$sigma_phy
 
+indiv.part <- s.y / (s.y + s.c)
+cohort.part <- s.c / (s.y + s.c)
+#phylo.part <- s.p / (s.y + s.c + s.p)
+
+var.parts <- melt(cbind(individual = indiv.part, cohort = cohort.part))
+gvar <- ggplot(var.parts, aes(x = value))
+gvar <- gvar + geom_histogram(aes(y = ..density..))
+gvar <- gvar + facet_grid(Var2 ~ .)
+gvar <- gvar + labs(x = 'Interclass correlation', y = 'Prob. Density')
+ggsave(gvar, filename = '../doc/na_surv/figure/variance_est.png',
+       width = 5, height = 10)
 
 
 # for cohort effect, do point range with 80% quartile
