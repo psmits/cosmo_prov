@@ -5,44 +5,44 @@ A level-1 auxiliary file: zfit_table.aux
 The style file: abbrvnat.bst
 Database file #1: biblio.bib
 Database file #2: packages.bib
-You've used 35 entries,
+You've used 36 entries,
             2773 wiz_defined-function locations,
-            852 strings with 11339 characters,
-and the built_in function-call counts, 16763 in all, are:
-= -- 1519
-> -- 1027
+            860 strings with 11526 characters,
+and the built_in function-call counts, 17269 in all, are:
+= -- 1565
+> -- 1057
 < -- 26
-+ -- 354
-- -- 318
-* -- 1422
-:= -- 2671
-add.period$ -- 136
-call.type$ -- 35
-change.case$ -- 205
-chr.to.int$ -- 34
-cite$ -- 70
-duplicate$ -- 704
-empty$ -- 1274
-format.name$ -- 371
-if$ -- 3432
++ -- 364
+- -- 327
+* -- 1470
+:= -- 2748
+add.period$ -- 139
+call.type$ -- 36
+change.case$ -- 211
+chr.to.int$ -- 35
+cite$ -- 72
+duplicate$ -- 725
+empty$ -- 1315
+format.name$ -- 381
+if$ -- 3536
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 37
-newline$ -- 214
-num.names$ -- 140
-pop$ -- 368
+missing$ -- 38
+newline$ -- 219
+num.names$ -- 144
+pop$ -- 378
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 181
 quote$ -- 0
-skip$ -- 541
+skip$ -- 556
 stack$ -- 0
-substring$ -- 598
-swap$ -- 58
+substring$ -- 625
+swap$ -- 59
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 355
+type$ -- 366
 warning$ -- 0
-while$ -- 150
+while$ -- 155
 width$ -- 0
-write$ -- 523
+write$ -- 536

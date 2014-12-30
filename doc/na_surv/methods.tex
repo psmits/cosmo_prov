@@ -24,7 +24,7 @@
 
 Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filtered so that only occurrences identified to the species level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitude and longitude information were excluded.
 
-Species dietary and locomotor category assignments were done using the assignments in initial the PBDB which were then reasigned into coarser categories (Table \ref{tab:trait_cats}). This was done to improve interpretability, increase sample size per category, and make these results comparable to previous studies \citep{Jernvall2004,Price2012}.
+Species dietary and locomotor category assignments were done using the assignments in initial the PBDB which were then reassigned into coarser categories (Table \ref{tab:trait_cats}). This was done to improve interpretability, increase sample size per category, and make these results comparable to previous studies \citep{Jernvall2004,Price2012}.
 
 \begin{table}
   \centering
@@ -65,7 +65,7 @@ The taxonomic information from the PBDB served as the basis for additional revis
 %Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. 
 %MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
 
-Polytomies were resolved resolved with respect to the order of their appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is an imporant covenience for compuation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
+Polytomies were resolved resolved with respect to the order of their appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is an important convenience for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
 % I really wish I was using the Hedman approach.
 
 
@@ -88,12 +88,12 @@ The shape parameter \(\alpha\) was assumed constant, as is standard practice in 
 
 \(\beta\) is a vector of regression coefficients, where each element was given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. In all cases, posterior inference was not effected by changes to this choice of prior. % proof?
 
-Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This linear transform greatly improves the interpretaility of the coefficients as expected change in mean duration given a difference of one standard deviation of the covariate \citep{Schielzeth2010}. However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs for illustrative purposes.
+Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation of the covariate \citep{Schielzeth2010}. However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs for illustrative purposes.
 
 
 \subsubsection{Hierarchical effects}
 
-The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored while no pooling is where different groups are analyzed seperately. By allowing for partial pooling, we are modeling a compromise between these two extremes which allows for better inference. This is done by having all of the groups sharing the same prior with the variance parameter, \(sigma^{2}\), estimated from the data, which then acts as an indicator of the amount of pooling. \(\sigma^{2} = 0\) and \(\sigma^{2} = \infty\) indicate complete and no pooling, respectively. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}. 
+The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored while no pooling is where different groups are analyzed separately. By allowing for partial pooling, we are modeling a compromise between these two extremes which allows for better inference. This is done by having all of the groups sharing the same prior with the variance parameter, \(\sigma^{2}\), estimated from the data, which then acts as an indicator of the amount of pooling. \(\sigma^{2} = 0\) and \(\sigma^{2} = \infty\) indicate complete and no pooling, respectively. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}. 
 
 Origination cohort is defined as the group of species which originated during the same 2 My temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered Normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual unification between paleontological dynamic and cohort survival analysis \citep{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of relative importance of these two end members.
 
@@ -118,15 +118,38 @@ Both \(\eta\) and \(h\) were centered at 0 so that these effects can be interpre
 
 In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The sample variance \(\sigma_{y}^{2}\) is approximated as the variance of the deviance residuals.
 
-\uppercase{define deviance residuals}
+In ordinary linear regression, the residuals are defined as \(r = y - y_{est}\). For hierarchical models, this definition is inadequate. For survival analysis, the equivalent values are deviance residuals. To define how deviance residuals are calculated, we first must define the survival function. The survival function \(S(t)\) is equivalent to the complementary cumulative density function or tail probability of observing a given value or greater \citep{Klein2003}. For a Weibull model, \(S(t)\) is defined
+\begin{equation}
+  S(t) = \exp(-(\sigma * t)^{\alpha})
+\end{equation}
+where \(\sigma\) is defined as above (Eq. \ref{eq:reg}).
 
-I used ratios of the variances and intraclass correlations to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citet{Housworth2004}, is effectively identical to the intraclass correlation of the phylogenetic effect, \(\frac{\sigma_{p}^{2}}{\sigma_{y}^{2} + \sigma_{c}^{2} + \sigma_{p}^{2}}\).
+Given \(S(t)\), we can define the cumulative hazard function \citep{Klein2003}, 
+\begin{equation}
+  \Lambda(t) = -log(S(t)).
+\end{equation}
+
+Next, we define the martingale residuals, \(r\), which is based in counting theory \citep{Therneau1990}. Martingale residuals are defined in relation to \(I\), the inclusion vector described below (Sec. \ref{sec:censor})
+\begin{equation}
+  r_{i} = I_{i} - \Lambda(t_i)
+\end{equation}
+
+Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected values based on the model. However, the range of the martingale residuals is difficult to interpret, tend to be asymmetrically distributed, and not equivalent to standard residuals. 
+
+The solution to this is to use the deviance residuals, \(D\). This is defined as a function of martingale residuals and takes the form
+\begin{equation}
+  D_{i} = \text{sign}(r_{i}) \sqrt{-2[r_{i} + I_{i}log(I_{i} - r_{i})]}.
+\end{equation}
+
+Finally, \(\sigma_{y}^{2}\) is defined as \(var(D)\).
+
+I used ratios of the variances and intraclass correlations to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the intraclass correlation of the phylogenetic effect, \(\frac{\sigma_{p}^{2}}{\sigma_{y}^{2} + \sigma_{c}^{2} + \sigma_{p}^{2}}\).
 
 
 
-\subsubsection{Censored observations}
+\subsubsection{Censored observations} \label{sec:censor}
 
-An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Kleinbaum2005} or observations where the failure time has not been observed. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. 
+An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Klein2003} or observations where the failure time has not been observed. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. 
 
 There are a number of steps involved with modeling censored data, illustrated here with right censored data. The approach taken here follows \citet{Gelman2013d} and the stan modeling language manual \citep{stan-manual:2014}. Let \(I\) be a vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. Beginning with a simple complete-likelihood equation for when all observations are completely observed
 
@@ -181,7 +204,7 @@ For the model without phylogenetic effect the four MCMC chains ran for 1000 step
 
 The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \(y\) \citep{Gelman2013d}. This was done both graphically and numerically.
 
-An example posterior predictive check used in this study is a graphical comparison of the Kaplan-Meier (K-M) survival curve estimated from the observed data with the survival curves from 1000 simulations. K-M survival curves are non-parametric estimates of the function \(S(t)\) or the probability of a species going extinct given that it has lived to time \(t\) \citep{Kleinbaum2005}. Other posterior predictive checks included comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations.
+An example posterior predictive check used in this study is a graphical comparison of the Kaplan-Meier (K-M) survival curve estimated from the observed data with the survival curves from 1000 simulations. K-M survival curves are non-parametric estimates of the function \(S(t)\) or the probability of a species going extinct given that it has lived to time \(t\) \citep{Klein2003}. Other posterior predictive checks included comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations.
 
 
 

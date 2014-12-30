@@ -135,7 +135,7 @@ mo <- rbind(scale.data$move_unc, scale.data$move_cen)
 dead <- duration
 pm <- list()
 pm.res <- list()
-for(i in 1:100) {
+for(i in 1:nsim) {
   n <- length(dead)
   alp <- sample(phypost$alpha, 1)
   inc <- sample(phypost$beta_inter, 1)

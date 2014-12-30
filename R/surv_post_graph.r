@@ -41,12 +41,12 @@ theme_update(axis.text = element_text(size = 20),
 
 # posterior predictive checks
 base.dur <- data.frame(dur = duration)
-hist.sim <- melt(mm)  # simulations
+hist.sim <- melt(pm)  # simulations
 hist.sim <- hist.sim[hist.sim$L1 %in% 1:12, ]
 ppc.hist <- ggplot(hist.sim, aes(x = value))
 ppc.hist <- ppc.hist + geom_histogram(data = base.dur, 
                                       aes(x = dur, y = ..density..),
-                                      binwidth = .2, fill = 'grey', alpha = 0.5,
+                                      fill = 'grey', alpha = 0.5,
                                       colour = 'darkgrey')
 ppc.hist <- ppc.hist + geom_histogram(aes(y = ..density..), binwidth = .2, 
                                       fill = 'blue', alpha = 0.4)
@@ -55,7 +55,7 @@ ppc.hist <- ppc.hist + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ggsave(ppc.hist, filename = '../doc/na_surv/figure/histogram_ppc.png',
        width = 15, height = 10)
 
-means <- laply(mm, mean)
+means <- laply(pm, mean)
 mean.dur <- mean(duration)
 ppc.mean <- ggplot(data.frame(x = means), aes(x = x))
 ppc.mean <- ppc.mean + geom_histogram(aes(y = ..density..), binwidth = .2)
@@ -63,9 +63,9 @@ ppc.mean <- ppc.mean + geom_vline(xintercept = mean.dur,
                                   colour = 'blue', size = 2)
 ppc.mean <- ppc.mean + labs(x = 'Duration', y = 'Prob. Density')
 ggsave(ppc.mean, filename = '../doc/na_surv/figure/mean_ppc.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
-quant <- laply(mm, function(x) c(mean = mean(x), quantile(x, c(.25, .5, .75))))
+quant <- laply(pm, function(x) c(mean = mean(x), quantile(x, c(.25, .5, .75))))
 quant <- melt(quant)
 quant.dur <- c(mean = mean(duration), quantile(duration, c(.25, .5, .75)))
 quant.dur <- melt(quant.dur)
@@ -80,10 +80,8 @@ ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
 ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
        width = 10, height = 10)
 
-# standardized residuals: mean and var? 
-# do weibull residuals need to be special?
-# something like: res = alpha * (ln(duration) - ln(x))
-std.res <- melt(mm.res)
+# deviance residuals
+std.res <- melt(pm.res)
 std.res <- std.res[std.res$L1 %in% 1:12, ]
 std.res$index <- rep(seq(1:1921), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
@@ -103,8 +101,8 @@ ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
-skew.res <- laply(mm.res, moments::skewness)
-var.res <- laply(mm.res, function(x) var(x))
+skew.res <- laply(pm.res, moments::skewness)
+var.res <- laply(pm.res, function(x) var(x))
 res.sum <- melt(cbind(skew.res, var.res))
 res.sum$Var2 <- as.character(res.sum$Var2)
 res.sum$Var2[res.sum$Var2 == 'skew.res'] <- 'residual skewness'
@@ -126,7 +124,7 @@ emp.surv <- survfit(Surv(time = duration, time2 = duration,
 emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
 emp.surv <- rbind(c(0, 1), emp.surv)
 
-sim.surv <- llply(mm, function(x) survfit(Surv(x) ~ 1))
+sim.surv <- llply(pm, function(x) survfit(Surv(x) ~ 1))
 sim.surv <- llply(sim.surv, function(x) data.frame(cbind(time = x$time, 
                                                          surv = x$surv)))
 sim.surv <- llply(sim.surv, function(x) rbind(c(0, 1), x))
@@ -159,8 +157,8 @@ ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
 
 # marginal posteriors
 melted <- melt(mpost)
-scale.melted <- melt(scale.mpost)
-ns <- length(mpost$lp__)
+scale.melted <- melt(phypost)
+ns <- length(phypost$lp__)
 
 # create the different combinations
 regcoef <- scale.melted[str_detect(scale.melted$L1, 'beta'), ]
@@ -182,7 +180,7 @@ loco <- loco + geom_histogram(aes(y = ..density..))
 loco <- loco + facet_grid(Var2 ~ .)
 loco <- loco + labs(x = 'Value', y = 'Prob. Density')
 ggsave(loco, filename = '../doc/na_surv/figure/loco_est.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 # better to compare as differences?
 loco.diff <- melt(pairwise.diffs(cbind(arb, grd, scn)))
@@ -192,7 +190,7 @@ lodf <- lodf + geom_histogram(aes(y = ..density..))
 lodf <- lodf + facet_grid(Var2 ~ .)
 lodf <- lodf + labs(x = 'Value', y = 'Prob. Density')
 ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 
 # effect of dietary category
@@ -207,7 +205,7 @@ diet <- diet + geom_histogram(aes(y = ..density..))
 diet <- diet + facet_grid(Var2 ~ .)
 diet <- diet + labs(x = 'Value', y = 'Prob. Density')
 ggsave(diet, filename = '../doc/na_surv/figure/diet_est.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 # better to compare as differences?
 diet.diff <- melt(pairwise.diffs(cbind(crn, hrb, ist, omn)))
@@ -217,16 +215,18 @@ didf <- didf + geom_histogram(aes(y = ..density..))
 didf <- didf + facet_grid(Var2 ~ .)
 didf <- didf + labs(x = 'Value', y = 'Prob. Density')
 ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 
 # effect of body size and occupancy
 size.eff <- melted[melted$L1 == 'beta_size', 'value']  # base line
 occ.eff <- melted[melted$L1 == 'beta_occ', 'value']  # base line
-oth.eff <- melt(cbind(size.eff, occ.eff))
+oth.eff <- melt(cbind(size.eff = size.eff[1:2000], 
+                      occ.eff = occ.eff[1:2000]))
 oth.eff$label <- rep('unstandardized', nrow(oth.eff))
-sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']  # base line
-sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']  # base line
+
+sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']
+sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']
 sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
 sc.oth.eff$label <- rep('standardized', nrow(sc.oth.eff))
 
@@ -239,7 +239,7 @@ other <- other + geom_histogram(aes(y = ..density..))
 other <- other + facet_grid(Var2 ~ label)
 other <- other + labs(x = 'Value', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
-       width = 15, height = 10)
+       width = 10, height = 10)
 
 
 # bioprovinces through time?
@@ -248,15 +248,17 @@ ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
 # histogram phylogeny effect variance
 # variance ratios
 # interclass correlations/VPC
-s.y <- laply(mm.res, var)
-s.c <- mpost$fv
-#s.p <- mpost$sigma_phy
+s.y <- laply(pm.res, var)
+s.c <- phypost$fv
+s.p <- phypost$sigma_phy
 
-indiv.part <- s.y / (s.y + s.c)
-cohort.part <- s.c / (s.y + s.c)
-#phylo.part <- s.p / (s.y + s.c + s.p)
+indiv.part <- s.y / (s.y + s.c + s.p)
+cohort.part <- s.c / (s.y + s.c + s.p)
+phylo.part <- s.p / (s.y + s.c + s.p)
 
-var.parts <- melt(cbind(individual = indiv.part, cohort = cohort.part))
+var.parts <- melt(cbind(individual = indiv.part, 
+                        cohort = cohort.part, 
+                        phylogeny = phylo.part))
 gvar <- ggplot(var.parts, aes(x = value))
 gvar <- gvar + geom_histogram(aes(y = ..density..))
 gvar <- gvar + facet_grid(Var2 ~ .)
@@ -266,9 +268,9 @@ ggsave(gvar, filename = '../doc/na_surv/figure/variance_est.png',
 
 
 # for cohort effect, do point range with 80% quartile
-top <- apply(mpost$rando, 2, function(x) quantile(x, .8))
-bot <- apply(mpost$rando, 2, function(x) quantile(x, .2))
-med <- apply(mpost$rando, 2, function(x) quantile(x, .5))
+top <- apply(phypost$rando, 2, function(x) quantile(x, .8))
+bot <- apply(phypost$rando, 2, function(x) quantile(x, .2))
+med <- apply(phypost$rando, 2, function(x) quantile(x, .5))
 rands <- data.frame(cbind(top = top, bot = bot, med = med, 
                           bin = seq(length(top))))
 rands$bin <- (rands$bin * 2) + 1
@@ -291,11 +293,12 @@ wei.haz <- function(time, scale, alpha) {
 xx <- seq(0, 12, by = 0.01)
 wz <- list()
 for(ii in seq(nsim)) {
-  wz[[ii]] <- wei.haz(xx, exp(-sample(mpost$beta_inter, 1)), 
-                      sample(mpost$alpha, 1))
+  wz[[ii]] <- wei.haz(xx, exp(-sample(phypost$beta_inter, 1)), 
+                      sample(phypost$alpha, 1))
 }
 
-mid.haz <- wei.haz(xx, exp(-median(mpost$beta_inter, 1)), median(mpost$alpha, 1))
+mid.haz <- wei.haz(xx, exp(-median(phypost$beta_inter, 1)), 
+                   median(phypost$alpha, 1))
 mid.haz <- data.frame(time = xx, hazard = mid.haz)
 
 wzm <- llply(wz, function(x) data.frame(time = xx, hazard = x))
