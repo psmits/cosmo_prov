@@ -174,22 +174,19 @@ wei.var <- function(scale, shape) {
 }
 sim.var <- function(n) {
   c.star <- rnorm(n, 0, sample(phypost$fv, 1))
-
-  # do i need to sample from the multivariate?
-  # by sampling just from rnorm, i make no statement about relatedness
-  # i'm just saying "random taxon"
-  #o <- ceiling(n / nrow(tree.vcv) )
-  #p.star <- rmvn(o, mu = rep(0, nrow(tree.vcv)), 
-  #               sigma = base::chol(sample(phypost$sq_sigma, 1) * tree.vcv),
-  #               isChol = TRUE) 
-  #p.star <- melt(p.star)[, 3]
-  #p.star <- sample(p.star, n)
   p.star <- rnorm(n, 0, sample(phypost$sigma_phy))
 
   aa <- sample(phypost$alpha, 1)
-  ss <- exp(-(sample(phypost$beta_inter, 1) + (c.star + p.star)) / aa)
-  mean(wei.var(ss, aa))
+  inter <- sample(phypost$beta_inter, 1)
+  ss <- exp(-(inter + c.star) / aa)
+  yy <- exp(-(inter + p.star) / aa)
+
+  out <- c(y = mean(c(mean(wei.var(ss, aa)), mean(wei.var(yy, aa)))),
+           p = var(yy),
+           c = var(ss))
+  out
 }
 var.star <- mclapply(1:nsim, function(x) sim.var(50000), 
-                     mc.cores = detectCores()) 
-var.star <- unlist(var.star)
+                     mc.cores = detectCores())
+
+var.star <- data.frame(Reduce(rbind, var.star))

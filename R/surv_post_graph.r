@@ -243,9 +243,9 @@ ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
 
 
 # variance partition coefficient
-s.y <- var.star
-s.c <- phypost$fv^2
-s.p <- phypost$sq_sigma
+s.y <- var.star[, 1]
+s.c <- var.star[, 3]
+s.p <- var.star[, 2]
 
 indiv.part <- s.y / (s.y + s.c + s.p)
 cohort.part <- s.c / (s.y + s.c + s.p)
@@ -257,6 +257,7 @@ var.parts <- melt(cbind(individual = indiv.part,
 gvar <- ggplot(var.parts, aes(x = value))
 gvar <- gvar + geom_histogram(aes(y = ..density..))
 gvar <- gvar + facet_grid(Var2 ~ .)
+gvar <- gvar + scale_x_continuous(limits = c(0, 1))
 gvar <- gvar + labs(x = 'Variance partition coefficient', y = 'Prob. Density')
 ggsave(gvar, filename = '../doc/na_surv/figure/variance_est.png',
        width = 5, height = 10)

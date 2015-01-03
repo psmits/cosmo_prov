@@ -195,14 +195,18 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 
 
 \subsection{Variance partitioning}
-In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. Instead, \(\sigma_{y}^{2}\) was approximated by a simulation procedure proposed by \citet{Goldstein2002}.
+In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. To partition the variance between these three components, instead an approximation was done via simulation modified from \citet{Goldstein2002}.
 
 The procedure is as follows:
 \begin{enumerate}
-  \item Simulate \(w\) (50,000) values of \(\eta\) and \(h\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\) and \(h \sim \mathcal{N}(0, \sigma_{p})\).
-  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations.
-  \item Calculate \(\upsilon\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{*}\) with \(\alpha\) drawn from the posterior estimate.
-  \item \(\sigma_{y}^{2} = \frac{1}{w} \sum_{i}^{w} \upsilon_{i}\).
+  \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\). 
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
+  \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
+  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\)
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
+  \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
+  \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\)
+  \item \(\sigma_{c*}^{2} = var(\upsilon_{c})\) and \(\sigma_{p*}^{2} = var(\upsilon_{p})\)
 \end{enumerate}
 
 The simulated values of \(h\) were drawn from a univariate normal distribution because each simulated value is in isolation, so there are is no concern of phylogenetic autocorrelation. The chosen value for \(\beta^{T} \mathbf{X}\) was a draw from the posterior estimate of the intercept. Because input variables were standardized prior to model fitting, the intercept corresponds to the estimated effect on survival of the sample mean.
@@ -214,7 +218,9 @@ Wiebull variance is calculated as
 \end{equation}
 where \(\Gamma\) is the gamma function. 
 
-I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the VPC of the phylogenetic effect, \(\frac{\sigma_{p}^{2}}{\sigma_{y}^{2} + \sigma_{c}^{2} + \sigma_{p}^{2}}\). 
+The variance partitioning coefficients are then calculated \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similar for the other variance components.
+
+I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the VPC of the phylogenetic effect.
 
 
 \end{document}
