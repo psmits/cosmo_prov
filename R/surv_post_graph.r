@@ -242,15 +242,10 @@ ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
        width = 10, height = 10)
 
 
-# bioprovinces through time?
-
-# histogram cohort effect variance 
-# histogram phylogeny effect variance
-# variance ratios
-# interclass correlations/VPC
-s.y <- laply(pm.res, var)
-s.c <- phypost$fv
-s.p <- phypost$sigma_phy
+# variance partition coefficient
+s.y <- var.star
+s.c <- phypost$fv^2
+s.p <- phypost$sq_sigma
 
 indiv.part <- s.y / (s.y + s.c + s.p)
 cohort.part <- s.c / (s.y + s.c + s.p)
@@ -262,7 +257,7 @@ var.parts <- melt(cbind(individual = indiv.part,
 gvar <- ggplot(var.parts, aes(x = value))
 gvar <- gvar + geom_histogram(aes(y = ..density..))
 gvar <- gvar + facet_grid(Var2 ~ .)
-gvar <- gvar + labs(x = 'Interclass correlation', y = 'Prob. Density')
+gvar <- gvar + labs(x = 'Variance partition coefficient', y = 'Prob. Density')
 ggsave(gvar, filename = '../doc/na_surv/figure/variance_est.png',
        width = 5, height = 10)
 
@@ -293,12 +288,12 @@ wei.haz <- function(time, scale, alpha) {
 xx <- seq(0, 12, by = 0.01)
 wz <- list()
 for(ii in seq(nsim)) {
-  wz[[ii]] <- wei.haz(xx, exp(-sample(phypost$beta_inter, 1)), 
-                      sample(phypost$alpha, 1))
+  a <- sample(phypost$alpha, 1)
+  wz[[ii]] <- wei.haz(xx, exp(-(sample(phypost$beta_inter, 1)) / a ), a)
 }
 
-mid.haz <- wei.haz(xx, exp(-median(phypost$beta_inter, 1)), 
-                   median(phypost$alpha, 1))
+ma <- median(phypost$alpha)
+mid.haz <- wei.haz(xx, exp(-(median(phypost$beta_inter) / ma)), ma)
 mid.haz <- data.frame(time = xx, hazard = mid.haz)
 
 wzm <- llply(wz, function(x) data.frame(time = xx, hazard = x))
