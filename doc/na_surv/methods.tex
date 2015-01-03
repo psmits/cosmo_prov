@@ -65,45 +65,49 @@ The taxonomic information from the PBDB served as the basis for additional revis
 %Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. 
 %MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
 
-Polytomies were resolved resolved with respect to the order of their appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is an important convenience for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
+Polytomies were resolved in order of species first appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is an important convenience for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
 % I really wish I was using the Hedman approach.
 
 
 
 \subsection{Survival model}
 
-The survival model described here was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. \(\sigma\) was defined as an exponentiated regression model whose parameters are defined below (Eq. \ref{eq:reg}). The model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and to fit the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
-
-
+The statistical model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and to fit the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
+A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. 
 \begin{align}
   p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma) \nonumber \\ 
-  &= \frac{\alpha}{\sigma} \left(\frac{y_{i}}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma}\right)^{\alpha}\right) \label{eq:weibull}\\
-  \sigma &= \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right) \label{eq:reg}
+  &= \frac{\alpha}{\sigma} \left(\frac{y_{i}}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma}\right)^{\alpha}\right) 
+  \label{eq:weibull}
 \end{align}
 
-The shape parameter \(\alpha\) was assumed constant, as is standard practice in survival analysis, and was given a diffuse half-Cauchy prior. 
+As is standard practice in survival analysis \citep{Klein2003}, \(\alpha\) was assumed constant and was given a weakly informative half-Cauchy prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}).
 
-\(\mathbf{X}\) is a \(n \times k\) matrix of species level covariates. The covariates of interest included the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariates such as dietary or locomotor category, called index variables, were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable. Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s were included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(\mathbf{X}\) have eight columns.
+\begin{equation}
+  \sigma = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
+  \label{eq:reg}
+\end{equation}
 
-\(\beta\) is a vector of regression coefficients, where each element was given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. In all cases, posterior inference was not effected by changes to this choice of prior. % proof?
+\(K\) species level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). The covariates of interest included the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable. Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s were included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
 
-Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation of the covariate \citep{Schielzeth2010}. However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs for illustrative purposes.
+\(\beta\) is a vector of regression coefficients, where each element was given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. %In all cases, posterior inference was not effected by changes to this choice of prior. Do I have proof?
+
+Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation in the covariate \citep{Schielzeth2010}. However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized inputs for illustrative purposes.
 
 
 \subsubsection{Hierarchical effects}
 
-The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored while no pooling is where different groups are analyzed separately. By allowing for partial pooling, we are modeling a compromise between these two extremes which allows for better inference. This is done by having all of the groups sharing the same prior with the variance parameter, \(\sigma^{2}\), estimated from the data, which then acts as an indicator of the amount of pooling. \(\sigma^{2} = 0\) and \(\sigma^{2} = \infty\) indicate complete and no pooling, respectively. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}. 
+The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored while no pooling is where different groups are analyzed separately. By allowing for partial pooling, we are modeling a compromise between these two extremes which allows for better inference. This is done by having all of the groups sharing the same prior with the scale parameter estimated from the data, which then acts as an indicator of the amount of pooling. A scale of 0 and \(\infty\) indicate complete and no pooling, respectively. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}. 
 
-Origination cohort is defined as the group of species which originated during the same 2 My temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered Normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual unification between paleontological dynamic and cohort survival analysis \citep{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of relative importance of these two end members.
+Origination cohort is defined as the group of species which originated during the same 2 My temporal bin. The most recent temporal bin, 0-2 Mya, was excluded, leaving 32 different cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered Normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual unification between dynamic and cohort survival analysis in paleontology \citep{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of relative importance of these two end members.
 
 \begin{align*}
   \eta_{j} &\sim \mathcal{N}(0, \sigma_{c}) \\
   \sigma_{c} &\sim \mathrm{halfCauchy}(0, 2.5)
 \end{align*}
 
-\(\sigma_{c}\) was given a half-Cauchy hyperprior following \citet{Gelman2006a}
+The choice of prior for \(\sigma_{c}\) follows \citet{Gelman2006a}
 
-The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect, where each observation, \(i\) was considered drawn from a multivariate normal distribution, \(h\), who's covariance matrix was assumed known up to a constant, \(\sigma_{p}\) \citep{Lynch1991,Housworth2004}. More fully, this is written
+The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect where each observation, \(i\), is distributed as a multivariate normal, \(h\), where the covariance matrix was assumed known up to a constant variance, \(\sigma_{p}^{2}\) \citep{Lynch1991,Housworth2004}. More fully, this is written
 
 \begin{align*}
   h &\sim \mathrm{Multi}\mathcal{N}(0, \mathbf{\Sigma}) \\
@@ -111,39 +115,27 @@ The impact of shared evolutionary history, or phylogeny, was modeling as an indi
   \sigma_{p} &\sim \mathrm{halfCauchy}(0, 2.5),
 \end{align*}
  
-with \(\sigma_{p}\) also given a half-Cauchy hyperprior and \(\mathbf{V}_{phy}\) being the phylogenetic covariance matrix. \(\mathbf{V}_{phy}\) is defined as an n x n matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\).
+with \(\mathbf{V}_{phy}\) being the phylogenetic covariance matrix defined as an \(n \times n\) matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\). \(\sigma_{p}\) was given a weakly informative half-Cauchy hyperprior. 
 
-Both \(\eta\) and \(h\) were centered at 0 so that these effects can be interpreted as differences from the intercept of the model. 
+Both \(\eta\) and \(h\) were centered at 0 so that these effects can be interpreted as differences from the mean of the observed.
 
 
 \subsubsection{Censored observations} \label{sec:censor}
 
 An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Klein2003} or observations where the failure time has not been observed. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. 
 
-There are a number of steps involved with modeling censored data, illustrated here with right censored data. The approach taken here follows \citet{Gelman2013d} and the stan modeling language manual \citep{stan-manual:2014}. These calculations include the inclusion vector, \(I\) which is defined as a vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. Beginning with a simple complete-likelihood equation for when all observations are completely observed
+To model censored data, there are a few functions which must first be defined following \citet{Klein2003}. The survival function, \(S(t)\), for a Weibull model is
+\begin{equation}
+  S(t | \alpha, \sigma) = \exp\left(-\left(\frac{t}{\sigma}\right)^{\alpha}\right),
+  \label{eq:surv}
+\end{equation}
+where \(\sigma\) is defined as above (Eq. \ref{eq:reg}). \(S(t)\) is the probability that an observation will survive longer than a give time, \(t\). The likelihood of uncensored observations is evaluated as as normal using Equation \ref{eq:weibull} while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cummulative density function and \(S(t)\) is equivalent to the complementary cummulative density function \citep{Gelman2013d}.
+
+Fully, the likelihood for both uncensored and both right and left censored observations is written
 \begin{equation*}
-  p(y | \theta) = \prod_{i = 1}^{n} \mathrm{Weibull}(y_{i}|\theta, 1).
+  L \propto \prod_{i \in C} \mathrm{Weibull}(y_{i} | \alpha, \sigma) \prod_{j \in R} S(y_j | \alpha, \sigma) \prod_{k \in L} \left(1 - S(y_{k} | \alpha, \sigma)\right),
 \end{equation*}
-
-The likelihood of the inclusion vector \(I\), in this case, is easily defined as a simple equation
-\begin{align*}
-  p(I | y, \theta) &= \prod_{i = 1}^{n} p(I_{i} | y_{i}, \phi) \\
-  &= \prod_{i = 1}^{n} 
-    \begin{cases} 
-      1 & \text{if } (I_{i} = 1) \text{ or } (I_{i} = 0 \text{ and } y_{i} > \phi) \\ 
-      0 & \text{otherwise},
-    \end{cases}
-\end{align*}
-where \(\phi\) is the censoring point or the observed species duration.
-
-For valid Bayesian inference, conditioned on the data, the joint likelihood of the fully observed data (\(y_{obs}\)) and \(I\) is obtained by integrating out the censored data (\(y_{cen}\)) from the complete likelihood:
-\begin{align*}
-  p(y_{obs}, I | \theta, \phi) &= \int p(y, I | theta, \phi) dy_{cen} \\
-  &= \int p(y | \theta, \phi) p(I | y, \theta, \phi) dy_{cen} \\
-  &= \prod_{i: I_{i} = 1} \mathrm{Weibull}(y_{i} | \theta, 1) \prod_{i: I_{i} = 0} \int_{\phi}^{\infty} \mathrm{Weibull}(y_{i} | \theta, 1) p(I_{i} | y_{i}, \phi) dy_{i} \\
-  &= \prod_{i: I_{i} = 1} \mathrm{Weibull}(y_{i} | \theta, 1) \prod_{i : I_{i} = 0} 1 - F_{Weibull}(y_{i} | \theta, \phi),
-\end{align*}
-where \(F(x)\) is the cumulative density function, equivalent to the probability of observing a value of \(x\) or less. \(1 - F(x)\) is the complementary cumulative density function which is the equivalent of the probability of observing a value of \(x\) or greater.
+where \(C\) is the set of uncensored observations, \(R\) is the set of right censored observations, and \(L\) is the set of left censored observations.
 
 A summary of the entire model, save for calculations for censored observations, along with the exact priors for every estimated parameter is presented in Figure \ref{fig:model_diagram}.
 
@@ -170,23 +162,18 @@ The most basic assessment of model fit is that simulated data generated using th
 
 An example posterior predictive check used in this study is a graphical comparison of the Kaplan-Meier (K-M) survival curve estimated from the observed data with the survival curves from 1000 simulations. K-M survival curves are non-parametric estimates of the function \(S(t)\) or the probability of a species going extinct given that it has lived to time \(t\) \citep{Klein2003}. Other posterior predictive checks included comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations, and inspection of the deviance residuals, defined below.
 
-In ordinary linear regression, the residuals are defined as \(r = y - y_{est}\). For hierarchical models, this definition is inadequate. For survival analysis, the equivalent values are deviance residuals. To define how deviance residuals are calculated, we first define the survival function, \(S(t)\). The survival function is equivalent to the complementary cumulative density function or tail probability of observing a given value or greater \citep{Klein2003}. For a Weibull model, \(S(t)\) is defined
+In ordinary linear regression, the residuals are defined as \(r = y - y_{est}\). For hierarchical models, this definition is inadequate. For survival analysis, the equivalent values are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \citep{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:surv}), we define the cumulative hazard function as 
 \begin{equation*}
-  S(t) = \exp(-(\frac{t}{\sigma})^{\alpha})
-\end{equation*}
-where \(\sigma\) is further parameterized as above (Eq. \ref{eq:reg}).
-
-Given \(S(t)\), we can define the cumulative hazard function \citep{Klein2003}, 
-\begin{equation*}
-  \Lambda(t) = -log(S(t)).
+  \Lambda(t) = -log\left(S\left(t\right)\right).
 \end{equation*}
 
-Next, we define the martingale residuals, \(m\), which is based in counting theory \citep{Therneau1990}. Martingale residuals are defined in relation to \(I\), the inclusion vector. 
+Next, we define martingale residuals, \(m\), which are defined in relation to the inclusion vector \(I\)
 \begin{equation*}
-  m_{i} = I_{i} - \Lambda(t_i)
+  m_{i} = I_{i} - \Lambda(t_i).
 \end{equation*}
+\(I\) is as a vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. 
 
-Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected values based on the model. However, the range of the martingale residuals is difficult to interpret, tend to be asymmetrically distributed, and not equivalent to standard residuals. 
+Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, the range of the martingale residuals is difficult to interpret, can be asymmetrically distributed, and are not equivalent to standard residuals. 
 
 The solution to this is to use the deviance residuals, \(D\). This is defined as a function of martingale residuals and takes the form
 \begin{equation*}
@@ -195,11 +182,11 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 
 
 \subsection{Variance partitioning}
-In total, there are three different variance components in this model: sample variance \(\sigma_{y}^{2}\), cohort variance \(\sigma_{c}^{2}\), and phylogenetic variance \(\sigma_{p}^{2}\). The model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. To partition the variance between these three components, instead an approximation was done via simulation modified from \citet{Goldstein2002}.
+There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. To partition the variance between these three components, instead an approximation was done via a simulation approach modified from \citet{Goldstein2002}.
 
 The procedure is as follows:
 \begin{enumerate}
-  \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\). 
+  \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
   \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
   \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\)
@@ -211,7 +198,7 @@ The procedure is as follows:
 
 The simulated values of \(h\) were drawn from a univariate normal distribution because each simulated value is in isolation, so there are is no concern of phylogenetic autocorrelation. The chosen value for \(\beta^{T} \mathbf{X}\) was a draw from the posterior estimate of the intercept. Because input variables were standardized prior to model fitting, the intercept corresponds to the estimated effect on survival of the sample mean.
 
-Wiebull variance is calculated as
+Weibull variance is calculated as
 \begin{equation}
   var(x) = \sigma^{2}\left(\Gamma\left(1 + \frac{2}{\alpha}\right) - \left(\Gamma\left(1 + \frac{1}{\alpha}\right)\right)^{2}\right),
   \label{eq:wei_var}
@@ -220,7 +207,7 @@ where \(\Gamma\) is the gamma function.
 
 The variance partitioning coefficients are then calculated \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similar for the other variance components.
 
-I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the VPC of the phylogenetic effect.
+I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the tree effect.
 
 
 \end{document}
