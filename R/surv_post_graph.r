@@ -258,7 +258,7 @@ gvar <- ggplot(var.parts, aes(x = value))
 gvar <- gvar + geom_histogram(aes(y = ..density..))
 gvar <- gvar + facet_grid(Var2 ~ .)
 gvar <- gvar + scale_x_continuous(limits = c(0, 1))
-gvar <- gvar + labs(x = 'Variance partition coefficient', y = 'Prob. Density')
+gvar <- gvar + labs(x = 'Variance partition\ncoefficient', y = 'Prob. Density')
 ggsave(gvar, filename = '../doc/na_surv/figure/variance_est.png',
        width = 5, height = 10)
 
