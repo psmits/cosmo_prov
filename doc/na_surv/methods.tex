@@ -152,7 +152,7 @@ The parameter posteriors were approximated using a Markov-chain Monte Carlo (MCM
 
 Both models with and without phylogenetic effects were estimated. Because inverting a large matrix is a memory intense procedure and because the phylogenetic covariance matrix is only assumed known up to a constant, every iteration of the MCMC would involve solving a very large matrix which is not ideal. In order to speed up the MCMC routine, this aspect of the model had to be reparameterized for efficiency purposes. Because of the size of the covariance matrix a custom multivariate sampler was used (see Appendix: Code).
 
-For the model without phylogenetic effect the four MCMC chains ran for 1000 steps, with the first 500 used as warm-up and the last 500 as samples from the posterior. Because of the added complexity of estimating the phylogenetic effect, all four chains were run 20000 steps thinned to every twentieth sample split evenly between warm-up and sampling. 
+For the model without phylogenetic effect the four MCMC chains ran for 1000 steps, with the first 500 used as warm-up and the last 500 as samples from the posterior. Because of the added complexity of estimating the phylogenetic effect, instead all four chains were run 20000 steps thinned to every twentieth sample split evenly between warm-up and sampling. 
 
 
 
