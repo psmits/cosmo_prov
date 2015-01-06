@@ -16,12 +16,19 @@ set.seed(seed)
 source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
 
-# TO DO Negative Binomial distribution / overdispersion
+# compile the models
 poisson.mod <- stan(file = '../stan/degree_model.stan') # 
 pois.phy.mod <- stan(file = '../stan/degree_phy_model.stan') # 
 pois.spt.mod <- stan(file = '../stan/degree_spt_model.stan') # 
 pois.ful.mod <- stan(file = '../stan/degree_full_model.stan') # 
 
+negbin.mod <- stan(file = '../stan/deg_mod_over.stan')
+negb.phy.mod <- stan(file = '../stan/deg_phy_over.stan')
+negb.phy.mod <- stan(file = '../stan/deg_spt_over.stan')
+negb.ful.mod <- stan(file = '../stan/deg_full_over.stan')
+
+
+# prep the data
 species.graph <- function(bipartite) {
   bip <- bipartite.projection(bipartite)
   if(any(grepl('[0-9]', V(bip[[1]])$name))) {
@@ -61,7 +68,6 @@ diet <- llply(ecol, function(x) model.matrix( ~ x$diet - 1)[, -1])
 move <- llply(ecol, function(x) model.matrix( ~ x$move - 1)[, -1])
 
 
-
 # prepare the phylo vcv
 tax.nam <- str_replace(na.ecol[, 1], ' ', '_')
 to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
@@ -83,6 +89,9 @@ for(ii in seq(length(name))) {
   vcv.s[[ii]] <- temp.vcv  
 }
 
+
+# fit the models
+# basic poisson model
 degfit <- list()
 for(ii in seq(length(adj))) {
 
@@ -105,31 +114,28 @@ for(ii in seq(length(adj))) {
   degfit[[ii]] <- sflist2stanfit(degmod)
 }
 
-deg.coef <- extract(degfit[[1]], permuted = TRUE)
 
-names(deg.coef)
 
-mu <- list()
-for(ii in 1:nsim) {
-  n <- size[[1]]
-  inc <- sample(deg.coef$beta_inter, 1)
-  sz <- sample(deg.coef$beta_mass, 1)
-  mv <- deg.coef$beta_move[sample(size[[1]], 1), ]
-  di <- deg.coef$beta_diet[sample(size[[1]], 1), ]
-
-  oo <- c()
-  for(jj in seq(size[[1]])) {
-    reg <- inc + sz * ecol[[1]]$mass[jj] + 
-           sum(mv * move[[1]][jj, ]) + sum(di * diet[[1]][jj, ])
-    oo[jj] <- rpois(1, lambda = exp(reg))
-  }
-  mu[[ii]] <- oo
-}
-
-par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-hist(deg[[1]])
-for(s in 1:19)
-  hist(mu[[s]])
 
 
 # probably need to switch to a negative binomial, duh :P
+overfit <- list()
+for(ii in seq(length(adj))) {
+  data <- list(N = size[[ii]],
+               D = ncol(diet[[ii]]),
+               M = ncol(move[[ii]]),
+               degree = deg[[ii]],
+               mass = ecol[[ii]]$mass,
+               diet = diet[[ii]],
+               move = move[[ii]],
+               vcv = vcv.s[[ii]],
+               adj = adj[[ii]])
+
+  degmod <- mclapply(1:4, mc.cores = detectCores(),
+                     function(x) stan(fit = negbin.mod, 
+                                      seed = seed,
+                                      data = data, 
+                                      chains = 1, chain_id = x,
+                                      refresh = -1))
+  overfit[[ii]] <- sflist2stanfit(degmod)
+}
