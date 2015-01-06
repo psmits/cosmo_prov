@@ -1,12 +1,10 @@
 library(rstan)
 library(arm)
 library(parallel)
-library(xtable)
 library(stringr)
 library(plyr)
 library(igraph)
 library(ape)
-
 
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
@@ -17,15 +15,15 @@ source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
 
 # compile the models
-poisson.mod <- stan(file = '../stan/degree_model.stan') # 
-pois.phy.mod <- stan(file = '../stan/degree_phy_model.stan') # 
-pois.spt.mod <- stan(file = '../stan/degree_spt_model.stan') # 
-pois.ful.mod <- stan(file = '../stan/degree_full_model.stan') # 
+poisson.mod <- stan(file = '../stan/degree_model.stan')
+#pois.phy.mod <- stan(file = '../stan/degree_phy_model.stan')
+#pois.spt.mod <- stan(file = '../stan/degree_spt_model.stan')
+#pois.ful.mod <- stan(file = '../stan/degree_full_model.stan')
 
 negbin.mod <- stan(file = '../stan/deg_mod_over.stan')
-negb.phy.mod <- stan(file = '../stan/deg_phy_over.stan')
-negb.phy.mod <- stan(file = '../stan/deg_spt_over.stan')
-negb.ful.mod <- stan(file = '../stan/deg_full_over.stan')
+#negb.phy.mod <- stan(file = '../stan/deg_phy_over.stan')
+#negb.phy.mod <- stan(file = '../stan/deg_spt_over.stan')
+#negb.ful.mod <- stan(file = '../stan/deg_full_over.stan')
 
 
 # prep the data
@@ -90,51 +88,42 @@ for(ii in seq(length(name))) {
 }
 
 
+# make the list of lists
+data <- list()
+for(ii in seq(length(adj))) {
+  data[[ii]] <- list(N = size[[ii]],
+                     D = ncol(diet[[ii]]),
+                     M = ncol(move[[ii]]),
+                     degree = deg[[ii]],
+                     mass = ecol[[ii]]$mass,
+                     diet = diet[[ii]],
+                     move = move[[ii]],
+                     vcv = vcv.s[[ii]],
+                     adj = adj[[ii]])
+}
+
+
 # fit the models
 # basic poisson model
 degfit <- list()
 for(ii in seq(length(adj))) {
-
-  data <- list(N = size[[ii]],
-               D = ncol(diet[[ii]]),
-               M = ncol(move[[ii]]),
-               degree = deg[[ii]],
-               mass = ecol[[ii]]$mass,
-               diet = diet[[ii]],
-               move = move[[ii]],
-               vcv = vcv.s[[ii]],
-               adj = adj[[ii]])
-
   degmod <- mclapply(1:4, mc.cores = detectCores(),
                      function(x) stan(fit = poisson.mod, 
                                       seed = seed,
-                                      data = data, 
+                                      data = data[[ii]], 
                                       chains = 1, chain_id = x,
                                       refresh = -1))
   degfit[[ii]] <- sflist2stanfit(degmod)
 }
 
 
-
-
-
 # probably need to switch to a negative binomial, duh :P
 overfit <- list()
 for(ii in seq(length(adj))) {
-  data <- list(N = size[[ii]],
-               D = ncol(diet[[ii]]),
-               M = ncol(move[[ii]]),
-               degree = deg[[ii]],
-               mass = ecol[[ii]]$mass,
-               diet = diet[[ii]],
-               move = move[[ii]],
-               vcv = vcv.s[[ii]],
-               adj = adj[[ii]])
-
   degmod <- mclapply(1:4, mc.cores = detectCores(),
                      function(x) stan(fit = negbin.mod, 
                                       seed = seed,
-                                      data = data, 
+                                      data = data[[ii]], 
                                       chains = 1, chain_id = x,
                                       refresh = -1))
   overfit[[ii]] <- sflist2stanfit(degmod)
