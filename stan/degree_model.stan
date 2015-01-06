@@ -15,7 +15,7 @@ parameters {
 }
 model {
   vector[N] mu;
-  
+
   beta_inter ~ normal(0, 10);
   beta_mass ~ normal(0, 10);
   for(i in 1:M) {
@@ -26,8 +26,17 @@ model {
   }
 
   mu <- (beta_inter + beta_mass * mass + 
-        diet * beta_diet + move * beta_move);
+      diet * beta_diet + move * beta_move);
 
   degree ~ poisson_log(mu);
 }
+generated quantities {
+  vector[N] log_lik;
+  vector[N] mu;
+  mu <- (beta_inter + beta_mass * mass + 
+      diet * beta_diet + move * beta_move);
 
+  for(i in 1:N) {
+    log_lik[i] <- poisson_log_log(degree[i], mu[i]);
+  }
+}

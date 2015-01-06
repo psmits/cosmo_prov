@@ -11,7 +11,27 @@ seed <- 420
 nsim <- 1000
 
 
-# takes posteriors and data
+# get some WAIC values
+# rough estimate of comparative goodness of fit
+colVars <- function (a){
+  diff <- a - matrix (colMeans(a), nrow(a), ncol(a), byrow=TRUE)
+  vars <- colMeans (diff^2)*nrow(a)/(nrow(a)-1)
+  return (vars)
+}
+waic <- function (stanfit){
+  log_lik <- extract (stanfit, "log_lik")$log_lik
+  lppd <- sum (log (colMeans(exp(log_lik))))
+  p_waic_1 <- 2*sum (log(colMeans(exp(log_lik))) - colMeans(log_lik))
+  p_waic_2 <- sum (colVars(log_lik))
+  waic_2 <- -2*lppd + 2*p_waic_2
+  return (list (waic=waic_2, p_waic=p_waic_2, lppd=lppd, p_waic_1=p_waic_1))
+}
+pois.waic <- llply(degfit, waic)
+negbin.waic <- llply(overfit, waic)
+
+
+# posterior simulations
+# poisson model
 poisson.sim <- function(fit, data, nsim) {
   mu <- list()
   for(ii in 1:nsim) {
@@ -32,21 +52,21 @@ poisson.sim <- function(fit, data, nsim) {
   mu
 }
 
-# for poisson model
+# remember, the order is reversed
+# 2, 4, 6, etc.
 deg.coef <- llply(degfit, function(x) extract(x, permuted = TRUE))
 pois.out <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
                 x = deg.coef, y = data)
+
 ll <- length(deg.coef)
 pois.for <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
-                x = deg.coef[-ll], y = data[-1])
+                x = deg.coef[-1], y = data[-ll])
 
-#par(mfrow = c(5, 4), mar = c(4, 4, 2, 2))
-#hist(data[[1]]$deg)
-#for(s in 1:19)
-#  hist(pois.out[[s]])
+ps.forward <- Map(function(x, y) quantile(x, 0.5) - quantile(y, 0.5),
+                  x = pois.out, y = pois.for)
 
 
-# neg binom simulations
+# neg binom model
 negbinom.sim <- function(fit, data, nsim) {
   mu <- list()
   for(ii in 1:nsim) {
@@ -73,4 +93,7 @@ negbinom.out <- Map(function(x, y) negbinom.sim(x, y, nsim = nsim),
 
 ll <- length(over.coef)
 negbinom.for <- Map(function(x, y) negbinom.sim(x, y, nsim = nsim),
-                    x = over.coef[-ll], y = data[-1])
+                    x = over.coef[-1], y = data[-ll])
+
+nb.forward <- Map(function(x, y) quantile(x, 0.5) - quantile(y, 0.5),
+                  x = negbinom.out, y = negbinom.for)
