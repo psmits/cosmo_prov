@@ -154,7 +154,6 @@ ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
        width = 15, height = 10)
 
 
-
 # marginal posteriors
 melted <- melt(mpost)
 scale.melted <- melt(phypost)

@@ -54,7 +54,7 @@ mgt.est <- Reduce(rbind, llply(split(mgt.est, mgt.est$quant),
                                function(x) x[order(x$label), ]))
 pnt.est <- cbind(pnt.est, mgt.est[, 1:2])
 names(pnt.est) <- c('quant', 'value', 'label', 'bot', 'top')
-pnt.est <- pnt.est[!(pnt.est$top > 100), ]
+pnt.est <- pnt.est[!(abs(pnt.est$top - pnt.est$bot) > 100), ]
 
 bad.one <- llply(split(pnt.est, pnt.est$quant), 
                  function(x) which(!(1:10 %in% x$label)))
@@ -80,8 +80,7 @@ mgt.for <- Reduce(rbind, llply(split(mgt.for, mgt.for$quant),
                                function(x) x[order(x$label), ]))
 pnt.for <- cbind(pnt.for, mgt.for[, 1:2])
 names(pnt.for) <- c('quant', 'value', 'label', 'bot', 'top')
-pnt.for <- pnt.for[!(pnt.for$top > 100), ]
-pnt.for <- pnt.for[!(pnt.for$top > 100), ]
+pnt.for <- pnt.for[!(abs(pnt.for$top - pnt.for$bot) > 100),]
 
 bad.two <- llply(split(pnt.for, pnt.for$quant), 
                  function(x) which(!(1:10 %in% x$label)))
@@ -95,7 +94,6 @@ pnt.est <- rbind(cbind(pnt.est, mod = rep('est', nrow(pnt.est))),
 
 bad.one <- rbind(cbind(bad.one, mod = rep('est', nrow(bad.one))),
                  cbind(bad.two, mod = rep('for', nrow(bad.two))))
-
 
 disc <- ggplot(pnt.est, aes(x = label, y = value, 
                             ymin = bot, ymax = top,
