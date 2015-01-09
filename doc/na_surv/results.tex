@@ -19,7 +19,11 @@
 
 \begin{document}
 \section{Results}
-\include{post_out_raw}
+
+% posterior summary table
+\include{post_out}
+
+
 
 \begin{figure}[ht]
   \centering
@@ -42,12 +46,22 @@
   \label{fig:ppc_quant}
 \end{figure}
 
-% Model deficiencies.
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \caption{}
+    \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/loco_diff_est}
+    \label{subfig:loco}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \caption{}
+    \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/diet_diff_est}
+    \label{subfig:diet}
+  \end{subfigure}
+  \caption{Pairwise differences in effect of the locomotor (\subref{subfig:loco}) and dietary categories (\subref{subfig:diet}) on expected duration from 1000 samples from the posterior distribution. Comparisons of locomotor categories, from top to bottom (\subref{subfig:loco}), are: arboreal versus ground dwelling, arboreal versus scansorial, and ground dwelling versus scansorial. For dietary category, from top to bottom (\subref{subfig:diet}): carnivore versus herbivore, carnivore versus insectivore, carnivore versus omnivore, herbivore versus insectivore, herbivore versus omnivore, and insectivore versus omnivore. Values to the left indicate that the first category is expected to have a greater duration than the second, while values to the right indicate that the first category is expected to have a shorter duration.}
+  \label{fig:loco_est}
+\end{figure}
 
-% fit summary
-%   graph: violin plot(!) with each individual species level effect
-%   or
-%   table: with summaries of the effects and \hat{R} values
 
 \begin{figure}[ht]
   \centering
@@ -66,7 +80,7 @@
 \begin{figure}[ht]
   \centering
   \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/variance_est}
-  \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total variance. Each of the estimates is a distribution of 1000 approximating simulations due to the models non-normality.}
+  \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total unexplained variance. Each of the estimates is a distribution of 1000 approximating simulations due to the model's non-normality.}
   \label{fig:vpc}
 \end{figure}
 

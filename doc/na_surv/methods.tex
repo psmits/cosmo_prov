@@ -173,7 +173,7 @@ Next, we define martingale residuals, \(m\), which are defined in relation to th
 \end{equation*}
 \(I\) is as a vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. 
 
-Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, the range of the martingale residuals is difficult to interpret, can be asymmetrically distributed, and are not equivalent to standard residuals. 
+Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, martingale residuals are difficult to interpret, can be asymmetrically distributed, and are not equivalent to standard residuals. 
 
 The solution to this is to use the deviance residuals, \(D\). This is defined as a function of martingale residuals and takes the form
 \begin{equation*}
@@ -182,7 +182,7 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 
 
 \subsection{Variance partitioning}
-There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. To partition the variance between these three components, instead an approximation was done via a simulation approach modified from \citet{Goldstein2002}.
+There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. The partitioning of the variance between these three components was instead approximated via a simulation approach modified from \citet{Goldstein2002}.
 
 The procedure is as follows:
 \begin{enumerate}
