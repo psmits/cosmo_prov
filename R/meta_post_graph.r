@@ -9,7 +9,9 @@ library(GGally)
 library(moments)
 library(plyr)
 
+#source('../R/meta_post_sim.r')
 nsim <- 100
+
 
 pairwise.diffs <- function(x) {
   # create column combination pairs
@@ -26,8 +28,6 @@ pairwise.diffs <- function(x) {
   result
 }
 
-
-
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
          '#0072B2', '#D55E00', '#CC79A7')
@@ -38,7 +38,7 @@ theme_update(axis.text = element_text(size = 20),
              legend.key.size = unit(2, 'cm'),
              strip.text = element_text(size = 20))
 
-# discrepency
+# discrepency in quantile estimates
 # on point
 pnt.est <- llply(negbinom.cout, function(y) 
                  aaply(y, .margins = 2, .fun = median))
@@ -83,7 +83,7 @@ names(pnt.for) <- c('quant', 'value', 'label', 'bot', 'top')
 pnt.for <- pnt.for[!(abs(pnt.for$top - pnt.for$bot) > 100),]
 
 bad.two <- llply(split(pnt.for, pnt.for$quant), 
-                 function(x) which(!(1:10 %in% x$label)))
+                 function(x) which(!(1:9 %in% x$label)))
 bad.two <- melt(bad.two)
 names(bad.two) <- c('label', 'quant')
 bad.two$value <- rep(0, nrow(bad.two))
@@ -108,4 +108,96 @@ disc <- disc + geom_point(data = bad.one,
                           position = position_jitter(height = 0, 
                                                      width = 0.1))
 disc <- disc + facet_grid(quant ~ .)
+disc <- disc + scale_x_reverse()
 disc <- disc + scale_colour_manual(values = cbp)
+
+
+
+# mass sign/size
+eff.mass <- llply(over.coef, function(x) x$beta_mass)
+mass.quant <- llply(eff.mass, function(x) quantile(x, c(0.20, 0.5, 0.80)))
+mass.quant <- data.frame(Reduce(rbind, mass.quant))
+mass.quant <- cbind(mass.quant, label = 2 * (1:10) + 1)
+names(mass.quant) <- c('bot', 'med', 'top', 'label')
+
+efms <- ggplot(mass.quant, aes(x = label, y = med, ymin = bot, ymax = top))
+efms <- efms + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
+efms <- efms + geom_pointrange()
+efms <- efms + scale_x_reverse(breaks = seq(from = 0, 
+                                            to = (test * 2) + 1, 
+                                            by = 2))
+
+
+# move sign/size
+arb.eff <- llply(over.coef, function(x) x$beta_inter)
+arb.quant <- llply(arb.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+gnd.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_move[, 1])
+gnd.quant <- llply(gnd.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+scn.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_move[, 2])
+scn.quant <- llply(scn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+
+lamb <- function(x) {
+  ll <- length(x)
+  temp <- data.frame(Reduce(rbind, x))
+  temp <- cbind(temp, label = 2 * (1:ll) + 1)
+  names(temp) <- c('bot', 'med', 'top', 'label')
+  temp
+}
+arb.quant <- cbind(lamb(arb.quant), mv = rep('arb', length(arb.quant)))
+arb.quant$label <- arb.quant$label + 0.2
+gnd.quant <- cbind(lamb(gnd.quant), mv = rep('gnd', length(gnd.quant)))
+scn.quant <- cbind(lamb(scn.quant), mv = rep('scn', length(scn.quant)))
+scn.quant$label <- scn.quant$label - 0.2
+move.eff <- rbind(arb.quant, gnd.quant, scn.quant)
+
+efmv <- ggplot(move.eff, aes(x = label, y = med, 
+                             ymin = bot, ymax = top, 
+                             colour = mv))
+efmv <- efmv + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
+efmv <- efmv + geom_pointrange()
+efmv <- efmv + scale_x_reverse()
+efmv <- efmv + scale_colour_manual(values = cbp)
+
+
+# diet sign/size
+crn.eff <- llply(over.coef, function(x) x$beta_inter)
+crn.quant <- llply(crn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+hrb.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_diet[, 1])
+hrb.quant <- llply(gnd.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+ist.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_diet[, 2])
+ist.quant <- llply(scn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+omn.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_diet[, 3])
+omn.quant <- llply(scn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
+
+crn.quant <- cbind(lamb(crn.quant), mv = rep('crn', length(crn.quant)))
+crn.quant$label <- crn.quant$label + 0.4
+hrb.quant <- cbind(lamb(hrb.quant), mv = rep('hrb', length(hrb.quant)))
+hrb.quant$label <- hrb.quant$label + 0.2
+ist.quant <- cbind(lamb(ist.quant), mv = rep('ist', length(ist.quant)))
+omn.quant <- cbind(lamb(omn.quant), mv = rep('omn', length(omn.quant)))
+omn.quant$label <- omn.quant$label - 0.2
+
+diet.eff <- rbind(crn.quant, hrb.quant, ist.quant, omn.quant)
+
+efdt <- ggplot(diet.eff, aes(x = label, y = med, 
+                             ymin = bot, ymax = top, 
+                             colour = mv))
+efdt <- efdt + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
+efdt <- efdt + geom_pointrange()
+efdt <- efdt + scale_x_reverse()
+efdt <- efdt + scale_colour_manual(values = cbp)
+
+
+# overdispersion in each bin
+eff.over <- llply(over.coef, function(x) x$phi)
+over.quant <- llply(eff.over, function(x) quantile(x, c(0.20, 0.5, 0.80)))
+over.quant <- data.frame(Reduce(rbind, over.quant))
+over.quant <- cbind(over.quant, label = 2 * (1:10) + 1)
+names(over.quant) <- c('bot', 'med', 'top', 'label')
+
+efov <- ggplot(over.quant, aes(x = label, y = med, ymin = bot, ymax = top))
+efov <- efov + geom_hline(aes(yintercept = 1), colour = 'grey', size = 2)
+efov <- efov + geom_pointrange()
+efov <- efov + scale_x_reverse(breaks = seq(from = 0, 
+                                            to = (test * 2) + 1, 
+                                            by = 2))
