@@ -28,6 +28,7 @@ Species dietary and locomotor category assignments were done using the assignmen
 
 \begin{table}
   \centering
+  \caption{Species trait assignments in this study are a coarser version of the information available in the PBDB. Information was coarsened to improve per category sample size and uniformity and followed this table.}
   \begin{tabular}[ht]{ l | l | l }
     \hline
     \multicolumn{2}{ c |}{This study} & PBDB categories \\
@@ -42,7 +43,6 @@ Species dietary and locomotor category assignments were done using the assignmen
     & Scansorial & Scansorial. \\
     \hline
   \end{tabular}
-  \caption{Species trait assignments in this study are a coarser version of the information available in the PBDB. Information was coarsened to improve per category sample size and uniformity and followed this table.}
   \label{tab:trait_cats}
 \end{table}
 
@@ -80,7 +80,10 @@ A survival model was fit in a Bayesian context where species duration were assum
   \label{eq:weibull}
 \end{align}
 
-As is standard practice in survival analysis \citep{Klein2003}, \(\alpha\) was assumed constant and was given a weakly informative half-Cauchy prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}).
+Following standard practice in survival analysis \citep{Klein2003}, \(\alpha\) was assumed constant and was given a weakly informative half-Cauchy prior. 
+% Should I give this a much stronger prior? 
+% Hierarchical modeling of \alpha would be a pain in the ass, but potentially illuminating.
+\(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). Note, the inclusion of \(\alpha\) in the denominator of the exponentiated term is a standard parameterization for survival models using a Wiebull distribution \citep{Klein2003}.
 
 \begin{equation}
   \sigma = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
@@ -148,7 +151,7 @@ A summary of the entire model, save for calculations for censored observations, 
 
 
 \subsubsection{Estimation}
-The parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
+Parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
 
 Both models with and without phylogenetic effects were estimated. Because inverting a large matrix is a memory intense procedure and because the phylogenetic covariance matrix is only assumed known up to a constant, every iteration of the MCMC would involve solving a very large matrix which is not ideal. In order to speed up the MCMC routine, this aspect of the model had to be reparameterized for efficiency purposes. Because of the size of the covariance matrix a custom multivariate sampler was used (see Appendix: Code).
 
@@ -182,7 +185,7 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 
 
 \subsection{Variance partitioning}
-There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance. The partitioning of the variance between these three components was instead approximated via a simulation approach modified from \citet{Goldstein2002}.
+There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). The sample variance, \(\sigma_{y}^{2}\), is similar to the residual variance from a normal linear regression. Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance, as the errors are not normally distributed. The partitioning of the variance between these three components was instead approximated via a simulation approach modified from \citet{Goldstein2002}.
 
 The procedure is as follows:
 \begin{enumerate}

@@ -19,11 +19,29 @@
 
 \begin{document}
 \section{Results}
+% \hat{R} values indicate approximate convergence of all chains for all parameter estimates.
+% The table is for key parameters of interest.
+% Given these estimated parameter values, how well does my model fit?
+%   Deviance residuals indicate the major problem is over estimation of duration.
+%   However, there residuals are not oddly shaped, approximately good fit for the mean.
+%   Comparison of empirical survival to 100 estimates shows pretty good congruence.
+%   Corroborated with comparison of empirical point estimates with simulated distributions.
+% The model seems a pretty good descriptor of expected duration.
+% Interpretation of parameter estimates.
+%   Diet and locomotor categories and probability state X lives longer than state Y.
+%   Mass has small effect of increase in mass associated with an expected increase in duration.
+%   Occupancy has largest effect, as expected given how often it has been identified.
+%   Cohort
+%     Evidence of weak effect of younger cohorts surviving longer than older cohorts.
+%     However, effect has low overall variance, indicating cohorts are mostly similar.
+%   Phylogeny
+%     Non-zero effect, though small. Probably why ``phylo signal'' not found.
+%     Slightly greater overall variance than cohort
+%   VPC
+%     Individual species variance is largest source of unexplained variance.
+%     Phylogeny then cohort.
 
-% posterior summary table
 \include{post_out}
-
-
 
 \begin{figure}[ht]
   \centering
@@ -59,7 +77,7 @@
     \label{subfig:diet}
   \end{subfigure}
   \caption{Pairwise differences in effect of the locomotor (\subref{subfig:loco}) and dietary categories (\subref{subfig:diet}) on expected duration from 1000 samples from the posterior distribution. Comparisons of locomotor categories, from top to bottom (\subref{subfig:loco}), are: arboreal versus ground dwelling, arboreal versus scansorial, and ground dwelling versus scansorial. For dietary category, from top to bottom (\subref{subfig:diet}): carnivore versus herbivore, carnivore versus insectivore, carnivore versus omnivore, herbivore versus insectivore, herbivore versus omnivore, and insectivore versus omnivore. Values to the left indicate that the first category is expected to have a greater duration than the second, while values to the right indicate that the first category is expected to have a shorter duration.}
-  \label{fig:loco_est}
+  \label{fig:trait_est}
 \end{figure}
 
 
