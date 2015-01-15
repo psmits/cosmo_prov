@@ -174,7 +174,8 @@ wei.var <- function(scale, shape) {
 }
 sim.var <- function(n) {
   c.star <- rnorm(n, 0, sample(phypost$fv, 1))
-  p.star <- rnorm(n, 0, sample(phypost$sigma_phy))
+  p.star <- rnorm(n, 0, sqrt(sample(phypost$sq_sigma, 1) *
+                             sample(diag(tree.vcv), 1)))
 
   aa <- sample(phypost$alpha, 1)
   inter <- sample(phypost$beta_inter, 1)

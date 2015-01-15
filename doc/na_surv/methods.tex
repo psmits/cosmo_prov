@@ -3,15 +3,10 @@
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
 \usepackage{graphicx,hyperref}
 \usepackage{microtype, parskip}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{lineno}
+\usepackage[comma,sort&compress]{natbib}
 \usepackage{docmute}
-\usepackage[font=small]{caption}
 \usepackage{subcaption, multirow, morefloats}
 \usepackage{wrapfig, rotating}
-\usepackage{titlesec}
-\usepackage{authblk, attrib, fullpage}
-\usepackage{lineno}
 
 \frenchspacing
 
@@ -192,7 +187,8 @@ The procedure is as follows:
   \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
   \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
-  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\)
+  \item Draw a random value from the diagonal of \(\mathbf{V}_{phy}\), \(p_{r}\)
+  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}\left(0, \sqrt{\sigma_{p}^{2} \times p_{r}}\right)\)
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
   \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
   \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\)

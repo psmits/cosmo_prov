@@ -3,15 +3,10 @@
 \usepackage{amsmath, amsthm}
 \usepackage{graphicx,hyperref}
 \usepackage{microtype, parskip}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{lineno}
+\usepackage[comma,sort&compress]{natbib}
 \usepackage{docmute}
-\usepackage[font=small]{caption}
 \usepackage{subcaption, multirow, morefloats}
 \usepackage{wrapfig}
-\usepackage{titlesec}
-\usepackage{authblk, attrib, fullpage}
-\usepackage{lineno}
 
 \frenchspacing
 
@@ -29,8 +24,8 @@
 % The model seems a pretty good descriptor of expected duration.
 % Interpretation of parameter estimates.
 %   Diet and locomotor categories and probability state X lives longer than state Y.
-%   Mass has small effect of increase in mass associated with an expected increase in duration.
 %   Occupancy has largest effect, as expected given how often it has been identified.
+%   Mass has weakly positive effect on duration. 
 %   Cohort
 %     Evidence of weak effect of younger cohorts surviving longer than older cohorts.
 %     However, effect has low overall variance, indicating cohorts are mostly similar.
@@ -39,9 +34,19 @@
 %     Slightly greater overall variance than cohort
 %   VPC
 %     Individual species variance is largest source of unexplained variance.
-%     Phylogeny then cohort.
+%     cohort >= phylo
+%     However, cohort + phylo approx. 20\% of the unexplained variance.
+%     Not ignorable effects.
+
+
+With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). 
 
 \include{post_out}
+
+First, visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the model tends to over estimate observed durations. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
+
+Though this bias appears to be concentrated at the tails of the duration distribution, as posterior predictive checks comparing the 25th, 50th, 75th quantiles as well as the mean of the observed durations to the results from simulation indicate adequate model (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
+
 
 \begin{figure}[ht]
   \centering
@@ -64,6 +69,8 @@
   \label{fig:ppc_quant}
 \end{figure}
 
+Given that the model appears adequate, it is now possible to interpreted the parameter estimates. The estimates for diet and locomotor categories were inferred as contrasts between the intercept and one of the \(k - 1\) other states (Table \ref{tab:post_sum}). In order to interpret these estimates, I compared the differences between each of the different states to get an estimate of whether either of two traits was associated with a greater mean duration or not. This was done for all pairwise comparisons for diet and locomotor category separately (Fig. \ref{fig:trait_est}). % Write out percentile results.
+
 \begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
@@ -80,6 +87,7 @@
   \label{fig:trait_est}
 \end{figure}
 
+The estimates for the individual cohort effects show a weak pattern of increased extinction risk in older Cenozoic cohorts and decreased extinction risk in younger cohorts (Fig. \ref{fig:eff_cohort}). However, this pattern is not very strong as there is a large amount of variation, particularity for older cohorts. For example, note the two cohorts between 55 and 50 My that have a much lower extinction risk than other cohorts of similar age.
 
 \begin{figure}[ht]
   \centering
@@ -87,6 +95,8 @@
   \caption{Summaries of estimated individual cohort effect posteriors. Depicted are medians and 80\% credible intervals of the estimated posterior distributions. High values correspond to shorter species durations while lower values correspond to greater species durations compared to the mean duration. Lines are placed at the middle of the 2 My origination cohorts.}
   \label{fig:eff_cohort}
 \end{figure}
+
+The estimate of the Weibull shape parameter, \(\alpha\), is greater than 1 which means that we expect that extinction risk would increase with taxon age (Table \ref{tab:post_sum}). % explain what this means for hazard function.
 
 \begin{figure}[ht]
   \centering
@@ -101,8 +111,5 @@
   \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total unexplained variance. Each of the estimates is a distribution of 1000 approximating simulations due to the model's non-normality.}
   \label{fig:vpc}
 \end{figure}
-
-
-
 
 \end{document}

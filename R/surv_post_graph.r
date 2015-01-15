@@ -271,7 +271,7 @@ rands <- data.frame(cbind(top = top, bot = bot, med = med,
 rands$bin <- (rands$bin * 2) + 1
 cohort <- ggplot(rands, aes(x = bin, y = med, ymin = bot, ymax = top))
 cohort <- cohort + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
-cohort <- cohort + geom_pointrange()
+cohort <- cohort + geom_pointrange(size = 1)
 cohort <- cohort + scale_x_reverse(breaks = seq(from = 0, to = 65, by = 5))
 cohort <- cohort + labs(x = 'Time (My)', y = 'Cohort effect')
 ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
