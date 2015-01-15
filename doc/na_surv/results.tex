@@ -22,6 +22,15 @@
 %   Comparison of empirical survival to 100 estimates shows pretty good congruence.
 %   Corroborated with comparison of empirical point estimates with simulated distributions.
 % The model seems a pretty good descriptor of expected duration.
+
+With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). 
+
+\include{post_out}
+
+First, visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the model tends to over estimate observed durations. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
+
+Though this bias appears to be concentrated at the tails of the duration distribution, as posterior predictive checks comparing the 25th, 50th, 75th quantiles as well as the mean of the observed durations to the results from simulation indicate adequate model (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
+
 % Interpretation of parameter estimates.
 %   Diet and locomotor categories and probability state X lives longer than state Y.
 %   Occupancy has largest effect, as expected given how often it has been identified.
@@ -38,14 +47,29 @@
 %     However, cohort + phylo approx. 20\% of the unexplained variance.
 %     Not ignorable effects.
 
+Given that the model appears adequate, it is possible to interpret the parameter estimates with some degree of confidence. The estimates for diet and locomotor categories were inferred as contrasts between the intercept and one of the \(k - 1\) other states (Table \ref{tab:post_sum}). In order to interpret these estimates, I compared the differences between each of the different states to get an estimate of whether either of two traits was associated with a greater mean duration or not. This was done for all pairwise comparisons for diet and locomotor category separately (Fig. \ref{fig:trait_est}).
 
-With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). 
+Locomotor category has a large amount of variation in the pairwise differences of the effect on expected duration (Fig. \ref{subfig:loco}). Carnivory appears to be associated with a greater expected duration than herbivory or insectivory, while approximately equal to or less than the expected duration of an omnivore. Omnivory is associated with greater expected duration than either herbivory or insectivory. Finally, herbivory and insectivory are associated with approximately equal effects on expected duration.
 
-\include{post_out}
+For dietary category, arboreality appears to be associated with a lower expected duration than either scansoriality or a ground dwelling life habit (Fig. \ref{subfig:diet}). Scansoriality and a ground dwelling life habit have approximately equal expected durations. % percentile differences.
 
-First, visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the model tends to over estimate observed durations. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
+The effects of both body size and bioprovince occupancy on expected duration are best interpreted from estimates from the model fit standardized data (Fig. \ref{fig:eff_other}). Of all the traits of interest, bioprovince occupancy has the largest effect size with larger occupancy associated with a longer expected duration. Body size has a very small, near zero effect on expected duration, similar to the lack of relationship between body size and generic duration \citep{Tomiya2013}.
 
-Though this bias appears to be concentrated at the tails of the duration distribution, as posterior predictive checks comparing the 25th, 50th, 75th quantiles as well as the mean of the observed durations to the results from simulation indicate adequate model (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
+The estimates for the individual cohort effects show a weak pattern of increased extinction risk in older Cenozoic cohorts and decreased extinction risk in younger cohorts (Fig. \ref{fig:eff_cohort}). However, this pattern is not very strong as there is a large amount of variation, particularity for older cohorts. For example, note the two cohorts between 55 and 50 My that have a much lower extinction risk than other cohorts of similar age.
+
+Because the estimate of the Weibull shape parameter, \(\alpha\), is greater than 1 this means that extinction risk is expected to increase with taxon age (Table \ref{tab:post_sum}). The estimate of \(\alpha\) is also rather tightly constrained with a small posterior standard deviation. \(\alpha\) is related to the strength of time on extinction risk and is a key parameter in the hazard function \(h(t)\), calculated for a Weibull distribution as
+\begin{equation}
+  h(t) = \frac{\alpha}{\sigma}\left(\frac{t}{\sigma}\right)^{\alpha - 1}.
+\end{equation}
+\(h(t)\) can be interpreted as the rate, or approximate probability, of an individual of age \(t\) going extinct. As the value of \(\alpha\) is between 1 and 1.5, extinction risk for a given species will gradually increase with age (Fig. \ref{fig:haz}). 
+
+% variance partitioning coefficient
+Of the three sources of variance present in the model, variation in individual species accounts for at least 70\% of unexplained variance (Fig. \ref{fig:vpc}). Both cohort and phylogenetic effects account for approximately 30\% of the unexplained variance. Both of these factors are related to some aspect of the relationship between taxa, either temporal and through shared evolutionary history. While both of these effects accounts for approximately 15\% of unexplained variance individually, the total combined effect of these factors indicates that neither can be ignored. 
+
+For example, \citet{Housworth2004} state that when the value of phylogenetic heritability is greater than 0, phylogenetic effect cannot be ignored. As \(VPC_{phylo}\) is equivalent to phylogenetic heritability and is greater than 0, the effect of shared evolutionary history on duration is non-ignorable.
+
+The low amount of variance of phylogenetic effect estimated from the model (Table \ref{tab:post_sum}) may explain previously found lack of ``phylogenetic signal'' in generic duration \citep{Tomiya2013}.
+
 
 
 \begin{figure}[ht]
@@ -69,8 +93,6 @@ Though this bias appears to be concentrated at the tails of the duration distrib
   \label{fig:ppc_quant}
 \end{figure}
 
-Given that the model appears adequate, it is now possible to interpreted the parameter estimates. The estimates for diet and locomotor categories were inferred as contrasts between the intercept and one of the \(k - 1\) other states (Table \ref{tab:post_sum}). In order to interpret these estimates, I compared the differences between each of the different states to get an estimate of whether either of two traits was associated with a greater mean duration or not. This was done for all pairwise comparisons for diet and locomotor category separately (Fig. \ref{fig:trait_est}). % Write out percentile results.
-
 \begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.4\textwidth}
@@ -87,7 +109,12 @@ Given that the model appears adequate, it is now possible to interpreted the par
   \label{fig:trait_est}
 \end{figure}
 
-The estimates for the individual cohort effects show a weak pattern of increased extinction risk in older Cenozoic cohorts and decreased extinction risk in younger cohorts (Fig. \ref{fig:eff_cohort}). However, this pattern is not very strong as there is a large amount of variation, particularity for older cohorts. For example, note the two cohorts between 55 and 50 My that have a much lower extinction risk than other cohorts of similar age.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/other_est}
+  \caption{}
+  \label{fig:eff_other}
+\end{figure}
 
 \begin{figure}[ht]
   \centering
@@ -96,12 +123,10 @@ The estimates for the individual cohort effects show a weak pattern of increased
   \label{fig:eff_cohort}
 \end{figure}
 
-The estimate of the Weibull shape parameter, \(\alpha\), is greater than 1 which means that we expect that extinction risk would increase with taxon age (Table \ref{tab:post_sum}). % explain what this means for hazard function.
-
 \begin{figure}[ht]
   \centering
   \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/haz_est}
-  \caption{100 estimates of the hazard function (\(h(t\)) for the observed species mean (grey), along with the median estimated hazard function. \(h(t)\) is an estimate of the number of extinctions that occur given an amount of time, \(t\). Hazard functions were estimated from random draws from the estimated posterior distributions and evaluated with all covariate information set to 0, which corresponds to the expected duration of the mean species.}
+  \caption{100 estimates of the hazard function (\(h(t\)) for the observed species mean (grey), along with the median estimated hazard function. \(h(t)\) is an estimate of the rate at which a species of age \(t\) is expected to go extinct. Hazard functions were estimated from random draws from the estimated posterior distributions and evaluated with all covariate information set to 0, which corresponds to the expected duration of the mean species.}
   \label{fig:haz}
 \end{figure}
 

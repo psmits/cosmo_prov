@@ -281,8 +281,8 @@ ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
 # estimate of alpha
 wei.haz <- function(time, scale, alpha) {
   # lambda is the inverse-scale parameter
-  tt <- time**(alpha - 1)
-  scale * alpha * tt
+  tt <- (time / scale)**(alpha - 1)
+  (alpha / scale) * tt
 }
 
 xx <- seq(0, 12, by = 0.01)
