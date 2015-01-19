@@ -36,43 +36,43 @@ waic.diff <- Reduce(rbind, Map(function(x, y) x$waic - y$waic, pois.waic, negbin
 # posterior simulations
 emp <- llply(data, function(x) quantile(x$degree, c(0.25, 0.5, 0.75)))
 
-# poisson model
-poisson.sim <- function(fit, data, nsim) {
-  mu <- list()
-  for(ii in 1:nsim) {
-    n <- data$N
-    inc <- sample(fit$beta_inter, 1)
-    sz <- sample(fit$beta_mass, 1)
-    mv <- fit$beta_move[sample(n, 1), ]
-    di <- fit$beta_diet[sample(n, 1), ]
-
-    oo <- c()
-    for(jj in seq(n)) {
-      reg <- inc + sz * data$mass[jj] + 
-      sum(mv * data$move[jj, ]) + sum(di * data$diet[jj, ])
-      oo[jj] <- rpois(1, lambda = exp(reg))
-    }
-    mu[[ii]] <- oo
-  }
-  mu
-}
-deg.coef <- llply(degfit, function(x) extract(x, permuted = TRUE))
-pois.out <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
-                x = deg.coef, y = data[1:test])
-pois.qout <- llply(pois.out, function(y)
-                   laply(y, function(x) 
-                         quantile(x, c(0.25, 0.5, 0.75), na.rm = TRUE)))
-pois.cout <- Map(function(x, y) aaply(x, .margins = 1, function(a) a - y),
-                 x = pois.qout, y = emp[1:test])
-
-ll <- length(deg.coef)
-pois.for <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
-                x = deg.coef[-1], y = data[1:(test - ll)])
-pois.qfor <- llply(pois.for, function(y)
-                   laply(y, function(x) 
-                         quantile(x, c(0.25, 0.5, 0.75), na.rm = TRUE)))
-pois.cfor <- Map(function(x, y) aaply(x, .margins = 1, function(a) a - y),
-                 x = pois.qfor, y = emp[1:(test - 1)])
+## poisson model
+#poisson.sim <- function(fit, data, nsim) {
+#  mu <- list()
+#  for(ii in 1:nsim) {
+#    n <- data$N
+#    inc <- sample(fit$beta_inter, 1)
+#    sz <- sample(fit$beta_mass, 1)
+#    mv <- fit$beta_move[sample(n, 1), ]
+#    di <- fit$beta_diet[sample(n, 1), ]
+#
+#    oo <- c()
+#    for(jj in seq(n)) {
+#      reg <- inc + sz * data$mass[jj] + 
+#      sum(mv * data$move[jj, ]) + sum(di * data$diet[jj, ])
+#      oo[jj] <- rpois(1, lambda = exp(reg))
+#    }
+#    mu[[ii]] <- oo
+#  }
+#  mu
+#}
+#deg.coef <- llply(degfit, function(x) extract(x, permuted = TRUE))
+#pois.out <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
+#                x = deg.coef, y = data[1:test])
+#pois.qout <- llply(pois.out, function(y)
+#                   laply(y, function(x) 
+#                         quantile(x, c(0.25, 0.5, 0.75), na.rm = TRUE)))
+#pois.cout <- Map(function(x, y) aaply(x, .margins = 1, function(a) a - y),
+#                 x = pois.qout, y = emp[1:test])
+#
+#ll <- length(deg.coef)
+#pois.for <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
+#                x = deg.coef[-1], y = data[1:(test - ll)])
+#pois.qfor <- llply(pois.for, function(y)
+#                   laply(y, function(x) 
+#                         quantile(x, c(0.25, 0.5, 0.75), na.rm = TRUE)))
+#pois.cfor <- Map(function(x, y) aaply(x, .margins = 1, function(a) a - y),
+#                 x = pois.qfor, y = emp[1:(test - 1)])
 
 
 # neg binom model

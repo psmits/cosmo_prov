@@ -2,7 +2,6 @@
 
 \usepackage{amsmath, amsthm}
 \usepackage{graphicx,hyperref}
-\usepackage{microtype, parskip}
 \usepackage[comma,sort&compress]{natbib}
 \usepackage{docmute}
 \usepackage{subcaption, multirow, morefloats}
@@ -23,13 +22,13 @@
 %   Corroborated with comparison of empirical point estimates with simulated distributions.
 % The model seems a pretty good descriptor of expected duration.
 
-With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). 
+With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \citep{Gelman2013d}.
 
 \include{post_out}
 
-First, visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the model tends to over estimate observed durations. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
+Visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed, with some predictions have longer durations than the observed. However, this bias appears very small. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
 
-Though this bias appears to be concentrated at the tails of the duration distribution, as posterior predictive checks comparing the 25th, 50th, 75th quantiles as well as the mean of the observed durations to the results from simulation indicate adequate model (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
+Posterior predictive comparisons of the observed 25th, 50th, 75th quantiles, and mean durations to the results from simulation indicate adequate model fit (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
 
 % Interpretation of parameter estimates.
 %   Diet and locomotor categories and probability state X lives longer than state Y.

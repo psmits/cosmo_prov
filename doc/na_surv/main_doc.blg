@@ -6,45 +6,45 @@ The style file: abbrvnat.bst
 Database file #1: biblio.bib
 Database file #2: packages.bib
 Warning--there's a number but no volume in Harnik2013
-You've used 83 entries,
+You've used 85 entries,
             2773 wiz_defined-function locations,
-            1224 strings with 21638 characters,
-and the built_in function-call counts, 39893 in all, are:
-= -- 3819
-> -- 2063
+            1240 strings with 22321 characters,
+and the built_in function-call counts, 41468 in all, are:
+= -- 3949
+> -- 2222
 < -- 64
-+ -- 714
-- -- 630
-* -- 3360
-:= -- 6243
-add.period$ -- 367
-call.type$ -- 83
-change.case$ -- 450
-chr.to.int$ -- 82
-cite$ -- 167
-duplicate$ -- 1739
-empty$ -- 3185
-format.name$ -- 753
-if$ -- 8294
++ -- 767
+- -- 681
+* -- 3525
+:= -- 6504
+add.period$ -- 377
+call.type$ -- 85
+change.case$ -- 473
+chr.to.int$ -- 84
+cite$ -- 171
+duplicate$ -- 1781
+empty$ -- 3263
+format.name$ -- 806
+if$ -- 8604
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 89
-newline$ -- 540
-num.names$ -- 334
-pop$ -- 729
+missing$ -- 91
+newline$ -- 554
+num.names$ -- 342
+pop$ -- 767
 preamble$ -- 1
-purify$ -- 375
+purify$ -- 396
 quote$ -- 0
-skip$ -- 1287
+skip$ -- 1326
 stack$ -- 0
-substring$ -- 1756
-swap$ -- 188
+substring$ -- 1797
+swap$ -- 192
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 868
+type$ -- 890
 warning$ -- 1
-while$ -- 383
+while$ -- 392
 width$ -- 0
-write$ -- 1321
+write$ -- 1355
 (There was 1 warning)
