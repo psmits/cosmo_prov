@@ -5,46 +5,44 @@ A level-1 auxiliary file: post_out.aux
 The style file: abbrvnat.bst
 Database file #1: biblio.bib
 Database file #2: packages.bib
-Warning--there's a number but no volume in Harnik2013
-You've used 85 entries,
+You've used 91 entries,
             2773 wiz_defined-function locations,
-            1240 strings with 22321 characters,
-and the built_in function-call counts, 41468 in all, are:
-= -- 3949
-> -- 2222
-< -- 64
-+ -- 767
-- -- 681
-* -- 3525
-:= -- 6504
-add.period$ -- 377
-call.type$ -- 85
-change.case$ -- 473
-chr.to.int$ -- 84
-cite$ -- 171
-duplicate$ -- 1781
-empty$ -- 3263
-format.name$ -- 806
-if$ -- 8604
+            1285 strings with 23887 characters,
+and the built_in function-call counts, 44430 in all, are:
+= -- 4237
+> -- 2380
+< -- 67
++ -- 821
+- -- 729
+* -- 3788
+:= -- 6973
+add.period$ -- 410
+call.type$ -- 91
+change.case$ -- 507
+chr.to.int$ -- 90
+cite$ -- 182
+duplicate$ -- 1906
+empty$ -- 3496
+format.name$ -- 862
+if$ -- 9218
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 91
-newline$ -- 554
-num.names$ -- 342
-pop$ -- 767
+missing$ -- 97
+newline$ -- 599
+num.names$ -- 366
+pop$ -- 817
 preamble$ -- 1
-purify$ -- 396
+purify$ -- 424
 quote$ -- 0
-skip$ -- 1326
+skip$ -- 1414
 stack$ -- 0
-substring$ -- 1797
-swap$ -- 192
+substring$ -- 1909
+swap$ -- 203
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 890
-warning$ -- 1
-while$ -- 392
+type$ -- 956
+warning$ -- 0
+while$ -- 418
 width$ -- 0
-write$ -- 1355
-(There was 1 warning)
+write$ -- 1461

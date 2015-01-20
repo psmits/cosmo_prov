@@ -24,8 +24,6 @@
 
 With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \citep{Gelman2013d}.
 
-\include{post_out}
-
 Visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed, with some predictions have longer durations than the observed. However, this bias appears very small. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
 
 Posterior predictive comparisons of the observed 25th, 50th, 75th quantiles, and mean durations to the results from simulation indicate adequate model fit (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
@@ -48,9 +46,9 @@ Posterior predictive comparisons of the observed 25th, 50th, 75th quantiles, and
 
 Given that the model appears adequate, it is possible to interpret the parameter estimates with some degree of confidence. The estimates for diet and locomotor categories were inferred as contrasts between the intercept and one of the \(k - 1\) other states (Table \ref{tab:post_sum}). In order to interpret these estimates, I compared the differences between each of the different states to get an estimate of whether either of two traits was associated with a greater mean duration or not. This was done for all pairwise comparisons for diet and locomotor category separately (Fig. \ref{fig:trait_est}).
 
-Locomotor category has a large amount of variation in the pairwise differences of the effect on expected duration (Fig. \ref{subfig:loco}). Carnivory appears to be associated with a greater expected duration than herbivory or insectivory, while approximately equal to or less than the expected duration of an omnivore. Omnivory is associated with greater expected duration than either herbivory or insectivory. Finally, herbivory and insectivory are associated with approximately equal effects on expected duration.
+Dietary category has a large amount of variation in the pairwise differences of the effect on expected duration (Fig. \ref{subfig:loco}). Carnivory appears to be associated with a greater expected duration than herbivory or insectivory, while approximately equal to or less than the expected duration of an omnivore. Omnivory is associated with greater expected duration than either herbivory or insectivory. Finally, herbivory and insectivory are associated with approximately equal effects on expected duration.
 
-For dietary category, arboreality appears to be associated with a lower expected duration than either scansoriality or a ground dwelling life habit (Fig. \ref{subfig:diet}). Scansoriality and a ground dwelling life habit have approximately equal expected durations. % percentile differences.
+For locomotor category, arboreality appears to be associated with a lower expected duration than either scansoriality or a ground dwelling life habit (Fig. \ref{subfig:diet}). Scansoriality and a ground dwelling life habit have approximately equal expected durations. % percentile differences.
 
 The effects of both body size and bioprovince occupancy on expected duration are best interpreted from estimates from the model fit standardized data (Fig. \ref{fig:eff_other}). Of all the traits of interest, bioprovince occupancy has the largest effect size with larger occupancy associated with a longer expected duration. Body size has a very small, near zero effect on expected duration, similar to the lack of relationship between body size and generic duration \citep{Tomiya2013}.
 
@@ -70,6 +68,7 @@ For example, \citet{Housworth2004} state that when the value of phylogenetic her
 The low amount of variance of phylogenetic effect estimated from the model (Table \ref{tab:post_sum}) may explain previously found lack of ``phylogenetic signal'' in generic duration \citep{Tomiya2013}.
 
 
+\include{post_out}
 
 \begin{figure}[ht]
   \centering
