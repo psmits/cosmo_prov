@@ -27,10 +27,10 @@ parameters {
 }
 transformed parameters {
   // make a variance
-  real<lower=0> sq_sigma;
+  real<lower=0> sig_phy_sq;
   real<lower=0> phi;
 
-  sq_sigma <- sigma_phy^2;  
+  sig_phy_sq <- sigma_phy * sigma_phy;  
 
   phi <- 1 / omega;
 }
@@ -51,9 +51,9 @@ model {
   // phylogenetic effect
   sigma_phy ~ cauchy(0, 2.5);
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
-  increment_log_prob(-0.5 * N * log(sq_sigma));
+  increment_log_prob(-0.5 * N * log(sig_phy_sq));
   // log of kernal of mulinorm
-  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sq_sigma));
+  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sig_phy_sq));
   
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
@@ -61,6 +61,14 @@ model {
 
   degree ~ neg_binomial_2_log(mu, phi);
 }
+generated quantities {
+  vector[N] log_lik;
+  vector[N] mu;
+  mu <- (beta_inter + beta_mass * mass + 
+         diet * beta_diet + move * beta_move + 
+         phy);
 
-
-
+  for(i in 1:N) {
+    log_lik[i] <- poisson_log_log(degree[i], mu[i]);
+  }
+}

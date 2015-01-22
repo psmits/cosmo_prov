@@ -85,11 +85,13 @@ negbinom.sim <- function(fit, data, nsim) {
     mv <- fit$beta_move[sample(n, 1), ]
     di <- fit$beta_diet[sample(n, 1), ]
     phi <- sample(fit$phi, 1)
+    phy <- fit$phy[sample(nrow(fit$phy), 1), ]
 
     oo <- c()
     for(jj in seq(n)) {
       reg <- inc + sz * data$mass[jj] + 
-      sum(mv * data$move[jj, ]) + sum(di * data$diet[jj, ])
+             sum(mv * data$move[jj, ]) + sum(di * data$diet[jj, ]) +
+             pp[j]
       oo[jj] <- rnbinom(1, mu = exp(reg), size = phi)
     }
     mu[[ii]] <- oo

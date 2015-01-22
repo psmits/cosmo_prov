@@ -64,4 +64,3 @@ model {
 
   degree ~ poisson_log(mu);
 }
-

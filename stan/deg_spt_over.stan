@@ -11,10 +11,14 @@ data {
 }
 transformed data {
   matrix[N, N] DS;
+  vector[N] zeros;
 
   for(i in 1:N)
     for(j in 1:N)
       DS[i, j] <- if_else(i==j, sum(row(adj, i)), 0.0);
+  
+  for(i in 1:N)
+    zeros[i] <- 1;
 }
 parameters {
   real beta_inter;
@@ -22,25 +26,24 @@ parameters {
   vector[M] beta_move;
   vector[D] beta_diet;
 
-  real<lower=0> tau;  // var of spatial
+  real<lower=0> tau;  // prec of spatial
   real<lower=0,upper=1> p;  // stength of spatial
   vector[N] spatial;
 
   real<lower = 0> omega;
 }
 transformed parameters {
-  // make a variance
-  real<lower=0> tau_sq;
+  real<lower=0> sigma;
   real<lower=0> phi;
-
-  tau_sq <- tau^2;
+  
+  sigma <- 1 / tau;
 
   phi <- 1 / omega;
 }
 model {
+  vector[N] mu;
   real spatial_mean;
   vector[N] spatial_std;
-  vector[N] mu;
   
   beta_inter ~ normal(0, 10);
   beta_mass ~ normal(0, 10);
@@ -54,22 +57,15 @@ model {
   omega ~ cauchy(0, 2.5);
 
   // spatial effect
-  tau ~ cauchy(0, 2.5);
-  increment_log_prob(-0.5 / (tau_sq) * (transpose(spatial) * 
-                     DS * spatial - p * (transpose(spatial) * 
-                     adj * spatial)));
-  increment_log_prob(-0.5 * N * log(tau_sq) + 0.5 * log(determinant(DS - p * adj)));
-  
-  spatial_mean <- mean(spatial);  // sum to zero constraint
-  spatial_std <- spatial - spatial_mean;
+  sigma ~ cauchy(0, 2.5);
+  spatial ~ multi_norm_prec(0 vector, (tau * tau) * (DS - p * adj));
 
+  spatial_mean <- mean(spatial);
+  spatial_std <- spatial - spatial_mean;
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        spatial);
+        spatial_std);
 
   degree ~ neg_binomial_2_log(mu, phi);
 }
-
-
-

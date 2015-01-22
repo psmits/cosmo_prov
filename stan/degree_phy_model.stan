@@ -54,4 +54,14 @@ model {
 
   degree ~ poisson_log(mu);
 }
+generated quantities {
+  vector[N] log_lik;
+  vector[N] mu;
+  mu <- (beta_inter + beta_mass * mass + 
+         diet * beta_diet + move * beta_move +
+         phy);
 
+  for(i in 1:N) {
+    log_lik[i] <- poisson_log_log(degree[i], mu[i]);
+  }
+}

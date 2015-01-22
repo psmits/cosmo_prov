@@ -17,7 +17,7 @@
 
 \subsection{Species information}
 
-Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filtered so that only occurrences identified to the species level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitude and longitude information were excluded.
+Fossil occurrence information was downloaded from the Paleobiology Database (PBDB; \url{http://paleodb.org/}). Occurrence, taxonomic, stratigraphic, and biological information was downloaded for all North American mammals. This data set was filtered so that only occurrences identified to the species-level, excluding all ``sp.''-s. All aquatic and volant taxa were also excluded. Additionally, all occurrences without latitude and longitude information were excluded.
 
 Species dietary and locomotor category assignments were done using the assignments in initial the PBDB which were then reassigned into coarser categories (Table \ref{tab:trait_cats}). This was done to improve interpretability, increase sample size per category, and make results comparable to previous studies \citep{Jernvall2004,Price2012}.
 
@@ -61,7 +61,7 @@ A survival model was fit in a Bayesian context where species duration were assum
   \label{eq:reg}
 \end{equation}
 
-\(K\) species level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). Two of the covariates of interest are the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s were included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
+\(K\) species-level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). Two of the covariates of interest are the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s were included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
 
 \(\beta\) is a vector of regression coefficients, where each element was given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. %In all cases, posterior inference was not effected by changes to this choice of prior. Do I have proof?
 
@@ -154,12 +154,12 @@ The procedure is as follows:
   \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
   \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
-  \item Draw a random value from the diagonal of \(\mathbf{V}_{phy}\), \(p_{r}\)
-  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}\left(0, \sqrt{\sigma_{p}^{2} \times p_{r}}\right)\)
+  \item Draw a random value from the diagonal of \(\mathbf{V}_{phy}\), \(p_{r}\).
+  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\). 
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
   \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
-  \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\)
-  \item \(\sigma_{c*}^{2} = var(\upsilon_{c})\) and \(\sigma_{p*}^{2} = var(\upsilon_{p})\)
+  \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\).
+  \item \(\sigma_{c*}^{2} = var(\upsilon_{c})\) and \(\sigma_{p*}^{2} = var(\upsilon_{p})\).
 \end{enumerate}
 
 The simulated values of \(h\) were drawn from a univariate normal distribution because each simulated value is in isolation, so there are is no concern of phylogenetic autocorrelation. The chosen value for \(\beta^{T} \mathbf{X}\) was a draw from the posterior estimate of the intercept. Because input variables were standardized prior to model fitting, the intercept corresponds to the estimated effect on survival of the sample mean.
@@ -173,7 +173,7 @@ where \(\Gamma\) is the gamma function.
 
 The variance partitioning coefficients are then calculated \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similar for the other variance components.
 
-I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Housworth2004}, is effectively identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the tree effect.
+I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Lynch1991,Housworth2004}, is effectively identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the tree effect.
 
 
 \begin{table}

@@ -28,21 +28,19 @@ parameters {
   real<lower=0> sigma_phy;
   vector[N] phy;
 
-  real<lower=0> tau;  // var of spatial
+  real<lower=0> tau;  // prec of spatial
   real<lower=0,upper=1> p;  // stength of spatial
   vector[N] spatial;
 
   real<lower = 0> omega;
 }
 transformed parameters {
-  // make a variance
-  real<lower=0> sq_sigma;
-  real<lower=0> tau_sq;
+  real<lower=0> sig_phy_sq;
+  real<lower=0> sigma_spt;
   real<lower=0> phi;
 
-
-  sq_sigma <- sigma_phy^2;  
-  tau_sq <- tau^2;
+  sig_phy_sq <- sigma_phy * sigma_phy;
+  sigma_spt <- 1 / tau;
 
   phi <- 1 / omega;
 }
@@ -66,27 +64,20 @@ model {
   // phylogenetic effect
   sigma_phy ~ cauchy(0, 2.5);
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
-  increment_log_prob(-0.5 * N * log(sq_sigma));
+  increment_log_prob(-0.5 * N * log(sig_phy_sq));
   // log of kernal of mulinorm
-  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sq_sigma));
+  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sig_phy_sq));
   
   // spatial effect
-  tau ~ cauchy(0, 2.5);
-  increment_log_prob(-0.5 / (tau_sq) * (transpose(spatial) * 
-                     DS * spatial - p * (transpose(spatial) * 
-                     adj * spatial)));
-  increment_log_prob(-0.5 * N * log(tau_sq) + 0.5 * log(determinant(DS - p * adj)));
-  
-  spatial_mean <- mean(spatial);  // sum to zero constraint
-  spatial_std <- spatial - spatial_mean;
+  sigma ~ cauchy(0, 2.5);
+  spatial ~ multi_norm_prec(0 vector, (tau * tau) * (DS - p * adj));
 
+  spatial_mean <- mean(spatial);
+  spatial_std <- spatial - spatial_mean;
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        phy + spatial);
+        phy + spatial_std);
 
   degree ~ neg_binomial_2_log(mu, phi);
 }
-
-
-
