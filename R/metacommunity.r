@@ -9,7 +9,7 @@ library(ape)
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
-test <- 10
+test <- 5
 
 set.seed(seed)
 source('../R/surv_setup.r')
@@ -108,6 +108,7 @@ for(ii in seq(test)) {
                      function(x) stan(fit = pois.phy.mod, 
                                       seed = seed,
                                       data = data[[ii]], 
+                                      iter = 5000,
                                       chains = 1, chain_id = x,
                                       refresh = -1))
   degfit[[ii]] <- sflist2stanfit(degmod)
@@ -121,6 +122,7 @@ for(ii in seq(test)) {
                      function(x) stan(fit = negb.phy.mod, 
                                       seed = seed,
                                       data = data[[ii]], 
+                                      iter = 5000,
                                       chains = 1, chain_id = x,
                                       refresh = -1))
   overfit[[ii]] <- sflist2stanfit(degmod)

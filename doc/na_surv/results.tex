@@ -22,11 +22,11 @@
 %   Corroborated with comparison of empirical point estimates with simulated distributions.
 % The model seems a pretty good descriptor of expected duration.
 
-With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of fit of the model (Table \ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \citep{Gelman2013d}.
+With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of model fit (Table \ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \citep{Gelman2013d}.
 
-Visual examination of the deviance residuals from twelve different sets of posterior predictive values indicate little systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed, with some predictions have longer durations than the observed. However, this bias appears very small. This can also be observed when comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
+Visual examination of the deviance residuals from twelve different sets of posterior predictive simulations indicates few systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed, however this bias appears very small. This is confirmed by comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. \ref{fig:ppc_surv}).
 
-Posterior predictive comparisons of the observed 25th, 50th, 75th quantiles, and mean durations to the results from simulation indicate adequate model fit (Fig. \ref{fig:ppc_quant}). Between all of these different posterior predictive checks, the inferred model appears adequate at capturing the observed variation.
+Comparisons of the observed 25th, 50th, 75th quantiles, and mean durations to the results from the posterior predictive simulations indicate adequate model fit (Fig. \ref{fig:ppc_quant}). Because all the different posterior predictive checks seem to agree, the inferred model appears adequate at capturing the observed variation.
 
 % Interpretation of parameter estimates.
 %   Diet and locomotor categories and probability state X lives longer than state Y.
@@ -52,20 +52,18 @@ For locomotor category, arboreality appears to be associated with a lower expect
 
 The effects of both body size and bioprovince occupancy on expected duration are best interpreted from estimates from the model fit standardized data (Fig. \ref{fig:eff_other}). Of all the traits of interest, bioprovince occupancy has the largest effect size with larger occupancy associated with a longer expected duration. Body size has a very small, near zero effect on expected duration, similar to the lack of relationship between body size and generic duration \citep{Tomiya2013}.
 
-The estimates for the individual cohort effects show a weak pattern of increased extinction risk in older Cenozoic cohorts and decreased extinction risk in younger cohorts (Fig. \ref{fig:eff_cohort}). However, this pattern is not very strong as there is a large amount of variation, particularity for older cohorts. For example, note the two cohorts between 55 and 50 My that have a much lower extinction risk than other cohorts of similar age.
+The estimates for the individual cohort effects show a weak pattern of increased extinction risk in older Cenozoic cohorts and decreased extinction risk in younger cohorts (Fig. \ref{fig:eff_cohort}). However, this pattern is not very strong as there is a large amount of variation, particularity for older cohorts. For example, note the two cohorts between 50 and 55 My that have a much lower extinction risk than other cohorts of similar age.
 
-Because the estimate of the Weibull shape parameter, \(\alpha\), is greater than 1 this means that extinction risk is expected to increase with taxon age (Table \ref{tab:post_sum}). The estimate of \(\alpha\) is also rather tightly constrained with a small posterior standard deviation. \(\alpha\) is related to the strength of time on extinction risk and is a key parameter in the hazard function \(h(t)\), calculated for a Weibull distribution as
+Because the estimate of the Weibull shape parameter, \(\alpha\), is greater than 1 extinction risk is expected to increase with taxon age (Table \ref{tab:post_sum}). The estimate of \(\alpha\) is also rather tightly constrained, having a small posterior standard deviation. \(\alpha\) is related to the strength of time on extinction risk and is a key parameter in the hazard function \(h(t)\), calculated for a Weibull distribution as
 \begin{equation}
   h(t) = \frac{\alpha}{\sigma}\left(\frac{t}{\sigma}\right)^{\alpha - 1}.
 \end{equation}
-\(h(t)\) can be interpreted as the rate, or approximate probability, of an individual of age \(t\) going extinct. As the value of \(\alpha\) is between 1 and 1.5, extinction risk for a given species will gradually increase with age (Fig. \ref{fig:haz}). 
+\(h(t)\) can be interpreted as the rate, or approximate probability, of an individual of age \(t\) going extinct. As the value of \(\alpha\) is between 1 and 1.5, extinction risk for a given species will only gradually increase with age (Fig. \ref{fig:haz}). 
 
 % variance partitioning coefficient
-Of the three sources of variance present in the model, variation in individual species accounts for approximately 70\% of unexplained variance (Fig. \ref{fig:vpc}). Both cohort and phylogenetic effects account for the other 30\% of the unexplained variance. Both of these factors are related to some aspect of the relationship between taxa, either temporal and through shared evolutionary history. While both of these effects are the source of approximately 15\% of unexplained variance individually, the total combined effect of these factors indicates that neither can be ignored. 
+Of the three sources of variance present in the model, variation in individual species accounts for approximately 70\% of observed variance (Fig. \ref{fig:vpc}). Both cohort and phylogenetic effects account for the other 30\% of the observed variance. Both of these factors are related to some aspect of the relationship between taxa, either temporal and through shared evolutionary history. While both of these effects are the source of approximately 15\% of observed variance individually, the total combined effect of these factors indicates that neither can be ignored. For example, \citet{Housworth2004} state that when phylogenetic heritability is greater than 0, phylogenetic effect cannot be ignored. As \(VPC_{phylo}\) is equivalent to phylogenetic heritability and is greater than 0, the effect of shared evolutionary history on duration is non-ignorable.
 
-For example, \citet{Housworth2004} state that when the value of phylogenetic heritability is greater than 0, phylogenetic effect cannot be ignored. As \(VPC_{phylo}\) is equivalent to phylogenetic heritability and is greater than 0, the effect of shared evolutionary history on duration is non-ignorable.
-
-The low amount of variance of phylogenetic effect estimated from the model (Table \ref{tab:post_sum}) may explain previously found lack of ``phylogenetic signal'' in generic duration \citep{Tomiya2013}.
+The low amount of variance of phylogenetic effect estimated from the model (Table \ref{tab:post_sum}) may explain previously found lack of ``significant phylogenetic signal'' in generic duration \citep{Tomiya2013}.
 
 
 \include{post_out}
@@ -131,7 +129,7 @@ The low amount of variance of phylogenetic effect estimated from the model (Tabl
 \begin{figure}[ht]
   \centering
   \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/variance_est}
-  \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total unexplained variance. Each of the estimates is a distribution of 1000 approximating simulations due to the model's non-normality.}
+  \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total observed variance. Each of the estimates is a distribution of 1000 approximating simulations due to the model's non-normality.}
   \label{fig:vpc}
 \end{figure}
 

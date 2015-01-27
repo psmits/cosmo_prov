@@ -21,58 +21,58 @@ Fossil occurrence information was downloaded from the Paleobiology Database (PBD
 
 Species dietary and locomotor category assignments were done using the assignments in initial the PBDB which were then reassigned into coarser categories (Table \ref{tab:trait_cats}). This was done to improve interpretability, increase sample size per category, and make results comparable to previous studies \citep{Jernvall2004,Price2012}.
 
-Fossil occurrences were assigned to 2 My bins ranging through the entire Cenozoic. Taxon duration was measured as the number of bins from the first bin of occurrence to the last bin of occurrence, inclusive. This bin size was chosen because it approximately reflects the resolution of the North American Cenozoic mammal fossil record \citep{Alroy2009,Marcot2014,Alroy2000g}. The youngest cohort, 0-2 My, was excluded from this analysis.
+All individual fossil occurrences were assigned to 2 My bins ranging through the entire Cenozoic. Taxon duration was measured as the number of bins from the first occurrence to the last occurrence, inclusive. This bin size was chosen because it approximately reflects the resolution of the North American Cenozoic mammal fossil record \citep{Alroy2009,Marcot2014,Alroy2000g}. The youngest cohort, 0-2 My, was excluded from analysis.
 
 Species body size estimates were sourced from a large selection of primary literature and data base compilations, principally the PBDB, PanTHERIA \citep{Jones2009c}, the Neogene Old World Mammal database (Now; \url{http://www.helsinki.fi/science/now/}), and other large scale data collection efforts \citep{Smith2004c, Raia2012f, Brook2004a, Freudenthal2013, McKenna2011}. In many cases, species body mass was estimated from anatomical dimensions such as tooth size. These estimates were made using a variety of published regression equations. See Appendix: Data for a complete list of individual sources and equations. % equations in a giant table/appendix section
 
 
 \subsubsection{Bioprovince occupancy}
 
-For each 2 My time bin, a bipartite biogeographic network was created between species occurrences and spatial units, defined as 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Taxa are not linked to each other, nor are localities linked. Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. The relative number of bioprovinces occupied per time bin was then determined for each species. This approach to understanding biogeographic patterns of species occurrence was first used by \citet{Sidor2013} and \citet{Vilhena2013}. 
+For each 2 My bin, a bipartite biogeographic network was created between species occurrences and spatial units, defined as 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection. In these bipartite networks, taxa can only be linked to localities and \textit{vice versa}. Emergent bioprovinces within the biogeographic occurrence network were identified using the map equation \citep{Rosvall2008,Rosvall2009a}. A bioprovince is a set of species--locality connections that are more interconnected within the group than without. This was done for each bin's biogeographic network using the \texttt{igraph} package for R \citep{csardi2006igraph,2014language}. The relative number of bioprovinces occupied per time bin was then determined for each species. This approach to understanding biogeographic patterns of species occurrence was first used by \citet{Sidor2013} and \citet{Vilhena2013}. 
 
 
 \subsubsection{Informal phylogeny}
 
-Because there exists no phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and a few published phylogenies.
+As there is no single, combined formal phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and a few published phylogenies.
 
-The taxonomic information from the PBDB served as the basis for additional revision. The taxonomy of many species was updated using the Encyclopedia of Life (\url{http://eol.org/}), which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}. This was additionally correct using various published phylogenies and taxonomies of fossil mammals \citep{Raia2012f,Janis1998,Janis2008}, producing a tree that was a series of nested polytomies. 
+The taxonomic information from the PBDB served as the initial phylogenetic placement. This information was then updated using the Encyclopedia of Life (\url{http://eol.org/}), which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}. This was additionally corrected using various published phylogenies and taxonomies of fossil mammals \citep{Raia2012f,Janis1998,Janis2008}, producing a tree that was a series of nested polytomies. 
 %Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. 
 %MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
 
-Polytomies were resolved in order of species first appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is important for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are of interest in this study. 
+Polytomies were resolved in order of species first appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is important for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are the interest of this study. 
 % I really wish I was using the Hedman approach.
 
 
 
 \subsection{Survival model}
 
-The statistical model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and to fit the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
+The statistical model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and the fit to the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
 A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. 
 \begin{align}
-  p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma) \nonumber \\ 
-  &= \frac{\alpha}{\sigma} \left(\frac{y_{i}}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma}\right)^{\alpha}\right) 
+  p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma_{i}) \nonumber \\ 
+  &= \frac{\alpha}{\sigma_{i}} \left(\frac{y_{i}}{\sigma_{i}}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma_{i}}\right)^{\alpha}\right) 
   \label{eq:weibull}
 \end{align}
 
 \(\alpha\) was assumed constant, which is standard practice in survival analysis \citep{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). Note that the inclusion of \(\alpha\) in the denominator of the exponentiated term is a standard parameterization for survival models using a Wiebull distribution \citep{Klein2003}.
 
 \begin{equation}
-  \sigma = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
+  \sigma_{i} = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
   \label{eq:reg}
 \end{equation}
 
-\(K\) species-level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). Two of the covariates of interest are the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s were included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
+\(K\) species-level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). Two of the covariates of interest are the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s was included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
 
-\(\beta\) is a vector of regression coefficients, where each element was given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. %In all cases, posterior inference was not effected by changes to this choice of prior. Do I have proof?
+\(\beta\) is a vector of regression coefficients, where each element is given a unique, weakly informative Normally distributed prior. These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates. %In all cases, posterior inference was not effected by changes to this choice of prior. Do I have proof?
 
-Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This is accomplished by subtracting the mean of the covariate from all values and then dividing by the standard deviation, resulting in a variable with mean of zero and a standard deviation of one. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation in the covariate \citep{Schielzeth2010}. However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs must instead by divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized continuous inputs for illustrative purposes.
+Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This is accomplished by subtracting the mean of the covariate from all values and then dividing by the standard deviation, resulting in a variable with mean of zero and a standard deviation of one. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation in the covariate \citep{Schielzeth2010}. Additionally, this makes the intercept directly interpretable as the estimate of mean (transformed) \(\sigma\) (Eq. \ref{eq:reg}). However, because the expected standard deviation for a binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs must instead by divided by twice their standard deviation \citep{Gelman2008}. The above model was fit with both unstandardardized and standardized continuous inputs for illustrative purposes.
 
 
 \subsubsection{Hierarchical effects}
 
-The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling of groups \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored and no pooling is where different groups are analyzed separately. By allowing for partial pooling, we are modeling the appropriate compromise between these two extremes, allowing for better and potentially more informative overall inference. This is done by having all of the groups share the same Normal prior with mean 0 and a scale parameter estimated from the data, which then acts as an indicator of the amount of pooling. A scale of 0 and \(\infty\) indicate complete and no pooling, respectively. The choice of mean 0 allows for the individual groups estimates to be interpreted as deviations from the mean. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}.
+The two hierarchical effects of interest in this study are origination cohort and shared evolutionary history, or phylogeny. Hierarchical modeling can be considered an intermediate between complete and no pooling of groups \citep{Gelman2007}, where complete pooling is when the differences between groups are ignored and no pooling is where different groups are analyzed separately. By allowing for partial pooling, we are modeling the appropriate compromise between these two extremes, allowing for better and potentially more informative overall inference. This is done by having all of the groups share the same Normal prior with mean 0 and a scale parameter estimated from the data, which then acts as an indicator of the amount of pooling. A scale of 0 and \(\infty\) indicate complete and no pooling, respectively. The choice of mean 0 allows for the individual groups estimates to be interpreted as deviations from the intercept. Hierarchical modeling is analogous to mixed-effects modeling \citep{Gelman2007}.
 
-Origination cohort is defined as the group of species which originated during the same 2 My temporal bin. Because the most recent temporal bin, 0-2 Mya was excluded, there are 32 different cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered Normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual unification between dynamic and cohort survival analysis in paleontology \citep{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a compromise between these two end members.
+Origination cohort is defined as the group of species which all originated during the same 2 My temporal bin. Because the most recent temporal bin, 0-2 Mya was excluded, there are 32 different cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered Normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual and statistical unification between dynamic and cohort survival analysis in paleontology \citep{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of compromise between these two end members.
 
 \begin{align*}
   \eta_{j} &\sim \mathcal{N}(0, \sigma_{c}) \\
@@ -81,41 +81,41 @@ Origination cohort is defined as the group of species which originated during th
 
 The choice of the half-Cauchy prior on \(\sigma_{c}\) follows \citet{Gelman2006a}
 
-The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect where each observation, \(i\), is distributed as a multivariate normal, \(h\), where the covariance matrix was assumed known up to a constant, \(\sigma_{p}^{2}\) \citep{Lynch1991,Housworth2004}. This is written
+The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect where each observation, \(i\), is distributed as a multivariate normal, \(h\), where the covariance matrix \(\Sigma\) is known up to a constant, \(\sigma_{p}^{2}\) \citep{Lynch1991,Housworth2004}. This is written
 
 \begin{align*}
   h &\sim \mathrm{Multi}\mathcal{N}(0, \mathbf{\Sigma}) \\
   \mathbf{\Sigma} &= \sigma_{p}^{2} \mathbf{V}_{phy} \\
-  \sigma_{p} &\sim \mathrm{halfCauchy}(0, 2.5),
+  \sigma_{p} &\sim \mathrm{halfCauchy}(0, 2.5).
 \end{align*}
  
-with \(\mathbf{V}_{phy}\) being the phylogenetic covariance matrix defined as an \(n \times n\) matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\). \(\sigma_{p}\) was given a weakly informative half-Cauchy hyperprior. 
+\(\mathbf{V}_{phy}\) is the phylogenetic covariance matrix defined as an \(n \times n\) matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\). \(\sigma_{p}\) was given a weakly informative half-Cauchy hyperprior. 
 
 
 \subsubsection{Censored observations} \label{sec:censor}
 
-An important part of survival analysis is the inclusion of ``censored'' observations \citep{Ibrahim2001,Klein2003} or observations where the failure time has not been observed. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study. In this case, this means taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In this study, taxa occurring in only a single time bin were left censored. Because of the minimum resolution of the record, we cannot observe if these taxa went extinct in less than that single bin or not. 
+An important part of survival analysis is the inclusion of censored observations where the failure time has not been observed \citep{Ibrahim2001,Klein2003}. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study, such as taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In order to account for the minimum resolution of the fossil record encountered here, taxa that occurred in only a single time bin were left censored.
 
-To model censored data, the survival function, \(S(t)\) must first be defined \citep{Klein2003}. \(S(t)\) for a Weibull model is
+To model censored data the survival function, \(S(t)\), must first be defined \citep{Klein2003}. For the Weibull distribution this is 
 \begin{equation}
   S(t | \alpha, \sigma) = \exp\left(-\left(\frac{t}{\sigma}\right)^{\alpha}\right),
   \label{eq:surv}
 \end{equation}
-where \(\sigma\) is defined as above (Eq. \ref{eq:reg}). \(S(t)\) is the probability that an observation will survive longer than a given time, \(t\). The likelihood of uncensored observations is evaluated as as normal using Equation \ref{eq:weibull} while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cumulative density function and \(S(t)\) is equivalent to the complementary cumulative density function \citep{Gelman2013d}.
+where \(\sigma\) is defined as above (Eq. \ref{eq:reg}). \(S(t)\) is the probability that an observation will survive longer than a given time \(t\). The likelihood of uncensored observations is evaluated as normal using Equation \ref{eq:weibull} while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cumulative density function and \(S(t)\) is equivalent to the complementary cumulative density function \citep{Gelman2013d}.
 
-Fully, the likelihood for both uncensored and both right and left censored observations is written
+The full likelihood for both uncensored and both right and left censored observations is written
 \begin{equation*}
   L \propto \prod_{i \in C} \mathrm{Weibull}(y_{i} | \alpha, \sigma) \prod_{j \in R} S(y_j | \alpha, \sigma) \prod_{k \in L} \left(1 - S(y_{k} | \alpha, \sigma)\right),
 \end{equation*}
 where \(C\) is the set of uncensored observations, \(R\) is the set of right censored observations, and \(L\) is the set of left censored observations.
 
-A summary of the entire model, save for calculations for censored observations, along with the exact priors for every estimated parameter is presented in Figure \ref{fig:model_diagram}.
+A summary of the entire model, save for the formulation for censored observations, along with the exact priors for every estimated parameter is presented in Figure \ref{fig:model_diagram}.
 
 
 \subsubsection{Estimation}
-Parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains. Chain convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
+Parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \citep{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \citep{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains where convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \citep{Gelman2013d}.
 
-In order to speed up the MCMC routine, a custom multivariate normal sampler was used for estimating the unknown constant term in the covariance matrix. This is necessary because inverting and solving the complete covariance matrix on every iteration is a memory intense procedure. The custom sampler limits the necessary number of operations and matrix inversions per iteration.
+In order to speed up the poisterior approximation, a custom multivariate normal sampler was used to estimate the unknown constant term in the covariance matrix. This is necessary because inverting and solving the complete covariance matrix on every iteration is a memory intense procedure. The custom sampler limits the necessary number of operations and matrix inversions per iteration.
 
 Four different MCMC chains were run for 20000 steps and were thinned to every twentieth sample split evenly between warm-up and sampling. 
 
@@ -123,11 +123,11 @@ Four different MCMC chains were run for 20000 steps and were thinned to every tw
 
 \subsection{Posterior predictive checks}
 
-The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the predictors from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \(y\) \citep{Gelman2013d}. This was done both graphically and numerically.
+The most basic assessment of model fit is that simulated data generated using the fitted model should be similar to the observed. This is the idea behind posterior predictive checks. Using the covariates from each of the observed durations, and randomly drawn parameter estimates from their marginal posteriors, a simulated data set \(y^{rep}\) was generated. This process was repeated 1000 times and the distribution of \(y^{rep}\) was compared with the observed \citep{Gelman2013d}.
 
-An example posterior predictive check used in this study is a graphical comparison of the Kaplan-Meier (K-M) survival curve estimated from the observed data with the survival curves from 1000 simulations. K-M survival curves are non-parametric estimates of the function \(S(t)\) or the probability of a species going extinct given that it has lived to time \(t\) \citep{Klein2003}. Other posterior predictive checks included comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations, and inspection of the deviance residuals, defined below.
+An example posterior predictive check used in this study is a graphical comparison between the Kaplan-Meier (K-M) survival curve estimated from the observed data and the K-M survival curves estimated from 1000 simulation sets. K-M survival curves are non-parametric estimates of \(S(t)\) \citep{Klein2003}. Other posterior predictive checks used here include comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations, and inspection of the deviance residuals, defined below.
 
-In standard linear regression, the residuals are defined as \(r = y - y_{est}\). For hierarchical models, this definition is inadequate. For survival analysis, the equivalent values are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \citep{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:surv}), we define the cumulative hazard function as 
+In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \citep{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:surv}), we define the cumulative hazard function as 
 \begin{equation*}
   \Lambda(t) = -log\left(S\left(t\right)\right).
 \end{equation*}
@@ -144,17 +144,17 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 \begin{equation*}
   D_{i} = \text{sign}(m_{i}) \sqrt{-2[m_{i} + I_{i}log(I_{i} - m_{i})]}.
 \end{equation*}
+Deviance residuals have a mean of 0 and a standard deviation of 1 by definition.
 
 
 \subsection{Variance partitioning}
-There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). The sample variance, \(\sigma_{y}^{2}\), is similar to the residual variance from a normal linear regression. Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of overall variance, as the errors are not normally distributed. The partitioning of the variance between these three components was instead approximated via a simulation approach modified from \citet{Goldstein2002}.
+There are three different variance components in this model (Fig. \ref{fig:model_diagram}): sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). The sample variance, \(\sigma_{y}^{2}\), is similar to the residual variance from a normal linear regression. Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the model used here (Eq. \ref{eq:weibull}) does not include an estimate of the sample variance, \(\sigma_{y}^{2}\). Partitioning the variance between these three components was approximated via a simulation approach modified from \citet{Goldstein2002}.
 
 The procedure is as follows:
 \begin{enumerate}
   \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
   \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
-  \item Draw a random value from the diagonal of \(\mathbf{V}_{phy}\), \(p_{r}\).
   \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\). 
   \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq. \ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
   \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq. \ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
@@ -171,9 +171,9 @@ Weibull variance is calculated as
 \end{equation}
 where \(\Gamma\) is the gamma function. 
 
-The variance partitioning coefficients are then calculated \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similar for the other variance components.
+The variance partitioning coefficients are then calculated, for example, as \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similarly for the other components.
 
-I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Lynch1991,Housworth2004}, is effectively identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the tree effect.
+I used ratios of the variances and variance partitioning coefficients (VPC) to measure the amount of partial pooling. The former, when compared to the sample size of the hierarchical effect such as the number of cohorts, is an estimate of the relative amount of pooling, while the latter is a measure of the relative size importance of the different variance components \citep{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \citep{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
 
 
 \begin{table}

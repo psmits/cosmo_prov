@@ -20,40 +20,80 @@
 \begin{document}
 \section{Discussion}
 
-The number and structure of the parameters from the fitted model allows many different hypotheses to be addressed and inferences to be made. First, I interpret the results in terms of hypotheses of trait effects on survival. Second, I address implications for future paleobiological modeling. Third and finally, I discuss additional model improvements and complexities that can be used to futher address other hypotheses.
+The number and structure of the parameters from the fitted model allows for many different hypotheses to be addressed and inferences to be made. First, I interpret the results in terms of hypotheses of trait effects on survival. Second, I address implications for future paleobiological modeling. Finally, I discuss additional model improvements and complexities that can be used to address further hypotheses of species survival.
 
 % interpretation
 %   results are consistent with which hypotheses?
-As expected, bioprovince occupancy has the single largest effect of expected species duration. The other factors all appear to have small effect sizes which is also consistent with expectations.
+As expected, bioprovince occupancy has the largest effect on expected species duration/extinction risk. The other factors all appear to have small effect sizes which is also consistent with expectations.
 
-I found that carnivores are expected to have a greater average duration than herbivores and insectivores, while ominivores have approximately equal or greater expected durations than carnivores. Omnivorous taxa are also associated with a greater expected duration than both herbivores and insectivores. These results sit nicely beside those of \citet{Price2012}.
+I found that carnivores have a lower extinction risk than herbivores and insectivores, while ominivores have approximately equal or lower extinction risk than carnivores. Omnivorous taxa are also associated with a lower extinction risk than both herbivores and insectivores. These results sit nicely beside those of \citet{Price2012}.
 
-Given that carnivores and omnivores have approximately equal expected durations, and that \citet{Price2012} found that carnivores have a greater diversification rate than omnivores, this implies that carnivores have a greater origination rate than omnivores. In comparison, given the results of this study and \citet{Price2012}, this also implies that herbivores which have the lowest expected duration must have a very high origination rate in order to have the greatest diversification rate of these three categories.
+Given that carnivores and omnivores have approximately equal extinction risk, and that \citet{Price2012} found that carnivores have a greater diversification rate than omnivores, this implies that carnivores have a greater origination rate than omnivores. In comparison, given the results of this study and \citet{Price2012}, this also implies that herbivores which have the greatest extinction risk must also have a very high origination rate in order to have the greatest diversification rate of these three categories. 
 
-The comparisons between the effects of locomotor category on expected species duration are consistent with the hypotheses that arboreality has the lowest effect on expected duration when compared with scansoriality and ground dwelling taxa. Importantly, scansoriality appears to not influence any difference in duration when compared with ground dwelling taxa. This can be interpreted that arboreal taxa, which require a specific kind of environment, may be more prone to extinction because the lack of permanency of those environments may prevent species persistence. 
+The large difference in time-invariant extinction risk between omnivores and both herbivores and insectivores is most likely related to the concept of ``survival of the unspecialized'' where less specialized taxa have lower extinction risks \citep{Liow2004a,Simpson1944}. Because larger effects are easier to identify in coarse or small data sets, the magnitude of this effect also explains both the early identification and origin of this hypothesis of time-invariant effects on survival \citep{Simpson1944}.
 
-The very weak if non-existent effect of body size on expected duration, which can be considered not ``significant'', is consistent with \citet{Tomiya2013}. The direction/sign of the effect, however, is not consistent with the prediction of decrease of duration associated with increase in body size \citep{Liow2008}. Importantly, however, the other studies were performed at the generic-level which may or may not involve different processes that are not included in this species-level model \citep{Liow2008,Tomiya2013}.
+The comparisons between the effects of locomotor category on expected species extinction risk are consistent with the hypotheses that arboreality is associated with a greater expected extinction risk than either with scansoriality and ground dwelling taxa. Importantly, scansoriality appears to not influence any difference in extinction risk when compared with ground dwelling taxa. This can be interpreted that arboreal taxa, which require a specific kind of environment, may be more prone to extinction because the lack of permanency of those environments may prevent species persistence. 
+
+The very weak if non-existent effect of body size on extinction risk, which can be considered not ``significant'', is consistent with \citet{Tomiya2013}. The direction/sign of the modal estimate of effect is not consistent with the prediction of increase in extinction risk associated with increase in body size \citep{Liow2008}. Importantly, however, the other studies were performed at the generic-level which may or may not involve different processes that are not included in this species-level model \citep{Liow2008,Tomiya2013}.
 
 %   VPC and what that means about cohort and shared evolutionary history
-While explicit phylogenetic relations between taxa are frequently not included in paleobiological studies of diversity \citep{Alroy2009,Foote2013,Jablonski2006a,Hunt2007a,Liow2008,Payne2007,Alroy2000g,Jernvall2002,Jernvall2004,Marcot2014}, there have been more recent studies which analyze fossil diversification in an explicitly phylogenetic context \citep{Slater2012,Slater2013a,Tomiya2013,Harnik2014,Simpson2011a}. The partitioning of the different sources of variance involved in this model shows that phylogeny or shared evolutionary history accounts for approximately 10-15\% of the unexplained variance. Because VPC of phylogeny is greater than 0, it is not appropriate to ignore phylogeny when modeling survival in paleontological studies \citep{Housworth2004}. An addition 10-15\% of unexplained variance was due to shared origination cohort. Between these two sources of variance, it is clear that a shared evolutionary history and temporal occurrence are non-ignorable in paleontological studies or survival.
+While explicit phylogenetic relations between taxa are frequently not modeled in paleobiological studies of diversity \citep{Alroy2009,Foote2013,Jablonski2006a,Hunt2007a,Liow2008,Payne2007,Alroy2000g,Jernvall2002,Jernvall2004,Marcot2014}, there have been more recent studies which analyze fossil diversification in an explicitly phylogenetic context \citep{Slater2012,Slater2013a,Tomiya2013,Harnik2014,Simpson2011a}. The partitioning of the different sources of variance involved in this model indicate that phylogeny or shared evolutionary history accounts for approximately 10-15\% of the unexplained variance each. Because VPC of phylogeny is greater than 0, it is not appropriate to ignore phylogeny when modeling survival in paleontological studies \citep{Housworth2004}. An addition 10-15\% of unexplained variance was due to shared origination cohort. Between these two sources of variance, it is clear that a shared evolutionary history and temporal occurrence are non-ignorable in paleontological studies or survival. Modeling phylogeny as a hierarchical effect, as done here, is a very simple and interpretable means of integrating phylgoenetic information into any and all regression models \citep{Lynch1991,Housworth2004} and is most likely ideal for most paleontological studies.
 % This is where WAIC might make some people believe me.
 
+
+
+
+
+
 % implications
-Comparison of time-invariant effects from the Cenozoic, the ``signature'' of a regime, to the predictions of selection for current biodiversity crisis. This presuposes that the current biodiversity crisis may involve fundamentally different selection pressures than experienced over the Cenozoic.
+Comparison of time-invariant effects from the Cenozoic, the ``signature'' of a regime, to the predictions of selection for current biodiversity crisis. This presupposes that the current biodiversity crisis may involve fundamentally different selection pressures than experienced over the Cenozoic.
 %   conservation
 %     compare with other results
 %   ``macroevolutionary regime''
+
+% in modern systems
+%   large range size good
+%   large body size bad, but only in tropical areas fritz ecol letters 2009
+%   phylogeny is a thing (though D is shitty) fritz and purvis 2010 conservation
+%   trophic level (diet) in Liow et al. Am Nat 2009
+%     included in ``best'' model
+%     very small effect; they didn't parse it out. 
+%     unknown why because their analysis should give that information
+%     though they only report a single estimate, which makes no sense
+%   trophic level in Purvis et al 2000 Proc B
+%     higher trophic level, higher extinction risk
+%     body mass either bad or approx. 0
+%     primarily primates, carnivores
+
+
 % future
 %   interaction between traits and/or hierarchical effects
 %   time transient effects
+There are a few data quality concerns in this study which are also inherent to almost any paleontological study.
 
-Interaction between species level effects.
+Almost all of the body mass estimates were obtained using published regression equations that estimate mass from some other body part (e.g. tooth). These estimates are known with error, which was not included in the model. If the standard deviation of the residuals from each of these regression equations was known, it would be possible to directly model this as measurement error \citep{Gelman2013d}. 
 
-Varying intercept, varying slope model. We have an intercept, diet, loco, body, occ in a k x k shared multivariate prior situation. This is really complicated and makes interpreation and inferrence much more difficult. Each species has an origination cohort. This allows for cohort variability in effects. This allows for each cohort to effectively have it's own model while also estimating the shared time-invariant model. The goal of this would be very different that this study.
+A similar situation occurs with species bioprovince occupancy. Depending on the structure of the biogeographic network, there can be a range in the number of emergent bioprovinces. By estimating the standard deviation of both the number of bioprovinces and the number of occupied bioprovinces, it might be possible in propegate this measurement error correctly through the model \citep{Gelman2013d}. 
 
-Better phylogeny. For such a well sampled group, it is surprising that a phylogeny across the whole Cenozoic. Of even just the Eocene.
+These model improvements were not done here for a variety of reasons: adequacy of current model fit, lack of residual standard deviation information from regression equations, and for improved tractability. Both of these measurement error models involve estimating the actual value given the observed and some known amout of error. Because of this, by allowing two covariates to be known with error approximately 4000 more parameter values would need to be estimated. Because of the combination of these factors, no measurement error in body size or bioprovince occupancy was included.
 
+The phylogeny used here is only a coarse, baseline estimate of the actual species relationships. Because of this, the analysis of phylogenetic effect on survival represents a minimum or rough estimate. With improved topology and resolution, it would be possible to more accurately estimate the effect of shared evolutionary history. As it stand, given the rough minimum estimate of phylogenetic heritability, these results point to the importance of including shared evolutionary history in diversification models.
 
+The minimum resolution of the fossil record might cause an upward bias in estimates of the Weibull shape parameter \(\alpha\) \citep{Sepkoski1975}. This effect can be observed by the initial plateau in the K-M estimate of \(S(t)\) for the observed (Fig. \ref{fig:ppc_surv}). This plateau is a hallmark of the survival analyses by \citet{VanValen1973} which \citet{Sepkoski1975} identified as partially a product of minimum resolution of the fossil records of the different studied groups.
+
+%An ambitious improvement upon this model would be setting up a varying intercept, varying slope model for each cohort. We have an intercept, diet, loco, body, occ in a k x k shared multivariate prior situation. This is really complicated and makes interpretation and inference much more difficult. Each species has an origination cohort. This allows for cohort variability in effects. This allows for each cohort to effectively have it's own model while simultaneously estimating the shared time-invariant model. The goal of this would be very different that this study.
+
+%The next step after setting up this varying intercept, varying slope model would be the inclusion of an additionally higher level of organization: continents.
+
+% relative importance of time-invariant and time-variant effects?
+
+% take home point
+%   background extinction is highly variable
+%   non-random with respect to a lot of biology
+%     this is partially heritable
+%   extinction is found to be partially age dependent (accelerating)
+%     without modeling fossilization process hard to be sure
+%     this result may be due to minimum resolution of fossil record (Sepkoski)
 
 
 \end{document}
