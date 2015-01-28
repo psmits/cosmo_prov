@@ -9,19 +9,11 @@ library(ape)
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
-test <- 5
+test <- 3
 
 set.seed(seed)
 source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
-
-# compile the models
-#poisson.mod <- stan(file = '../stan/degree_model.stan')
-pois.phy.mod <- stan(file = '../stan/degree_phy_model.stan')
-
-#negbin.mod <- stan(file = '../stan/deg_mod_over.stan')
-negb.phy.mod <- stan(file = '../stan/deg_phy_over.stan')
-
 
 # prep the data
 species.graph <- function(bipartite) {
@@ -45,7 +37,7 @@ name <- llply(spg, function(x) V(x)$name)
 inin <- llply(name, function(x) x %in% na.ecol$taxa)
 spg <- Map(function(x, y) delete.vertices(x, which(!y)), spg, inin)
 
-adj <- llply(spg, function(x) get.adjacency(x, sparse = FALSE))
+aj <- llply(spg, function(x) get.adjacency(x, sparse = FALSE))
 deg <- llply(spg, degree)
 size <- llply(spg, vcount)
 name <- llply(spg, function(x) V(x)$name)
@@ -59,8 +51,8 @@ ecol <- llply(ecol, function(x) {
               x$mass <- rescale(log(x$mass))
               x})
 
-diet <- llply(ecol, function(x) model.matrix( ~ x$diet - 1)[, -1])
-move <- llply(ecol, function(x) model.matrix( ~ x$move - 1)[, -1])
+dit <- llply(ecol, function(x) model.matrix( ~ x$diet - 1)[, -1])
+mve <- llply(ecol, function(x) model.matrix( ~ x$move - 1)[, -1])
 
 
 # prepare the phylo vcv
@@ -76,7 +68,7 @@ for(ii in seq(length(name))) {
   temp <- drop.tip(na.tree, nono)
   temp$edge.length <- temp$edge.length / max(diag(vcv(temp)))
   temp.vcv <- vcv(temp)
-  
+
   # have to have this line up correctly
   o <- match(str_replace(name[[ii]], ' ', '_'), colnames(temp.vcv))
   temp.vcv <- temp.vcv[o, o]
@@ -87,43 +79,21 @@ for(ii in seq(length(name))) {
 
 # make the list of lists
 data <- list()
-for(ii in seq(length(adj))) {
-  data[[ii]] <- list(N = size[[ii]],
-                     D = ncol(diet[[ii]]),
-                     M = ncol(move[[ii]]),
-                     degree = deg[[ii]],
-                     mass = ecol[[ii]]$mass,
-                     diet = diet[[ii]],
-                     move = move[[ii]],
-                     vcv = vcv.s[[ii]],
-                     adj = adj[[ii]])
-}
+for(ii in seq(length(aj))) {
+  N <- size[[ii]]
+  D <- ncol(dit[[ii]])
+  M <- ncol(mve[[ii]])
+  degree <- deg[[ii]]
+  mass <- ecol[[ii]]$mass
+  diet <- dit[[ii]]
+  move <- mve[[ii]]
+  vcv <- vcv.s[[ii]]
+  adj <- aj[[ii]]
 
-
-# fit the models
-# basic poisson model
-degfit <- list()
-for(ii in seq(test)) {
-  degmod <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = pois.phy.mod, 
-                                      seed = seed,
-                                      data = data[[ii]], 
-                                      iter = 5000,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-  degfit[[ii]] <- sflist2stanfit(degmod)
-}
-
-
-# probably need to switch to a negative binomial, duh :P
-overfit <- list()
-for(ii in seq(test)) {
-  degmod <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = negb.phy.mod, 
-                                      seed = seed,
-                                      data = data[[ii]], 
-                                      iter = 5000,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-  overfit[[ii]] <- sflist2stanfit(degmod)
+  # spit out the data into a stan dump file
+  # use shell script to analyze the data
+  n <- paste0('../data/meta_dump/meta_dump_', ii, '.data.R')
+  stan_rdump(list = c('N', 'D', 'M', 'degree', 'mass', 
+                      'diet', 'move', 'vcv', 'adj'),
+             file = n)
 }
