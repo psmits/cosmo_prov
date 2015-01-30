@@ -6,12 +6,10 @@ library(stringr)
 library(grid)
 library(survival)
 library(GGally)
-library(moments)
 library(plyr)
 
-#source('../R/meta_post_sim.r')
+source('../R/meta_post_sim.r')
 nsim <- 100
-
 
 pairwise.diffs <- function(x) {
   # create column combination pairs

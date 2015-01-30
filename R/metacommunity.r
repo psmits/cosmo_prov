@@ -89,6 +89,7 @@ for(ii in seq(length(aj))) {
   move <- mve[[ii]]
   vcv <- vcv.s[[ii]]
   adj <- aj[[ii]]
+  data[[ii]] <- list(N, D, M, degree, mass, diet, move, vcv, adj)
 
   # spit out the data into a stan dump file
   # use shell script to analyze the data

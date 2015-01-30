@@ -10,8 +10,6 @@ RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
 
-source('../R/metacommunity.r')
-
 # get some WAIC values
 # rough estimate of comparative goodness of fit
 colVars <- function (a){
@@ -56,6 +54,7 @@ poisson.sim <- function(fit, data, nsim) {
   }
   mu
 }
+# this section needs to be heavily modified to deal with the sampling files
 deg.coef <- llply(degfit, function(x) extract(x, permuted = TRUE))
 pois.out <- Map(function(x, y) poisson.sim(x, y, nsim = nsim),
                 x = deg.coef, y = data[1:test])
