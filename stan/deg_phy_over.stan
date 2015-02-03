@@ -22,17 +22,13 @@ parameters {
 
   real<lower=0> sigma_phy;
   vector[N] phy;
-
-  real<lower = 0> omega;
+  real<lower = 0> phi;
 }
 transformed parameters {
   // make a variance
   real<lower=0> sig_phy_sq;
-  real<lower=0> phi;
 
   sig_phy_sq <- sigma_phy * sigma_phy;  
-
-  phi <- 1 / omega;
 }
 model {
   vector[N] mu;
@@ -46,7 +42,7 @@ model {
     beta_diet[i] ~ normal(0, 10);
   }
 
-  omega ~ cauchy(0, 2.5);
+  phi ~ cauchy(0, 2.5);
 
   // phylogenetic effect
   sigma_phy ~ cauchy(0, 2.5);
@@ -69,6 +65,6 @@ generated quantities {
          phy);
 
   for(i in 1:N) {
-    log_lik[i] <- poisson_log_log(degree[i], mu[i]);
+    log_lik[i] <- neg_binomial_2_log_log(degree[i], mu[i], phi);
   }
 }
