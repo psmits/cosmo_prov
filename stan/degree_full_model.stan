@@ -83,4 +83,3 @@ generated quantities {
     log_lik[i] <- poisson_log_log(degree[i], mu[i]);
   }
 }
-
