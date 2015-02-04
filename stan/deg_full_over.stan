@@ -12,8 +12,11 @@ data {
   matrix[N, N] adj;  // adjacency matrix
 }
 transformed data {
+  vector[N] zeroes;
   matrix[N, N] vcv_inv;
   matrix[N, N] DS;
+
+  for(i in 1:N) zeroes[i] <- 0;
 
   vcv_inv <- inverse(vcv);
   for(i in 1:N)
@@ -29,7 +32,7 @@ parameters {
   real<lower=0> sigma_phy;
   vector[N] phy;
 
-  real<lower=0> tau;  // prec of spatial
+  real<lower=0> sigma_spt;  // prec of spatial
   real<lower=0,upper=1> p;  // stength of spatial
   vector[N] spatial;
 
@@ -37,10 +40,10 @@ parameters {
 }
 transformed parameters {
   real<lower=0> sig_phy_sq;
-  real<lower=0> sigma_spt;
+  real<lower=0> tau;
 
   sig_phy_sq <- sigma_phy * sigma_phy;
-  sigma_spt <- 1 / tau;
+  tau <- 1 / sigma_spt;
 }
 model {
   vector[N] mu;
@@ -56,7 +59,6 @@ model {
 
   phi ~ cauchy(0, 2.5);
 
-
   // phylogenetic effect
   sigma_phy ~ cauchy(0, 2.5);
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
@@ -67,7 +69,7 @@ model {
   // spatial effect
   sigma_spt ~ cauchy(0, 2.5);
   p ~ uniform(0, 1);
-  spatial ~ multi_norm_prec(0 vector, (tau * tau) * (DS - p * adj));
+  spatial ~ multi_normal_prec(zeroes, (tau * tau) * (DS - p * adj));
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
