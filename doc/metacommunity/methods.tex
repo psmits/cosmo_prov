@@ -14,12 +14,13 @@
 
 \begin{document}
 \section{Methods}
-
 \subsection{Species information}
 
 \subsubsection{Informal phylogeny}
 
 \subsection{Biogeographic network}
+
+A biogeographic network is here defined as a bipartite network between localities and taxa \citep{Vilhena2013b,Vilhena2013,Sidor2013}. The properties of a bipartite network are such that taxa are connected to localities, but taxa are not connected to taxa and localities are not connected to localities (Fig. \ref{subfig:bip_net}). In this study, taxa are defined as species and localities are defined as 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection.
 
 \begin{figure}[ht]
   \centering
@@ -39,15 +40,13 @@
 \end{figure}
 
 
-
-
 \subsection{Co-occurrence model}
 
 Poisson distribution with rate \(\lambda\) is defined 
 \begin{align}
   \mathrm{Poisson}(n_{i} | \lambda_{i}) &= \frac{1}{n_{i}!} \lambda^{n_{i}} \exp(-\lambda_{i}) 
   \label{eq:pois} \\
-  \lambda_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i}).
+  \lambda_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i} + \log(u_{i})).
   \label{eq:lambda}
 \end{align}
 
@@ -55,7 +54,7 @@ Negative binomial distribution parameterized with mean \(\mu\) and overdispersio
 \begin{align}
   \mathrm{Negative\ binomial}(y_{i} | \mu_{i}, \phi) &= {y_{i} + \phi -1 \choose y_{i}} \left(\frac{\mu_{i}}{\mu_{i} + \phi}\right)^{y_{i}} \left(\frac{\phi}{\mu_{i} + \phi}\right)^{\phi}
   \label{eq:neg_bin} \\
-  \mu_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i}) 
+  \mu_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i} + \log(u_{i})) 
   \label{eq:mu} \\
   \phi &\sim \mathrm{halfCauchy}(2.5).
   \label{eq:phi} 
@@ -72,6 +71,16 @@ For the parameterizations of the means for both the Poisson (Eq. \ref{eq:lambda}
   \mathbf{\Sigma} &= \sigma_{p}^{2} \mathbf{V}_{phy} \nonumber \\
   \sigma_{p} &\sim \mathrm{halfCauchy}(2.5). \nonumber
 \end{align}
+This parameterization follows \citet{Lynch1991} and \citet{Housworth2004}.
+
+\(u_{i}\) is the exposure term for observation \(i\) and is defined as the number of localities species \(i\) occurred in during the given stage. The inclusion of an exposure is so that the rate is more biologically interpretable as the rate is now in relation to some baseline. In this case, we can interpret \(\lambda\) as the expected number of co-occurring species per locality for a given observation. While \(u_{i}\) is called the exposure, \(\log(u_{i})\) is called the offset in the language generalized linear modeling \citep{Gelman2007}. The inclusion of \(\log(u_{i}\) in the parameterization of \(\mu_{i}\) is due to the following relationships 
+\begin{align*}
+  \mathrm{E}(Y) &= u_{i}\lambda_{i} \\
+  \log(\mathrm{E}(Y)) &= \log(u_{i}) + \log(\lambda_{i}) \\
+  \log(\mathrm{E}(Y)) &= \log(u_{i}) + \beta^{T}\mathbf{X_{i}} + h_{i} \\
+  \log(\mathrm{E}(Y)) - \log(u_{i}) &= \beta^{T}\mathbf{X_{i}} + h_{i} \\
+  \log\left(\frac{\mathrm{E}(Y)}{u_{i}}\right) &= \beta^{T}\mathbf{X_{i}} + h_{i}.
+\end{align*}
 
 The overdispersion parameter \(\phi\) of the negative binomial distribution was given weakly informative half-Cauchy prior distribution (Eq. \ref{eq:phi}).
 
@@ -92,10 +101,15 @@ Graphical summaries of the Poisson and negative binomial models, along with all 
 
 \subsection{Posterior predictive checks}
 
-A models utility in making predictive and descriptive statements is dependent on its fit to the data and the questions of interest.
+A models utility in making predictive and descriptive statements is dependent on its fit to the data and the questions of interest. The most basic assessment of model fit is if, given known covariate information, values simulated from the model (\(y^{rep}\)) are similar to the observed (\(y\)). This is the idea behind posterior predictive checks \citep{Gelman2013d}. 
+
+For all estimated parameters, a value is randomly drawn from their respective posteriors. These parameter estimates are then used with covariate information for all observations to make \(n\) estimates of the number of co-occurring species for a given species \(y^{rep}\). This process is repeated 1000 times to get a distribution of possible \(y^{rep}\)-s, which can then be compared to the original data \(y\) to assess the quality of model fit \citep{Gelman2013d}.
 
 
-\subsection{Predictive power}
+\subsection{Predictive estimates}
+
+For each stage, 
+
 
 \begin{figure}[ht]
   \centering
