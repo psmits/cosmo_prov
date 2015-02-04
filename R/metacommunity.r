@@ -29,6 +29,13 @@ species.graph <- function(bipartite) {
   out
 }
 
+num.loc <- function(bipartite) {
+  tax <- which(!(grepl('[0-9]', V(bipartite)$name)))
+  nei <- llply(tax, function(x) neighbors(bipartite, x))
+  laply(nei, length)
+}
+
+exposure <- llply(taxawin, num.loc)
 spg <- llply(taxawin, function(x) {
              o <- species.graph(x)
              E(o)$weight <- 1
@@ -89,12 +96,13 @@ for(ii in seq(length(aj))) {
   move <- mve[[ii]]
   vcv <- vcv.s[[ii]]
   adj <- aj[[ii]]
-  data[[ii]] <- list(N, D, M, degree, mass, diet, move, vcv, adj)
+  off <- exposure[[ii]]
+  data[[ii]] <- list(N, D, M, degree, mass, diet, move, vcv, adj, off)
 
   # spit out the data into a stan dump file
   # use shell script to analyze the data
   n <- paste0('../data/meta_dump/meta_dump_', ii, '.data.R')
   stan_rdump(list = c('N', 'D', 'M', 'degree', 'mass', 
-                      'diet', 'move', 'vcv', 'adj'),
+                      'diet', 'move', 'vcv', 'adj', 'off'),
              file = n)
 }

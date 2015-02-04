@@ -2,6 +2,7 @@ data {
   int<lower=0> N;  // sample size
   int D;  // number of diet categories
   int M;  // number of move categories
+  vector[N] off;
   int<lower=0> degree[N];  // # i co-occurs with
   vector[N] mass;
   matrix[N, D] diet;
@@ -53,7 +54,7 @@ model {
   
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        phy);
+        phy + log(off));
 
   degree ~ neg_binomial_2_log(mu, phi);
 }
@@ -62,7 +63,7 @@ generated quantities {
   vector[N] mu;
   mu <- (beta_inter + beta_mass * mass + 
          diet * beta_diet + move * beta_move + 
-         phy);
+         phy + log(off));
 
   for(i in 1:N) {
     log_lik[i] <- neg_binomial_2_log_log(degree[i], mu[i], phi);

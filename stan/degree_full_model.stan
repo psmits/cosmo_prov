@@ -2,6 +2,7 @@ data {
   int<lower=0> N;  // sample size
   int D;  // number of diet categories
   int M;  // number of move categories
+  vector[N] off;
   int<lower=0> degree[N];  // # i co-occurs with
   vector[N] mass;
   matrix[N, D] diet;
@@ -28,20 +29,20 @@ parameters {
   real<lower=0> sigma_phy;
   vector[N] phy;
 
-  real<lower=0> tau;  // var of spatial
+  real<lower=0> tau;  // prec of spatial
   real<lower=0,upper=1> p;  // stength of spatial
   vector[N] spatial;
+
+  real<lower = 0> phi;
 }
 transformed parameters {
-  // make a variance
-  real<lower=0> sq_sigma;
-  real<lower=0> tau_sq;
-  sq_sigma <- sigma_phy^2;  
-  tau_sq <- tau^2;
+  real<lower=0> sig_phy_sq;
+  real<lower=0> sigma_spt;
+
+  sig_phy_sq <- sigma_phy * sigma_phy;
+  sigma_spt <- 1 / tau;
 }
 model {
-  real spatial_mean;
-  vector[N] spatial_std;
   vector[N] mu;
   
   beta_inter ~ normal(0, 10);
@@ -53,30 +54,33 @@ model {
     beta_diet[i] ~ normal(0, 10);
   }
 
-
   // phylogenetic effect
   sigma_phy ~ cauchy(0, 2.5);
   // non-constant part of log(det(sigma_phy * vcv) ^ -0.5
-  increment_log_prob(-0.5 * N * log(sq_sigma));
+  increment_log_prob(-0.5 * N * log(sig_phy_sq));
   // log of kernal of mulinorm
-  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sq_sigma));
+  increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sig_phy_sq));
   
   // spatial effect
-  tau ~ cauchy(0, 2.5);
-  increment_log_prob(-0.5 / (tau_sq) * (transpose(spatial) * 
-                     DS * spatial - p * (transpose(spatial) * 
-                     adj * spatial)));
-  increment_log_prob(-0.5 * N * log(tau_sq) + 0.5 * log(determinant(DS - p * adj)));
-  
-  spatial_mean <- mean(spatial);  // sum to zero constraint
-  spatial_std <- spatial - spatial_mean;
-
+  sigma_spt ~ cauchy(0, 2.5);
+  p ~ uniform(0, 1);
+  spatial ~ multi_norm_prec(0 vector, (tau * tau) * (DS - p * adj));
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        phy + spatial);
+        phy + spatial + log(off));
 
   degree ~ poisson_log(mu);
 }
+generated quantities {
+  vector[N] log_lik;
+  vector[N] mu;
+  mu <- (beta_inter + beta_mass * mass + 
+         diet * beta_diet + move * beta_move + 
+         phy + spatial + log(off));
 
+  for(i in 1:N) {
+    log_lik[i] <- poisson_log_log(degree[i], mu[i]);
+  }
+}
 

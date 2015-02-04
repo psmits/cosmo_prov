@@ -2,6 +2,7 @@ data {
   int<lower=0> N;  // sample size
   int D;  // number of diet categories
   int M;  // number of move categories
+  vector[N] off;
   int<lower=0> degree[N];  // # i co-occurs with
   vector[N] mass;
   matrix[N, D] diet;
@@ -32,21 +33,16 @@ parameters {
   real<lower=0,upper=1> p;  // stength of spatial
   vector[N] spatial;
 
-  real<lower = 0> omega;
+  real<lower = 0> phi;
 }
 transformed parameters {
   real<lower=0> sig_phy_sq;
   real<lower=0> sigma_spt;
-  real<lower=0> phi;
 
   sig_phy_sq <- sigma_phy * sigma_phy;
   sigma_spt <- 1 / tau;
-
-  phi <- 1 / omega;
 }
 model {
-  real spatial_mean;
-  vector[N] spatial_std;
   vector[N] mu;
   
   beta_inter ~ normal(0, 10);
@@ -58,7 +54,7 @@ model {
     beta_diet[i] ~ normal(0, 10);
   }
 
-  omega ~ cauchy(0, 2.5);
+  phi ~ cauchy(0, 2.5);
 
 
   // phylogenetic effect
@@ -69,15 +65,24 @@ model {
   increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sig_phy_sq));
   
   // spatial effect
-  sigma ~ cauchy(0, 2.5);
+  sigma_spt ~ cauchy(0, 2.5);
+  p ~ uniform(0, 1);
   spatial ~ multi_norm_prec(0 vector, (tau * tau) * (DS - p * adj));
-
-  spatial_mean <- mean(spatial);
-  spatial_std <- spatial - spatial_mean;
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        phy + spatial_std);
+        phy + spatial + log(off));
 
   degree ~ neg_binomial_2_log(mu, phi);
+}
+generated quantities {
+  vector[N] log_lik;
+  vector[N] mu;
+  mu <- (beta_inter + beta_mass * mass + 
+         diet * beta_diet + move * beta_move + 
+         phy + spatial + log(off));
+
+  for(i in 1:N) {
+    log_lik[i] <- neg_binomial_2_log_log(degree[i], mu[i], phi);
+  }
 }
