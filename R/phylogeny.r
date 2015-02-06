@@ -69,7 +69,7 @@ if(class(species.trees) == 'multiPhylo') {
   spt <- species.trees
 }
 
-dr <- spt[!(spt$tip.label %in% dat$name.bi)]
+dr <- spt$tip.label[!(spt$tip.label %in% dat$name.bi)]
 spt <- drop.tip(spt, dr)
 spt <- timeLadderTree(spt, timeData = datmat)
 spt <- timePaleoPhy(spt, timeData = datmat, 

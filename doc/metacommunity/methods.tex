@@ -20,7 +20,7 @@
 
 \subsection{Biogeographic network}
 
-A biogeographic network is here defined as a bipartite network between localities and taxa \citep{Vilhena2013b,Vilhena2013,Sidor2013}. The properties of a bipartite network are such that taxa are connected to localities, but taxa are not connected to taxa and localities are not connected to localities (Fig. \ref{subfig:bip_net}). In this study, taxa are defined as species and localities are defined as 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection.
+A biogeographic network is defined as a bipartite network between localities and taxa \citep{Vilhena2013b,Vilhena2013,Sidor2013}. The properties of a bipartite network are such that taxa are connected to localities, but taxa are not connected to taxa and localities are not connected to localities (Fig. \ref{subfig:bip_net}). In this study, taxa are defined as species and localities are defined as 2x2 latitude--longitude grid cells from an azimuthal equal-area map projection.
 
 \begin{figure}[ht]
   \centering
@@ -41,16 +41,19 @@ A biogeographic network is here defined as a bipartite network between localitie
 
 
 \subsection{Co-occurrence model}
+A random graph is one where the probability of any two nodes being connected is equal for all combinations \citep{Erdos1959}. This assumption implies that the distribution of nodal degree should follow a Poisson distribution. What this means is that the degree, or number of connections, of a node in a one mode network is considered drawn from a Poisson distribution with some rate, \(\lambda\).
 
-Poisson distribution with rate \(\lambda\) is defined 
+The Poisson distribution with rate \(\lambda > 0\) is defined 
 \begin{align}
-  \mathrm{Poisson}(n_{i} | \lambda_{i}) &= \frac{1}{n_{i}!} \lambda^{n_{i}} \exp(-\lambda_{i}) 
+  \mathrm{Poisson}(y_{i} | \lambda_{i}) &= \frac{1}{y_{i}!} \lambda^{y_{i}} \exp(-\lambda_{i}) 
   \label{eq:pois} \\
   \lambda_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i} + \log(u_{i})).
   \label{eq:lambda}
 \end{align}
 
-Negative binomial distribution parameterized with mean \(\mu\) and overdispersion \(\phi\) is defined
+The biggest assumption of the Poisson distribution is that mean and variance are equal is very strong and not frequently observed, instead there tends to be excess variance or overdisperssion. The negative binomial distribution can be viewed as an extension of the Poisson distribution allowing for overdispersion. 
+
+Negative binomial distribution parameterized with mean \(\mu > 0\) and overdispersion \(\phi > 0\) is defined
 \begin{align}
   \mathrm{Negative\ binomial}(y_{i} | \mu_{i}, \phi) &= {y_{i} + \phi -1 \choose y_{i}} \left(\frac{\mu_{i}}{\mu_{i} + \phi}\right)^{y_{i}} \left(\frac{\phi}{\mu_{i} + \phi}\right)^{\phi}
   \label{eq:neg_bin} \\
@@ -59,6 +62,7 @@ Negative binomial distribution parameterized with mean \(\mu\) and overdispersio
   \phi &\sim \mathrm{halfCauchy}(2.5).
   \label{eq:phi} 
 \end{align}
+
 
 \(\mathbf{X}\) is defined as an \(n \times K\) matrix where \(n\) is the number of observations and \(K\) is the number of covariates of interest. As described above, the covariates of interest are the dietary and locomotor categories of a species and its body mass. While body mass is a continuous covariate, dietary and locomotor categories are index variables that need to be transformed into multiple binary covariates or indicator variables. To do this, for each of these variables were each transformed into \(n \times (k - 1)\) matrices where \(k - 1\) is the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining category. Finally, a column of 1-s in included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept. In total, \(K\) equals 7.
 % Do I want to change locomotor and dietary categories into random effects? Might improve interpretability.
