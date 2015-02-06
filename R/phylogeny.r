@@ -50,17 +50,31 @@ lad <- lad[match(na.tree$tip.label, lad[, 1]), ]
 datmat <- cbind(fad[, 2], lad[, 2])
 rownames(datmat) <- fad[, 1]
 
-#na.tree <- timeLadderTree(na.tree, timeData = datmat)
-#na.scale <- timePaleoPhy(na.tree, timeData = datmat, 
-#                         type = 'mbl', vartime = 0.1)
-#save(na.scale, file = '../data/taxonomy_tree.rdata')
+na.tree <- timeLadderTree(na.tree, timeData = datmat)
+na.scale <- timePaleoPhy(na.tree, timeData = datmat, 
+                         type = 'mbl', vartime = 0.1)
+save(na.scale, file = '../data/taxonomy_tree.rdata')
 
 # raia.tree is species level
 # super tree is species level
 species.trees <- c(raia.tree, super.tree[[1]], na.tree)
 class(species.trees) <- 'multiPhylo'
 big.tree <- mrp.supertree(species.trees)
+save(species.trees, file = '../data/super_big_tree.rdata')
 
+# get rid of the stupid tips
+if(class(species.trees) == 'multiPhylo') {
+  spt <- species.trees[[1]] 
+} else {
+  spt <- species.trees
+}
+
+dr <- spt[!(spt$tip.label %in% dat$name.bi)]
+spt <- drop.tip(spt, dr)
+spt <- timeLadderTree(spt, timeData = datmat)
+spt <- timePaleoPhy(spt, timeData = datmat, 
+                         type = 'mbl', vartime = 0.1)
+save(spt, file = '../data/scaled_super.rdata')
 
 
 
