@@ -1,3 +1,4 @@
+library(ape)
 library(plyr)
 library(phytools)
 library(stringr)
@@ -60,18 +61,18 @@ save(na.scale, file = '../data/taxonomy_tree.rdata')
 species.trees <- c(raia.tree, super.tree[[1]], na.tree)
 class(species.trees) <- 'multiPhylo'
 big.tree <- mrp.supertree(species.trees)
-save(species.trees, file = '../data/super_big_tree.rdata')
+save(big.tree, file = '../data/super_big_tree.rdata')
 
 # get rid of the stupid tips
-if(class(species.trees) == 'multiPhylo') {
-  spt <- species.trees[[1]] 
+if(class(big.tree) == 'multiPhylo') {
+  spt <- big.tree[[1]] 
 } else {
-  spt <- species.trees
+  spt <- big.tree
 }
 
-dr <- spt$tip.label[!(spt$tip.label %in% dat$name.bi)]
+dr <- spt$tip.label[!(spt$tip.label %in% rownames(datmat))]
 spt <- drop.tip(spt, dr)
-spt <- timeLadderTree(spt, timeData = datmat)
+#spt <- timeLadderTree(spt, timeData = datmat)
 spt <- timePaleoPhy(spt, timeData = datmat, 
                          type = 'mbl', vartime = 0.1)
 save(spt, file = '../data/scaled_super.rdata')

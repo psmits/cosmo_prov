@@ -13,8 +13,6 @@ parameters {
   real beta_mass;
   vector[M] beta_move;
   vector[D] beta_diet;
-
-  real<lower = 0> phi;
 }
 model {
   vector[N] mu;

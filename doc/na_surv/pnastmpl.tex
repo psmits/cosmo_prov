@@ -1,22 +1,20 @@
 %% PNAStwoS.tex
 %% Sample file to use for PNAS articles prepared in LaTeX
 %% For two column PNAS articles
-%% Version: Apr 15, 2008 
- 
+%% Version1: Apr 15, 2008
+%% Version2: Oct 04, 2013
 
 %% BASIC CLASS FILE
 \documentclass{pnastwo}
 
-%% ADDITIONAL OPTIONAL STYLE FILES
-\usepackage{graphicx}
-%\usepackage{pnastwof}
-\usepackage{amssymb,amsfonts,amsmath}
+%% ADDITIONAL OPTIONAL STYLE FILES Font specification
+
+%\usepackage{pnastwoF}
+
 
 
 %% OPTIONAL MACRO DEFINITIONS
 \def\s{\sigma}
-
-
 %%%%%%%%%%%%
 %% For PNAS Only:
 \url{www.pnas.org/cgi/doi/10.1073/pnas.0709640104}
@@ -41,11 +39,15 @@ Franklin Sonnery\affil{2}{}}
 \contributor{Submitted to Proceedings of the National Academy of Sciences
 of the United States of America}
 
+%%%Newly updated.
+%%% If significance statement need, then can use the below command otherwise just delete it.
+\significancetext{RJSM and ACAC developed the concept of the study. RJSM conducted the analysis, data interpretation and drafted the manuscript. AGB contributed to the development of the statistical methods, data interpretation and drafting of the manuscript.}
+
 \maketitle
 
 \begin{article}
 \begin{abstract}
-We use heat kernels or eigenfunctions of the Laplacian to construct
+{We use heat kernels or eigenfunctions of the Laplacian to construct
 local coordinates on large classes of Euclidean domains and Riemannian
 manifolds (not necessarily smooth, e.g. with $\mathcal{C}^\alpha$
 metric). These coordinates are bi-Lipschitz on large neighborhoods of
@@ -57,17 +59,16 @@ gradient, as well as for the eigenfunctions of the Laplacian and their
 gradient, that hold in the non-smooth category, and are stable with
 respect to perturbations within this category. Finally, these coordinate
 systems are intrinsic and efficiently computable, and are of value in
-applications. 
+applications.}
 \end{abstract}
 
 \keywords{monolayer | structure | x-ray reflectivity | molecular electronics}
 
-\abbreviations{SAM, self-assembled monolayer; OTS,
-octadecyltrichlorosilane}
+\abbreviations{SAM, self-assembled monolayer; OTS, octadecyltrichlorosilane}
 
 \dropcap{I}n this article we study the evolution of ``almost-sharp'' fronts
 for the surface quasi-geostrophic equation. This 2-D active scalar
-equation reads for the surface quasi-geostrophic equation. 
+equation reads for the surface quasi-geostrophic equation.
 \begin{equation}
 \mfrac{D \theta}{Dt}=\mfrac{\pr \theta}{\pr t} + u\cdot \nabla
 \theta=0 \label{qg1}
@@ -109,7 +110,7 @@ evolution of sharp fronts (in the periodic setting), proving its
 local well-posedness for that equation. (see \cite{ZhaZha} and
 \cite{TSL} for more details). This is a problem in contour
 dynamics. Contour dynamics for other fluid equations has been
-studied extensively. 
+studied extensively.
 
 
 \section{Analysis of almost sharp fronts}
@@ -254,7 +255,7 @@ Details are given in the {\it SI Materials and Methods}.
 
 \section{Digital RCD Analysis} Extracted DNA was quantified by
 spectrophotometry (NanoDrop Technologies, Wilmington, DE) and diluted to a
-concentration of 
+concentration of
 approximately one target template from either chr21 or ch1 per well.
 \end{materials}
 
@@ -271,12 +272,10 @@ and 14. This appendix is included here for completeness.
 This is an example of an appendix without a title.
 
 \begin{acknowledgments}
-This work was partially supported by 
+This work was partially supported by
 Spanish Ministry of Science and Technology Grant BFM2002-02042 (to D.C. and
 J.L.R.) and by National Science Foundation Grand DMS-0245242 (to C.F.).
 \end{acknowledgments}
-
-
 
 \begin{thebibliography}{10}
 \bibitem{BN}
@@ -362,6 +361,8 @@ Z.~Zhang and H.~Zha, {\em Principal manifolds and nonlinear dimension
   Department of computer science and engineering, Pennsylvania State
   University, 2002.
 \end{thebibliography}
+
+
 \end{article}
 
 \begin{figure}
@@ -424,7 +425,6 @@ chosen unique ref\/lections not used in the ref\/inement.}&5\quad &50&.0008&8&50
 \hline
 \end{tabular*}
 \end{table*}
-
 
 
 \end{document}
