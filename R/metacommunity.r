@@ -35,7 +35,6 @@ num.loc <- function(bipartite) {
   laply(nei, length)
 }
 
-exposure <- llply(taxawin, num.loc)
 spg <- llply(taxawin, function(x) {
              o <- species.graph(x)
              E(o)$weight <- 1
@@ -44,8 +43,12 @@ name <- llply(spg, function(x) V(x)$name)
 inin <- llply(name, function(x) x %in% na.ecol$taxa)
 spg <- Map(function(x, y) delete.vertices(x, which(!y)), spg, inin)
 
+bips <- Map(function(x, y) delete.vertices(x, which(!y)), taxawin, inin) 
+exposure <- llply(bips, num.loc)
+
+
 aj <- llply(spg, function(x) get.adjacency(x, sparse = FALSE))
-deg <- llply(spg, degree)
+deg <- llply(spg, igraph::degree)
 size <- llply(spg, vcount)
 name <- llply(spg, function(x) V(x)$name)
 
@@ -97,7 +100,8 @@ for(ii in seq(length(aj))) {
   vcv <- vcv.s[[ii]]
   adj <- aj[[ii]]
   off <- exposure[[ii]]
-  data[[ii]] <- list(N, D, M, degree, mass, diet, move, vcv, adj, off)
+  data[[ii]] <- list(N = N, D = D, M = M, degree = degree, mass = mass, 
+                     diet = diet, move = move, vcv = vcv, adj = adj, off = off)
 
   # spit out the data into a stan dump file
   # use shell script to analyze the data
@@ -106,3 +110,7 @@ for(ii in seq(length(aj))) {
                       'diet', 'move', 'vcv', 'adj', 'off'),
              file = n)
 }
+
+data[[1]]$N
+length(data[[1]]$off)
+

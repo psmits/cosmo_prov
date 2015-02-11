@@ -12,16 +12,16 @@ data {
   matrix[N, N] adj;  // adjacency matrix
 }
 transformed data {
-  vector[N] zeroes;
+//  vector[N] zeroes;
   matrix[N, N] vcv_inv;
-  matrix[N, N] DS;
+//  matrix[N, N] DS;
 
-  for(i in 1:N) zeroes[i] <- 0;
+//  for(i in 1:N) zeroes[i] <- 0;
 
   vcv_inv <- inverse(vcv);
-  for(i in 1:N)
-    for(j in 1:N)
-      DS[i, j] <- if_else(i==j, sum(row(adj, i)), 0.0);
+//  for(i in 1:N)
+//    for(j in 1:N)
+//      DS[i, j] <- if_else(i==j, sum(row(adj, i)), 0.0);
 }
 parameters {
   real beta_inter;
@@ -32,18 +32,16 @@ parameters {
   real<lower=0> sigma_phy;
   vector[N] phy;
 
-  real<lower=0> sigma_spt;  // prec of spatial
-  real<lower=0,upper=1> p;  // stength of spatial
-  vector[N] spatial;
-
-  real<lower = 0> phi;
+//  real<lower=0> sigma_spt;  // prec of spatial
+//  real<lower=0,upper=1> p;  // stength of spatial
+//  vector[N] spatial;
 }
 transformed parameters {
   real<lower=0> sig_phy_sq;
-  real<lower=0> tau;
+//  real<lower=0> tau;
 
   sig_phy_sq <- sigma_phy * sigma_phy;
-  tau <- 1 / sigma_spt;
+//  tau <- 1 / sigma_spt;
 }
 model {
   vector[N] mu;
@@ -65,13 +63,13 @@ model {
   increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sig_phy_sq));
   
   // spatial effect
-  sigma_spt ~ cauchy(0, 2.5);
-  p ~ uniform(0, 1);
-  spatial ~ multi_normal_prec(zeroes, (tau * tau) * (DS - p * adj));
+//  sigma_spt ~ cauchy(0, 2.5);
+//  p ~ uniform(0, 1);
+//  spatial ~ multi_normal_prec(zeroes, (tau * tau) * (DS - p * adj));
 
   mu <- (beta_inter + beta_mass * mass + 
         diet * beta_diet + move * beta_move +
-        phy + spatial + log(off));
+        phy + log(off));
 
   degree ~ poisson_log(mu);
 }
@@ -80,7 +78,7 @@ generated quantities {
   vector[N] mu;
   mu <- (beta_inter + beta_mass * mass + 
          diet * beta_diet + move * beta_move + 
-         phy + spatial + log(off));
+         phy + log(off));
 
   for(i in 1:N) {
     log_lik[i] <- poisson_log_log(degree[i], mu[i]);

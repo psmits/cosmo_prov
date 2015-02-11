@@ -12,6 +12,9 @@ nsim <- 1000
 set.seed(seed)
 source('../R/surv_setup.r')
 load('../data/taxonomy_tree.rdata')
+load('../data/super_big_tree.rdata')
+load('../data/scaled_super.rdata')
+
 
 # compile model
 zero.weibull <- stan(file = '../stan/zero_weibull.stan')
