@@ -38,8 +38,8 @@ inr <- interaction(di, mo)
 
 # prepare the vcv
 tax.nam <- str_replace(na.ecol[-plio, 1], ' ', '_')
-to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
-na.tree <- drop.tip(na.scale, to.drop)
+to.drop <- spt$tip.label[!(spt$tip.label %in% tax.nam)]
+na.tree <- drop.tip(spt, to.drop)
 na.tree$edge.length <- na.tree$edge.length / max(diag(vcv(na.tree)))
 tree.vcv <- vcv(na.tree)
 split.tax <- rev(split(tax.nam, extinct))

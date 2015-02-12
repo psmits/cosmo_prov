@@ -40,12 +40,14 @@ theme_update(axis.text = element_text(size = 20),
 # on point
 pnt.est <- llply(negbinom.cout, function(y) 
                  aaply(y, .margins = 2, .fun = median))
-pnt.est <- cbind(melt(Reduce(rbind, pnt.est)), label = rep(1:test, 3))[, -1]
+pnt.est <- cbind(melt(Reduce(rbind, pnt.est)), 
+                 label = rep(1:length(pnt.est), 3))[, -1]
 
 mgt.est <- llply(negbinom.cout, function(y) 
                  aaply(y, .margins = 2, .fun = function(x) 
                        quantile(x, c(0.2, 0.8))))
-mgt.est <- cbind(Reduce(rbind, mgt.est), label = rep(1:test, each = 3))
+mgt.est <- cbind(Reduce(rbind, mgt.est), 
+                 label = rep(1:length(mgt.est), each = 3))
 mgt.est <- cbind(data.frame(mgt.est), quant = rownames(mgt.est))
 names(mgt.est) <- c('bot', 'top', 'label', 'quant')
 mgt.est <- Reduce(rbind, llply(split(mgt.est, mgt.est$quant), 
@@ -55,7 +57,7 @@ names(pnt.est) <- c('quant', 'value', 'label', 'bot', 'top')
 pnt.est <- pnt.est[!(abs(pnt.est$top - pnt.est$bot) > 100), ]
 
 bad.one <- llply(split(pnt.est, pnt.est$quant), 
-                 function(x) which(!(1:10 %in% x$label)))
+                 function(x) which(!(1:33 %in% x$label)))
 bad.one <- melt(bad.one)
 names(bad.one) <- c('label', 'quant')
 bad.one$value <- rep(0, nrow(bad.one))
@@ -65,13 +67,13 @@ bad.one$label <- as.numeric(as.character(bad.one$label))
 pnt.for <- llply(negbinom.cfor, function(y)
                  aaply(y, .margins = 2, .fun = median))
 pnt.for <- cbind(melt(Reduce(rbind, pnt.for)), 
-                 label = rep(1:(test - 1), 3))[, -1]
+                 label = rep(1:(length(pnt.for)), 3))[, -1]
 
 mgt.for <- llply(negbinom.cfor, function(y) 
                  aaply(y, .margins = 2, .fun = function(x) 
                        quantile(x, c(0.2, 0.8))))
 mgt.for <- cbind(Reduce(rbind, mgt.for), 
-                 label = rep(1:(test - 1), each = 3))
+                 label = rep(1:(length(mgt.for)), each = 3))
 mgt.for <- cbind(data.frame(mgt.for), quant = rownames(mgt.for))
 names(mgt.for) <- c('bot', 'top', 'label', 'quant')
 mgt.for <- Reduce(rbind, llply(split(mgt.for, mgt.for$quant), 
@@ -94,18 +96,18 @@ bad.one <- rbind(cbind(bad.one, mod = rep('est', nrow(bad.one))),
                  cbind(bad.two, mod = rep('for', nrow(bad.two))))
 
 disc <- ggplot(pnt.est, aes(x = label, y = value, 
-                            ymin = bot, ymax = top,
-                            colour = mod))
+                            ymin = bot, ymax = top, colour = mod))
 disc <- disc + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 disc <- disc + geom_pointrange(position = position_jitter(height = 0, 
                                                           width = 0.1))
 disc <- disc + geom_point(data = bad.one, 
                           mapping = aes(x = label, y = value, 
                                         ymin = value, ymax = value),
-                          size = 5, shape = 8, 
+                          size = 2, shape = 8, 
                           position = position_jitter(height = 0, 
-                                                     width = 0.1))
+                                                     width = 0.2))
 disc <- disc + facet_grid(quant ~ .)
+disc <- disc + labs(x = 'Time (My)', y = 'difference')
 disc <- disc + scale_x_reverse()
 disc <- disc + scale_colour_manual(values = cbp)
 
@@ -115,15 +117,13 @@ disc <- disc + scale_colour_manual(values = cbp)
 eff.mass <- llply(over.coef, function(x) x$beta_mass)
 mass.quant <- llply(eff.mass, function(x) quantile(x, c(0.20, 0.5, 0.80)))
 mass.quant <- data.frame(Reduce(rbind, mass.quant))
-mass.quant <- cbind(mass.quant, label = 2 * (1:10) + 1)
+mass.quant <- cbind(mass.quant, label = 2 * (1:(nrow(mass.quant))) - 1)
 names(mass.quant) <- c('bot', 'med', 'top', 'label')
 
 efms <- ggplot(mass.quant, aes(x = label, y = med, ymin = bot, ymax = top))
 efms <- efms + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 efms <- efms + geom_pointrange()
-efms <- efms + scale_x_reverse(breaks = seq(from = 0, 
-                                            to = (test * 2) + 1, 
-                                            by = 2))
+efms <- efms + scale_x_reverse()
 
 
 # move sign/size
@@ -190,12 +190,10 @@ efdt <- efdt + scale_colour_manual(values = cbp)
 eff.over <- llply(over.coef, function(x) x$phi)
 over.quant <- llply(eff.over, function(x) quantile(x, c(0.20, 0.5, 0.80)))
 over.quant <- data.frame(Reduce(rbind, over.quant))
-over.quant <- cbind(over.quant, label = 2 * (1:10) + 1)
+over.quant <- cbind(over.quant, label = 2 * (1:(nrow(over.quant))) - 1)
 names(over.quant) <- c('bot', 'med', 'top', 'label')
 
 efov <- ggplot(over.quant, aes(x = label, y = med, ymin = bot, ymax = top))
 efov <- efov + geom_hline(aes(yintercept = 1), colour = 'grey', size = 2)
 efov <- efov + geom_pointrange()
-efov <- efov + scale_x_reverse(breaks = seq(from = 0, 
-                                            to = (test * 2) + 1, 
-                                            by = 2))
+efov <- efov + scale_x_reverse()

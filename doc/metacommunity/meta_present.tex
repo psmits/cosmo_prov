@@ -41,8 +41,14 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{System}
+  \frametitle{Analysis framework}
+  \begin{center}
+    \includegraphics[height = 0.8\textheight, width = \textwidth,  keepaspectratio = true]{figure/predict_perform}
+  \end{center}
+\end{frame}
 
+\begin{frame}
+  \frametitle{System}
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
@@ -70,7 +76,7 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item Relations to community assembly
+        \item Relations to community assembly \\(e.g. requirements)
         \item Covariate hypotheses
           \begin{itemize}
             \item carnivore greatest diet co-occur
@@ -104,7 +110,7 @@
 \begin{frame}
   \frametitle{Modeling co-occurrence}
   \begin{alertblock}{Assumption and setup}
-    \(y_{i}\): \# co-occurring species with species \(i\) per \# of localities.
+    \(y_{i}\): \# co-occurring species with species \(i\) per \# of localities (offset).
 
     Any species is equally likely to co-occur with any other species.
 
@@ -140,9 +146,9 @@
 \begin{frame}
   \frametitle{Modeling co-occurrence}
   \begin{block}{Improvement}
-    Poisson assumption \(\frac{Var[x]}{E[x]} = 1\).
+    Poisson assumption \(\frac{Var[y]}{E[y]} = 1\).
 
-    Relax assumption by modeling overdisperssion \(\phi\).
+    Relax assumption by modeling overdispersion \(\phi\).
   \end{block}
 \end{frame}
 
@@ -154,9 +160,33 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Modeling locality richness}
+  \frametitle{Model adequacy}
+
+  % Is this model an adequate representation of the data?
+  % How do we measure that?
+  % Skewness of the residuals.
+  % Point estimate distributions of 25th, 50th, 75th quartiles.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Forward prediction}
+
+  % Use parameter estimates from t to esimate distribution of t+1,\dots,t+n.
+  % Quantify how poor this estimate is compared to the actual model of that time.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parameter estimates}
+
+  % How do parameter estimates differ between time bins?
+  % Any massive shifts?
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Modeling locality diversity}
   \begin{alertblock}{Assumption and setup}
-    \(y_{i}\): \# species at locality \(i\) per \# of species.
+    \(y_{i}\): \# species at locality \(i\) per \# of species (offset).
 
     \(y_{i}\) drawn from Poisson (or Negative Binomial) distribution.
 
@@ -187,17 +217,11 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Locality richness model}
+  \frametitle{Locality diversity model}
   \begin{center}
     \includegraphics[height = 0.8\textheight, width = \textwidth,  keepaspectratio = true]{figure/mammal_locality_model}
   \end{center}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Analysis framework}
-  \begin{center}
-    \includegraphics[height = 0.8\textheight, width = \textwidth,  keepaspectratio = true]{figure/predict_perform}
-  \end{center}
-\end{frame}
 
 \end{document}

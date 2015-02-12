@@ -105,12 +105,8 @@ for(ii in seq(length(aj))) {
 
   # spit out the data into a stan dump file
   # use shell script to analyze the data
-  n <- paste0('../data/meta_dump/meta_dump_', ii, '.data.R')
-  stan_rdump(list = c('N', 'D', 'M', 'degree', 'mass', 
-                      'diet', 'move', 'vcv', 'adj', 'off'),
-             file = n)
+#  n <- paste0('../data/meta_dump/meta_dump_', ii, '.data.R')
+#  stan_rdump(list = c('N', 'D', 'M', 'degree', 'mass', 
+#                      'diet', 'move', 'vcv', 'adj', 'off'),
+#             file = n)
 }
-
-data[[1]]$N
-length(data[[1]]$off)
-
