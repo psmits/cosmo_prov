@@ -95,23 +95,27 @@ pnt.est <- rbind(cbind(pnt.est, mod = rep('est', nrow(pnt.est))),
 bad.one <- rbind(cbind(bad.one, mod = rep('est', nrow(bad.one))),
                  cbind(bad.two, mod = rep('for', nrow(bad.two))))
 
+pnt.est$label <- pnt.est$label * 2 - 1
+bad.one$label <- bad.one$label * 2 - 1
 disc <- ggplot(pnt.est, aes(x = label, y = value, 
                             ymin = bot, ymax = top, colour = mod))
 disc <- disc + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
-disc <- disc + geom_pointrange(position = position_jitter(height = 0, 
-                                                          width = 0.1))
+disc <- disc + geom_pointrange()
 disc <- disc + geom_point(data = bad.one, 
                           mapping = aes(x = label, y = value, 
                                         ymin = value, ymax = value),
                           size = 2, shape = 8, 
                           position = position_jitter(height = 0, 
-                                                     width = 0.2))
+                                                     width = -0.2))
 disc <- disc + facet_grid(quant ~ .)
 disc <- disc + labs(x = 'Time (My)', y = 'difference')
 disc <- disc + scale_x_reverse()
 disc <- disc + scale_colour_manual(values = cbp)
+ggsave(disc, filename = '../doc/metacommunity/figure/discrepency.pdf',
+       width = 15, height = 10)
 
 
+no.go <- bad.one[bad.one$mod == 'est' & bad.one$quant == '50%', 'label']
 
 # mass sign/size
 eff.mass <- llply(over.coef, function(x) x$beta_mass)
@@ -119,11 +123,15 @@ mass.quant <- llply(eff.mass, function(x) quantile(x, c(0.20, 0.5, 0.80)))
 mass.quant <- data.frame(Reduce(rbind, mass.quant))
 mass.quant <- cbind(mass.quant, label = 2 * (1:(nrow(mass.quant))) - 1)
 names(mass.quant) <- c('bot', 'med', 'top', 'label')
+mass.quant <- mass.quant[!(mass.quant$label %in% no.go), ]
 
 efms <- ggplot(mass.quant, aes(x = label, y = med, ymin = bot, ymax = top))
 efms <- efms + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 efms <- efms + geom_pointrange()
 efms <- efms + scale_x_reverse()
+efms <- efms + labs(x = 'Time (My)', y = 'parameter estimate')
+ggsave(efms, filename = '../doc/metacommunity/figure/body_est_time.pdf',
+       width = 15, height = 10)
 
 
 # move sign/size
@@ -141,12 +149,19 @@ lamb <- function(x) {
   names(temp) <- c('bot', 'med', 'top', 'label')
   temp
 }
-arb.quant <- cbind(lamb(arb.quant), mv = rep('arb', length(arb.quant)))
+arb.quant <- cbind(lamb(arb.quant), mv = rep('arboreal', 
+                                             length(arb.quant)))
+arb.quant <- arb.quant[!(arb.quant$label %in% no.go), ]
 arb.quant$label <- arb.quant$label + 0.2
-gnd.quant <- cbind(lamb(gnd.quant), mv = rep('gnd', length(gnd.quant)))
-scn.quant <- cbind(lamb(scn.quant), mv = rep('scn', length(scn.quant)))
+gnd.quant <- cbind(lamb(gnd.quant), mv = rep('ground\ndwelling', 
+                                             length(gnd.quant)))
+gnd.quant <- gnd.quant[!(gnd.quant$label %in% no.go), ]
+scn.quant <- cbind(lamb(scn.quant), mv = rep('scansorial', 
+                                             length(scn.quant)))
+scn.quant <- scn.quant[!(scn.quant$label %in% no.go), ]
 scn.quant$label <- scn.quant$label - 0.2
 move.eff <- rbind(arb.quant, gnd.quant, scn.quant)
+
 
 efmv <- ggplot(move.eff, aes(x = label, y = med, 
                              ymin = bot, ymax = top, 
@@ -155,6 +170,9 @@ efmv <- efmv + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 efmv <- efmv + geom_pointrange()
 efmv <- efmv + scale_x_reverse()
 efmv <- efmv + scale_colour_manual(values = cbp)
+efmv <- efmv + labs(x = 'Time (My)', y = 'parameter estimate')
+ggsave(efmv, filename = '../doc/metacommunity/figure/loco_est_time.pdf',
+       width = 15, height = 10)
 
 
 # diet sign/size
@@ -167,12 +185,16 @@ ist.quant <- llply(scn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
 omn.eff <- llply(over.coef, function(x) x$beta_inter + x$beta_diet[, 3])
 omn.quant <- llply(scn.eff, function(x) quantile(x, c(0.2, 0.5, 0.8)))
 
-crn.quant <- cbind(lamb(crn.quant), mv = rep('crn', length(crn.quant)))
+crn.quant <- cbind(lamb(crn.quant), mv = rep('carnivore', length(crn.quant)))
+crn.quant <- crn.quant[!(crn.quant$label %in% no.go), ]
 crn.quant$label <- crn.quant$label + 0.4
-hrb.quant <- cbind(lamb(hrb.quant), mv = rep('hrb', length(hrb.quant)))
+hrb.quant <- cbind(lamb(hrb.quant), mv = rep('herbivore', length(hrb.quant)))
+hrb.quant <- hrb.quant[!(hrb.quant$label %in% no.go), ]
 hrb.quant$label <- hrb.quant$label + 0.2
-ist.quant <- cbind(lamb(ist.quant), mv = rep('ist', length(ist.quant)))
-omn.quant <- cbind(lamb(omn.quant), mv = rep('omn', length(omn.quant)))
+ist.quant <- cbind(lamb(ist.quant), mv = rep('insectivore', length(ist.quant)))
+ist.quant <- ist.quant[!(ist.quant$label %in% no.go), ]
+omn.quant <- cbind(lamb(omn.quant), mv = rep('omnivore', length(omn.quant)))
+omn.quant <- omn.quant[!(omn.quant$label %in% no.go), ]
 omn.quant$label <- omn.quant$label - 0.2
 
 diet.eff <- rbind(crn.quant, hrb.quant, ist.quant, omn.quant)
@@ -184,6 +206,9 @@ efdt <- efdt + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 efdt <- efdt + geom_pointrange()
 efdt <- efdt + scale_x_reverse()
 efdt <- efdt + scale_colour_manual(values = cbp)
+efdt <- efdt + labs(x = 'Time (My)', y = 'parameter estimate')
+ggsave(efdt, filename = '../doc/metacommunity/figure/diet_est_time.pdf',
+       width = 15, height = 10)
 
 
 # overdispersion in each bin
@@ -192,8 +217,12 @@ over.quant <- llply(eff.over, function(x) quantile(x, c(0.20, 0.5, 0.80)))
 over.quant <- data.frame(Reduce(rbind, over.quant))
 over.quant <- cbind(over.quant, label = 2 * (1:(nrow(over.quant))) - 1)
 names(over.quant) <- c('bot', 'med', 'top', 'label')
+over.quant <- over.quant[!(over.quant$label %in% no.go), ]
 
 efov <- ggplot(over.quant, aes(x = label, y = med, ymin = bot, ymax = top))
 efov <- efov + geom_hline(aes(yintercept = 1), colour = 'grey', size = 2)
 efov <- efov + geom_pointrange()
 efov <- efov + scale_x_reverse()
+efov <- efov + labs(x = 'Time (My)', y = 'overdispersion')
+ggsave(efov, filename = '../doc/metacommunity/figure/over_est_time.pdf',
+       width = 15, height = 10)
