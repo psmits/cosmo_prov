@@ -10,10 +10,12 @@ seed <- 420
 nsim <- 1000
 
 set.seed(seed)
-source('../R/surv_setup.r')
+source('../R/surv_setup.r')  # data cleaned up nice
+
+# multiple states of super tree
 load('../data/taxonomy_tree.rdata')
 load('../data/super_big_tree.rdata')
-load('../data/scaled_super.rdata')
+load('../data/scaled_super.rdata')  # best
 
 
 # compile model

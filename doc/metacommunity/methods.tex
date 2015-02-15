@@ -43,13 +43,14 @@ A biogeographic network is defined as a bipartite network between localities and
 \subsection{Co-occurrence model}
 A random graph is one where the probability of any two nodes being connected is equal for all combinations \citep{Erdos1959}. This assumption implies that the distribution of nodal degree should follow a Poisson distribution. What this means is that the degree, or number of connections, of a node in a one mode network is considered drawn from a Poisson distribution with some rate, \(\lambda\).
 
-The Poisson distribution with rate \(\lambda > 0\) is defined 
+The Poisson distribution with rate \(\lambda > 0\) is was parameterized here as 
 \begin{align}
   \mathrm{Poisson}(y_{i} | \lambda_{i}) &= \frac{1}{y_{i}!} \lambda^{y_{i}} \exp(-\lambda_{i}) 
   \label{eq:pois} \\
   \lambda_{i} &= \exp(\beta^{T}\mathbf{X_{i}} + h_{i} + \log(u_{i})).
   \label{eq:lambda}
 \end{align}
+Eq. \ref{eq:lambda} is the regression parameterization of \(\lambda\).
 
 The biggest assumption of the Poisson distribution is that mean and variance are equal is very strong and not frequently observed, instead there tends to be excess variance or overdisperssion. The negative binomial distribution can be viewed as an extension of the Poisson distribution allowing for overdispersion. 
 
@@ -62,6 +63,7 @@ Negative binomial distribution parameterized with mean \(\mu > 0\) and overdispe
   \phi &\sim \mathrm{halfCauchy}(2.5).
   \label{eq:phi} 
 \end{align}
+Eq. \ref{eq:mu} is the regression parameterization of \(\mu\).
 
 
 \(\mathbf{X}\) is defined as an \(n \times K\) matrix where \(n\) is the number of observations and \(K\) is the number of covariates of interest. As described above, the covariates of interest are the dietary and locomotor categories of a species and its body mass. While body mass is a continuous covariate, dietary and locomotor categories are index variables that need to be transformed into multiple binary covariates or indicator variables. To do this, for each of these variables were each transformed into \(n \times (k - 1)\) matrices where \(k - 1\) is the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining category. Finally, a column of 1-s in included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept. In total, \(K\) equals 7.
@@ -112,7 +114,7 @@ For all estimated parameters, a value is randomly drawn from their respective po
 
 \subsection{Predictive estimates}
 
-For each stage, 
+
 
 
 \begin{figure}[ht]

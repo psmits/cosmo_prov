@@ -71,6 +71,7 @@ quant.dur <- c(mean = mean(duration), quantile(duration, c(.25, .5, .75)))
 quant.dur <- melt(quant.dur)
 quant.dur$Var2 <- rownames(quant.dur)
 
+# all four of the major point checks
 ppc.quant <- ggplot(quant, aes(x = value))
 ppc.quant <- ppc.quant + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value), 
@@ -101,6 +102,7 @@ ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
+# skewness and variance
 skew.res <- laply(pm.res, moments::skewness)
 var.res <- laply(pm.res, function(x) var(x))
 res.sum <- melt(cbind(skew.res, var.res))

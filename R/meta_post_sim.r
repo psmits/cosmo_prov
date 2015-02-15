@@ -5,6 +5,7 @@ library(ape)
 library(stringr)
 library(plyr)
 library(reshape2)
+library(igraph)
 
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420

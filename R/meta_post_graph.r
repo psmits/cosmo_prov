@@ -36,6 +36,21 @@ theme_update(axis.text = element_text(size = 20),
              legend.key.size = unit(2, 'cm'),
              strip.text = element_text(size = 20))
 
+
+# degree distribution for each time bin
+degdat <- melt(llply(data, function(x) x$degree))
+degdat$L1 <- degdat$L1 * 2 - 1
+dgtm <- ggplot(degdat, aes(x = L1, y = value))
+dgtm <- dgtm + geom_point(position = position_jitter(width = 0.1, height = 0),
+                          alpha = 0.3)
+dgtm <- dgtm + labs(x = 'Time (My)', y = 'co-occurring')
+dgtm <- dgtm + scale_x_reverse()
+dgtm <- dgtm + scale_colour_manual(values = cbp)
+ggsave(dgtm, filename = '../doc/metacommunity/figure/count.pdf',
+       width = 15, height = 10)
+
+
+
 # discrepency in quantile estimates
 # on point
 pnt.est <- llply(negbinom.cout, function(y) 
@@ -162,7 +177,6 @@ scn.quant <- scn.quant[!(scn.quant$label %in% no.go), ]
 scn.quant$label <- scn.quant$label - 0.2
 move.eff <- rbind(arb.quant, gnd.quant, scn.quant)
 
-
 efmv <- ggplot(move.eff, aes(x = label, y = med, 
                              ymin = bot, ymax = top, 
                              colour = mv))
@@ -225,4 +239,19 @@ efov <- efov + geom_pointrange()
 efov <- efov + scale_x_reverse()
 efov <- efov + labs(x = 'Time (My)', y = 'overdispersion')
 ggsave(efov, filename = '../doc/metacommunity/figure/over_est_time.pdf',
+       width = 15, height = 10)
+
+# sigma_phy in each bin
+eff.phy <- llply(over.coef, function(x) x$sigma_phy)
+phy.quant <- llply(eff.phy, function(x) quantile(x, c(0.20, 0.5, 0.80)))
+phy.quant <- data.frame(Reduce(rbind, phy.quant))
+phy.quant <- cbind(phy.quant, label = 2 * (1:(nrow(phy.quant))) - 1)
+names(phy.quant) <- c('bot', 'med', 'top', 'label')
+phy.quant <- phy.quant[!(phy.quant$label %in% no.go), ]
+
+efph <- ggplot(phy.quant, aes(x = label, y = med, ymin = bot, ymax = top))
+efph <- efph + geom_pointrange()
+efph <- efph + scale_x_reverse()
+efph <- efph + labs(x = 'Time (My)', y = 'sigma_phy')
+ggsave(efph, filename = '../doc/metacommunity/figure/phy_est_time.pdf',
        width = 15, height = 10)
