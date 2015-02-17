@@ -3,46 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: nature_survival.aux
 The style file: naturemag.bst
 A level-1 auxiliary file: post_out.aux
-Database file #1: biblio.bib
+Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 50 entries,
+You've used 47 entries,
             2348 wiz_defined-function locations,
-            1338 strings with 19949 characters,
-and the built_in function-call counts, 19311 in all, are:
-= -- 1420
-> -- 432
+            1294 strings with 17925 characters,
+and the built_in function-call counts, 18024 in all, are:
+= -- 1302
+> -- 408
 < -- 0
-+ -- 215
-- -- 108
-* -- 2379
-:= -- 2143
-add.period$ -- 170
-call.type$ -- 50
-change.case$ -- 49
++ -- 203
+- -- 102
+* -- 2204
+:= -- 1983
+add.period$ -- 136
+call.type$ -- 47
+change.case$ -- 47
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 1708
-empty$ -- 1825
-format.name$ -- 141
-if$ -- 3878
+cite$ -- 47
+duplicate$ -- 1617
+empty$ -- 1723
+format.name$ -- 134
+if$ -- 3622
 int.to.chr$ -- 0
-int.to.str$ -- 50
-missing$ -- 401
-newline$ -- 278
-num.names$ -- 52
-pop$ -- 295
+int.to.str$ -- 47
+missing$ -- 378
+newline$ -- 238
+num.names$ -- 49
+pop$ -- 298
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 302
+skip$ -- 286
 stack$ -- 0
-substring$ -- 913
-swap$ -- 1681
+substring$ -- 879
+swap$ -- 1593
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 129
-width$ -- 52
-write$ -- 589
+while$ -- 124
+width$ -- 49
+write$ -- 507
