@@ -1,4 +1,5 @@
 library(ggplot2)
+library(moments)
 library(reshape2)
 library(scales)
 library(hexbin)
@@ -26,6 +27,7 @@ pairwise.diffs <- function(x) {
   result
 }
 
+# make all plots minimum pretty
 theme_set(theme_bw())
 cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
          '#0072B2', '#D55E00', '#CC79A7')

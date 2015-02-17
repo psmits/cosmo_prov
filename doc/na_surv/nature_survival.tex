@@ -4,7 +4,7 @@
 %%
 
 \documentclass{nature}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 
 %% make sure you have the nature.cls and naturemag.bst files where
 %% LaTeX can find them
@@ -220,17 +220,17 @@ There are many processes encompassed by background extinction and identifying th
 
 \begin{figure}[ht]
   %\centering
-  \begin{subfigure}[b]{0.4\textwidth}
-    \caption{}
+  %\begin{subfigure}[b]{0.4\textwidth}
+  %  \caption{}
   %  \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/loco_diff_est}
     \label{subfig:loco}
   %\end{subfigure}
   %\begin{subfigure}[b]{0.4\textwidth}
-    \caption{}
+  %  \caption{}
   %  \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/diet_diff_est}
     \label{subfig:diet}
-  \end{subfigure}
-  \caption{Pairwise differences in effect of the locomotor (\subref{subfig:loco}) and dietary categories (\subref{subfig:diet}) on expected duration from 1000 samples from the posterior distribution. Comparisons of locomotor categories, from top to bottom (\subref{subfig:loco}), are: arboreal versus ground dwelling, arboreal versus scansorial, and ground dwelling versus scansorial. For dietary category, from top to bottom (\subref{subfig:diet}): carnivore versus herbivore, carnivore versus insectivore, carnivore versus omnivore, herbivore versus insectivore, herbivore versus omnivore, and insectivore versus omnivore. Values to the left indicate that the first category is expected to have a greater duration than the second, while values to the right indicate that the first category is expected to have a shorter duration.}
+  %\end{subfigure}
+  \caption{Pairwise differences in effect of the locomotor (\ref{subfig:loco}) and dietary categories (\ref{subfig:diet}) on expected duration from 1000 samples from the posterior distribution. Comparisons of locomotor categories, from top to bottom (\ref{subfig:loco}), are: arboreal versus ground dwelling, arboreal versus scansorial, and ground dwelling versus scansorial. For dietary category, from top to bottom (\ref{subfig:diet}): carnivore versus herbivore, carnivore versus insectivore, carnivore versus omnivore, herbivore versus insectivore, herbivore versus omnivore, and insectivore versus omnivore. Values to the left indicate that the first category is expected to have a greater duration than the second, while values to the right indicate that the first category is expected to have a shorter duration.}
   \label{fig:trait_est}
 \end{figure}
 

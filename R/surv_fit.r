@@ -13,16 +13,14 @@ set.seed(seed)
 source('../R/surv_setup.r')  # data cleaned up nice
 
 # multiple states of super tree
-load('../data/taxonomy_tree.rdata')
-load('../data/super_big_tree.rdata')
+#load('../data/taxonomy_tree.rdata')
+#load('../data/super_big_tree.rdata')
 load('../data/scaled_super.rdata')  # best
 
 
 # compile model
-zero.weibull <- stan(file = '../stan/zero_weibull.stan')
-weibull.model <- stan(file = '../stan/weibull_survival.stan')
 phywei.model <- stan(file = '../stan/weibull_phy_surv.stan')
-exponential.model <- stan(file = '../stan/exp_survival.stan')
+phyexp.model <- stan(file = '../stan/exp_phy_surv.stan')
 
 plio <- which(cohort == 1)
 
@@ -108,52 +106,28 @@ scale.data$occ_cen <- rescale(scale.data$occ_cen)
 
 exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
 
-# zero model 
-zerolist <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = zero.weibull, 
-                                      seed = seed,
-                                      data = data,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-
-zfit <- sflist2stanfit(zerolist)
-
-
-# weibull model minus phylogeny
-modlist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = weibull.model, 
-                                     seed = seed,
-                                     data = data,
-                                     iter = 1000,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-
-mfit <- sflist2stanfit(modlist)
-
-
-# same with scaled data
-scale.modlist <- mclapply(1:4, mc.cores = detectCores(),
-                          function(x) stan(fit = weibull.model, 
-                                           seed = seed,
-                                           data = scale.data,
-                                           iter = 1000,
-                                           chains = 1, chain_id = x,
-                                           refresh = -1))
-
-scale.mfit <- sflist2stanfit(scale.modlist)
-
 
 # exponential model minus phylogeny
 # for comparison with weibull to see if value of alpha merited
 explist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = exponential.model, 
+                    function(x) stan(fit = phyexp.model, 
                                      seed = seed,
                                      data = data,
                                      iter = 1000,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
-
 efit <- sflist2stanfit(explist)
+
+scale.explist <- mclapply(1:4, mc.cores = detectCores(),
+                    function(x) stan(fit = phyexp.model, 
+                                     seed = seed,
+                                     data = scale.data,
+                                     iter = 20000,
+                                     thin = 20,
+                                     chains = 1, chain_id = x,
+                                     refresh = -1))
+
+escalefit <- sflist2stanfit(explist)
 
 
 # phylogenetic random effect models
@@ -178,4 +152,3 @@ scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
 phy.scalemfit <- sflist2stanfit(scale.phylist)
 
 save.image(file = '../data/survival_out.rdata')
-
