@@ -5,44 +5,44 @@ A level-1 auxiliary file: post_out.aux
 The style file: abbrvnat.bst
 Database file #1: biblio.bib
 Database file #2: packages.bib
-You've used 105 entries,
+You've used 107 entries,
             2773 wiz_defined-function locations,
-            1390 strings with 27485 characters,
-and the built_in function-call counts, 52594 in all, are:
-= -- 4985
-> -- 2950
-< -- 74
-+ -- 1015
-- -- 909
-* -- 4567
-:= -- 8274
-add.period$ -- 474
-call.type$ -- 105
-change.case$ -- 609
-chr.to.int$ -- 104
-cite$ -- 210
-duplicate$ -- 2193
-empty$ -- 4058
-format.name$ -- 1058
-if$ -- 10869
+            1402 strings with 27945 characters,
+and the built_in function-call counts, 53840 in all, are:
+= -- 5090
+> -- 3053
+< -- 75
++ -- 1050
+- -- 942
+* -- 4684
+:= -- 8475
+add.period$ -- 481
+call.type$ -- 107
+change.case$ -- 626
+chr.to.int$ -- 106
+cite$ -- 214
+duplicate$ -- 2234
+empty$ -- 4138
+format.name$ -- 1093
+if$ -- 11120
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 111
-newline$ -- 691
-num.names$ -- 422
-pop$ -- 977
+missing$ -- 113
+newline$ -- 702
+num.names$ -- 430
+pop$ -- 1007
 preamble$ -- 1
-purify$ -- 512
+purify$ -- 527
 quote$ -- 0
-skip$ -- 1637
+skip$ -- 1672
 stack$ -- 0
-substring$ -- 2272
-swap$ -- 224
+substring$ -- 2322
+swap$ -- 226
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1110
+type$ -- 1132
 warning$ -- 0
-while$ -- 488
+while$ -- 497
 width$ -- 0
-write$ -- 1687
+write$ -- 1715

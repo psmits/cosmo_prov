@@ -35,30 +35,61 @@ For each 2 My bin, a bipartite biogeographic network was created between species
 
 As there is no single, combined formal phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and a few published phylogenies.
 
-The taxonomic information from the PBDB served as the initial phylogenetic placement. This information was then updated using the Encyclopedia of Life (\url{http://eol.org/}), which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}. This was additionally corrected using various published phylogenies and taxonomies of fossil mammals \citep{Raia2012f,Janis1998,Janis2008}, producing a tree that was a series of nested polytomies. 
-%Using the \texttt{treebase} package for R \citep{boettiger2014treebase}, I downloaded all phylogenies where at least one of the observed fossil taxon was sampled. 
-%MRP supertree implemented in the \texttt{phytools} package for R \citep{revell2012phytools}
+The taxonomic information from the PBDB served as the initial phylogenetic placement. This information was then updated using the Encyclopedia of Life (\url{http://eol.org/}), which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \citep{2013taxize}. This was modified using a published taxonomy of fossil mammals \citep{Janis1998,Janis2008}. This taxonomy based tree was combined with a selection of species level phylogenies \cite{Raia2012f,Bininda-Emonds2007} into a supertree via matrix representation parsimony as implemented in the R package \texttt{phytools} \citep{revell2012phytools}.
 
-Polytomies were resolved in order of species first appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is important for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are the interest of this study. 
+  Polytomies were resolved in order of species first appearance. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \citep{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not be positive definite, which is important for computation (see below). While other time scaling approaches are possible \citep{Bapst2013a,Hedman2010} this method was chosen for it's simplicity and not requiring additional information about diversification rates which are the interest of this study. 
 % I really wish I was using the Hedman approach.
 
 
 
 \subsection{Survival model}
 
-The statistical model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and the fit to the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
-A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. 
+First, define \(y\) as a vector of \(i\) species durations where \(i = 1,\cdots,n\). The simplest survival model is when durations are considered drawn from an exponential distribution with a single rate or inverse-scale parameter \(\lambda\) (Eq. \ref{eq:exp}).
 \begin{align}
-  p(y_{i}|\alpha, \sigma) &= \mathrm{Weibull}(y_{i}|\alpha, \sigma_{i}) \nonumber \\ 
-  &= \frac{\alpha}{\sigma_{i}} \left(\frac{y_{i}}{\sigma_{i}}\right)^{\alpha - 1} \exp\left(-\left(\frac{y_{i}}{\sigma_{i}}\right)^{\alpha}\right) 
+  p(y | \lambda) &= \lambda \exp(-\lambda y) \nonumber \\
+  y &\sim \mathrm{Exp}(\lambda).
+  \label{eq:exp}
+\end{align}
+In survival analysis, two quantities of interest that are derived directly from the sampling statement (e.g. Eq. \ref{eq:exp}) are the survival function \(S(t)\) and hazard function \(h(t)\) where \(t\) is a given duration. \(S(t)\) corresponds to the probability that a species having existed for \(t\) My will not have gone extinct while \(h(t)\) corresponds to the instantaneous extinction rate for some taxon age \(t\) \citep{Klein2003}. For an exponential model, \(S(t)\) is defined
+\begin{equation}
+  S(t) = \exp(-\lambda t)
+  \label{eq:exp_surv}
+\end{equation}
+and \(h(t)\) is defined
+\begin{equation}
+  h(t) = \lambda
+  \label{eq:exp_haz}
+\end{equation}
+The choice of the exponential distribution corresponds directly to the Law of Constant Extinction \citep{VanValen1973} as extinction risk (\(h(t)\)) does not depend on species age (Eq. \ref{eq:exp_haz}).
+
+The current sampling statement (Eq. \ref{eq:exp}) currently assumes that all species share the same rate parameter with no variation. To allow for variation in \(\lambda\) associated with relevant covariate information like species body size, \(\lambda\) is reparameterized as \(\lambda_{i} = \exp(\beta^{T}\mathbf{X}_{i})\) with \(i\) indexing a given observation and its covariates, \(\beta\) is a vector of regression coefficients, and \(\mathbf{X}\) is a matrix of covariates. This is a standard regression formulation, where one column of \(\mathbf{X}\) is all 1-s and its corresponding \(\beta\) coefficient is the intercept. This approach is essentially a generalized linear model (GLM) approach where instead of normally distributed errors there are exponentially distributed errors \citep{Klein2003}.
+
+To relax the assumption of age-independent extinction or the Law of Constant Extinction we substitute the Weibull distribution for the exponential \citep{Klein2003}. \(\sigma\) is the inverse of \(\lambda\). The Weibull distribution has two parameters: shape \(\alpha\) and scale \(\sigma\) and is written
+\begin{align}
+  p(y | \alpha, \sigma) &= \frac{\alpha}{\sigma} \left(\frac{y}{\sigma}\right)^{\alpha - 1} \exp\left(-\left(\frac{y}{\sigma}\right)^{\alpha}\right) \nonumber \\
+  y &\sim \mathrm{Weibull}(\alpha, \sigma).
   \label{eq:weibull}
 \end{align}
+\(S(t)\) and \(h(t)\) for the Weibull distribution are defined
+\begin{align}
+  S(t) &= \exp\left(-\left(\frac{t}{\sigma}\right)^{\alpha}\right) \label{eq:wei_surv} \\
+  h(t) &= \frac{\alpha}{\sigma}\left(\frac{t}{\sigma}\right)^{\alpha - 1} \label{eq:wei_haz}.
+\end{align}
 
-\(\alpha\) was assumed constant, which is standard practice in survival analysis \citep{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). Note that the inclusion of \(\alpha\) in the denominator of the exponentiated term is a standard parameterization for survival models using a Wiebull distribution \citep{Klein2003}.
+The Weibull is useful because when \(\alpha = 1\), the distribution is equivalent to the exponential. When \(\alpha > 1\) then \(h(t)\) (Eq. \ref{eq:wei_haz}) is a monotonically increasing function and when \(\alpha < 1\) \(h(t)\) is a monotonically decreasing function.
+
+To allow for \(\sigma\) to vary with \(y\)'s covariate information it reparameterized in a similar fashion to \(\lambda\) with a few key differences. Because \(\sigma = 1/\lambda\) and to preserve interpretation of \(\beta\), along with taking into account the \(\alpha\), \(\sigma\) is reparameterized as
+\begin{equation}
+  \sigma_{i} = \exp\left(\frac{-(\beta^{T}\mathbf{X}_{i})}{\alpha}\right).
+  \label{eq:reg}
+\end{equation}
+
+The statistical model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and the fit to the data. This follows the approach described in \citet{Gelman2007} and \citet{Gelman2013d}.
+A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. \(\alpha\) was assumed constant, which is standard practice in survival analysis \citep{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). This was further expanded (Eq. \ref{eq:reg_ext}) to allow for two hierarchical factors as discussed below. 
 
 \begin{equation}
   \sigma_{i} = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
-  \label{eq:reg}
+  \label{eq:reg_ext}
 \end{equation}
 
 \(K\) species-level covariates were included as a \(n \times K\) matrix, \(\mathbf{X}\). Two of the covariates of interest are the logit of mean relative occupancy and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. Finally, a vector of 1-s was included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
@@ -96,12 +127,7 @@ The impact of shared evolutionary history, or phylogeny, was modeling as an indi
 
 An important part of survival analysis is the inclusion of censored observations where the failure time has not been observed \citep{Ibrahim2001,Klein2003}. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study, such as taxa that are still extant. Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. In order to account for the minimum resolution of the fossil record encountered here, taxa that occurred in only a single time bin were left censored.
 
-To model censored data the survival function, \(S(t)\), must first be defined \citep{Klein2003}. For the Weibull distribution this is 
-\begin{equation}
-  S(t | \alpha, \sigma) = \exp\left(-\left(\frac{t}{\sigma}\right)^{\alpha}\right),
-  \label{eq:surv}
-\end{equation}
-where \(\sigma\) is defined as above (Eq. \ref{eq:reg}). \(S(t)\) is the probability that an observation will survive longer than a given time \(t\). The likelihood of uncensored observations is evaluated as normal using Equation \ref{eq:weibull} while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cumulative density function and \(S(t)\) is equivalent to the complementary cumulative density function \citep{Gelman2013d}.
+Censored data is modeled using the survival function of the distribution, \(S(t)\), defined earlier for the Weibull distribution (Eq. \ref{eq:wei_surv}) with \(\sigma\) is defined as above (Eq. \ref{eq:reg_ext}). \(S(t)\) is the probability that an observation will survive longer than a given time \(t\). The likelihood of uncensored observations is evaluated as normal using Equation \ref{eq:weibull} while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cumulative density function and \(S(t)\) is equivalent to the complementary cumulative density function \citep{Gelman2013d}.
 
 The full likelihood for both uncensored and both right and left censored observations is written
 \begin{equation*}
@@ -127,7 +153,7 @@ The most basic assessment of model fit is that simulated data generated using th
 
 An example posterior predictive check used in this study is a graphical comparison between the Kaplan-Meier (K-M) survival curve estimated from the observed data and the K-M survival curves estimated from 1000 simulation sets. K-M survival curves are non-parametric estimates of \(S(t)\) \citep{Klein2003}. Other posterior predictive checks used here include comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations, and inspection of the deviance residuals, defined below.
 
-In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \citep{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:surv}), we define the cumulative hazard function as 
+In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \citep{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:wei_surv}), we define the cumulative hazard function as 
 \begin{equation*}
   \Lambda(t) = -log\left(S\left(t\right)\right).
 \end{equation*}
