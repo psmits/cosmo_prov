@@ -2,6 +2,13 @@ library(plyr)
 library(reshape2)
 library(mapproj)
 library(stringr)
+library(dismo)
+library(raster)
+library(sp)
+library(XML)
+library(maptools)
+library(foreign)
+library(rgdal)
 
 source('../R/clean_pbdb.r')
 source('../R/mung_help.r')
@@ -71,12 +78,21 @@ for (ii in seq(nrow(bins))) {
   dat$bins[out] <- bins[ii, 1]
 }
 
-# get rid of anything that is missing
-# 2x2, 5x5, 10x10 
-dat$gid <- as.character(with(dat, grid.id(paleolatdec, paleolngdec, 
-                                          2, 'azequalarea')))
-# relevel the factor
-dat$gid <- factor(dat$gid, unique(dat$gid))
+# spatial localitions
+#wgs1984.proj <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
+globe.map <- readShapeSpatial('../data/ne_10m_coastline.shp')  # from natural earth
+proj4string(globe.map) <- eq
+
+spatialref <- SpatialPoints(coords = dat[, c('paleolngdec', 'paleolatdec')],
+                            proj4string = eq)  # wgs1984.proj
+
+r <- raster(globe.map, nrows = 70, ncols = 34)
+sp.ras <- rasterize(spatialref, r)
+membership <- cellFromXY(sp.ras, xy = dat[, c('paleolngdec', 'paleolatdec')])
+dat$gid <- membership
+#plot(sp.ras)
+#plot(globe.map, add = TRUE)
 
 # remove duplicates at grid locations in each bin
 db <- split(dat, dat$bins)
