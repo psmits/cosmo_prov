@@ -62,7 +62,7 @@ and \(h(t)\) is defined
 \end{equation}
 The choice of the exponential distribution corresponds directly to the Law of Constant Extinction \citep{VanValen1973} as extinction risk (\(h(t)\)) does not depend on species age (Eq. \ref{eq:exp_haz}).
 
-The current sampling statement (Eq. \ref{eq:exp}) currently assumes that all species share the same rate parameter with no variation. To allow for variation in \(\lambda\) associated with relevant covariate information like species body size, \(\lambda\) is reparameterized as \(\lambda_{i} = \exp(\beta^{T}\mathbf{X}_{i})\) with \(i\) indexing a given observation and its covariates, \(\beta\) is a vector of regression coefficients, and \(\mathbf{X}\) is a matrix of covariates. This is a standard regression formulation, where one column of \(\mathbf{X}\) is all 1-s and its corresponding \(\beta\) coefficient is the intercept. This approach is essentially a generalized linear model (GLM) approach where instead of normally distributed errors there are exponentially distributed errors \citep{Klein2003}.
+The current sampling statement (Eq. \ref{eq:exp}) currently assumes that all species share the same rate parameter with no variation. To allow for variation in \(\lambda\) associated with relevant covariate information like species body size, \(\lambda\) is reparameterized as \(\lambda_{i} = \exp(\sum \beta^{T}\mathbf{X}_{i})\) with \(i\) indexing a given observation and its covariates, \(\beta\) is a vector of regression coefficients, and \(\mathbf{X}\) is a matrix of covariates. This is a standard regression formulation, where one column of \(\mathbf{X}\) is all 1-s and its corresponding \(\beta\) coefficient is the intercept. This approach is essentially a generalized linear model (GLM) approach where instead of normally distributed errors there are exponentially distributed errors \citep{Klein2003}.
 
 To relax the assumption of age-independent extinction or the Law of Constant Extinction we substitute the Weibull distribution for the exponential \citep{Klein2003}. \(\sigma\) is the inverse of \(\lambda\). The Weibull distribution has two parameters: shape \(\alpha\) and scale \(\sigma\) and is written
 \begin{align}
@@ -78,9 +78,9 @@ To relax the assumption of age-independent extinction or the Law of Constant Ext
 
 The Weibull is useful because when \(\alpha = 1\), the distribution is equivalent to the exponential. When \(\alpha > 1\) then \(h(t)\) (Eq. \ref{eq:wei_haz}) is a monotonically increasing function and when \(\alpha < 1\) \(h(t)\) is a monotonically decreasing function.
 
-To allow for \(\sigma\) to vary with \(y\)'s covariate information it reparameterized in a similar fashion to \(\lambda\) with a few key differences. Because \(\sigma = 1/\lambda\) and to preserve interpretation of \(\beta\), along with taking into account the \(\alpha\), \(\sigma\) is reparameterized as
+To allow for \(\sigma\) to vary with a given observation's covariate information it is reparameterized in a similar fashion to \(\lambda\) with a few key differences. Because \(\sigma = 1/\lambda\) and to preserve interpretation of \(\beta\), along with taking into account the \(\alpha\), \(\sigma\) is reparameterized as
 \begin{equation}
-  \sigma_{i} = \exp\left(\frac{-(\beta^{T}\mathbf{X}_{i})}{\alpha}\right).
+  \sigma_{i} = \exp\left(\frac{-(\sum \beta^{T}\mathbf{X}_{i})}{\alpha}\right).
   \label{eq:reg}
 \end{equation}
 
@@ -158,13 +158,11 @@ In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^
   \Lambda(t) = -log\left(S\left(t\right)\right).
 \end{equation*}
 
-Next, we define martingale residuals, \(m\), which are defined in relation to the inclusion vector \(I\)
+Next, we define martingale residuals \(m\) as
 \begin{equation*}
   m_{i} = I_{i} - \Lambda(t_i).
 \end{equation*}
-\(I\) is as a vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. 
-
-Martingale residuals have a mean of 0 and ranges between 1 and \(-\infty\) and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, martingale residuals are difficult to interpret, can be asymmetrically distributed, and are not equivalent to standard residuals. 
+\(I\) is the inclusion vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. Martingale residuals have a mean of 0, range between 1 and \(-\infty\), and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, martingale residuals are asymmetrically distributed, and can not be interpreted in the same manner as standard residuals. 
 
 The solution to this is to use the deviance residuals, \(D\). This is defined as a function of martingale residuals and takes the form
 \begin{equation*}

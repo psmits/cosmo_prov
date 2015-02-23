@@ -5,44 +5,44 @@ The style file: naturemag.bst
 A level-1 auxiliary file: post_out.aux
 Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 47 entries,
+You've used 45 entries,
             2348 wiz_defined-function locations,
-            1294 strings with 17925 characters,
-and the built_in function-call counts, 18024 in all, are:
-= -- 1302
-> -- 408
+            1283 strings with 17670 characters,
+and the built_in function-call counts, 17263 in all, are:
+= -- 1245
+> -- 392
 < -- 0
-+ -- 203
-- -- 102
-* -- 2204
-:= -- 1983
-add.period$ -- 136
-call.type$ -- 47
-change.case$ -- 47
++ -- 195
+- -- 98
+* -- 2109
+:= -- 1898
+add.period$ -- 130
+call.type$ -- 45
+change.case$ -- 45
 chr.to.int$ -- 0
-cite$ -- 47
-duplicate$ -- 1617
-empty$ -- 1723
-format.name$ -- 134
-if$ -- 3622
+cite$ -- 45
+duplicate$ -- 1548
+empty$ -- 1652
+format.name$ -- 129
+if$ -- 3472
 int.to.chr$ -- 0
-int.to.str$ -- 47
-missing$ -- 378
-newline$ -- 238
-num.names$ -- 49
-pop$ -- 298
+int.to.str$ -- 45
+missing$ -- 362
+newline$ -- 228
+num.names$ -- 47
+pop$ -- 289
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 286
+skip$ -- 276
 stack$ -- 0
-substring$ -- 879
-swap$ -- 1593
+substring$ -- 838
+swap$ -- 1524
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 124
-width$ -- 49
-write$ -- 507
+while$ -- 118
+width$ -- 47
+write$ -- 485
