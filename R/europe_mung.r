@@ -91,7 +91,7 @@ spatialref <- SpatialPoints(coords = eur[, c('paleolngdec', 'paleolatdec')],
 r <- raster(globe.map, nrows = 70, ncols = 34)
 sp.ras <- rasterize(spatialref, r)
 membership <- cellFromXY(sp.ras, xy = eur[, c('paleolngdec', 'paleolatdec')])
-
+eur$gid <- membership
 
 # remove duplicates at grid locations in each bin
 db <- split(eur, eur$bins)
