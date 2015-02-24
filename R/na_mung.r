@@ -88,9 +88,11 @@ spatialref <- SpatialPoints(coords = dat[, c('paleolngdec', 'paleolatdec')],
                             proj4string = eq)  # wgs1984.proj
 
 r <- raster(globe.map, nrows = 70, ncols = 34)
-sp.ras <- rasterize(spatialref, r)
+sp.ras <- trim(rasterize(spatialref, r))
 membership <- cellFromXY(sp.ras, xy = dat[, c('paleolngdec', 'paleolatdec')])
 dat$gid <- membership
+
+
 #plot(sp.ras)
 #plot(globe.map, add = TRUE)
 
