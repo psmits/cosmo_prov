@@ -4,44 +4,44 @@ The top-level auxiliary file: nature_survival_supplement.aux
 The style file: plain.bst
 Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 45 entries,
+You've used 46 entries,
             2118 wiz_defined-function locations,
-            794 strings with 11813 characters,
-and the built_in function-call counts, 15699 in all, are:
-= -- 1532
-> -- 845
+            802 strings with 11970 characters,
+and the built_in function-call counts, 15996 in all, are:
+= -- 1564
+> -- 852
 < -- 3
-+ -- 338
-- -- 291
-* -- 1227
-:= -- 2695
-add.period$ -- 135
-call.type$ -- 45
-change.case$ -- 273
++ -- 341
+- -- 293
+* -- 1249
+:= -- 2744
+add.period$ -- 138
+call.type$ -- 46
+change.case$ -- 277
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 524
-empty$ -- 1124
-format.name$ -- 291
-if$ -- 3150
+cite$ -- 46
+duplicate$ -- 535
+empty$ -- 1151
+format.name$ -- 293
+if$ -- 3211
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 47
-newline$ -- 227
-num.names$ -- 92
-pop$ -- 239
+int.to.str$ -- 46
+missing$ -- 48
+newline$ -- 232
+num.names$ -- 94
+pop$ -- 241
 preamble$ -- 1
-purify$ -- 234
+purify$ -- 237
 quote$ -- 0
-skip$ -- 357
+skip$ -- 364
 stack$ -- 0
-substring$ -- 992
-swap$ -- 77
+substring$ -- 1022
+swap$ -- 78
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 168
+type$ -- 172
 warning$ -- 0
-while$ -- 156
-width$ -- 47
-write$ -- 496
+while$ -- 160
+width$ -- 48
+write$ -- 507

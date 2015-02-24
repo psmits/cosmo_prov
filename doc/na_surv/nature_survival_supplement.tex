@@ -48,7 +48,35 @@ All individual fossil occurrences were assigned to 2 My bins ranging through the
 \subsubsection{Body size estimates and estimation}
 Species body size estimates were sourced from a large selection of primary literature and data base compilations.
 
-Databases used include the PBDB, PanTHERIA \cite{Jones2009c}, and the Neogene Old World Mammal database (NOW; http://www.helsinki.fi/science/now/). Major sources of additional compiled body size estimates include \cite{Brook2004a,Freudenthal2013,McKenna2011,Raia2012f,Smith2004c,Tomiya2013}. These were then supplemented with an additional literature search to try and fill in the remaining gaps. In many cases, species body mass was estimated using various published regression equations based on tooth or skull measurements. See Supplementary Tables XXX and XXX for a complete list of individual sources and equations, respectively.
+Databases used include the PBDB, PanTHERIA \cite{Jones2009c}, and the Neogene Old World Mammal database (NOW; http://www.helsinki.fi/science/now/). Major sources of additional compiled body size estimates include \cite{Brook2004a,Freudenthal2013,McKenna2011,Raia2012f,Smith2004c,Tomiya2013}. These were then supplemented with an additional literature search to try and fill in the remaining gaps. In many cases, species body mass was estimated using various published regression equations based on tooth or skull measurements (Tab. \ref{tab:mass_est}). See Supplementary Tables XXX for a complete list of individual measures and sources.
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{l | l | l | l}
+    Group & Equation & log(Measurement) & Source \\
+    \hline
+    General & \(\log(m) = 1.827x + 1.81\) & lower m1 area &  \cite{Legendre1986} \\
+    General & \(\log(m) = 2.9677x - 5.6712\) & mandible length & \cite{Legendre1986} \\
+    General & \(\log(m) = 3.68x - 3.83\) & skull length & \cite{Legendre1986} \\
+    Carnivores & \(\log(m) = 2.97x + 1.681\) & lower m1 length & \\
+    Insectivores & \(\log(m) = 1.628x + 1.726\) & lower m1 area & \\
+    Insectivores & \(\log(m) = 1.714x + 0.886\) & upper M1 area & \\
+    Lagomorph & \(\log(m) = 2.671x - 2.671\) & lower toothrow area & \\
+    Lagomorph & \(\log(m) = 4.468x - 3.002\) & lower m1 length & \\
+    Marsupials & \(\log(m) = 3.284x + 1.83\) & upper M1 length & \\
+    Marsupials & \(\log(m) = 1.733x + 1.571\) & upper M1 area & \\
+    Rodentia & \(\log(m) = 1.767x + 2.172\) & lower m1 area & \\
+    Ungulates & \(\log(m) = 1.516x + 3.757\) & lower m1 area & \\
+    Ungulates & \(\log(m) = 3.076x + 2.366\) & lower m2 length & \\
+    Ungulates & \(\log(m) = 1.518x + 2.792\) & lower m2 area & \\
+    Ungulates & \(\log(m) = 3.113x - 1.374\) & lower toothrow length & \\
+    \hline
+  \end{tabular}
+  \caption{CAPTION}
+  \label{tab:mass_est}
+\end{table}
+
 
 
 \subsubsection{Biogeographic network}
@@ -118,7 +146,7 @@ To allow for \(\sigma\) to vary with a given observation's covariate information
 \end{equation}
 
 The model described here was the final model at the end of a continuous model development framework where the sampling and prior distributions were iteratively modified to best reflect theory, knowledge of the data, the inclusion of important covariates, and the fit to the data. This follows the approach described in \cite{Gelman2007} and \cite{Gelman2013d}.
-A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. \(\alpha\) was assumed constant, which is standard practice in survival analysis \cite{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy (C\(^{+}\) prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). This was further expanded (Eq. \ref{eq:wei_reg_ext}) to allow for two hierarchical factors as discussed below. This is written
+A survival model was fit in a Bayesian context where species duration were assumed to be drawn from a Wiebull distribution (Eq. \ref{eq:weibull}) with shape \(\alpha\) and scale \(\sigma\) parameters. \(\alpha\) was assumed constant, which is standard practice in survival analysis \cite{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy (C\(^{+}\)) prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq. \ref{eq:reg}). This was further expanded (Eq. \ref{eq:wei_reg_ext}) to allow for two hierarchical factors as discussed below. This is written
 \begin{equation}
   \sigma_{i} = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
   \label{eq:wei_reg_ext}
