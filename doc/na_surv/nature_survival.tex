@@ -151,7 +151,6 @@ There are many processes encompassed by background extinction and identifying th
 
   \subsection{Survival model.}
 
-  % this needs to be heavily re written to include exponential model as well as for clarity's sake
   Species duration was modeled as being drawn from either an exponential with one inverse-scale parameter \(\lambda\) or a Weibull distribution with shape parameter \(\alpha\) and scale parameter \(\sigma\). When \(\alpha = 1\) the Weibull and exponential are equivalent. Both distributions were parameterized as regression models using a log link function. For the exponential distribution this is \(\lambda = \exp(\beta^{T}\mathbf{X}\) where \(\beta^{T}\mathbf{X}\) represents the set of covariates and associated regression coefficients. For the Weibull distribution reparameterization is a bit different where \(\sigma = \exp(\frac{-(\beta^{T}\mathbf{X})}{\alpha})\) where \(\alpha\) is constant for all observations.
   
   These regression model included eight species-level coefficients for the covariates (dietary and locomotor categories, body size, mean bioprovince occupancy) along with an intercept term. Both continuous covariates were standardized by subtracting the mean value and dividing by 2 times the standard deviation so that the inferred values were comparable with the coefficients from the binary variables \cite{Gelman2007}. Each of these regression coefficients was given a weakly informative normally distributed prior.
