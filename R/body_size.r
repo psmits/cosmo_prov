@@ -1,4 +1,5 @@
 library(stringr)
+library(xtable)
 library(plyr)
 source('../R/predict_mass.r')
 
@@ -70,6 +71,15 @@ er.mass <- rbind(er.pbdb, er.now, er.smith, er.brook, er.pan, er.tom, er.raia, e
 na.mass <- na.mass[!duplicated(na.mass[, 1]), ]
 er.mass <- er.mass[!duplicated(er.mass[, 1]), ]
 
+north.source <- list(na.pbdb, na.now, na.smith, na.brook, na.pan, na.tom, 
+                     na.raia, na.me)
+sources <- list('PBDB', 'NOW', 'Smith2004', 'Brook2004', 'PanTheria', 
+                'Tomiya2013', 'Raia2010', 'this study')
+north.source <- Map(function(x, y) cbind(x, source = rep(y, nrow(x))), 
+                    north.source, sources)
+north.source <- Reduce(rbind, north.source)
+north.source <- north.source[!(duplicated(north.source[, 1])), ]
+
 
 # for those remaining
 missing.mass <- unique(dat$name.bi[!(dat$name.bi %in% na.mass$name)],
@@ -123,7 +133,7 @@ if(length(rms) > 0) good.mean <- good.mean[-rms, ]
 me.measure <- smits[smits$measure != '' & smits$measure != 'mass', ]
 # combined
 names(good.mean)[2:3] <- c('part', 'measure')
-measures <- rbind(me.measure[, 1:4], good.mean[, 1:4])
+measures <- rbind(me.measure[, c(1, 3:5)], good.mean[, 1:4])
 
 # predict mass
 # ungulate
@@ -154,3 +164,47 @@ missing.taxa <- sort(unique(c(eur.missing, na.missing)))
 #write.csv(missing.taxa, '../data/unknown_mass.csv', row.names = FALSE)
 
 save(na.mass, er.mass, file = '../data/body_mass.rdata')
+
+
+# make the sources table
+north.source <- rbind(north.source, 
+                      cbind(na.est, source = rep('PBDB + regression', 
+                                                 nrow(na.est))))
+founds <- me.good$species %in% north.source[north.source$source == 
+                                            'this study', 1]
+new.source <- me.good[founds, c('species', 'source')]
+north.source$source <- as.character(north.source$source)
+north.source[north.source[, 1] %in% new.source[, 1], 
+             'source'] <- new.source[, 2]
+#unique(north.source$source)
+the.fixer <- matrix(c('Smith', 'cite{Smith2004}', 
+                      'Brook', 'cite{Brook2004a}', 
+                      'Tomiya', 'cite{Tomiya2013}', 
+                      'Raia', 'cite{Raia2012f}', 
+                      'McKenna', 'cite{McKenna2011}', 
+                      'Wilson et', 'cite{Wilson2012}', 
+                      'Sorkin', 'cite{Sorkin2008}', 
+                      'Conroy', 'cite{Controy1987}', 
+                      'ADW', 'Animal Diversity Web', 
+                      'Soligo', 'cite{Soligo2006}', 
+                      'MacFadden', 'cite{MacFadden1986}', 
+                      'McDonald', 'cite{McDonald1995}', 
+                      'Martin', 'cite{Martin2002a}', 
+                      'EOL', 'Encyclopedia of Life', 
+                      'Strait', 'cite{Strait2001}', 
+                      'Egi', 'cite{Egi2001}', 
+                      'Torregrosa', 'cite{Torregrosa2010}'), 
+                    ncol = 2, byrow = TRUE)
+ss <- '(.*)$'
+the.fixer[, 1] <- paste0(the.fixer[, 1], ss)
+
+for(ii in seq(nrow(the.fixer))) {
+  north.source$source <- str_replace(north.source$source, 
+                                     the.fixer[ii, 1], the.fixer[ii, 2])
+}
+names(north.source) <- c('Species', 'Mass (g)', 'Source')
+mass.table <- xtable(north.source, label = 'tab:mass_data')
+print.xtable(mass.table, 
+             file = '../doc/na_surv/mass_data.tex',
+             include.rownames = FALSE, 
+             sanitize.text.function = identity)
