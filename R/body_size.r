@@ -167,16 +167,24 @@ save(na.mass, er.mass, file = '../data/body_mass.rdata')
 
 
 # make the sources table
+north.source$source <- as.character(north.source$source)
+
+me.happy <- smits[smits$species %in% na.me$name, ]
+north.source[north.source$name %in% me.happy$species, 'source'] <- 
+  me.happy$source
+
 north.source <- rbind(north.source, 
                       cbind(na.est, source = rep('PBDB + regression', 
                                                  nrow(na.est))))
-founds <- me.good$species %in% north.source[north.source$source == 
-                                            'this study', 1]
-new.source <- me.good[founds, c('species', 'source')]
-north.source$source <- as.character(north.source$source)
+founds <- me.measure[, 1] %in% north.source[, 1]
+new.source <- me.measure[founds, c('species', 'source')]
 north.source[north.source[, 1] %in% new.source[, 1], 
              'source'] <- new.source[, 2]
-#unique(north.source$source)
+
+weird <- north.source[north.source$source == 'this study', ]
+as.character(weird[, 1]) %in% me.measure$species
+
+
 the.fixer <- matrix(c('Smith', 'cite{Smith2004}', 
                       'Brook', 'cite{Brook2004a}', 
                       'Tomiya', 'cite{Tomiya2013}', 
@@ -193,7 +201,99 @@ the.fixer <- matrix(c('Smith', 'cite{Smith2004}',
                       'EOL', 'Encyclopedia of Life', 
                       'Strait', 'cite{Strait2001}', 
                       'Egi', 'cite{Egi2001}', 
-                      'Torregrosa', 'cite{Torregrosa2010}'), 
+                      'Torregrosa', 'cite{Torregrosa2010}',
+                      'Osborn 1933', 'cite{Osborn1933}',
+                      'Bloch et al', 'cite{Bloch2007}',
+                      'Ferrusquia', 'cite{Ferrusquia-Villafranca2006}',
+                      'Scott and', 'cite{Scott1940}',
+                      'Scott 2003 J', 'cite{Scott2003a}',
+                      'Skinner', 'cite{Skinner1972}',
+                      'Williamson and Brusatte 2013', 'cite{Williamson2013}',
+                      'Lofgren and Anad', 'cite{Lofgren2011}',
+                      'Czaplewski', 'cite{Czaplewski2012}',
+                      'Beatty and', 'cite{Beatty2009}',
+                      'Van Valkenburgh 2007', 'cite{VanValkenburgh2007a}',
+                      'Loomis 1911', 'cite{Loomis1911}',
+                      'Wang 1994', 'cite{Wang1994a}',
+                      'Carraway', 'cite{Carraway2010}', 
+                      'Emry et al', 'cite{Emry2005}',
+                      'Coombs 1979', 'cite{Coombs1979}',
+                      'Mora and Zamora', 'cite{Mora2005}',
+                      'Dawson and Beard', 'cite{Dawson2007}',
+                      'Becker and White', 'cite{Becker1981}',
+                      'Mellett 1969', 'cite{Mellett1969}',
+                      'Lim et al', 'cite{Lim2001}',
+                      'Fox and Scott', 'cite{Fox2011b}',
+                      'Zakrzewski 1991', 'cite{Zakrzewski1991a}',
+                      'Rose and Krause', 'cite{Rose1982a}',
+                      'Wood 1962', 'cite{Wood1962}',
+                      'Cope 1871', 'cite{Cope1871}',
+                      'Jepsen 1932', 'cite{Jepsen1932}',
+                      'Taylor and Webb', 'cite{Taylor1976}',
+                      'Korth 1993 T', 'cite{Korth1993}',
+                      'Chester and Beard', 'cite{Chester2012}',
+                      'Madden and Storer 1985', 'cite{Madden1985}',
+                      'Grohe', 'cite{Grohe2010}',
+                      'Ivy 1990 C', 'cite{Ivy1990}',
+                      'Patton and Taylor', 'cite{Patton1973}',
+                      'Bever 2003', 'cite{Bever2003}',
+                      'Mac Intyre 1966', 'cite{MacIntyre1966}',
+                      'Stock 1948', 'cite{Stock1948}',
+                      'Baskin 2004', 'cite{Baskin2004}',
+                      'Kelly and Wood', 'cite{Kelly1954}',
+                      'Rose et al 2011', 'cite{Rose2011a}',
+                      'Johansen 1996', 'cite{Johansen1996}',
+                      'Hay 1916', 'cite{Hay1916}',
+                      'Macdonald 1951', 'cite{Macdonald1951}',
+                      'Secord 2008', 'cite{Secord2008a}',
+                      'Rich 1981', 'cite{Rich1981}',
+                      'Stock 1937', 'cite{Stock1937}',
+                      'Mihlbacher and Demere', 'cite{Mihlbacher2010}',
+                      'Carranza-Castaneda and Walt', 'cite{Carranza-Castaneda1992}',
+                      'Scott et al 2013', 'cite{Scott2013}',
+                      'Tseng et al 2009', 'cite{Tseng2009}',
+                      'Zack et al', 'cite{Zack2005}',
+                      'Loomis 1932', 'cite{Loomis1932}',
+                      'Scott et al 1937', 'cite{Scott1937}',
+                      'Tedford et al 1994', 'cite{Tedford1994}',
+                      'Wang et al 2014', 'cite{Wang2014}',
+                      'Bjork 1970', 'cite{Bjork1970}',
+                      'Korth 2010 P', 'cite{Korth2010}',
+                      'Silcox and Willamson', 'cite{Silcox2012}',
+                      'Zonneveld and Gu', 'cite{Zonneveld2003}', 
+                      'Novacek 1977', 'cite{Novacek1977}',
+                      'Scott 2004', 'cite{Scott2004}',
+                      'McGrew 1939', 'cite{McGrew1939}',
+                      'Mihlbacher and Solounias 2006', 'cite{Mihlbacher2006}',
+                      'Cooke 2011', 'cite{Cooke2011}',
+                      'Hall 1930', 'cite{Hall1930}',
+                      'Hay 1969 P', 'cite{Hay1969}',
+                      'Macdonald 1956', 'cite{Macdonald1956}',
+                      'Clemens 2011', 'cite{Clemens2011}',
+                      'Cassiliano 2008', 'cite{Cassiliano2008}',
+                      'Dalquest 1978', 'cite{Dalquest1978}',
+                      'Clemens and Williamson', 'cite{Clemens2005}',
+                      'Rose et al 2013', 'cite{Rose2013a}',
+                      'Kirk and Williams 2011', 'cite{Kirk2011}',
+                      'Gidley 1920', 'cite{Gidley1920}',
+                      'Robinson 1966', 'cite{Robinson1966}',
+                      'Silcox et al 2008', 'cite{Silcox2008}',
+                      'Sinclair 1915', 'cite{Sinclair1915}',
+                      'Lillegraven 1977 Bull', 'cite{Lillegraven1977}',
+                      'Albright 2000 Biostrat', 'cite{Albright2000}',
+                      'White 1988', 'cite{White1988}',
+                      'Wang et al 1999', 'cite{Wang1999}',
+                      'Matthew 1901 B', 'cite{Matthew1901}',
+                      'Worthman and Earle 18', 'cite{Worthman1893}',
+                      'Gazin 1930 Thesis Carn', 'cite{Gazin1930}',
+                      'Brown 1980 Transactions', 'cite{Brown1980}',
+                      'Stirton 1932', 'cite{Stirton1932}',
+                      'Simons 1960', 'cite{Simons1960}',
+                      'Heissig 2012', 'cite{Heissig2012a}',
+                      'Williamson et al 2012', 'cite{Williamson2012}',
+                      'Dawson 2012 Swiss', 'cite{Dawson2012}',
+                      'Baskin 2011 Pal', 'cite{Baskin2011}'
+                      ), 
                     ncol = 2, byrow = TRUE)
 ss <- '(.*)$'
 the.fixer[, 1] <- paste0(the.fixer[, 1], ss)
@@ -203,8 +303,6 @@ for(ii in seq(nrow(the.fixer))) {
                                      the.fixer[ii, 1], the.fixer[ii, 2])
 }
 names(north.source) <- c('Species', 'Mass (g)', 'Source')
-mass.table <- xtable(north.source, label = 'tab:mass_data')
-print.xtable(mass.table, 
-             file = '../doc/na_surv/mass_data.tex',
-             include.rownames = FALSE, 
-             sanitize.text.function = identity)
+north.source <- north.source[order(as.character(north.source[, 1])), ]
+
+save(north.source, file = '../data/na_mass_table.rdata')

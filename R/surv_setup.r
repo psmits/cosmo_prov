@@ -15,7 +15,6 @@ library(rgdal)
 
 source('../R/paleo_surv.r')
 source('../R/oxygen_curve.r')
-#source('../R/cosmo_prov.r')
 load('../data/cosmo_prov_setup.r')
 
 nadur <- read.csv('../data/mam-ranges.csv', stringsAsFactors = FALSE)
@@ -23,6 +22,7 @@ names(nadur) <- c('genus', 'species', 'fad', 'lad',
                   'collections', 'abundance', 'geo.mean.ab')
 
 load('../data/body_mass.rdata')  # body mass data
+load('../data/na_mass_table.rdata')  # body mass table
 
 bi <- with(nadur, binom.make(genus, species))
 nadur <- nadur[bi %in% dat$name.bi, ]
@@ -80,3 +80,11 @@ ext <- as.numeric(bin.range[, 3] != 2)
 occ <- na.mean.occ[na.mean.occ[, 2] %in% bin.range[, 1], 1]
 
 cohort <- bin.range[, 2] / 2  # find the cohorts
+
+north.source <- north.source[north.source$Species %in% 
+                             na.ecol$taxa[cohort != 1], ]
+mass.table <- xtable(north.source, label = 'tab:mass_data')
+print.xtable(mass.table, 
+             file = '../doc/na_surv/mass_data.tex',
+             include.rownames = FALSE, 
+             sanitize.text.function = identity)
