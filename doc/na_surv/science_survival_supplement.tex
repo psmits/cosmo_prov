@@ -5,13 +5,17 @@
 \usepackage{longtable}
 \bibliographystyle{science}
 
-\renewcommand{\thefigure}{A\arabic{figure}}
-\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
 
 \setcounter{figure}{0}
 \setcounter{table}{0}
 
+\title{Supplementary Information for ``Death and Taxa''}
+\author{Peter D Smits}
+
 \begin{document}
+\maketitle
 
 \section{Materials and Methods}
 
@@ -211,7 +215,14 @@ The variance partitioning coefficients are then calculated, for example, as \(VP
 
 I used variance partitioning coefficients (VPC) to estimate of the relative size importance of the different variance components \cite{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \cite{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
 
-\bibliography{newbib,packages}
+
+\section{Supplementary text}
+\subsection{Results of posterior predictive checks}
+With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible be examine the quality of model fit (Table \ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \cite{Gelman2013d}.
+
+Visual examination of the deviance residuals from twelve different sets of posterior predictive simulations indicates few systematic problems (Fig. \ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed, however this bias appears very small. This is confirmed by comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. MAIN TEXT).
+
+Comparisons of the observed 25th, 50th, 75th quantiles, and mean durations to the results from the posterior predictive simulations indicate adequate model fit (Fig. \ref{fig:ppc_quant}). Because all the different posterior predictive checks seem to agree, the inferred model appears adequate at capturing the observed variation.
 
 
 
@@ -246,6 +257,7 @@ I used variance partitioning coefficients (VPC) to estimate of the relative size
 
 
 \section{Supplementary tables}
+\include{post_out}
 
 \begin{table}[t!]
   \centering
@@ -295,5 +307,6 @@ I used variance partitioning coefficients (VPC) to estimate of the relative size
   \label{tab:mass_est}
 \end{table}
 
-
+\clearpage
+\bibliography{newbib,packages}
 \end{document}
