@@ -5,13 +5,14 @@ library(plyr)
 library(parallel)
 library(mapproj)
 library(stringr)
-library(dismo)
-library(raster)
-library(sp)
-library(XML)
-library(maptools)
-library(foreign)
-library(rgdal)
+#library(xtable)
+#library(dismo)
+#library(raster)
+#library(sp)
+#library(XML)
+#library(maptools)
+#library(foreign)
+#library(rgdal)
 
 source('../R/paleo_surv.r')
 source('../R/oxygen_curve.r')
@@ -83,8 +84,8 @@ cohort <- bin.range[, 2] / 2  # find the cohorts
 
 north.source <- north.source[north.source$Species %in% 
                              na.ecol$taxa[cohort != 1], ]
-mass.table <- xtable(north.source, label = 'tab:mass_data')
-print.xtable(mass.table, 
-             file = '../doc/na_surv/mass_data.tex',
-             include.rownames = FALSE, 
-             sanitize.text.function = identity)
+#mass.table <- xtable(north.source, label = 'tab:mass_data')
+#print.xtable(mass.table, 
+#             file = '../doc/na_surv/mass_data.tex',
+#             include.rownames = FALSE, 
+#             sanitize.text.function = identity)

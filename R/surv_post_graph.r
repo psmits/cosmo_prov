@@ -9,6 +9,8 @@ library(GGally)
 library(moments)
 library(plyr)
 
+source('../R/surv_post_sim.r')
+
 nsim <- 100
 
 pairwise.diffs <- function(x) {
@@ -25,7 +27,6 @@ pairwise.diffs <- function(x) {
                             colnames(x)[col.diffs[, 2]], sep = "")
   result
 }
-
 
 
 theme_set(theme_bw())
@@ -61,7 +62,6 @@ ppc.mean <- ggplot(data.frame(x = means), aes(x = x))
 ppc.mean <- ppc.mean + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.mean <- ppc.mean + geom_vline(xintercept = mean.dur, 
                                   colour = 'blue', size = 2)
-ppc.mean <- ppc.mean + labs(x = 'Duration', y = 'Prob. Density')
 ggsave(ppc.mean, filename = '../doc/na_surv/figure/mean_ppc.png',
        width = 10, height = 10)
 
@@ -157,7 +157,6 @@ ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
 
 
 # marginal posteriors
-melted <- melt(mpost)
 scale.melted <- melt(phypost)
 ns <- length(phypost$lp__)
 
@@ -220,24 +219,14 @@ ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
 
 
 # effect of body size and occupancy
-size.eff <- melted[melted$L1 == 'beta_size', 'value']  # base line
-occ.eff <- melted[melted$L1 == 'beta_occ', 'value']  # base line
-oth.eff <- melt(cbind(size.eff = size.eff[1:2000], 
-                      occ.eff = occ.eff[1:2000]))
-oth.eff$label <- rep('unstandardized', nrow(oth.eff))
-
 sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']
 sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']
 sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
-sc.oth.eff$label <- rep('standardized', nrow(sc.oth.eff))
 
-sc.oth.eff$Var2 <- oth.eff$Var2
-oth.eff <- rbind(oth.eff, sc.oth.eff)
-
-other <- ggplot(oth.eff, aes(x = value))
+other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 other <- other + geom_histogram(aes(y = ..density..))
-other <- other + facet_grid(Var2 ~ label)
+other <- other + facet_grid(Var2 ~ . )
 other <- other + labs(x = 'Value', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
        width = 10, height = 10)

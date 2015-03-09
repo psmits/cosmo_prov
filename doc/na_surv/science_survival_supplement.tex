@@ -3,6 +3,7 @@
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
 \usepackage{multirow, microtype, graphicx}
 \usepackage{longtable}
+\usepackage{lineno}
 \bibliographystyle{science}
 
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -16,6 +17,8 @@
 
 \begin{document}
 \maketitle
+\linenumbers
+\modulolinenumbers[2]
 
 \section{Materials and Methods}
 
@@ -157,9 +160,9 @@ where \(C\) is the set of uncensored observations, \(R\) is the set of right cen
 \subsubsection{Estimation}
 Parameter posteriors were approximated using a Markov-chain Monte Carlo (MCMC) routine implemented in the Stan programming language \cite{2014stan}. Stan implements a Hamiltonian Monte Carlo using a No-U-Turn sampler \cite{Hoffman-Gelman:2011}. Posterior approximation was done using four parallel MCMC chains where convergence was evaluated using the scale reduction factor, \(\hat{R}\). Values of \(\hat{R}\) close to 1, or less than or equal to 1.1, indicate approximate convergence. Convergence means that the chains are approximately stationary and the samples are well mixed \cite{Gelman2013d}.
 
-In order to speed up the poisterior approximation, a custom multivariate normal sampler was used to estimate the unknown constant term in the covariance matrix. This is necessary because inverting and solving the complete covariance matrix on every iteration is a memory intense procedure. The custom sampler limits the necessary number of operations and matrix inversions per iteration.
+In order to speed up the posterior approximation, a custom multivariate normal sampler was used to estimate the unknown constant term in the covariance matrix. This is necessary because inverting and solving the complete covariance matrix on every iteration is a memory intense procedure. The custom sampler limits the necessary number of operations and matrix inversions per iteration.
 
-Four different MCMC chains were run for 20000 steps and were thinned to every twentieth sample split evenly between warm-up and sampling. 
+Four different MCMC chains were run for 30000 steps and were thinned to every thirtieth sample split evenly between warm-up and sampling. 
 
 
 
@@ -169,7 +172,7 @@ The most basic assessment of model fit is that simulated data generated using th
 
 An example posterior predictive check used in this study is a graphical comparison between the Kaplan-Meier (K-M) survival curve estimated from the observed data and the K-M survival curves estimated from 1000 simulation sets. K-M survival curves are non-parametric estimates of \(S(t)\) \cite{Klein2003}. Other posterior predictive checks used here include comparison of the mean and quantiles of the observed durations to the distributions of the same quantities from the simulations, and inspection of the deviance residuals, defined below.
 
-In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cummulative hazard function \cite{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:wei_surv}), we define the cumulative hazard function as 
+In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cumulative hazard function \cite{Klein2003}. Given \(S(t)\) (Eq. \ref{eq:wei_surv}), we define the cumulative hazard function as 
 \begin{equation*}
   \Lambda(t) = -log\left(S\left(t\right)\right).
 \end{equation*}

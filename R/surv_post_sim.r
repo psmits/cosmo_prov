@@ -35,62 +35,9 @@ deviance.res <- function(time, scale, shape, inclusion) {
 }
 
 
-# zero posterior data set simulations
-set.seed(seed)
-zpost <- extract(zfit, permuted = TRUE)
-zz <- list()
-for(i in 1:nsim) {
-  oo <- rweibull(length(duration), shape = sample(zpost$alpha, 1), 
-                 scale = sample(zpost$sigma, 1))
-  zz[[i]] <- oo
-}
-
-
-# weibull posterior data set simulations
-mpost <- extract(mfit, permuted = TRUE)
-scale.mpost <- extract(scale.mfit, permuted = TRUE)
-
-dat <- cbind(c(scale.data$occ_unc, scale.data$occ_cen), 
-             c(scale.data$size_unc, scale.data$size_cen))
-dd <- rbind(scale.data$diet_unc, scale.data$diet_cen)
-mo <- rbind(scale.data$move_unc, scale.data$move_cen)
-
-set.seed(seed)
-dead <- duration
-mm <- list()
-mm.res <- list()
-for(i in 1:nsim) {
-  n <- length(dead)
-  alp <- sample(scale.mpost$alpha, 1)
-  inc <- sample(scale.mpost$beta_inter, 1)
-  oc <- sample(scale.mpost$beta_occ, 1)
-  sz <- sample(scale.mpost$beta_size, 1)
-  mv <- scale.mpost$beta_move[sample(nrow(scale.mpost$beta_move), 1), ]
-  di <- scale.mpost$beta_diet[sample(nrow(scale.mpost$beta_diet), 1), ]
-  ff <- scale.mpost$rando[sample(nrow(scale.mpost$rando), 1), ]
-
-  oo <- c()
-  rr <- c()
-  for(j in seq(n)) {
-    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
-    oo[j] <- rweibull(1, scale = exp(-(reg) / alp),
-                      shape = alp)
-    
-    rr[j] <- deviance.res(duration[j], 
-                          scale = exp(-(reg) / alp), 
-                          shape = alp, 
-                          inclusion = extinct[j])
-  }
-  mm[[i]] <- oo
-
-  mm.res[[i]] <- rr
-}
-
-
 # exponential data set simulations
 set.seed(seed)
-epost <- extract(efit, permuted = TRUE)
+epost <- extract(escalefit, permuted = TRUE)
 dat <- cbind(c(data$occ_unc, data$occ_cen), 
              c(data$size_unc, data$size_cen))
 dd <- rbind(data$diet_unc, data$diet_cen)
@@ -107,12 +54,13 @@ for(i in 1:nsim) {
   mv <- epost$beta_move[sample(nrow(epost$beta_move), 1), ]
   di <- epost$beta_diet[sample(nrow(epost$beta_diet), 1), ]
   ff <- epost$rando[sample(nrow(epost$rando), 1), ]
+  pp <- epost$phy[sample(nrow(epost$phy), 1), ]
 
   oo <- c()
   rr <- c()
   for(j in seq(n)) {
     reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]]
+    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]] + pp[j]
     oo[j] <- rexp(1, rate = exp(reg))
     
     rr[j] <- deviance.res(duration[j], 
@@ -126,7 +74,7 @@ for(i in 1:nsim) {
 }
 
 
-# weibull + phylogenetic scaled data set simulations
+# weibull scaled data set simulations
 set.seed(seed)
 phypost <- extract(phy.scalemfit, permuted = TRUE)
 

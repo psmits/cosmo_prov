@@ -109,21 +109,21 @@ exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
 
 # exponential model minus phylogeny
 # for comparison with weibull to see if value of alpha merited
-explist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = phyexp.model, 
-                                     seed = seed,
-                                     data = data,
-                                     iter = 1000,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-efit <- sflist2stanfit(explist)
+#explist <- mclapply(1:4, mc.cores = detectCores(),
+#                    function(x) stan(fit = phyexp.model, 
+#                                     seed = seed,
+#                                     data = data,
+#                                     iter = 1000,
+#                                     chains = 1, chain_id = x,
+#                                     refresh = -1))
+#efit <- sflist2stanfit(explist)
 
 scale.explist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = phyexp.model, 
                                      seed = seed,
                                      data = scale.data,
-                                     iter = 20000,
-                                     thin = 20,
+                                     iter = 30000,
+                                     thin = 30,
                                      chains = 1, chain_id = x,
                                      refresh = -1))
 
@@ -131,22 +131,22 @@ escalefit <- sflist2stanfit(explist)
 
 
 # phylogenetic random effect models
-phylist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = phywei.model, 
-                                     seed = seed,
-                                     data = data,
-                                     iter = 20000,
-                                     thin = 20,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-phy.mfit <- sflist2stanfit(phylist)
+#phylist <- mclapply(1:4, mc.cores = detectCores(),
+#                    function(x) stan(fit = phywei.model, 
+#                                     seed = seed,
+#                                     data = data,
+#                                     iter = 20000,
+#                                     thin = 20,
+#                                     chains = 1, chain_id = x,
+#                                     refresh = -1))
+#phy.mfit <- sflist2stanfit(phylist)
 
 scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
                           function(x) stan(fit = phywei.model, 
                                            seed = seed,
                                            data = scale.data,
-                                           iter = 20000,
-                                           thin = 20,
+                                           iter = 30000,
+                                           thin = 30,
                                            chains = 1, chain_id = x,
                                            refresh = -1))
 phy.scalemfit <- sflist2stanfit(scale.phylist)
