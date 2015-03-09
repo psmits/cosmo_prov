@@ -23,8 +23,8 @@ pairwise.diffs <- function(x) {
   if(is.null(colnames(x)))
     colnames(x) <- 1:ncol(x)
   
-  colnames(result) <- paste(colnames(x)[col.diffs[, 1]], ".vs.", 
-                            colnames(x)[col.diffs[, 2]], sep = "")
+  colnames(result) <- paste('beta[', colnames(x)[col.diffs[, 1]], "] - beta[", 
+                            colnames(x)[col.diffs[, 2]], ']', sep = "")
   result
 }
 
@@ -187,7 +187,7 @@ loco.diff <- melt(pairwise.diffs(cbind(arb, grd, scn)))
 lodf <- ggplot(loco.diff, aes(x = value))
 lodf <- lodf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 lodf <- lodf + geom_histogram(aes(y = ..density..))
-lodf <- lodf + facet_grid(Var2 ~ .)
+lodf <- lodf + facet_grid(Var2 ~ ., labeller = label_parsed)
 lodf <- lodf + labs(x = 'Value', y = 'Prob. Density')
 ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
        width = 10, height = 10)
@@ -212,7 +212,7 @@ diet.diff <- melt(pairwise.diffs(cbind(crn, hrb, ist, omn)))
 didf <- ggplot(diet.diff, aes(x = value))
 didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 didf <- didf + geom_histogram(aes(y = ..density..))
-didf <- didf + facet_grid(Var2 ~ .)
+didf <- didf + facet_grid(Var2 ~ ., labeller = label_parsed)
 didf <- didf + labs(x = 'Value', y = 'Prob. Density')
 ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
        width = 10, height = 10)
@@ -222,11 +222,14 @@ ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
 sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']
 sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']
 sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
+sc.oth.eff$Var2 <- as.character(sc.oth.eff$Var2)
+sc.oth.eff$Var2 <- mapvalues(sc.oth.eff$Var2, c('sc.occ.eff', 'sc.size.eff'),
+                             c('beta[occupancy]', 'beta[size]'))
 
 other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 other <- other + geom_histogram(aes(y = ..density..))
-other <- other + facet_grid(Var2 ~ . )
+other <- other + facet_grid(Var2 ~ . , labeller = label_parsed)
 other <- other + labs(x = 'Value', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
        width = 10, height = 10)
