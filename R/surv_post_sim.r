@@ -11,7 +11,19 @@ RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
 
-load('../data/survival_out.rdata')
+source('../R/surv_setup.r')
+data <- read_rdump('../data/data_dump/surv_info.data.R')
+
+# this is for the total model
+pat <- paste0('wei_surv_', '[0-9].csv')
+outs <- list.files('../data/mcmc_out', pattern = pat, full.names = TRUE)
+phy.scalemfit <- read_stan_csv(outs)
+
+pat <- paste0('exp_surv_', '[0-9].csv')
+outs <- list.files('../data/mcmc_out', pattern = pat, full.names = TRUE)
+escalefit <- read_stan_csv(outs)
+
+duration <- c(data$dur_unc, data$dur_cen)
 
 wei.surv <- function(time, scale, shape) {
   exp(-((1 / scale) * time)**shape)

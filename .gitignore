@@ -1,3 +1,4 @@
 survival_out.rdata
 meta_dump/
 *.cpp
+*.hpp

@@ -18,10 +18,6 @@ source('../R/surv_setup.r')  # data cleaned up nice
 load('../data/scaled_super.rdata')  # best
 
 
-# compile model
-phywei.model <- stan(file = '../stan/weibull_phy_surv.stan')
-phyexp.model <- stan(file = '../stan/exp_phy_surv.stan')
-
 plio <- which(cohort == 1)
 
 # set up variables
@@ -104,19 +100,13 @@ scale.data$size_cen <- rescale(scale.data$size_cen)
 scale.data$occ_unc <- rescale(scale.data$occ_unc)
 scale.data$occ_cen <- rescale(scale.data$occ_cen)
 
-exdat <- data[c('N_unc', 'N_cen', 'dur_unc', 'dur_cen', 'L')]
+with(data, {stan_rdump(list = c('N', 'N_unc', 'N_cen', 'D', 'M', 'L', 'C', 
+                                'dur_unc', 'dur_cen', 'size_unc', 'size_cen', 
+                                'occ_unc', 'occ_cen', 'diet_unc', 'diet_cen', 
+                                'move_unc', 'move_cen', 'coh_unc', 'coh_cen', 
+                                'samp_unc', 'samp_cen', 'vcv'),
+                       file = '../data/data_dump/surv_info.data.R')})
 
-
-# exponential model minus phylogeny
-# for comparison with weibull to see if value of alpha merited
-#explist <- mclapply(1:4, mc.cores = detectCores(),
-#                    function(x) stan(fit = phyexp.model, 
-#                                     seed = seed,
-#                                     data = data,
-#                                     iter = 1000,
-#                                     chains = 1, chain_id = x,
-#                                     refresh = -1))
-#efit <- sflist2stanfit(explist)
 
 scale.explist <- mclapply(1:4, mc.cores = detectCores(),
                     function(x) stan(fit = phyexp.model, 
@@ -129,18 +119,6 @@ scale.explist <- mclapply(1:4, mc.cores = detectCores(),
 
 escalefit <- sflist2stanfit(explist)
 
-
-# phylogenetic random effect models
-#phylist <- mclapply(1:4, mc.cores = detectCores(),
-#                    function(x) stan(fit = phywei.model, 
-#                                     seed = seed,
-#                                     data = data,
-#                                     iter = 20000,
-#                                     thin = 20,
-#                                     chains = 1, chain_id = x,
-#                                     refresh = -1))
-#phy.mfit <- sflist2stanfit(phylist)
-
 scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
                           function(x) stan(fit = phywei.model, 
                                            seed = seed,
@@ -150,5 +128,3 @@ scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
                                            chains = 1, chain_id = x,
                                            refresh = -1))
 phy.scalemfit <- sflist2stanfit(scale.phylist)
-
-save.image(file = '../data/survival_out.rdata')
