@@ -45,13 +45,13 @@ transformed parameters {
 }
 model {
   beta_inter ~ normal(0, 10);
-  beta_occ ~ normal(0, 10);
-  beta_size ~ normal(0, 10);
+  beta_occ ~ normal(0, 5);
+  beta_size ~ normal(0, 5);
   for(i in 1:M) {
-    beta_move[i] ~ normal(0, 10);
+    beta_move[i] ~ normal(0, 5);
   }
   for(i in 1:D) {
-    beta_diet[i] ~ normal(0, 10);
+    beta_diet[i] ~ normal(0, 5);
   }
 
   fv ~ cauchy(0, 2.5);

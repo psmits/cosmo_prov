@@ -109,6 +109,42 @@
   Determining which and how biological traits influence extinction risk is vital for understanding the differential diversification of life during the Phanerozoic and for making predictions about species' vulnerability to anthropogenic impacts. Here I present a hierarchical Bayesian survival model of North American Cenozoic mammal species durations as predicted by species-level ecological factors, time of origination, and phylogenetic relationships. I also explicitly allow for species age to effect extinction risk, relaxing the Law of Constant Extinction which is the critical assumption underlying the Red Queen Hypothesis. This study estimates time-invariant effects in order to characterize background selection so as to provide a base line for determining if the current biodiversity crisis is due to either an intensification of previous of previous processes or represents the arrival at an environmental ``tipping point'' or a shift in ``macroevolutionary regime'' associated with a mass extinction.
 \end{sciabstract}
 
+% Detail the various things I'm estimating and what hypotheses are being dealt with. 
+% occupancy -- expected decrease in extinction risk with increase in size
+%   this is expected based on virtually everything piece of work ever
+% body size -- plausibles either nothing, or increase extinction risk with size.
+%   former is based on Tomiya, later is based on ecology/Liow
+%   what if something else?
+% diet
+%   omnivory is lowest extinction risk of all
+% loco
+%   ground dwelling is lowest extinction risk of all
+%   arboreal is greatest extinction risk of all
+%
+% complex models are realistic because life is complex
+% a bunch of things to improve model realisim 
+%   origination cohort
+%   phylogenetic effect
+%   exponential and weibull distribution
+%
+% show results from exponential model results along side weibull results
+%   make sure the signs are the same for exponential and weibull?
+%     then i can show estimates together with double histograms?
+%     will really help explain the actual results
+%   do as two histograms in the same panel for the posterior predictive checks!
+%     probably just in supplement
+%   results are consistent with which hypotheses?
+%
+% other results
+%   decrease in extinction risk with time is known previous result
+%     marine groups
+%     mammals (find the alroy paper)
+%   extinction risk has BOTH temporal and phylogenetic aspects
+%     decomposing variance, they provide about equal variance
+%
+% make table for current extinction crisis
+%   factor & past risk & current risk (citations)
+
 Why species go extinct at different rates remains one of the most fundamental questions in paleobiology \cite{Simpson1944,VanValen1973,Raup1994,Quental2013,Wagner2014b}. Here I test how non-random extinction is with respect to species-level traits during times of background extinction, if and which traits have time-invariant effects on species duration, and if extinction is species-age independent? I approach these questions together by using a model of species duration whose parameter estimates act as direct tests of these questions. Cenozoic mammals represent an ideal group and time period because their fossil record is well sampled, well resolved both temporally and spatially, and individual species ecology and taxonomic position are generally understood \cite{Alroy2009,Liow2008,Smith2004,Quental2013,Simpson1944,Tomiya2013,Marcot2014}. 
 
 The species-level traits studied here are dietary and locomotor categories, bioprovince occupancy, and body mass. Each of these traits are related to different aspects of a species' adaptive zone such as population density, expected range size, potential prey items, and dispersal ability \cite{Smith2004,Jernvall2004}. While it is expected that species with larger geographic ranges have lower extinction rates than species with smaller geographic ranges \cite{Jablonski1986,Roy2009c}, traits directly related to species--environment interactions may play an important role in determining extinction risk. This is not only the first time that all of these ecological traits have been included in a single model, this also represents the first time that extinction selectivity has been analyzed with respect to both species temporal and phylogenetic contexts.
