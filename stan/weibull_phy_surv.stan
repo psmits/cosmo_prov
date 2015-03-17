@@ -31,6 +31,7 @@ parameters {
   real beta_inter;
   real beta_occ;
   real beta_size;
+  real beta_interaction;
   real<lower=0> alpha;
   vector[M] beta_move;
   vector[D] beta_diet;
@@ -48,6 +49,7 @@ model {
   beta_inter ~ normal(0, 10);
   beta_occ ~ normal(0, 5);
   beta_size ~ normal(0, 5);
+  beta_interaction ~ normal(0, 5);
   for(i in 1:M) {
     beta_move[i] ~ normal(0, 5);
   }
@@ -67,6 +69,8 @@ model {
   increment_log_prob(-(transpose(phy) * vcv_inv * phy) / (2 * sq_sigma));
 
   alpha ~ cauchy(0, 2.5);
+  //alpha ~ cauchy(0, tau);
+  //tau ~ cauchy(0, 1);
 
   for(i in 1:N_unc) {
     if(dur_unc[i] == L) {
@@ -74,6 +78,7 @@ model {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
+                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
@@ -82,6 +87,7 @@ model {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
+                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
@@ -92,6 +98,7 @@ model {
           exp(-(beta_inter +
               beta_occ * occ_cen[i] + 
               beta_size * size_cen[i] + 
+              beta_interaction * (occ_cen[i] * size_cen[i]) +
               diet_cen[i] * beta_diet +
               move_cen[i] * beta_move +
               rando[coh_cen[i]] + phy[samp_cen[i]]) / alpha)));

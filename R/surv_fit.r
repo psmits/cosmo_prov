@@ -106,25 +106,3 @@ with(data, {stan_rdump(list = c('N', 'N_unc', 'N_cen', 'D', 'M', 'L', 'C',
                                 'move_unc', 'move_cen', 'coh_unc', 'coh_cen', 
                                 'samp_unc', 'samp_cen', 'vcv'),
                        file = '../data/data_dump/surv_info.data.R')})
-
-
-scale.explist <- mclapply(1:4, mc.cores = detectCores(),
-                    function(x) stan(fit = phyexp.model, 
-                                     seed = seed,
-                                     data = scale.data,
-                                     iter = 30000,
-                                     thin = 30,
-                                     chains = 1, chain_id = x,
-                                     refresh = -1))
-
-escalefit <- sflist2stanfit(explist)
-
-scale.phylist <- mclapply(1:4, mc.cores = detectCores(),
-                          function(x) stan(fit = phywei.model, 
-                                           seed = seed,
-                                           data = scale.data,
-                                           iter = 30000,
-                                           thin = 30,
-                                           chains = 1, chain_id = x,
-                                           refresh = -1))
-phy.scalemfit <- sflist2stanfit(scale.phylist)

@@ -1,4 +1,5 @@
 survival_out.rdata
 meta_dump/
+mcmc_out/
 *.cpp
 *.hpp
