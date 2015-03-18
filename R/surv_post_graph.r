@@ -51,7 +51,7 @@ ppc.hist <- ppc.hist + geom_histogram(data = base.dur,
                                       colour = 'darkgrey')
 ppc.hist <- ppc.hist + geom_histogram(aes(y = ..density..), binwidth = .2, 
                                       fill = 'blue', alpha = 0.4)
-ppc.hist <- ppc.hist + labs(x = 'Duration', y = 'Prob. Density')
+ppc.hist <- ppc.hist + labs(x = 'Duration (2 My bins)', y = 'Prob. Density')
 ppc.hist <- ppc.hist + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ggsave(ppc.hist, filename = '../doc/na_surv/figure/histogram_ppc.png',
        width = 15, height = 10)
@@ -76,7 +76,7 @@ ppc.quant <- ggplot(quant, aes(x = value))
 ppc.quant <- ppc.quant + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value), 
                                     colour = 'blue', size = 2)
-ppc.quant <- ppc.quant + labs(x = 'Duration', y = 'Prob. Density')
+ppc.quant <- ppc.quant + labs(x = 'Duration (2 My bins)', y = 'Prob. Density')
 ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
 ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
        width = 10, height = 10)
@@ -113,7 +113,7 @@ ppc.sum <- ggplot(res.sum, aes(x = value))
 ppc.sum <- ppc.sum + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 ppc.sum <- ppc.sum + geom_histogram(aes(y = ..density..), binwidth = 0.2)
 ppc.sum <- ppc.sum + facet_grid(Var2 ~ .)
-ppc.sum <- ppc.sum + labs(x = 'value', y = 'Prob. Density')
+ppc.sum <- ppc.sum + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(ppc.sum, filename = '../doc/na_surv/figure/res_sum_plot.png',
        width = 5, height = 10)
 
@@ -151,7 +151,7 @@ soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label)
 soft <- soft + geom_step(size = 1, direction = 'hv')
 soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
 soft <- soft + facet_grid(. ~ lab)
-soft <- soft + labs(x = 'Duration', y = 'P(T > t)')
+soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
 ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
        width = 15, height = 10)
 
@@ -178,7 +178,7 @@ loco <- ggplot(loceff, aes(x = value))
 loco <- loco + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 loco <- loco + geom_histogram(aes(y = ..density..))
 loco <- loco + facet_grid(Var2 ~ .)
-loco <- loco + labs(x = 'Value', y = 'Prob. Density')
+loco <- loco + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(loco, filename = '../doc/na_surv/figure/loco_est.png',
        width = 10, height = 10)
 
@@ -188,7 +188,7 @@ lodf <- ggplot(loco.diff, aes(x = value))
 lodf <- lodf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 lodf <- lodf + geom_histogram(aes(y = ..density..))
 lodf <- lodf + facet_grid(Var2 ~ ., labeller = label_parsed)
-lodf <- lodf + labs(x = 'Value', y = 'Prob. Density')
+lodf <- lodf + labs(x = 'Estimated difference', y = 'Prob. Density')
 ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
        width = 10, height = 10)
 
@@ -203,7 +203,7 @@ diet <- ggplot(deteff, aes(x = value))
 diet <- diet + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 diet <- diet + geom_histogram(aes(y = ..density..))
 diet <- diet + facet_grid(Var2 ~ .)
-diet <- diet + labs(x = 'Value', y = 'Prob. Density')
+diet <- diet + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(diet, filename = '../doc/na_surv/figure/diet_est.png',
        width = 10, height = 10)
 
@@ -213,7 +213,7 @@ didf <- ggplot(diet.diff, aes(x = value))
 didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 didf <- didf + geom_histogram(aes(y = ..density..))
 didf <- didf + facet_grid(Var2 ~ ., labeller = label_parsed)
-didf <- didf + labs(x = 'Value', y = 'Prob. Density')
+didf <- didf + labs(x = 'Estimated difference', y = 'Prob. Density')
 ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
        width = 10, height = 10)
 
@@ -230,7 +230,7 @@ other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 other <- other + geom_histogram(aes(y = ..density..))
 other <- other + facet_grid(Var2 ~ . , labeller = label_parsed)
-other <- other + labs(x = 'Value', y = 'Prob. Density')
+other <- other + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
        width = 10, height = 10)
 
@@ -267,7 +267,7 @@ cohort <- ggplot(rands, aes(x = bin, y = med, ymin = bot, ymax = top))
 cohort <- cohort + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 cohort <- cohort + geom_pointrange(size = 1)
 cohort <- cohort + scale_x_reverse(breaks = seq(from = 0, to = 65, by = 5))
-cohort <- cohort + labs(x = 'Time (My)', y = 'Cohort effect')
+cohort <- cohort + labs(x = 'Time (Mya)', y = 'Cohort effect')
 ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
        width = 15, height = 10)
 
@@ -297,6 +297,6 @@ haz <- ggplot(mid.haz, aes(x = time, y = hazard))
 haz <- haz + geom_line(data = wzm, aes(x = time, y = hazard, group = label),
                        colour = 'darkgrey', alpha = 0.2)
 haz <- haz + geom_line(colour = 'blue')
-haz <- haz + labs(x = 'Duration', y = 'h(t)')
+haz <- haz + labs(x = 'Duration (2 My bins)', y = 'h(t)')
 ggsave(haz, filename = '../doc/na_surv/figure/haz_est.png',
        width = 15, height = 10)

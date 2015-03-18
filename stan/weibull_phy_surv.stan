@@ -23,9 +23,9 @@ data {
   matrix[N, N] vcv;
 }
 transformed data {
- matrix[N, N] vcv_inv;
+  matrix[N, N] vcv_inv;
 
- vcv_inv <- inverse(vcv);
+  vcv_inv <- inverse(vcv);
 }
 parameters {
   real beta_inter;
@@ -102,5 +102,40 @@ model {
               diet_cen[i] * beta_diet +
               move_cen[i] * beta_move +
               rando[coh_cen[i]] + phy[samp_cen[i]]) / alpha)));
+  }
+}
+generated quantities {
+  vector[N] log_lik;
+
+  for(i in 1:N_unc) {
+    if(dur_unc[i] == L) {
+      log_lik[i] <- weibull_cdf_log(dur_unc[i], alpha,
+            exp(-(beta_inter +
+                beta_occ * occ_unc[i] + 
+                beta_size * size_unc[i] + 
+                beta_interaction * (occ_unc[i] * size_unc[i]) +
+                diet_unc[i] * beta_diet +
+                move_unc[i] * beta_move +
+                rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha));
+    } else {
+      log_lik[i] <- weibull_log(dur_unc[i], alpha,
+            exp(-(beta_inter +
+                beta_occ * occ_unc[i] + 
+                beta_size * size_unc[i] + 
+                beta_interaction * (occ_unc[i] * size_unc[i]) +
+                diet_unc[i] * beta_diet +
+                move_unc[i] * beta_move +
+                rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha));
+    }
+  }
+  for(j in 1:N_cen) {
+    log_lik[N_unc + j] <- weibull_ccdf_log(dur_cen[j], alpha,
+        exp(-(beta_inter +
+            beta_occ * occ_cen[j] + 
+            beta_size * size_cen[j] + 
+            beta_interaction * (occ_cen[j] * size_cen[j]) +
+            diet_cen[j] * beta_diet +
+            move_cen[j] * beta_move +
+            rando[coh_cen[j]] + phy[samp_cen[j]]) / alpha));
   }
 }
