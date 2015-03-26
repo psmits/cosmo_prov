@@ -15,12 +15,10 @@ source('../R/surv_setup.r')
 data <- read_rdump('../data/data_dump/surv_info.data.R')
 
 # this is for the total model
-pat <- paste0('wei_surv_', '[0-9].csv')
-outs <- list.files('../data/mcmc_out', pattern = pat, full.names = TRUE)
+outs <- dir('../data/mcmc_out', pattern = 'wei_surv_[0-9]', full.names = TRUE)
 phy.scalemfit <- read_stan_csv(outs)
 
-pat <- paste0('exp_surv_', '[0-9].csv')
-outs <- list.files('../data/mcmc_out', pattern = pat, full.names = TRUE)
+outs <- dir('../data/mcmc_out', pattern = 'exp_surv_[0-9]', full.names = TRUE)
 escalefit <- read_stan_csv(outs)
 
 duration <- c(data$dur_unc, data$dur_cen)
@@ -152,3 +150,5 @@ var.star <- mclapply(1:nsim, function(x) sim.var(50000),
                      mc.cores = detectCores())
 
 var.star <- data.frame(Reduce(rbind, var.star))
+
+save.image(file = '../data/surv_sim_out.rdata')

@@ -155,6 +155,8 @@ soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
 ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
        width = 15, height = 10)
 
+# do each cohort
+
 
 # marginal posteriors
 scale.melted <- melt(phypost)

@@ -80,7 +80,7 @@ for (ii in seq(nrow(bins))) {
 
 # spatial localitions
 #wgs1984.proj <- CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
-eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=m")
+eq <- CRS("+proj=cea +lat_0=0 +lon_0=0 +lat_ts=30 +a=6371228.0 +units=km")
 globe.map <- readShapeSpatial('../data/ne_10m_coastline.shp')  # from natural earth
 proj4string(globe.map) <- eq
 
