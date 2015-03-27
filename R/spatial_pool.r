@@ -13,7 +13,7 @@ test <- 3
 
 set.seed(seed)
 source('../R/surv_setup.r')
-load('../data/taxonomy_tree.rdata')
+load('../data/scaled_super.rdata')
 
 # prep the data
 species.graph <- function(bipartite) {
@@ -67,8 +67,8 @@ mve <- llply(ecol, function(x) model.matrix( ~ x$move - 1)[, -1])
 
 # prepare the phylo vcv
 tax.nam <- str_replace(na.ecol[, 1], ' ', '_')
-to.drop <- na.scale$tip.label[!(na.scale$tip.label %in% tax.nam)]
-na.tree <- drop.tip(na.scale, to.drop)
+to.drop <- spt$tip.label[!(spt$tip.label %in% tax.nam)]
+na.tree <- drop.tip(spt, to.drop)
 
 # for each window
 vcv.s <- list()
@@ -87,26 +87,27 @@ for(ii in seq(length(name))) {
 }
 
 
-# make the list of lists
-data <- list()
-for(ii in seq(length(aj))) {
-  N <- size[[ii]]
-  D <- ncol(dit[[ii]])
-  M <- ncol(mve[[ii]])
-  degree <- deg[[ii]]
-  mass <- ecol[[ii]]$mass
-  diet <- dit[[ii]]
-  move <- mve[[ii]]
-  vcv <- vcv.s[[ii]]
-  adj <- aj[[ii]]
-  off <- exposure[[ii]]
-  data[[ii]] <- list(N = N, D = D, M = M, degree = degree, mass = mass, 
-                     diet = diet, move = move, vcv = vcv, adj = adj, off = off)
 
-  # spit out the data into a stan dump file
-  # use shell script to analyze the data
+## make the list of lists
+#data <- list()
+#for(ii in seq(length(aj))) {
+#  N <- size[[ii]]
+#  D <- ncol(dit[[ii]])
+#  M <- ncol(mve[[ii]])
+#  degree <- deg[[ii]]
+#  mass <- ecol[[ii]]$mass
+#  diet <- dit[[ii]]
+#  move <- mve[[ii]]
+#  vcv <- vcv.s[[ii]]
+#  adj <- aj[[ii]]
+#  off <- exposure[[ii]]
+#  data[[ii]] <- list(N = N, D = D, M = M, degree = degree, mass = mass, 
+#                     diet = diet, move = move, vcv = vcv, adj = adj, off = off)
+#
+#  # spit out the data into a stan dump file
+#  # use shell script to analyze the data
 #  n <- paste0('../data/meta_dump/meta_dump_', ii, '.data.R')
 #  stan_rdump(list = c('N', 'D', 'M', 'degree', 'mass', 
 #                      'diet', 'move', 'vcv', 'adj', 'off'),
 #             file = n)
-}
+#}

@@ -11,8 +11,9 @@ RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
 nsim <- 1000
 
-source('../R/surv_setup.r')
-data <- read_rdump('../data/data_dump/surv_info.data.R')
+#source('../R/surv_setup.r')
+source('../R/surv_fit.r')
+#data <- read_rdump('../data/data_dump/surv_info.data.R')
 
 # this is for the total model
 outs <- dir('../data/mcmc_out', pattern = 'wei_surv_[0-9]', full.names = TRUE)
@@ -151,4 +152,4 @@ var.star <- mclapply(1:nsim, function(x) sim.var(50000),
 
 var.star <- data.frame(Reduce(rbind, var.star))
 
-save.image(file = '../data/surv_sim_out.rdata')
+#save.image(file = '../data/surv_sim_out.rdata')

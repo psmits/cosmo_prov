@@ -31,7 +31,6 @@ parameters {
   real beta_inter;
   real beta_occ;
   real beta_size;
-  real beta_interaction;
   real<lower=0> alpha;
   vector[M] beta_move;
   vector[D] beta_diet;
@@ -49,7 +48,6 @@ model {
   beta_inter ~ normal(0, 10);
   beta_occ ~ normal(0, 5);
   beta_size ~ normal(0, 5);
-  beta_interaction ~ normal(0, 5);
   for(i in 1:M) {
     beta_move[i] ~ normal(0, 5);
   }
@@ -78,7 +76,6 @@ model {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
-                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
@@ -87,7 +84,6 @@ model {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
-                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha)));
@@ -98,7 +94,6 @@ model {
           exp(-(beta_inter +
               beta_occ * occ_cen[i] + 
               beta_size * size_cen[i] + 
-              beta_interaction * (occ_cen[i] * size_cen[i]) +
               diet_cen[i] * beta_diet +
               move_cen[i] * beta_move +
               rando[coh_cen[i]] + phy[samp_cen[i]]) / alpha)));
@@ -113,7 +108,6 @@ generated quantities {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
-                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha));
@@ -122,7 +116,6 @@ generated quantities {
             exp(-(beta_inter +
                 beta_occ * occ_unc[i] + 
                 beta_size * size_unc[i] + 
-                beta_interaction * (occ_unc[i] * size_unc[i]) +
                 diet_unc[i] * beta_diet +
                 move_unc[i] * beta_move +
                 rando[coh_unc[i]] + phy[samp_unc[i]]) / alpha));
@@ -133,7 +126,6 @@ generated quantities {
         exp(-(beta_inter +
             beta_occ * occ_cen[j] + 
             beta_size * size_cen[j] + 
-            beta_interaction * (occ_cen[j] * size_cen[j]) +
             diet_cen[j] * beta_diet +
             move_cen[j] * beta_move +
             rando[coh_cen[j]] + phy[samp_cen[j]]) / alpha));

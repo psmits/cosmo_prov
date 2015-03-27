@@ -84,7 +84,7 @@ ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
 # deviance residuals
 std.res <- melt(pm.res)
 std.res <- std.res[std.res$L1 %in% 1:12, ]
-std.res$index <- rep(seq(1:1921), 12)
+std.res$index <- rep(seq(1:1936), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
 ppc.res <- ppc.res + geom_hline(aes(yintercept = 0), 
                                 colour = 'darkgrey', size = 1)
@@ -223,10 +223,13 @@ ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
 # effect of body size and occupancy
 sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']
 sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']
-sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
+sc.inter.eff <- scale.melted[scale.melted$L1 == 'beta_interaction', 'value']
+sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff, sc.inter.eff))
 sc.oth.eff$Var2 <- as.character(sc.oth.eff$Var2)
-sc.oth.eff$Var2 <- mapvalues(sc.oth.eff$Var2, c('sc.occ.eff', 'sc.size.eff'),
-                             c('beta[occupancy]', 'beta[size]'))
+sc.oth.eff$Var2 <- mapvalues(sc.oth.eff$Var2, c('sc.occ.eff', 'sc.size.eff', 
+                                                'sc.inter.eff'),
+                             c('beta[occupancy]', 'beta[size]', 
+                               'beta[interaction]'))
 
 other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
