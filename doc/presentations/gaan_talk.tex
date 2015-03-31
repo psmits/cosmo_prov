@@ -38,10 +38,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Acknowledgements}
-\end{frame}
-
-\begin{frame}
   \frametitle{Differences in species duration}
 
   \begin{block}{Framework}
@@ -49,18 +45,65 @@
       \item How do different species-level ecological traits relate to differences in species duration?
       \item How do time of origination and phylogenetic history contribute to differences in species duration?
       \item Does extinction risk vary with species duration?
+      \item Is the current biodiversity crisis consistent with intensification of background or sometimes else (e.g. mass extinction)?
     \end{itemize}
   \end{block}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Traits of interest}
+  \frametitle{System and traits of interest}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Mammal species
+          \begin{itemize}
+            \item \(\sim\) 2000
+          \end{itemize}
+        \item North America
+        \item Cenozoic
+          \begin{itemize}
+            \item \(\sim\) 65 My
+          \end{itemize}
+        \item duration in 2 My bins
+        \item georeferenced occurrences
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Covariates of interest
+          \begin{itemize}
+            \item bioprovince occupancy
+            \item body size
+            \item dietary category: carnivore, herbivore, insectivore, omnivore
+            \item locomotor category: arboreal, ground dwelling, scansorial
+          \end{itemize}
+        \item Structure
+          \begin{itemize}
+            \item origination cohort
+            \item phylogenetic position
+          \end{itemize}
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
+
+%\begin{frame}
+%  \frametitle{Bioprovince occupancy}
+%  raster globe, assign occurrance
+%  create bipartite graph, map equation to estimate bioprovinces
+%\end{frame}
 
 \begin{frame}
   \frametitle{Body size}
 
-  Three hypotheses
+  \begin{block}{Hypotheses}
+    \begin{itemize}
+      \item increase body size, decrease reproductive rate, increase extinction risk.
+      \item increase body size, increase geographic range, decrease extinction risk.
+      \item no effect.
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -75,12 +118,22 @@
   arboreal, ground dwelling, scansorial
 \end{frame}
 
+
 \begin{frame}
   \frametitle{Bayesian survival model}
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio=true]{figure/mammal_survival_model}
 \end{frame}
 
 \begin{frame}
   \frametitle{Survival function}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Covariate effects}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Origination cohort effect}
 \end{frame}
 
 \begin{frame}
@@ -100,6 +153,10 @@
 \end{frame}
 
 \appendix
+
+\begin{frame}
+  % blank so i don't just keep going
+\end{frame}
 
 \begin{frame}
   \frametitle{Posterior predictive checks: deviance residuals}

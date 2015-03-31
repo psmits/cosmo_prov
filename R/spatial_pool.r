@@ -26,6 +26,7 @@ adj[adj.list] <- 1
 splits <- split(dat, dat$bins)
 diversities <- llply(splits, function(x) table(x$gid))
 
+
 data <- list()
 for(ii in seq(length(diversities))) {
   div <- array(data = 0, dim = nrow(adj))
@@ -39,11 +40,17 @@ for(ii in seq(length(diversities))) {
                                file = nam)})
 }
 
-fit.mod <- stan(file = '../stan/spatial_model.stan')
-fit.list <- mclapply(1:4, mc.cores = detectCores(),
-                     function(x) stan(fit = fit.mod,
-                                      data = data[[1]],
-                                      seed = 420,
-                                      chains = 1, chain_id = x,
-                                      refresh = -1))
-fit.attempt <- sflist2stanfit(fit.list)
+#par(mfrow = c(6, 5), mar = c(4, 4, 2, 2))
+#for(ii in seq(30)) {
+#  values(sp.ras) <- as.vector(data[[ii]]$div)
+#  plot(sp.ras, main = ii)
+#}
+
+#fit.mod <- stan(file = '../stan/spatial_model.stan')
+#fit.list <- mclapply(1:4, mc.cores = detectCores(),
+#                     function(x) stan(fit = fit.mod,
+#                                      data = data[[1]],
+#                                      seed = 420,
+#                                      chains = 1, chain_id = x,
+#                                      refresh = -1))
+#fit.attempt <- sflist2stanfit(fit.list)
