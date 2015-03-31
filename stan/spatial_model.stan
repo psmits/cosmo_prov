@@ -1,5 +1,5 @@
 data {
-  int<lower = 1> N;
+  int<lower=1> N;
   int diversity[N];
   matrix[N,N] adj;
   vector[N] neighbors;
@@ -23,7 +23,7 @@ parameters {
 
   vector[N] spatial;  // storage
   real<lower=0> sigma;  // spatial variance
-  real<lower=min(eigen),upper=max(eigen)> p;  // spatial "strength"
+  real<lower=1/min(eigen),upper=1/max(eigen)> p;  // spatial "strength"
 }
 transformed parameters {
   real<lower=0> tau;  // spatial precision
