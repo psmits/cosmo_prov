@@ -39,11 +39,11 @@ for(ii in seq(length(diversities))) {
                                file = nam)})
 }
 
-#fit.mod <- stan(file = '../stan/spatial_model.stan')
-#fit.list <- mclapply(1:4, mc.cores = detectCores(),
-#                     function(x) stan(fit = fit.mod,
-#                                      data = data,
-#                                      seed = 420,
-#                                      chains = 1, chain_id = x,
-#                                      refresh = -1))
-#fit.attempt <- sflist2stanfit(fit.list)
+fit.mod <- stan(file = '../stan/spatial_model.stan')
+fit.list <- mclapply(1:4, mc.cores = detectCores(),
+                     function(x) stan(fit = fit.mod,
+                                      data = data[[1]],
+                                      seed = 420,
+                                      chains = 1, chain_id = x,
+                                      refresh = -1))
+fit.attempt <- sflist2stanfit(fit.list)

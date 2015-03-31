@@ -4,44 +4,44 @@ The top-level auxiliary file: science_survival.aux
 The style file: science.bst
 Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 29 entries,
+You've used 28 entries,
             2300 wiz_defined-function locations,
-            939 strings with 10500 characters,
-and the built_in function-call counts, 6332 in all, are:
-= -- 563
-> -- 261
+            933 strings with 10384 characters,
+and the built_in function-call counts, 6158 in all, are:
+= -- 547
+> -- 257
 < -- 3
-+ -- 128
-- -- 65
-* -- 499
-:= -- 957
-add.period$ -- 29
-call.type$ -- 29
++ -- 126
+- -- 64
+* -- 486
+:= -- 929
+add.period$ -- 28
+call.type$ -- 28
 change.case$ -- 2
 chr.to.int$ -- 3
-cite$ -- 29
-duplicate$ -- 325
-empty$ -- 599
-format.name$ -- 83
-if$ -- 1485
+cite$ -- 28
+duplicate$ -- 315
+empty$ -- 581
+format.name$ -- 82
+if$ -- 1444
 int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 31
-newline$ -- 90
-num.names$ -- 33
-pop$ -- 133
+int.to.str$ -- 28
+missing$ -- 30
+newline$ -- 87
+num.names$ -- 32
+pop$ -- 131
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 201
+skip$ -- 196
 stack$ -- 0
-substring$ -- 326
-swap$ -- 99
+substring$ -- 316
+swap$ -- 96
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 63
-width$ -- 31
-write$ -- 233
+while$ -- 61
+width$ -- 30
+write$ -- 225
