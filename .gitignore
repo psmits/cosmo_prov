@@ -4,3 +4,4 @@ meta_dump/
 mcmc_out/
 *.cpp
 *.hpp
+ne_10m_coastline.*
