@@ -40,6 +40,8 @@ for(ii in seq(length(diversities))) {
                                file = nam)})
 }
 
+
+
 #par(mfrow = c(6, 5), mar = c(4, 4, 2, 2))
 #for(ii in seq(30)) {
 #  values(sp.ras) <- as.vector(data[[ii]]$div)
