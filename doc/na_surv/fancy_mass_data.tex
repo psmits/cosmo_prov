@@ -1,8 +1,23 @@
+\documentclass{article}
+\usepackage{scicite}
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{multirow, microtype, graphicx}
+\usepackage{longtable}
+\usepackage{lineno}
+\bibliographystyle{science}
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{table}{3}
+
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
 % Fri Feb 27 20:11:31 2015
-%\begin{table}[ht]
-  \centering
-  \begin{longtable}{p{0.5\textwidth} p{0.1\textwidth} p{0.4\textwidth}}
+\begin{document}
+\small
+\begin{center}
+  \begin{longtable}{p{0.5\textwidth} p{0.15\textwidth} p{0.4\textwidth}}
+    \caption[Mammal body mass estimates]{Body mass estimates in grams for all mammal species included in this study. Also included is the source of this measurement. PBDB = Paleobiology Database, NOW = Neogene Old World Database, EOL = Encyclopedia of Life, ADW = Animal Diversity Web. PBDB + regression indicates that body mass was estimated from a measurement on the PBDB using one of the many regression equations listed in Table S3.} \label{tab:mass_data} \\
+
     \hline Species & Mass (g) & Source \\ \hline
     \endfirsthead
 
@@ -15,19 +30,13 @@
 
     \hline \hline
     \endlastfoot
-
     Aaptoryctes ivyi & 9.40 & PBDB + regression \\ 
-    Abelmoschomys simpsoni & 15.96 & \cite{Tomiya2013} \\ 
     Absarokius abbotti & 6.30 & PBDB + regression \\ 
-    Absarokius gazini & 4.20 & PBDB + regression \\ 
     Absarokius metoecus & 6.10 & PBDB + regression \\ 
     Acarictis ryani & 8.30 & PBDB + regression \\ 
-    Achaenodon fremdi & 774100.00 & \cite{McKenna2011} \\ 
     Achaenodon robustus & 484.90 & PBDB + regression \\ 
     Achlyoscapter longirostris & 11.94 & \cite{Tomiya2013} \\ 
-    Acidomomys hebeticus & 4.60 & PBDB + regression \\ 
     Acmeodon secans & 12.10 & PBDB + regression \\ 
-    Acratocnus odontrigonus & 33036.95 & \cite{Brook2004a} \\ 
     Acritohippus isonesus & 135944.23 & \cite{Tomiya2013} \\ 
     Acritohippus quinni & 178082.11 & \cite{Tomiya2013} \\ 
     Acritoparamys atwateri & 5.70 & PBDB + regression \\ 
@@ -51,7 +60,6 @@
     Aelurodon stirtoni & 20537.34 & \cite{Tomiya2013} \\ 
     Aelurodon taxoides & 29436.77 & \cite{Tomiya2013} \\ 
     Aepinacodon americanus & 809.20 & \cite{Baskin2011} \\ 
-    Aepinacodon deflectus & 715.44 & PBDB \\ 
     Aepycamelus bradyi & 922.04 & \cite{Dawson2012} \\ 
     Aepycamelus giraffinus & 901.44 & PBDB \\ 
     Aepycamelus robustus & 420836.64 & \cite{Tomiya2013} \\ 
@@ -61,24 +69,18 @@
     Agriochoerus antiquus & 56387.34 & \cite{Tomiya2013} \\ 
     Agriochoerus guyotianus & 59000.00 & \cite{McKenna2011} \\ 
     Agriotherium schneideri & 355045.06 & \cite{Tomiya2013} \\ 
-    Aguascalientia wilsoni & 67.00 & PBDB + regression \\ 
     Alagomys russelli & 0.70 & PBDB + regression \\ 
-    Alces alces & 203183.00 & PBDB \\ 
     Aletodon conardae & 17.20 & PBDB + regression \\ 
     Aletodon gunnelli & 17.90 & PBDB + regression \\ 
     Aletodon quadravus & 13.00 & PBDB + regression \\ 
     Aletomeryx gracilis & 27173.57 & \cite{Tomiya2013} \\ 
-    Aletomeryx occidentalis & 30946.03 & \cite{Tomiya2013} \\ 
     Alforjas taylori & 408399.03 & \cite{Tomiya2013} \\ 
     Alilepus vagus & 7.20 & PBDB + regression \\ 
     Alilepus wilsoni & 4.90 & PBDB + regression \\ 
-    Allocosmodon woodi & 46.00 & \cite{Wilson2012} \\ 
     Allomys cristabrevis & 6.50 & PBDB + regression \\ 
     Allomys simplicidens & 122.00 & \cite{McKenna2011} \\ 
     Allomys storeri & 3.80 & PBDB + regression \\ 
-    Allophaiomys pliocaenicus & 2.60 & PBDB + regression \\ 
     Alluvisorex arcadentes & 5.70 & \cite{Tomiya2013} \\ 
-    Alopex lagopus & 3385.00 & PBDB \\ 
     Alphagaulus pristinus & 521.00 & \cite{McKenna2011} \\ 
     Alphagaulus vetus & 523.22 & \cite{Tomiya2013} \\ 
     Alticonus gazini & 17.50 & PBDB + regression \\ 
@@ -88,12 +90,8 @@
     Alwoodia magna & 226.00 & \cite{McKenna2011} \\ 
     Amebelodon floridanus & 8243.20 & PBDB + regression \\ 
     Amelotabes simpsoni & 3.40 & PBDB + regression \\ 
-    Ammospermophilus fossilis & 56.83 & \cite{Tomiya2013} \\ 
     Ammospermophilus hanfordi & 58.00 & \cite{McKenna2011} \\ 
-    Ammospermophilus harrisii & 8.05 & \cite{Smith2004} \\ 
-    Ammospermophilus interpres & 7.71 & \cite{Smith2004} \\ 
     Ammospermophilus junturensis & 53.52 & \cite{Tomiya2013} \\ 
-    Ammospermophilus leucurus & 7.51 & \cite{Smith2004} \\ 
     Amphechinus horncloudi & 175.91 & \cite{Tomiya2013} \\ 
     Amphicaenopus platycephalus & 2397650.84 & \cite{Tomiya2013} \\ 
     Amphicyon frendens & 245241.81 & \cite{Tomiya2013} \\ 
@@ -106,21 +104,16 @@
     Amynodon advenus & 1197.30 & PBDB + regression \\ 
     Amynodon reedi & 994.15 & PBDB \\ 
     Amynodontopsis bodei & 548.30 & PBDB + regression \\ 
-    Anacodon nexus & 74.10 & \cite{Heissig2012a} \\ 
     Anaptomorphus aemulus & 4.50 & PBDB + regression \\ 
     Anaptomorphus westi & 6.50 & PBDB + regression \\ 
     Anasazia williamsoni & 6.49 & \cite{Williamson2012} \\ 
-    Anchiblarinella wakeeneyensis & 6.96 & \cite{Tomiya2013} \\ 
     Anchitherium clarencei & 230960.04 & \cite{Tomiya2013} \\ 
-    Anchitherium navasotae & 154817.15 & \cite{Tomiya2013} \\ 
     Anconodon cochranensis & 57.00 & \cite{Wilson2012} \\ 
     Anemorhysis natronensis & 2.50 & PBDB + regression \\ 
     Anemorhysis pattersoni & 3.40 & PBDB + regression \\ 
     Anemorhysis pearcei & 2.48 & \cite{Albright2000} \\ 
-    Anemorhysis sublettensis & 2.10 & PBDB + regression \\ 
     Anemorhysis wortmani & 2.90 & PBDB + regression \\ 
     Angustidens vireti & 18.17 & \cite{Tomiya2013} \\ 
-    Anisonchus athelas & 12.50 & PBDB + regression \\ 
     Anisonchus oligistus & 9.70 & PBDB + regression \\ 
     Anisonchus onostus & 12.50 & PBDB + regression \\ 
     Anisonchus sectorius & 21.20 & PBDB + regression \\ 
@@ -135,7 +128,6 @@
     Antecalomys vasquezi & 10.70 & PBDB \\ 
     Antiacodon pygmaeus & 10.70 & PBDB + regression \\ 
     Antiacodon venustus & 24.80 & PBDB + regression \\ 
-    Antilocapra americana & 46244.00 & PBDB \\ 
     Apataelurus kayi & 60.00 & PBDB + regression \\ 
     Apatemys bellulus & 2.00 & PBDB + regression \\ 
     Apatemys bellus & 2.30 & PBDB + regression \\ 
@@ -155,13 +147,10 @@
     Aphronorus fraudator & 6.30 & PBDB + regression \\ 
     Aphronorus orieli & 14.30 & PBDB + regression \\ 
     Aphronorus ratatoski & 8.30 & PBDB + regression \\ 
-    Aphronorus simpsoni & 6.30 & PBDB + regression \\ 
     Apletotomeus crassus & 1.00 & PBDB + regression \\ 
-    Aplodontia rufa & 1003.00 & PBDB \\ 
     Apternodus gregoryi & 5.50 & PBDB + regression \\ 
     Apternodus iliffensis & 5.40 & PBDB + regression \\ 
     Arapahovius advena & 2.90 & PBDB + regression \\ 
-    Arapahovius gazini & 191.00 & \cite{Controy1987} \\ 
     Archaeocyon falkenbachi & 88.00 & \cite{Stirton1932} \\ 
     Archaeocyon leptodus & 3533.34 & \cite{Tomiya2013} \\ 
     Archaeocyon pavidus & 2275.60 & \cite{Tomiya2013} \\ 
@@ -178,16 +167,13 @@
     Archaeotherium lemleyi & 932.90 & PBDB + regression \\ 
     Archaeotherium mortoni & 297.60 & PBDB + regression \\ 
     Archaeotherium trippensis & 1691.00 & PBDB + regression \\ 
-    Arcticanodon dawsonae & 1.55 & \cite{White1988} \\ 
     Arctocyon montanensis & 71.10 & PBDB + regression \\ 
     Arctocyon mumak & 149.00 & PBDB \\ 
     Arctodontomys nuptus & 8.70 & PBDB + regression \\ 
     Arctodontomys simplicidens & 7.10 & PBDB + regression \\ 
     Arctodontomys wilsoni & 7.40 & PBDB + regression \\ 
     Arctodus pristinus & 239.13 & \cite{Smith2004} \\ 
-    Arctodus simus & 349.67 & \cite{Smith2004} \\ 
     Arctonasua eurybates & 15994.50 & \cite{Tomiya2013} \\ 
-    Arctonasua floridana & 16317.61 & \cite{Tomiya2013} \\ 
     Arctonasua gracilis & 8866.19 & \cite{Tomiya2013} \\ 
     Arctonasua minima & 7044.48 & \cite{Tomiya2013} \\ 
     Arctostylops steini & 11.30 & PBDB + regression \\ 
@@ -203,10 +189,8 @@
     Artimonius nocerai & 3.70 & PBDB + regression \\ 
     Artimonius witteri & 4.40 & PBDB + regression \\ 
     Astrohippus stockii & 203.04 & PBDB \\ 
-    Atopomys texensis & 21.33 & \cite{Tomiya2013} \\ 
     Aulolithomys bounites & 3.20 & PBDB + regression \\ 
     Aulolithomys vexilliames & 1.50 & PBDB + regression \\ 
-    Auroralestes simpsoni & 1.50 & PBDB + regression \\ 
     Australocamelus orarius & 100709.96 & \cite{Tomiya2013} \\ 
     Auxontodon pattersoni & 26.80 & PBDB + regression \\ 
     Avunculus didelphodonti & 4.30 & PBDB + regression \\ 
@@ -215,9 +199,7 @@
     Azygonyx ancylion & 74.20 & PBDB + regression \\ 
     Azygonyx grangeri & 94.00 & PBDB + regression \\ 
     Azygonyx xenicus & 48.40 & PBDB + regression \\ 
-    Baataromomys brandti & 2.97 & \cite{Silcox2008} \\ 
     Baioconodon denverensis & 35.70 & PBDB + regression \\ 
-    Baioconodon engdahli & 16.30 & PBDB + regression \\ 
     Baioconodon nordicus & 21.60 & PBDB + regression \\ 
     Baiomys rexroadi & 0.90 & PBDB + regression \\ 
     Baiotomeus douglassi & 6.60 & PBDB + regression \\ 
@@ -228,14 +210,11 @@
     Barbourofelis osborni & 264.00 & \cite{Martin2002a} \\ 
     Barbourofelis whitfordi & 77652.58 & \cite{Tomiya2013} \\ 
     Barbouromeryx trigonocorneus & 33860.35 & \cite{Tomiya2013} \\ 
-    Barylambda churchilli & 547.80 & PBDB + regression \\ 
     Barylambda faberi & 726.70 & PBDB + regression \\ 
     Barylambda jackwilsoni & 246.20 & PBDB + regression \\ 
     Basirepomys pliocenicus & 3.30 & PBDB + regression \\ 
     Basirepomys robertsi & 2.80 & PBDB + regression \\ 
-    Bassaricyonoides phyllismillerae & 2670.44 & \cite{Tomiya2013} \\ 
     Bassariscus antiquus & 1881.83 & \cite{Tomiya2013} \\ 
-    Bassariscus astutus & 765.00 & PBDB \\ 
     Bassariscus casei & 1652.43 & \cite{Tomiya2013} \\ 
     Bassariscus minimus & 6.15 & \cite{Robinson1966} \\ 
     Bassariscus ogallalae & 21.94 & \cite{Gidley1920} \\ 
@@ -249,7 +228,6 @@
     Bensonomys baskini & 1.89 & PBDB \\ 
     Bensonomys elachys & 1.00 & \cite{Kirk2011} \\ 
     Bensonomys gidleyi & 1.30 & PBDB \\ 
-    Bensonomys hershkovitzi & 1.50 & PBDB + regression \\ 
     Bensonomys lindsayi & 1.00 & PBDB + regression \\ 
     Bensonomys meadensis & 1.55 & PBDB \\ 
     Bensonomys winklerorum & 1.02 & PBDB \\ 
@@ -257,19 +235,13 @@
     Betonnia tsosia & 3.84 & \cite{Clemens2005} \\ 
     Bisonalveus browni & 5.50 & PBDB + regression \\ 
     Bisonalveus holtzmani & 7.40 & PBDB + regression \\ 
-    Bison antiquus & 1013911.39 & \cite{Brook2004a} \\ 
-    Bison bison & 453866.00 & PBDB \\ 
-    Bison latifrons & 385.29 & \cite{Smith2004} \\ 
-    Bison priscus & 1000000.00 & NOW \\ 
     Blacktops latidens & 18.02 & PBDB \\ 
     Blacktops longinares & 15.14 & PBDB \\ 
-    Blarina bravicauda & 21.63 & Animal Diversity Web \\ 
     Blarina brevicauda & 16.40 & PBDB \\ 
     Blarina carolinensis & 3.10 & \cite{Smith2004} \\ 
     Blastomeryx gemmifer & 10938.02 & \cite{Tomiya2013} \\ 
     Blastomeryx pristinus & 168.00 & PBDB \\ 
     Blickomylus galushai & 16983.54 & \cite{Tomiya2013} \\ 
-    Bootherium bombifrons & 239.13 & \cite{Smith2004} \\ 
     Boreameryx braskerudi & 56.30 & PBDB + regression \\ 
     Borophagus diversidens & 34891.55 & \cite{Tomiya2013} \\ 
     Borophagus dudleyi & 247.00 & \cite{Dalquest1978} \\ 
@@ -292,19 +264,14 @@
     Brachyerix richi & 340.36 & \cite{Tomiya2013} \\ 
     Brachyhyops viensis & 298.00 & PBDB + regression \\ 
     Brachyhyops wyomingensis & 199.30 & PBDB + regression \\ 
-    Brachylagus idahoensis & 13.80 & \cite{Smith2004} \\ 
-    Brachyprotoma obtusata & 42.95 & \cite{Tomiya2013} \\ 
-    Brachypsalis matutinus & 330.30 & \cite{Tomiya2013} \\ 
     Brachypsalis modicus & 512.86 & \cite{Tomiya2013} \\ 
     Brachypsalis obliquidens & 157.50 & PBDB \\ 
     Brachypsalis pachycephalus & 487.85 & \cite{Tomiya2013} \\ 
     Brachyrhynchocyon dodgei & 14.10 & PBDB + regression \\ 
     Brachyrhynchocyon montanus & 11.40 & PBDB + regression \\ 
-    Brontops dispar & 2380.70 & PBDB + regression \\ 
     Brontops tyleri & 571500.00 & PBDB \\ 
     Buisnictis breviramus & 5.50 & PBDB + regression \\ 
     Buisnictis burrowsi & 14.58 & PBDB \\ 
-    Buisnictis chisoensis & 6.84 & PBDB + regression \\ 
     Buisnictis schoffi & 22.42 & \cite{Tomiya2013} \\ 
     Bunomeryx montanus & 17.20 & PBDB + regression \\ 
     Bunophorus etsagicus & 44.10 & PBDB + regression \\ 
@@ -322,20 +289,14 @@
     Calippus proplacidus & 64860.88 & \cite{Tomiya2013} \\ 
     Calippus regulus & 45251.90 & \cite{Tomiya2013} \\ 
     Camelops hesternus & 420.31 & \cite{Smith2004} \\ 
-    Camelops huerfanensis & 345.50 & \cite{Smith2004} \\ 
-    Camelops minidokae & 642.10 & PBDB + regression \\ 
     Camelops traviswhitei & 774.70 & PBDB + regression \\ 
     Campestrallomys annectens & 3.50 & PBDB + regression \\ 
     Campestrallomys dawsonae & 298.87 & \cite{Tomiya2013} \\ 
     Campestrallomys siouxensis & 159.17 & \cite{Tomiya2013} \\ 
     Canis armbrusteri & 30333.26 & \cite{Tomiya2013} \\ 
-    Canis dirus & 123.10 & \cite{Smith2004} \\ 
     Canis edwardii & 25.40 & PBDB + regression \\ 
-    Canis familiaris & 18200.00 & PBDB \\ 
-    Canis ferox & 19.40 & PBDB + regression \\ 
     Canis latrans & 11765.00 & PBDB \\ 
     Canis lepophagus & 14617.87 & \cite{Tomiya2013} \\ 
-    Canis lupus & 32907.00 & PBDB \\ 
     Canis rufus & 15566.00 & PBDB \\ 
     Cantius abditus & 28.60 & PBDB + regression \\ 
     Cantius angulatus & 10.10 & PBDB + regression \\ 
@@ -347,8 +308,6 @@
     Cantius torresi & 10.00 & PBDB + regression \\ 
     Cantius trigonodus & 2000.00 & \cite{Soligo2006} \\ 
     Capricamelus gettyi & 389.10 & PBDB + regression \\ 
-    Capromeryx furcifer & 11849.01 & \cite{Tomiya2013} \\ 
-    Capromeryx minor & 54.60 & \cite{Smith2004} \\ 
     Capromeryx tauntonensis & 15835.35 & \cite{Tomiya2013} \\ 
     Cardiolophus radinskyi & 79.10 & PBDB + regression \\ 
     Cardiolophus semihians & 80.80 & PBDB + regression \\ 
@@ -357,20 +316,15 @@
     Carpocyon compressus & 15214.44 & \cite{Tomiya2013} \\ 
     Carpocyon robustus & 19341.34 & \cite{Tomiya2013} \\ 
     Carpocyon webbi & 20537.34 & \cite{Tomiya2013} \\ 
-    Carpodaptes aulacodon & 2.10 & PBDB + regression \\ 
     Carpodaptes hazelae & 3.20 & PBDB + regression \\ 
     Carpodaptes stonleyi & 2.50 & PBDB + regression \\ 
-    Carpolestes dubius & 4.70 & PBDB + regression \\ 
     Carpolestes nigridens & 87.00 & \cite{Scott2003a} \\ 
     Carpolestes simpsoni & 2.30 & PBDB + regression \\ 
     Carpomegodon jepseni & 6.10 & PBDB + regression \\ 
     Catopsalis alexanderi & 31.90 & PBDB + regression \\ 
     Catopsalis calgariensis & 90.20 & PBDB + regression \\ 
-    Catopsalis fissidens & 86.80 & PBDB + regression \\ 
     Catopsalis foliatus & 48.60 & PBDB + regression \\ 
     Catopsalis joyneri & 2435.00 & \cite{Wilson2012} \\ 
-    Catopsalis waddleae & 152.50 & PBDB + regression \\ 
-    Cedrocherus ryani & 3.20 & PBDB + regression \\ 
     Cedromus wardi & 6.60 & PBDB + regression \\ 
     Centetodon aztecus & 2.00 & PBDB + regression \\ 
     Centetodon bembicophagus & 1.50 & PBDB + regression \\ 
@@ -379,38 +333,26 @@
     Centetodon hendryi & 2.00 & PBDB + regression \\ 
     Centetodon kuenzii & 2.60 & PBDB + regression \\ 
     Centetodon magnus & 33.45 & \cite{Tomiya2013} \\ 
-    Centetodon marginalis & 1.81 & PBDB \\ 
     Centetodon neashami & 4.00 & PBDB + regression \\ 
-    Centetodon patratus & 2.50 & PBDB + regression \\ 
     Centetodon pulcher & 2.80 & PBDB + regression \\ 
     Centimanomys major & 6.50 & PBDB + regression \\ 
     Ceratogaulus hatcheri & 80.00 & \cite{Cassiliano2008} \\ 
     Cernictis hesperus & 177.68 & \cite{Tomiya2013} \\ 
     Cernictis repenningi & 53.55 & \cite{Hall1930} \\ 
-    Cervalces scotti & 330.63 & \cite{Smith2004} \\ 
-    Cervus brevitrabalis & 112483.00 & \cite{McKenna2011} \\ 
-    Cervus elaphus & 180000.00 & NOW \\ 
-    Ceutholestes dolosus & 3.30 & PBDB + regression \\ 
     Chacomylus sladei & 5.80 & PBDB + regression \\ 
-    Chacopterygus minutus & 7.30 & PBDB + regression \\ 
     Chadrolagus emryi & 3.60 & PBDB + regression \\ 
-    Chaetodipus formosus & 3.63 & \cite{Smith2004} \\ 
-    Chaetodipus hispidus & 42.70 & PBDB \\ 
-    Chaetodipus intermedius & 13.00 & PBDB \\ 
     Chalicomomys willwoodensis & 0.80 & PBDB + regression \\ 
     Chasmaporthetes ossifragus & 28.10 & PBDB + regression \\ 
     Chipetaia lamporea & 10.10 & PBDB + regression \\ 
     Chiromyoides caesor & 7.10 & PBDB + regression \\ 
     Chiromyoides minor & 3.80 & PBDB + regression \\ 
     Chiromyoides potior & 6.80 & PBDB + regression \\ 
-    Chlororhysis knightensis & 2.10 & PBDB + regression \\ 
     Chriacus badgleyi & 18.00 & PBDB + regression \\ 
     Chriacus baldwini & 20.70 & PBDB + regression \\ 
     Chriacus gallinae & 20.10 & PBDB + regression \\ 
     Chriacus pelvidens & 39.50 & PBDB + regression \\ 
     Chumashius balchi & 4.90 & PBDB + regression \\ 
     Churcheria baroni & 2.70 & PBDB + regression \\ 
-    Cimexomys arapahoensis & 104.00 & \cite{Wilson2012} \\ 
     Cimexomys minor & 2.30 & PBDB + regression \\ 
     Cimolestes incisus & 9.10 & PBDB + regression \\ 
     Colodon cingulatus & 282.74 & PBDB \\ 
@@ -422,18 +364,12 @@
     Conacodon delphae & 31.40 & PBDB + regression \\ 
     Conacodon entoconus & 25.50 & PBDB + regression \\ 
     Conacodon kohlbergeri & 12.20 & PBDB + regression \\ 
-    Condylura cristata & 83.00 & PBDB \\ 
-    Conepatus leuconotus & 34.61 & \cite{Smith2004} \\ 
-    Conepatus robustus & 12.30 & PBDB + regression \\ 
-    Conoryctella pattersoni & 45.20 & PBDB + regression \\ 
     Conoryctes comma & 76.10 & PBDB + regression \\ 
     Copecion brachypternus & 37.10 & PBDB + regression \\ 
     Copecion davisi & 28.60 & PBDB + regression \\ 
     Copedelphys innominata & 2.10 & PBDB + regression \\ 
-    Copedelphys stevensoni & 0.80 & PBDB + regression \\ 
     Copedelphys titanelix & 1.00 & PBDB + regression \\ 
     Copelemur australotutus & 21.30 & PBDB + regression \\ 
-    Copelemur praetutus & 16.10 & PBDB + regression \\ 
     Copelemur tutus & 22.90 & PBDB + regression \\ 
     Copemys barstowensis & 32.14 & \cite{Tomiya2013} \\ 
     Copemys esmeraldensis & 27.94 & \cite{Tomiya2013} \\ 
@@ -442,7 +378,6 @@
     Copemys loxodon & 28.79 & \cite{Tomiya2013} \\ 
     Copemys mariae & 31.50 & \cite{Tomiya2013} \\ 
     Copemys pagei & 15.18 & \cite{Tomiya2013} \\ 
-    Copemys pisinnus & 1.40 & PBDB + regression \\ 
     Copemys russelli & 24.29 & \cite{Tomiya2013} \\ 
     Copemys shotwelli & 1.10 & PBDB + regression \\ 
     Copemys tenuis & 23.34 & \cite{Tomiya2013} \\ 
@@ -453,7 +388,6 @@
     Coryphodon armatus & 882.70 & PBDB + regression \\ 
     Coryphodon eocaenus & 659.70 & PBDB + regression \\ 
     Coryphodon lobatus & 1189.40 & PBDB + regression \\ 
-    Coryphodon pisuqti & 793.00 & \cite{Cooke2011} \\ 
     Coryphodon proterus & 1068.80 & PBDB + regression \\ 
     Coryphodon radians & 864.30 & PBDB + regression \\ 
     Cosoryx cerroensis & 16814.55 & \cite{Tomiya2013} \\ 
@@ -461,16 +395,12 @@
     Cranioceras clarendonensis & 18.90 & PBDB + regression \\ 
     Cranioceras teres & 96761.07 & \cite{Tomiya2013} \\ 
     Cranioceras unicornis & 134591.56 & \cite{Tomiya2013} \\ 
-    Craseops sylvestris & 31.20 & PBDB + regression \\ 
-    Cratogeomys castanops & 44.20 & PBDB + regression \\ 
     Cratogeomys sansimonensis & 4.80 & PBDB + regression \\ 
     Crucimys milleri & 36.60 & \cite{Tomiya2013} \\ 
-    Crusafontina minima & 14.00 & \cite{McKenna2011} \\ 
     Crypholestes vaughni & 2.09 & PBDB \\ 
     Cryptotis adamsi & 13.33 & \cite{Tomiya2013} \\ 
     Cryptotis kansasensis & 3.00 & PBDB + regression \\ 
     Cryptotis parva & 4.10 & PBDB \\ 
-    Cuon texanus & 27.50 & PBDB + regression \\ 
     Cupidinimus avawatzensis & 20.09 & \cite{Tomiya2013} \\ 
     Cupidinimus bidahochiensis & 27.39 & \cite{Tomiya2013} \\ 
     Cupidinimus boronensis & 14.59 & \cite{Tomiya2013} \\ 
@@ -483,15 +413,11 @@
     Cupidinimus prattensis & 21.33 & \cite{Tomiya2013} \\ 
     Cupidinimus tertius & 16.44 & \cite{Tomiya2013} \\ 
     Cupidinimus whitlocki & 16.78 & \cite{Tomiya2013} \\ 
-    Cupressimus barbarae & 1.40 & PBDB + regression \\ 
-    Cuvieronius hyodon & 4197589.84 & \cite{Raia2012f} \\ 
     Cuvieronius tropicus & 10934.90 & PBDB + regression \\ 
     Cuyamalagus dawsoni & 639.06 & \cite{Tomiya2013} \\ 
-    Cylindrodon collinus & 4.30 & PBDB + regression \\ 
     Cylindrodon fontis & 3.70 & PBDB + regression \\ 
     Cylindrodon nebraskensis & 5.30 & PBDB + regression \\ 
     Cynarctoides acridens & 2921.93 & \cite{Tomiya2013} \\ 
-    Cynarctoides emryi & 2416.32 & \cite{Tomiya2013} \\ 
     Cynarctoides gawnae & 2643.87 & \cite{Tomiya2013} \\ 
     Cynarctoides harlowi & 1863.11 & \cite{Tomiya2013} \\ 
     Cynarctoides lemur & 2321.57 & \cite{Tomiya2013} \\ 
@@ -500,27 +426,18 @@
     Cynarctus crucidens & 4964.16 & \cite{Tomiya2013} \\ 
     Cynarctus galushai & 9228.02 & \cite{Tomiya2013} \\ 
     Cynarctus saxatilis & 10097.06 & \cite{Tomiya2013} \\ 
-    Cynarctus voorhiesi & 7259.02 & \cite{Tomiya2013} \\ 
     Cynelos caroniavorus & 16647.24 & \cite{Tomiya2013} \\ 
     Cynelos idoneus & 105873.47 & \cite{Tomiya2013} \\ 
     Cynelos sinapius & 213202.99 & \cite{Tomiya2013} \\ 
     Cynodesmus martini & 14185.85 & \cite{Tomiya2013} \\ 
     Cynodesmus thooides & 9228.02 & \cite{Tomiya2013} \\ 
-    Cynomyoides vatis & 307.97 & \cite{Tomiya2013} \\ 
-    Cynomys gunnisoni & 19.41 & \cite{Smith2004} \\ 
-    Cynomys ludovicianus & 1364.00 & PBDB \\ 
-    Cynomys niobrarius & 15.50 & PBDB + regression \\ 
-    Cynomys sappaensis & 15.00 & PBDB + regression \\ 
-    Cynomys spenceri & 13.40 & PBDB + regression \\ 
     Cynorca occidentale & 20537.34 & \cite{Tomiya2013} \\ 
     Cynorca sociale & 82.80 & PBDB + regression \\ 
-    Cyriacotherium argyreum & 101.92 & PBDB \\ 
     Cyriacotherium psamminum & 70.30 & PBDB \\ 
     Dakotallomys lillegraveni & 5.81 & PBDB \\ 
-    Dakotallomys pelycomyoides & 6.57 & \cite{Mihlbacher2006} \\ 
+    Dakotallomys pelycomyoides & 6.57 & \cite{Mihlbachler2006} \\ 
     Daphoenodon falkenbachi & 137310.49 & \cite{Tomiya2013} \\ 
     Daphoenodon notionastes & 43477.55 & \cite{Tomiya2013} \\ 
-    Daphoenodon skinneri & 85819.37 & \cite{Tomiya2013} \\ 
     Daphoenodon superbus & 77652.58 & \cite{Tomiya2013} \\ 
     Daphoenus hartshornianus & 13.90 & PBDB + regression \\ 
     Daphoenus lambei & 11.40 & PBDB + regression \\ 
@@ -529,13 +446,11 @@
     Daphoenus vetus & 19535.72 & \cite{Tomiya2013} \\ 
     Dartonius jepseni & 1.47 & \cite{Hay1969} \\ 
     Dasypus bellus & 104.90 & \cite{Smith2004} \\ 
-    Dawsonomys woodi & 3.80 & PBDB + regression \\ 
     Delahomeryx browni & 38948.67 & \cite{Tomiya2013} \\ 
     Desmatippus avus & 179871.86 & \cite{Tomiya2013} \\ 
     Desmatippus texanus & 169.36 & PBDB \\ 
     Desmatochoerus hesperus & 296.24 & \cite{McGrew1939} \\ 
     Desmatochoerus megalodon & 335100.00 & \cite{McKenna2011} \\ 
-    Desmatoclaenus dianae & 29.40 & PBDB + regression \\ 
     Desmatoclaenus hermaeus & 61.70 & PBDB + regression \\ 
     Desmatolagus schizopetrus & 6.72 & PBDB \\ 
     Desmocyon matthewi & 8103.08 & \cite{Tomiya2013} \\ 
@@ -543,24 +458,17 @@
     Diacocherus meizon & 2.10 & PBDB + regression \\ 
     Diacocherus minutus & 3.00 & PBDB + regression \\ 
     Diacodexis gracilis & 14.30 & PBDB + regression \\ 
-    Diacodexis ilicis & 10.90 & PBDB + regression \\ 
     Diacodexis kelleyi & 20.70 & PBDB + regression \\ 
     Diacodexis metsiacus & 17.80 & PBDB + regression \\ 
     Diacodexis minutus & 11.80 & PBDB + regression \\ 
     Diacodexis primus & 19.50 & PBDB + regression \\ 
     Diacodexis secans & 24.60 & PBDB + regression \\ 
-    Diacodexis woltonensis & 13.70 & PBDB + regression \\ 
     Diacodon alticuspis & 8.80 & PBDB + regression \\ 
     Diceratherium annectens & 864580.76 & \cite{Tomiya2013} \\ 
     Diceratherium armatum & 3541284.24 & \cite{Tomiya2013} \\ 
     Diceratherium gregorii & 734.10 & PBDB + regression \\ 
     Diceratherium niobrarense & 2105366.25 & \cite{Tomiya2013} \\ 
     Diceratherium tridactylum & 965112.54 & \cite{Tomiya2013} \\ 
-    Dicrostonyx hudsonius & 5.79 & \cite{Smith2004} \\ 
-    Dicrostonyx torquatus & 6.88 & \cite{Smith2004} \\ 
-    Didelphidectes pumilis & 1.50 & PBDB + regression \\ 
-    Didelphis marsupialis & 1086.00 & PBDB \\ 
-    Didelphis virginiana & 2769.00 & PBDB \\ 
     Didelphodus absarokae & 12.90 & PBDB + regression \\ 
     Didelphodus altidens & 10.20 & PBDB + regression \\ 
     Didelphodus rheos & 7.20 & PBDB + regression \\ 
@@ -576,7 +484,6 @@
     Dilophodon minusculus & 70.40 & PBDB + regression \\ 
     Dinaelurus crassus & 37320.00 & \cite{McKenna2011} \\ 
     Dinofelis palaeoonca & 24.30 & PBDB + regression \\ 
-    Dinogale siouxensis & 170.72 & \cite{Tomiya2013} \\ 
     Dinohippus interpolatus & 257815.63 & \cite{Tomiya2013} \\ 
     Dinohippus leardi & 392385.48 & \cite{Tomiya2013} \\ 
     Dinohippus leidyanus & 229900.00 & \cite{MacFadden1986} \\ 
@@ -584,27 +491,16 @@
     Dinohippus spectans & 536500.00 & \cite{McKenna2011} \\ 
     Dinohyus hollandi & 1215.50 & PBDB + regression \\ 
     Diplobunops matthewi & 167.50 & PBDB + regression \\ 
-    Diplolophus insolens & 5.70 & PBDB + regression \\ 
-    Dipodomys agilis & 5.82 & \cite{Smith2004} \\ 
     Dipodomys compactus & 5.43 & \cite{Smith2004} \\ 
-    Dipodomys deserti & 7.53 & \cite{Smith2004} \\ 
     Dipodomys gidleyi & 1.50 & PBDB + regression \\ 
     Dipodomys hibbardi & 17.81 & \cite{Tomiya2013} \\ 
-    Dipodomys merriami & 41.00 & PBDB \\ 
-    Dipodomys microps & 5.68 & \cite{Smith2004} \\ 
-    Dipodomys ordii & 61.80 & PBDB \\ 
-    Dipodomys pattersoni & 3.20 & PBDB + regression \\ 
-    Dipodomys spectabilis & 137.00 & PBDB \\ 
     Diprionomys agrarius & 2.00 & PBDB + regression \\ 
-    Diprionomys minimus & 12.18 & \cite{Tomiya2013} \\ 
     Diprionomys parvus & 11.00 & \cite{McKenna2011} \\ 
     Dipsalidictis aequidens & 126.40 & PBDB + regression \\ 
-    Dipsalidictis krausei & 86.70 & PBDB + regression \\ 
     Dipsalidictis platypus & 54.00 & PBDB + regression \\ 
     Dipsalidictis transiens & 89.10 & PBDB + regression \\ 
     Dipsalodon churchillorum & 98.20 & PBDB + regression \\ 
     Dipsalodon matthewi & 162.00 & PBDB + regression \\ 
-    Dissacus argenteus & 13.00 & PBDB + regression \\ 
     Dissacus navajovius & 10.80 & PBDB + regression \\ 
     Dissacus praenuntius & 14.40 & PBDB + regression \\ 
     Domnina dakotensis & 28.50 & \cite{Tomiya2013} \\ 
@@ -615,11 +511,9 @@
     Domninoides knoxjonesi & 2.88 & PBDB \\ 
     Domninoides mimicus & 135.64 & \cite{Tomiya2013} \\ 
     Domninoides riparensis & 56.83 & \cite{Tomiya2013} \\ 
-    Domninoides valentinensis & 77.48 & \cite{Tomiya2013} \\ 
     Dorraletes diminutivus & 3.20 & PBDB + regression \\ 
-    Douglassciurus jeffersoni & 8.19 & \cite{Mihlbacher2006} \\ 
+    Douglassciurus jeffersoni & 8.19 & \cite{Mihlbachler2006} \\ 
     Downsimus chadwicki & 56.26 & \cite{Tomiya2013} \\ 
-    Drassonax harpagops & 8.00 & PBDB + regression \\ 
     Drepanomeryx falciformis & 90219.42 & \cite{Tomiya2013} \\ 
     Dromomeryx borealis & 144350.55 & \cite{Tomiya2013} \\ 
     Dryomomys dulcifer & 0.85 & \cite{Novacek1977} \\ 
@@ -635,12 +529,10 @@
     Ectocion parvus & 30.30 & PBDB + regression \\ 
     Ectocion superstes & 68.50 & PBDB + regression \\ 
     Ectoconus ditrigonus & 89.20 & PBDB + regression \\ 
-    Ectoganus bighornensis & 128.80 & PBDB + regression \\ 
     Ectoganus gliriformes & 140.40 & \cite{Novacek1977} \\ 
     Ectoganus gliriformis & 140.40 & PBDB + regression \\ 
     Ectopocynus antiquus & 8266.78 & \cite{Tomiya2013} \\ 
     Ectopocynus intermedius & 12456.53 & \cite{Tomiya2013} \\ 
-    Ectopocynus simplicidens & 16647.24 & \cite{Tomiya2013} \\ 
     Ectypodus aphronorus & 18.00 & \cite{Wilson2012} \\ 
     Ectypodus childei & 1.60 & PBDB + regression \\ 
     Ectypodus lovei & 1.60 & PBDB + regression \\ 
@@ -653,7 +545,6 @@
     Elomeryx armatus & 157944.66 & \cite{Tomiya2013} \\ 
     Elphidotarsius florencae & 1.80 & PBDB + regression \\ 
     Elphidotarsius russelli & 2.10 & PBDB + regression \\ 
-    Elphidotarsius shotgunensis & 2.10 & PBDB + regression \\ 
     Elphidotarsius wightoni & 2.30 & PBDB + regression \\ 
     Elpidophorus elegans & 14.70 & PBDB + regression \\ 
     Elpidophorus minor & 5.80 & PBDB + regression \\ 
@@ -664,21 +555,17 @@
     Enhydrocyon crassidens & 18582.95 & \cite{Tomiya2013} \\ 
     Enhydrocyon pahinsintewakpa & 14764.78 & \cite{Tomiya2013} \\ 
     Enhydrocyon stenocephalus & 14044.69 & \cite{Tomiya2013} \\ 
-    Entoptychus fieldsi & 73.70 & \cite{Tomiya2013} \\ 
     Entoptychus grandiplanus & 59.74 & \cite{Tomiya2013} \\ 
     Entoptychus individens & 84.00 & \cite{McKenna2011} \\ 
-    Entoptychus leptophrys & 2.78 & PBDB \\ 
     Entoptychus planifrons & 134.29 & \cite{Tomiya2013} \\ 
     Entoptychus sheppardi & 94.63 & \cite{Tomiya2013} \\ 
     Entoptychus wheelerensis & 84.00 & \cite{McKenna2011} \\ 
-    Eoconodon copanus & 10.40 & PBDB + regression \\ 
     Eoconodon gaudrianus & 8.50 & \cite{Zonneveld2003} \\ 
     Eoconodon hutchisoni & 55.68 & PBDB \\ 
     Eoconodon nidhoggi & 6.90 & PBDB + regression \\ 
     Eohaplomys matutinus & 18.60 & PBDB + regression \\ 
     Eohaplomys serus & 14.20 & PBDB + regression \\ 
     Eohaplomys tradux & 12.60 & PBDB + regression \\ 
-    Eomellivora wimani & 45000.00 & NOW \\ 
     Eomoropus amarorum & 128.80 & PBDB + regression \\ 
     Eoryctes melanus & 4.00 & PBDB + regression \\ 
     Eotitanops borealis & 297.00 & PBDB + regression \\ 
@@ -692,45 +579,33 @@
     Epihippus intermedius & 61.09 & PBDB \\ 
     Epitriplopus uintensis & 32600.00 & \cite{MacFadden1986} \\ 
     Eporeodon occidentalis & 118300.00 & \cite{McKenna2011} \\ 
-    Equus alaskae & 262.70 & \cite{Smith2004} \\ 
     Equus complicatus & 270.97 & \cite{Smith2004} \\ 
     Equus conversidens & 241.29 & \cite{Smith2004} \\ 
     Equus cumminsii & 354.80 & PBDB + regression \\ 
-    Equus excelsus & 480.00 & \cite{Silcox2012} \\ 
     Equus francisci & 278.00 & PBDB + regression \\ 
-    Equus fraternus & 224.30 & \cite{Smith2004} \\ 
     Equus fromanius & 172311.00 & \cite{McKenna2011} \\ 
     Equus giganteus & 270.97 & \cite{Smith2004} \\ 
     Equus idahoensis & 560.70 & PBDB + regression \\ 
-    Equus kiang & 230.21 & \cite{Smith2004} \\ 
     Equus leidyi & 337.30 & PBDB + regression \\ 
-    Equus niobrarensis & 250.64 & \cite{Smith2004} \\ 
     Equus occidentalis & 317.03 & \cite{Smith2004} \\ 
     Equus scotti & 312.31 & \cite{Smith2004} \\ 
     Equus simplicidens & 296558.57 & \cite{Tomiya2013} \\ 
-    Eremotherium eomigrans & 2584400.00 & \cite{McDonald1995} \\ 
+    Eremotherium eomigrans & 2584400.00 & \cite{McDonald2005} \\ 
     Eremotherium laurillardi & 366.13 & \cite{Smith2004} \\ 
     Erethizon bathygnathum & 51.10 & PBDB + regression \\ 
-    Erethizon dorsatum & 7318.00 & PBDB \\ 
     Erethizon kleini & 31.30 & PBDB + regression \\ 
-    Erethizon poyeri & 7863.60 & \cite{Tomiya2013} \\ 
     Escavadodon zygus & 5.50 & PBDB + regression \\ 
     Esthonyx acutidens & 80.80 & PBDB + regression \\ 
     Esthonyx bisulcatus & 48.00 & PBDB + regression \\ 
-    Esthonyx gunnelli & 67.58 & \cite{Korth2010} \\ 
     Esthonyx spatularius & 60.80 & PBDB + regression \\ 
-    Euceratherium collinum & 285.15 & \cite{Smith2004} \\ 
-    Eucosmodon americanus & 14.00 & PBDB + regression \\ 
     Eucyon davisi & 10509.13 & \cite{Tomiya2013} \\ 
     Eudaemonema cuspidata & 11.50 & PBDB + regression \\ 
     Eumys brachyodus & 126.47 & \cite{Tomiya2013} \\ 
     Eumys elegans & 4.10 & PBDB + regression \\ 
-    Eumys parvidens & 3.67 & PBDB \\ 
     Euoplocyon brachygnathus & 11271.13 & \cite{Tomiya2013} \\ 
     Euoplocyon spissidens & 9798.65 & \cite{Tomiya2013} \\ 
     Eusmilus cerebralis & 804.32 & \cite{Tomiya2013} \\ 
     Eusmilus sicarius & 19.20 & PBDB + regression \\ 
-    Eutamias minimus & 40.00 & PBDB \\ 
     Eutypomys acares & 3.60 & PBDB + regression \\ 
     Eutypomys hibernodus & 12.20 & PBDB + regression \\ 
     Eutypomys inexpectatus & 12.00 & PBDB + regression \\ 
@@ -746,35 +621,24 @@
     Florentiamys kinseyi & 157.59 & \cite{Tomiya2013} \\ 
     Florentiamys loomisi & 151.41 & \cite{Tomiya2013} \\ 
     Florentiamys tiptoni & 117.92 & \cite{Tomiya2013} \\ 
-    Floridaceras whitei & 2002686.33 & \cite{Tomiya2013} \\ 
     Floridachoerus olseni & 35596.41 & \cite{Tomiya2013} \\ 
     Floridameryx floridanus & 8184.52 & \cite{Tomiya2013} \\ 
     Floridatragulus dolichanthereus & 43477.55 & \cite{Tomiya2013} \\ 
     Floridatragulus texanus & 61083.68 & \cite{Tomiya2013} \\ 
     Fouchia elyensis & 36.80 & PBDB + regression \\ 
-    Gaillardia thomsoni & 68.72 & \cite{Tomiya2013} \\ 
     Galbreathia bettae & 165.67 & \cite{Tomiya2013} \\ 
     Galbreathia novellus & 6.97 & PBDB \\ 
     Galecyon mordax & 23.70 & PBDB + regression \\ 
     Gazinius amplus & 875.00 & \cite{Soligo2006} \\ 
-    Gazinius bowni & 600.00 & \cite{Soligo2006} \\ 
     Gazinocyon vulpeculus & 39.60 & PBDB + regression \\ 
     Gelastops joni & 8.50 & PBDB + regression \\ 
     Gelastops parcus & 7.50 & PBDB + regression \\ 
-    Geomys bursarius & 10.06 & \cite{Smith2004} \\ 
     Geomys carranzai & 2.00 & PBDB + regression \\ 
-    Geomys pinetis & 6.88 & \cite{Smith2004} \\ 
     Geringia gloveri & 26.84 & \cite{Tomiya2013} \\ 
     Geringia mcgregori & 41.26 & \cite{Tomiya2013} \\ 
     Gigantocamelus spatulus & 1435.10 & PBDB + regression \\ 
-    Gingerichia geoteretes & 2.60 & PBDB \\ 
-    Gingerichia hystrix & 3.03 & \cite{Bjork1970} \\ 
-    Glossotherium chapadmalense & 310540.00 & \cite{McDonald1995} \\ 
-    Glyptotherium arizonae & 789680.00 & \cite{McDonald1995} \\ 
-    Glyptotherium floridanum & 420.31 & \cite{Smith2004} \\ 
-    Glyptotherium mexicanum & 420.31 & \cite{Smith2004} \\ 
-    Gnathabelodon thorpei & 6237.00 & PBDB + regression \\ 
-    Gomphotherium gratum & 113.00 & PBDB \\ 
+    Glossotherium chapadmalense & 310540.00 & \cite{McDonald2005} \\ 
+    Glyptotherium arizonae & 789680.00 & \cite{McDonald2005} \\ 
     Gomphotherium obscurum & 10056.96 & PBDB \\ 
     Gomphotherium osborni & 117.00 & \cite{Wang2014} \\ 
     Goniodontomys disjunctus & 44.26 & \cite{Tomiya2013} \\ 
@@ -782,15 +646,12 @@
     Grangeria anarsius & 126.00 & PBDB + regression \\ 
     Gregorymys curtus & 106.70 & \cite{Tomiya2013} \\ 
     Gregorymys formosus & 77.48 & \cite{Tomiya2013} \\ 
-    Gregorymys larsoni & 34.81 & \cite{Tomiya2013} \\ 
     Gregorymys riograndensis & 43.82 & \cite{Tomiya2013} \\ 
     Gripholagomys lavocati & 507.76 & \cite{Tomiya2013} \\ 
     Griphomys alecer & 1.40 & PBDB + regression \\ 
-    Griphomys toltecus & 1.83 & \cite{Mihlbacher2006} \\ 
+    Griphomys toltecus & 1.83 & \cite{Mihlbachler2006} \\ 
     Guanajuatomys hibbardi & 5.30 & PBDB + regression \\ 
     Guildayomys hibbardi & 82.27 & \cite{Tomiya2013} \\ 
-    Guildayomys matthewsi & 2.40 & PBDB + regression \\ 
-    Gulo gulo & 9896.00 & PBDB \\ 
     Hapalodectes anthracinus & 4.09 & PBDB + regression \\ 
     Hapalodectes leptognathus & 4.94 & PBDB + regression \\ 
     Haplaletes disceptatrix & 5.30 & PBDB + regression \\ 
@@ -808,7 +669,6 @@
     Haplomys liolophus & 39.00 & \cite{McKenna2011} \\ 
     Harpagolestes leotensis & 30.60 & PBDB + regression \\ 
     Harpagolestes uintensis & 28.00 & PBDB + regression \\ 
-    Harrymys canadensis & 1.70 & PBDB + regression \\ 
     Harrymys irvini & 83.93 & \cite{Tomiya2013} \\ 
     Harrymys magnus & 50.40 & \cite{Tomiya2013} \\ 
     Harrymys woodi & 2.48 & \cite{Kirk2011} \\ 
@@ -817,7 +677,6 @@
     Heliscomys senex & 0.70 & PBDB + regression \\ 
     Heliscomys vetus & 0.70 & PBDB + regression \\ 
     Heliscomys woodi & 1.10 & PBDB + regression \\ 
-    Hemiacodon casamissus & 6.80 & PBDB + regression \\ 
     Hemiacodon engardae & 11.60 & PBDB + regression \\ 
     Hemiacodon gracilis & 11.90 & PBDB + regression \\ 
     Hemiauchenia gracilis & 225.00 & PBDB + regression \\ 
@@ -826,7 +685,6 @@
     Hemiauchenia vera & 299.50 & PBDB + regression \\ 
     Hemipsalodon grandis & 453.84 & \cite{Scott1937} \\ 
     Hemithlaeus harbourae & 18.67 & \cite{Loomis1932} \\ 
-    Hemithlaeus josephi & 6.50 & PBDB + regression \\ 
     Hendryomeryx defordi & 25.31 & PBDB \\ 
     Hendryomeryx esulcatus & 27.80 & PBDB + regression \\ 
     Hendryomeryx wilsoni & 16.50 & PBDB + regression \\ 
@@ -839,13 +697,10 @@
     Herpetotherium youngi & 2.80 & PBDB + regression \\ 
     Hesperhys pinensis & 68186.37 & \cite{Tomiya2013} \\ 
     Hesperhys vagrans & 73865.41 & \cite{Tomiya2013} \\ 
-    Hesperocamelus stylodon & 355045.06 & \cite{Tomiya2013} \\ 
-    Hesperocyon coloradensis & 56.10 & \cite{Loomis1932} \\ 
     Hesperocyon gregarius & 3533.34 & \cite{Tomiya2013} \\ 
     Hesperolagomys fluviatilis & 169.02 & \cite{Tomiya2013} \\ 
     Hesperolagomys galbreathi & 149.90 & \cite{Tomiya2013} \\ 
     Hesperoscalops mcgrewi & 8.60 & PBDB + regression \\ 
-    Hesperoscalops ruficervus & 6.09 & \cite{Zack2005} \\ 
     Heteraletes leotanus & 45.60 & PBDB + regression \\ 
     Heteromeryx dispar & 107.00 & PBDB + regression \\ 
     Heteropliohippus hulberti & 302549.45 & \cite{Tomiya2013} \\ 
@@ -857,7 +712,6 @@
     Hibbardomys marthae & 3.60 & PBDB + regression \\ 
     Hibbardomys skinneri & 3.00 & PBDB + regression \\ 
     Hibbardomys voorhiesi & 3.00 & PBDB + regression \\ 
-    Hibbardomys zakrzewskii & 83.93 & \cite{Tomiya2013} \\ 
     Hipparion forcei & 194852.86 & \cite{Tomiya2013} \\ 
     Hipparion tehonense & 100709.96 & \cite{Tomiya2013} \\ 
     Hippotherium emsliei & 264.70 & PBDB + regression \\ 
@@ -866,31 +720,23 @@
     Hippotherium quinni & 431.00 & PBDB + regression \\ 
     Hitonkala macdonaldtau & 24.53 & \cite{Tomiya2013} \\ 
     Holmesina floridanus & 164.90 & PBDB + regression \\ 
-    Holmesina septentrionalis & 311888.96 & \cite{Brook2004a} \\ 
     Homacodon vagans & 28.00 & PBDB + regression \\ 
-    Homogalax aureus & 50.70 & PBDB + regression \\ 
     Homogalax protapirinus & 57.30 & PBDB + regression \\ 
-    Homo sapiens & 54138.00 & PBDB \\ 
     Homotherium crusafonti & 322.50 & PBDB \\ 
     Homotherium idahoensis & 257900.00 & \cite{McKenna2011} \\ 
     Homotherium johnstoni & 29.50 & PBDB + regression \\ 
-    Homotherium serum & 195.59 & \cite{Smith2004} \\ 
-    Hoplictis grangerensis & 15700.00 & \cite{McKenna2011} \\ 
     Hoplophoneus mentalis & 206.00 & PBDB + regression \\ 
-    Hoplophoneus occidentalis & 22.06 & PBDB + regression \\ 
     Hoplophoneus primaevus & 16.00 & PBDB + regression \\ 
     Huerfanodon polecatensis & 104.30 & PBDB + regression \\ 
     Huerfanodon torrejonius & 85.80 & PBDB + regression \\ 
     Hyaenodon brevirostrus & 118.10 & PBDB + regression \\ 
     Hyaenodon crucians & 71.10 & PBDB + regression \\ 
     Hyaenodon horridus & 193.20 & PBDB + regression \\ 
-    Hyaenodon microdon & 23.70 & PBDB + regression \\ 
     Hyaenodon montanus & 101.60 & PBDB + regression \\ 
     Hyaenodon mustelinus & 51.10 & PBDB + regression \\ 
     Hyaenodon raineyi & 17.10 & PBDB + regression \\ 
     Hyaenodon venturae & 27.20 & PBDB + regression \\ 
     Hyaenodon vetus & 111.00 & PBDB + regression \\ 
-    Hylomeryx annectens & 31.80 & PBDB + regression \\ 
     Hylomeryx quadricuspis & 23.00 & PBDB + regression \\ 
     Hyopsodus fastigatus & 23.10 & PBDB + regression \\ 
     Hyopsodus lepidus & 12.60 & PBDB + regression \\ 
@@ -939,14 +785,11 @@
     Ignacius graybullianus & 5.30 & PBDB + regression \\ 
     Indarctos nevadensis & 42.80 & PBDB + regression \\ 
     Indarctos oregonensis & 302549.45 & \cite{Tomiya2013} \\ 
-    Ingentisorex tumididens & 89.12 & \cite{Tomiya2013} \\ 
-    Insulacebus toussaintiana & 27.83 & \cite{Loomis1932} \\ 
     Ischyrocyon gidleyi & 282095.23 & \cite{Tomiya2013} \\ 
     Ischyromys typus & 12.50 & PBDB + regression \\ 
     Ischyromys veterior & 9.60 & PBDB + regression \\ 
     Jacobsomys verdensis & 50.91 & \cite{Tomiya2013} \\ 
     Janimus dawsonae & 1.50 & PBDB + regression \\ 
-    Javazapus weeksi & 11.94 & \cite{Tomiya2013} \\ 
     Jaywilsonomys ojinagaensis & 13.70 & PBDB + regression \\ 
     Jemezius szalayi & 4.50 & PBDB + regression \\ 
     Jepsenella praepropera & 2.10 & PBDB + regression \\ 
@@ -964,10 +807,8 @@
     Knightomys senior & 2.50 & PBDB + regression \\ 
     Kolponomos clallamensis & 253.10 & \cite{Tseng2009} \\ 
     Kolponomos newportensis & 664.45 & \cite{Scott2013} \\ 
-    Koniaryctes paulus & 1.20 & PBDB + regression \\ 
     Kyptoceras amatorum & 369534.73 & \cite{Tomiya2013} \\ 
     Labidolemur kayi & 3.00 & PBDB + regression \\ 
-    Labidolemur major & 5.20 & PBDB + regression \\ 
     Labidolemur serus & 4.60 & PBDB + regression \\ 
     Labidolemur soricoides & 1.80 & PBDB + regression \\ 
     Lambdotherium popoagicum & 74.70 & PBDB + regression \\ 
@@ -976,18 +817,11 @@
     Lanthanotherium sawini & 5.50 & PBDB + regression \\ 
     Laredochoerus edwardsi & 41.50 & PBDB + regression \\ 
     Laredomys riograndensis & 0.80 & PBDB + regression \\ 
-    Lasiopodomys deceitensis & 5.60 & PBDB + regression \\ 
     Leidymys cerasus & 41.68 & \cite{Tomiya2013} \\ 
     Leidymys korthi & 2.20 & PBDB + regression \\ 
     Leipsanolestes siegfriedti & 2.60 & PBDB + regression \\ 
-    Lemmiscus curtatus & 4.27 & \cite{Smith2004} \\ 
-    Lemmus sibiricus & 5.57 & \cite{Smith2004} \\ 
-    Lemmus trimucronatus & 34.00 & PBDB \\ 
     Lemoynea biradicularis & 45.60 & \cite{Tomiya2013} \\ 
-    Leopardus amnicola & 4590.00 & PBDB \\ 
-    Leopardus pardalis & 10605.00 & PBDB \\ 
     Lepoides lepoides & 3640.95 & \cite{Tomiya2013} \\ 
-    Leptacodon catulus & 1.70 & PBDB + regression \\ 
     Leptacodon munusculum & 1.10 & PBDB + regression \\ 
     Leptacodon packi & 1.80 & PBDB + regression \\ 
     Leptacodon tener & 1.30 & PBDB + regression \\ 
@@ -998,16 +832,12 @@
     Leptauchenia decora & 20130.67 & \cite{Tomiya2013} \\ 
     Leptauchenia major & 30946.03 & \cite{Tomiya2013} \\ 
     Leptictis dakotensis & 63.70 & PBDB + regression \\ 
-    Leptictis douglassi & 17.70 & PBDB + regression \\ 
     Leptochoerus elegans & 33.10 & PBDB + regression \\ 
     Leptochoerus spectabilis & 34.10 & PBDB + regression \\ 
     Leptochoerus supremus & 56.50 & PBDB + regression \\ 
     Leptocyon mollis & 3300.00 & \cite{McKenna2011} \\ 
     Leptocyon vafer & 5377.61 & \cite{Tomiya2013} \\ 
-    Leptocyon vulpinus & 56.64 & \cite{Carranza-Castaneda1992} \\ 
     Leptodontomys douglassi & 0.70 & PBDB + regression \\ 
-    Leptodontomys quartzi & 0.60 & PBDB + regression \\ 
-    Leptodontomys russelli & 0.53 & \cite{Mihlbacher2010} \\ 
     Leptodontomys stirtoni & 0.90 & \cite{Stock1937} \\ 
     Leptolambda schmidti & 383.51 & \cite{Zack2005} \\ 
     Leptomeryx blacki & 21.80 & PBDB + regression \\ 
@@ -1029,19 +859,13 @@
     Leptotragulus clarki & 24.20 & PBDB + regression \\ 
     Leptotragulus medius & 44.10 & PBDB + regression \\ 
     Leptotragulus proavus & 40.70 & PBDB + regression \\ 
-    Lepus alleni & 35.37 & \cite{Smith2004} \\ 
-    Lepus americanus & 25.36 & \cite{Smith2004} \\ 
-    Lepus arcticus & 2240.00 & PBDB \\ 
     Lepus californicus & 2288.00 & PBDB \\ 
-    Lepus callotis & 29.90 & \cite{Smith2004} \\ 
-    Lepus townsendii & 24.34 & \cite{Smith2004} \\ 
     Lignimus austridakotensis & 14.88 & \cite{Tomiya2013} \\ 
     Lignimus montis & 2.30 & PBDB + regression \\ 
     Limaconyssus habrus & 2.10 & PBDB + regression \\ 
     Limnoecus niobrarensis & 7.17 & \cite{Tomiya2013} \\ 
     Limnoecus tricuspis & 5.10 & \cite{Tomiya2013} \\ 
     Liodontia alexandrae & 198.34 & \cite{Tomiya2013} \\ 
-    Liodontia furlongi & 198.00 & \cite{McKenna2011} \\ 
     Litaletes disjunctus & 13.20 & PBDB + regression \\ 
     Litocherus lacunatus & 5.30 & PBDB + regression \\ 
     Litocherus notissimus & 3.20 & PBDB + regression \\ 
@@ -1049,16 +873,13 @@
     Litolagus molidens & 4.70 & PBDB + regression \\ 
     Litolestes ignotus & 2.10 & PBDB + regression \\ 
     Litomylus dissentaneus & 6.70 & PBDB + regression \\ 
-    Litomylus grandaletes & 16.90 & PBDB + regression \\ 
     Litomylus orthronepius & 6.40 & PBDB + regression \\ 
     Litoyoderimys auogoleus & 2.60 & PBDB + regression \\ 
-    Litoyoderimys lustrorum & 2.76 & \cite{Rich1981} \\ 
     Longirostromeryx clarendonensis & 13226.80 & \cite{Tomiya2013} \\ 
     Longirostromeryx wellsi & 17500.77 & \cite{Tomiya2013} \\ 
     Lophiparamys debequensis & 2.00 & PBDB + regression \\ 
     Lophiparamys murinus & 3.70 & PBDB + regression \\ 
     Loveina minuta & 3.00 & PBDB + regression \\ 
-    Loveina wapitiensis & 3.50 & PBDB + regression \\ 
     Loveina zephyri & 3.70 & PBDB + regression \\ 
     Loxolophus criswelli & 24.70 & PBDB + regression \\ 
     Loxolophus hyattianus & 23.70 & PBDB + regression \\ 
@@ -1066,54 +887,35 @@
     Loxolophus priscus & 34.30 & PBDB + regression \\ 
     Loxolophus schizophrenus & 15.20 & PBDB + regression \\ 
     Loxolophus spiekeri & 80.00 & PBDB + regression \\ 
-    Loxolophus stenognathus & 63.70 & PBDB + regression \\ 
     Lutravus halli & 454.86 & \cite{Tomiya2013} \\ 
     Lycophocyon hutchisoni & 9.90 & PBDB + regression \\ 
-    Lynx canadensis & 10999.00 & PBDB \\ 
-    Lynx lynx & 9899.00 & PBDB \\ 
     Lynx proterolyncis & 15677.78 & \cite{Tomiya2013} \\ 
     Lynx rufus & 10482.00 & PBDB \\ 
-    Machaeroides eothen & 49.20 & PBDB + regression \\ 
     Machaeromeryx gilchristensis & 4536.90 & \cite{Tomiya2013} \\ 
     Machaeromeryx tragulus & 4536.90 & \cite{Tomiya2013} \\ 
-    Machairodus catocopis & 30.60 & PBDB + regression \\ 
     Macrocranion junnei & 1.90 & PBDB + regression \\ 
     Macrocranion nitens & 3.00 & PBDB + regression \\ 
     Macrogenis crassigenis & 174.00 & PBDB \\ 
     Macrognathomys gemmacolis & 0.80 & PBDB + regression \\ 
     Macrognathomys nanus & 5.16 & \cite{Tomiya2013} \\ 
-    Macrotarsius jepseni & 13.00 & PBDB + regression \\ 
     Macrotarsius montanus & 17.60 & PBDB + regression \\ 
     Macrotarsius roederi & 1640.00 & \cite{Soligo2006} \\ 
     Macrotarsius siegerti & 17.90 & PBDB + regression \\ 
-    Mahgarita stevensi & 9.29 & \cite{Worthman1893} \\ 
-    Maiorana ferrisensis & 13.70 & PBDB + regression \\ 
+    Mahgarita stevensi & 9.29 & \cite{Wortman1893} \\ 
     Malaquiferus tourteloti & 47.30 & PBDB + regression \\ 
     Mammacyon obtusidens & 70262.96 & \cite{Tomiya2013} \\ 
     Mammut americanum & 777.43 & \cite{Smith2004} \\ 
-    Mammut americanus & 6310400.00 & \cite{McKenna2011} \\ 
     Mammut cosoensis & 7029.00 & \cite{Secord2008a} \\ 
     Mammut furlongi & 7102.00 & PBDB + regression \\ 
     Mammuthus columbi & 995.26 & \cite{Smith2004} \\ 
-    Mammuthus exilis & 169824.37 & \cite{Raia2012f} \\ 
-    Mammuthus primigenius & 5000000.00 & NOW \\ 
     Mammut raki & 8929.90 & PBDB + regression \\ 
-    Marmota caligata & 47.42 & \cite{Smith2004} \\ 
-    Marmota flaviventris & 33.95 & \cite{Smith2004} \\ 
     Marmota korthi & 2038.56 & \cite{Tomiya2013} \\ 
-    Marmota minor & 1199.91 & \cite{Tomiya2013} \\ 
-    Marmota monax & 3699.00 & PBDB \\ 
-    Marmota vancouverensis & 44.66 & \cite{Smith2004} \\ 
     Marmota vetus & 658.52 & \cite{Tomiya2013} \\ 
-    Martes diluviana & 12.70 & PBDB + regression \\ 
     Martes gazini & 1767.00 & \cite{McKenna2011} \\ 
     Martes parviloba & 42.75 & \cite{Macdonald1951} \\ 
-    Martes pennanti & 4070.00 & PBDB \\ 
     Martinogale alveodens & 17.99 & \cite{Tomiya2013} \\ 
     Mattimys kalicola & 2.10 & PBDB + regression \\ 
     Megacamelus merriami & 1905014.16 & \cite{Tomiya2013} \\ 
-    Megacerops curtus & 2256.20 & PBDB \\ 
-    Megacerops osborni & 1205.30 & PBDB + regression \\ 
     Megadelphus lundeliusi & 32.90 & PBDB + regression \\ 
     Megahippus matthewi & 882046.45 & \cite{Tomiya2013} \\ 
     Megalagus abaconis & 1118.79 & \cite{Tomiya2013} \\ 
@@ -1123,22 +925,15 @@
     Megalesthonyx hopsoni & 132.29 & \cite{Hay1916} \\ 
     Megalictis ferox & 1587.63 & \cite{Tomiya2013} \\ 
     Megalictis frazieri & 111.47 & PBDB \\ 
-    Megalonyx curvidens & 185050.00 & \cite{McDonald1995} \\ 
-    Megalonyx jeffersonii & 323.11 & \cite{Smith2004} \\ 
-    Megalonyx jerrersonii & 1090350.00 & \cite{Martin2002a} \\ 
+    Megalonyx curvidens & 185050.00 & \cite{McDonald2005} \\ 
     Megalonyx leptostomus & 355.40 & PBDB + regression \\ 
     Megalonyx wheatleyi & 336.20 & PBDB + regression \\ 
     Megantereon hesperus & 67507.91 & \cite{Tomiya2013} \\ 
     Megapeomys bobwilsoni & 411.58 & \cite{Tomiya2013} \\ 
-    Megasminthus gladiofex & 36.23 & \cite{Tomiya2013} \\ 
     Megasminthus tiheni & 55.70 & \cite{Tomiya2013} \\ 
-    Megatherium americanum & 895.16 & \cite{Smith2004} \\ 
-    Megatherium mirable & 1611.72 & PBDB \\ 
     Megatylopus cochrani & 702.00 & PBDB + regression \\ 
     Megatylopus matthewi & 1383324.20 & \cite{Tomiya2013} \\ 
     Megatylopus primaevus & 701.90 & PBDB + regression \\ 
-    Meizonyx salvadorensis & 599791.08 & \cite{Brook2004a} \\ 
-    Meliakrouniomys wilsoni & 3.70 & PBDB + regression \\ 
     Meniscomys hippodus & 69.41 & \cite{Tomiya2013} \\ 
     Meniscomys uhtoffi & 70.00 & \cite{McKenna2011} \\ 
     Meniscotherium chamense & 77.80 & PBDB + regression \\ 
@@ -1147,13 +942,11 @@
     Menoceras barbouri & 1251683.50 & \cite{Tomiya2013} \\ 
     Menops bakeri & 1897.40 & PBDB \\ 
     Mentoclaenodon acrogenius & 118.30 & PBDB + regression \\ 
-    Mephitis macroura & 18.25 & \cite{Smith2004} \\ 
     Mephitis mephitis & 2055.00 & PBDB \\ 
     Merriamoceros coronatus & 15214.44 & \cite{Tomiya2013} \\ 
     Merychippus brevidontus & 124243.67 & \cite{Tomiya2013} \\ 
     Merychippus calamarius & 196811.17 & \cite{Tomiya2013} \\ 
     Merychippus californicus & 86681.87 & \cite{Tomiya2013} \\ 
-    Merychippus close & 60471.00 & \cite{McKenna2011} \\ 
     Merychippus goorisi & 282.80 & PBDB + regression \\ 
     Merychippus gunteri & 92041.97 & \cite{Tomiya2013} \\ 
     Merychippus insignis & 125492.34 & \cite{Tomiya2013} \\ 
@@ -1161,7 +954,7 @@
     Merychippus relictus & 60471.00 & \cite{McKenna2011} \\ 
     Merychippus sejunctus & 75357.60 & \cite{Tomiya2013} \\ 
     Merychyus arenarum & 109.50 & PBDB + regression \\ 
-    Merychyus crabilli & 117.00 & \cite{Johansen1996} \\ 
+    Merychyus crabilli & 117.00 & \cite{Johanson1996} \\ 
     Merychyus elegans & 45706.69 & \cite{Tomiya2013} \\ 
     Merychyus medius & 108012.26 & \cite{Tomiya2013} \\ 
     Merychyus minimus & 74.70 & PBDB + regression \\ 
@@ -1173,7 +966,7 @@
     Merycochoerus matthewi & 275.00 & PBDB + regression \\ 
     Merycochoerus proprius & 265667.29 & \cite{Tomiya2013} \\ 
     Merycochoerus superbus & 438400.00 & \cite{McKenna2011} \\ 
-    Merycodus prodromus & 9.00 & \cite{Kelly1954} \\ 
+    Merycodus prodromus & 9.00 & \cite{Kelley1954} \\ 
     Merycodus sabulonis & 10509.13 & \cite{Tomiya2013} \\ 
     Merycodus warreni & 42.50 & \cite{Baskin2004} \\ 
     Merycoides harrisonensis & 90219.42 & \cite{Tomiya2013} \\ 
@@ -1182,7 +975,6 @@
     Merycoidodon bullatus & 109500.00 & \cite{McKenna2011} \\ 
     Merycoidodon culbertsoni & 184.60 & PBDB + regression \\ 
     Merycoidodon major & 62200.00 & \cite{McKenna2011} \\ 
-    Merycoidodon presidioensis & 257.80 & PBDB + regression \\ 
     Mescalerolemur horneri & 6.62 & \cite{MacIntyre1966} \\ 
     Mesocyon brachyops & 7942.63 & \cite{Tomiya2013} \\ 
     Mesocyon coryphaeus & 10198.54 & \cite{Tomiya2013} \\ 
@@ -1190,7 +982,6 @@
     Mesodma ambigua & 5.00 & PBDB + regression \\ 
     Mesodma formosa & 2.50 & PBDB + regression \\ 
     Mesodma garfieldensis & 2.70 & PBDB + regression \\ 
-    Mesodma hensleighi & 1.60 & PBDB + regression \\ 
     Mesodma pygmaea & 1.20 & PBDB + regression \\ 
     Mesodma thompsoni & 3.30 & PBDB + regression \\ 
     Mesogaulus paniensis & 13.97 & PBDB \\ 
@@ -1206,18 +997,14 @@
     Mesoscalops scopelotemos & 95.58 & \cite{Tomiya2013} \\ 
     Metadjidaumo hendryi & 10.38 & \cite{Tomiya2013} \\ 
     Metaliomys sevierensis & 1.40 & PBDB + regression \\ 
-    Metamynodon mckinneyi & 897.20 & PBDB + regression \\ 
     Metanoiamys agorus & 1.20 & PBDB + regression \\ 
     Metanoiamys fantasma & 1.60 & PBDB + regression \\ 
     Metanoiamys korthi & 1.30 & PBDB + regression \\ 
     Metanoiamys lacus & 1.10 & PBDB + regression \\ 
     Metanoiamys marinus & 1.00 & PBDB + regression \\ 
-    Metarhinus fluviatilis & 33.63 & PBDB \\ 
     Metarhinus pater & 810.00 & PBDB \\ 
     Metatomarctus canavus & 10938.02 & \cite{Tomiya2013} \\ 
     Metechinus amplior & 24.12 & \cite{Tedford1994} \\ 
-    Metechinus nevadensis & 454.86 & \cite{Tomiya2013} \\ 
-    Miacis australis & 30.50 & PBDB + regression \\ 
     Miacis deutschi & 16.00 & PBDB + regression \\ 
     Miacis exiguus & 22.30 & PBDB + regression \\ 
     Miacis hookwayi & 26.00 & \cite{Patton1973} \\ 
@@ -1226,22 +1013,16 @@
     Miacis petilus & 21.00 & PBDB + regression \\ 
     Michenia agatensis & 99707.88 & \cite{Tomiya2013} \\ 
     Michenia exilis & 65512.75 & \cite{Tomiya2013} \\ 
-    Microcosmodon arcuatus & 2.50 & PBDB + regression \\ 
     Microcosmodon conus & 1.70 & PBDB + regression \\ 
-    Microcosmodon harleyi & 2.00 & PBDB + regression \\ 
     Microcosmodon rosei & 2.30 & PBDB + regression \\ 
-    Microdipodops megacephalus & 2.77 & \cite{Smith2004} \\ 
     Microeutypomys karenae & 1.20 & PBDB + regression \\ 
     Microeutypomys tilliei & 1.70 & PBDB + regression \\ 
     Micromomys antelucanus & 0.90 & PBDB \\ 
-    Micromomys fremdi & 1.30 & PBDB + regression \\ 
-    Micromomys vossae & 0.90 & PBDB + regression \\ 
     Microparamys cheradius & 2.90 & PBDB + regression \\ 
     Microparamys dubius & 1.60 & PBDB + regression \\ 
     Microparamys hunterae & 1.32 & PBDB \\ 
     Microparamys minutus & 1.80 & PBDB + regression \\ 
     Microparamys nimius & 2.00 & PBDB + regression \\ 
-    Microparamys perfossus & 2.70 & PBDB + regression \\ 
     Microparamys sambucus & 2.40 & PBDB + regression \\ 
     Microparamys tricus & 2.90 & PBDB + regression \\ 
     Microparamys woodi & 2.10 & PBDB + regression \\ 
@@ -1258,31 +1039,9 @@
     Microsyops latidens & 10.80 & PBDB + regression \\ 
     Microsyops scottianus & 12.70 & PBDB + regression \\ 
     Microtomarctus conferta & 8866.19 & \cite{Tomiya2013} \\ 
-    Microtus californicus & 5.81 & \cite{Smith2004} \\ 
-    Microtus chrotorrhinus & 4.91 & \cite{Smith2004} \\ 
-    Microtus llanensis & 73.70 & \cite{Tomiya2013} \\ 
-    Microtus longicaudus & 41.20 & PBDB \\ 
-    Microtus mcnowni & 9.98 & \cite{Smith2004} \\ 
-    Microtus meadensis & 69.41 & \cite{Tomiya2013} \\ 
-    Microtus mexicanus & 4.68 & \cite{Smith2004} \\ 
-    Microtus miurus & 5.02 & \cite{Smith2004} \\ 
-    Microtus montanus & 29.50 & PBDB \\ 
-    Microtus morlani & 2.98 & \cite{Ivy1990} \\ 
-    Microtus ochrogaster & 34.50 & PBDB \\ 
-    Microtus oeconomus & 4.77 & \cite{Smith2004} \\ 
-    Microtus paroperarius & 59.74 & \cite{Tomiya2013} \\ 
-    Microtus pennsylvanicus & 28.20 & PBDB \\ 
-    Microtus richardsoni & 6.88 & \cite{Smith2004} \\ 
-    Microtus xanthognathus & 8.17 & \cite{Smith2004} \\ 
-    Mictomys borealis & 23.00 & PBDB \\ 
-    Mictomys kansasensis & 2.60 & PBDB + regression \\ 
-    Mictomys meltoni & 3.20 & PBDB + regression \\ 
     Mictomys vetus & 3.40 & PBDB + regression \\ 
-    Mimatuta minuial & 12.50 & PBDB + regression \\ 
     Mimatuta morgoth & 11.30 & PBDB + regression \\ 
-    Mimetodon churchilli & 4.50 & PBDB + regression \\ 
     Mimetodon silberlingi & 2.00 & PBDB + regression \\ 
-    Mimomys dakotaensis & 73.70 & \cite{Tomiya2013} \\ 
     Mimomys mcknighti & 110.70 & PBDB \\ 
     Mimomys panacaensis & 3.60 & PBDB + regression \\ 
     Mimomys parvus & 99.10 & PBDB \\ 
@@ -1295,11 +1054,9 @@
     Miniochoerus gracilis & 48.60 & PBDB \\ 
     Minippus index & 22.55 & PBDB \\ 
     Mioclaenus turgidus & 36.70 & PBDB + regression \\ 
-    Miocyon major & 58.60 & PBDB + regression \\ 
     Miocyon scotti & 125.60 & PBDB + regression \\ 
     Miocyon vallisrubrae & 69.70 & PBDB + regression \\ 
     Mioheteromys amplissimus & 41.26 & \cite{Tomiya2013} \\ 
-    Mioheteromys arcarius & 1.08 & PBDB \\ 
     Miohippus anceps & 41650.00 & \cite{McKenna2011} \\ 
     Miohippus assiniboiensis & 142.10 & PBDB + regression \\ 
     Miohippus equiceps & 41650.00 & \cite{McKenna2011} \\ 
@@ -1310,14 +1067,12 @@
     Miohippus obliquidens & 52575.21 & \cite{Tomiya2013} \\ 
     Miolabis fricki & 240385.70 & \cite{Tomiya2013} \\ 
     Miomustela madisonae & 13.46 & \cite{Tomiya2013} \\ 
-    Mionictis angustidens & 11.20 & PBDB + regression \\ 
     Mionictis elegans & 11.00 & PBDB \\ 
     Mionictis incertus & 12.30 & PBDB \\ 
     Mionictis letifer & 134.29 & \cite{Tomiya2013} \\ 
     Mionictis pristinus & 18.70 & PBDB + regression \\ 
     Miosciurus ballovianus & 36.60 & \cite{Tomiya2013} \\ 
     Miosicista angulus & 0.96 & PBDB \\ 
-    Miospermophilus bryanti & 56.83 & \cite{Tomiya2013} \\ 
     Miospermophilus lavertyi & 106.70 & \cite{Tomiya2013} \\ 
     Miospermophilus wyomingensis & 83.10 & \cite{Tomiya2013} \\ 
     Miotapirus harrisonensis & 325.20 & PBDB + regression \\ 
@@ -1332,49 +1087,34 @@
     Mojavemys galushai & 28.22 & \cite{Tomiya2013} \\ 
     Mojavemys lophatus & 1.36 & PBDB \\ 
     Mojavemys magnumarcus & 56.26 & \cite{Tomiya2013} \\ 
-    Mojavemys wilsoni & 1.68 & PBDB \\ 
     Montanatylopus matthewi & 242.70 & PBDB + regression \\ 
     Mookomys altifluminis & 13.07 & \cite{Tomiya2013} \\ 
     Mookomys formicarum & 1.19 & PBDB \\ 
-    Mookomys subtilis & 5.37 & \cite{Tomiya2013} \\ 
     Mookomys thrinax & 11.94 & \cite{Tomiya2013} \\ 
     Moropus elatus & 707858.86 & \cite{Tomiya2013} \\ 
     Moropus merriami & 173767.00 & \cite{McKenna2011} \\ 
     Moropus oregonensis & 189094.09 & \cite{Tomiya2013} \\ 
-    Mustela americana & 1300.00 & PBDB \\ 
-    Mustela erminea & 155.00 & PBDB \\ 
     Mustela frenata & 8.73 & \cite{Smith2004} \\ 
-    Mustela jacksoni & 4.12 & PBDB \\ 
     Mustela meltoni & 5.60 & PBDB + regression \\ 
-    Mustela nigripes & 710.00 & PBDB \\ 
-    Mustela nivalis & 52.50 & PBDB \\ 
-    Mustela nobilis & 1240.00 & PBDB \\ 
     Mustela rexroadensis & 9.58 & \cite{Tomiya2013} \\ 
     Mylanodon rosei & 2.30 & PBDB + regression \\ 
     Mylohyus elmorei & 235.60 & PBDB + regression \\ 
-    Mylohyus fossilis & 73960.53 & \cite{Brook2004a} \\ 
-    Myodes gapperi & 20.57 & Animal Diversity Web \\ 
-    Myodes rutilus & 30.00 & Animal Diversity Web \\ 
     Myrmecoboides montanensis & 3.60 & PBDB + regression \\ 
     Myrmecophaga tridactyla & 32544.00 & PBDB \\ 
     Mysops parvus & 2.80 & PBDB + regression \\ 
     Mystipterus martini & 29.37 & \cite{Tomiya2013} \\ 
     Mystipterus pacificus & 14.88 & \cite{Tomiya2013} \\ 
-    Mystipterus vespertilio & 9.49 & \cite{Tomiya2013} \\ 
     Mytonolagus petersoni & 7.00 & PBDB + regression \\ 
     Mytonolagus wyomingensis & 4.20 & PBDB + regression \\ 
     Mytonomeryx scotti & 24.50 & PBDB + regression \\ 
     Mytonomys burkei & 25.90 & PBDB + regression \\ 
-    Mytonomys coelumensis & 22.00 & PBDB + regression \\ 
     Mytonomys mytonensis & 16.00 & PBDB + regression \\ 
     Mytonomys robustus & 26.10 & PBDB + regression \\ 
-    Mytonomys wortmani & 12.99 & PBDB \\ 
     Namatomys lloydi & 1.80 & PBDB + regression \\ 
     Nannippus aztecus & 173.50 & PBDB + regression \\ 
     Nannippus beckensis & 205.70 & PBDB + regression \\ 
     Nannippus peninsulatus & 68871.66 & \cite{Tomiya2013} \\ 
     Nannippus westoni & 62317.65 & \cite{Tomiya2013} \\ 
-    Nannodectes gazini & 7.00 & PBDB + regression \\ 
     Nannodectes gidleyi & 11.40 & PBDB + regression \\ 
     Nannodectes intermedius & 5.40 & PBDB + regression \\ 
     Nannodectes simpsoni & 9.90 & PBDB + regression \\ 
@@ -1382,8 +1122,6 @@
     Nanotragulus loomisi & 2724.39 & \cite{Tomiya2013} \\ 
     Nanotragulus ordinatus & 5541.39 & \cite{Tomiya2013} \\ 
     Nanotragulus planiceps & 3678.00 & \cite{McKenna2011} \\ 
-    Napaeozapus insignis & 3.85 & \cite{Smith2004} \\ 
-    Navahoceros fricki & 220.96 & \cite{Smith2004} \\ 
     Navajovius kohlhaasae & 1.50 & PBDB + regression \\ 
     Nebraskomys mcgrewi & 46.06 & \cite{Tomiya2013} \\ 
     Nebraskomys rexroadensis & 2.60 & PBDB + regression \\ 
@@ -1400,40 +1138,21 @@
     Neoplagiaulax hunteri & 2.90 & PBDB + regression \\ 
     Neoplagiaulax macrotomeus & 1.60 & PBDB + regression \\ 
     Neoplagiaulax mckennai & 3.50 & PBDB + regression \\ 
-    Neoplagiaulax paskapooensis & 48.00 & \cite{Wilson2012} \\ 
-    Neoplagiaulax serrator & 36.00 & \cite{Wilson2012} \\ 
-    Neotamias cinereicollis & 61.59 & Encyclopedia of Life \\ 
-    Neotamias dorsalis & 63.66 & Encyclopedia of Life \\ 
-    Neotamias malloryi & 1.80 & PBDB + regression \\ 
-    Neotoma albigula & 10.11 & \cite{Smith2004} \\ 
     Neotoma cinerea & 11.89 & \cite{Smith2004} \\ 
-    Neotoma findleyi & 204.38 & \cite{Tomiya2013} \\ 
-    Neotoma floridana & 191.50 & PBDB \\ 
     Neotoma fossilis & 5.20 & PBDB + regression \\ 
-    Neotoma fuscipes & 10.60 & \cite{Smith2004} \\ 
-    Neotoma lepida & 9.15 & \cite{Smith2004} \\ 
     Neotoma leucopetrica & 8.56 & \cite{Grohe2010} \\ 
-    Neotoma mexicana & 10.05 & \cite{Smith2004} \\ 
-    Neotoma micropus & 10.76 & \cite{Smith2004} \\ 
-    Neotoma pygmaea & 119.10 & \cite{Tomiya2013} \\ 
     Neotoma quadriplicata & 9.60 & PBDB + regression \\ 
     Neotoma sawrockensis & 99.48 & \cite{Tomiya2013} \\ 
-    Neotoma spelaea & 232.76 & \cite{Tomiya2013} \\ 
-    Neotoma stephensi & 8.87 & \cite{Smith2004} \\ 
     Neotoma taylori & 5.70 & PBDB + regression \\ 
     Neotoma vaughani & 5.70 & PBDB + regression \\ 
     Nerterogeomys anzensis & 36.20 & PBDB \\ 
     Nerterogeomys garbanii & 43.40 & PBDB \\ 
     Nerterogeomys minor & 2.30 & PBDB + regression \\ 
     Nerterogeomys persimilis & 2.67 & \cite{Grohe2010} \\ 
-    Nesophontes edithae & 9.77 & \cite{Smith2004} \\ 
-    Neurotrichus columbianus & 2.57 & PBDB \\ 
     Nexuotapirus marslandensis & 144350.55 & \cite{Tomiya2013} \\ 
     Nexuotapirus robustus & 302549.45 & \cite{Tomiya2013} \\ 
     Niglarodon koerneri & 68.03 & \cite{Tomiya2013} \\ 
-    Niglarodon petersonensis & 119.10 & \cite{Tomiya2013} \\ 
     Nimravides galiani & 159532.03 & \cite{Tomiya2013} \\ 
-    Nimravides hibbardi & 81633.91 & \cite{Tomiya2013} \\ 
     Nimravides thinobates & 2460.50 & PBDB \\ 
     Nimravus brachyops & 3789.54 & \cite{Tomiya2013} \\ 
     Nimravus sectator & 28.50 & PBDB + regression \\ 
@@ -1451,23 +1170,16 @@
     Nothotylopus camptognathus & 334368.85 & \cite{Tomiya2013} \\ 
     Nothrotheriops shastensis & 613762.01 & \cite{Brook2004a} \\ 
     Nothrotheriops texanus & 228.60 & PBDB + regression \\ 
-    Notiosorex crawfordi & 1.90 & \cite{Smith2004} \\ 
     Notiosorex jacksoni & 1.52 & \cite{Madden1985} \\ 
     Notiosorex repenningi & 1.98 & \cite{Lillegraven1977} \\ 
     Notiotitanops mississippiensis & 2039.60 & PBDB + regression \\ 
     Notolagus lepusculus & 372.41 & \cite{Tomiya2013} \\ 
-    Notoparamys arctios & 8.30 & PBDB + regression \\ 
-    Notoparamys costilloi & 15.80 & PBDB + regression \\ 
     Nototamias hulberti & 17.12 & \cite{Tomiya2013} \\ 
     Nototamias quadratus & 35.87 & \cite{Tomiya2013} \\ 
     Nyctitherium serotinum & 1.60 & PBDB + regression \\ 
     Nyctitherium velox & 2.50 & PBDB + regression \\ 
-    Ochotona princeps & 9.01 & \cite{Smith2004} \\ 
     Ochotona spanglei & 188.67 & \cite{Tomiya2013} \\ 
-    Ochrotomys nuttalli & 22.60 & PBDB \\ 
-    Odocoileus hemionus & 113.75 & \cite{Smith2004} \\ 
     Odocoileus virginianus & 52607.00 & PBDB \\ 
-    Ogmodontomys pipecreekensis & 75.19 & \cite{Tomiya2013} \\ 
     Ogmodontomys poaphagus & 131.63 & \cite{Tomiya2013} \\ 
     Ogmodontomys sawrockensis & 140.40 & PBDB \\ 
     Oklahomalagus whisenhunti & 387.61 & \cite{Tomiya2013} \\ 
@@ -1477,14 +1189,9 @@
     Oligospermophilus douglassi & 4.30 & PBDB + regression \\ 
     Omomys carteri & 6.20 & PBDB + regression \\ 
     Omomys lloydi & 3.70 & PBDB + regression \\ 
-    Onohippidium galushai & 310700.00 & \cite{MacFadden1986} \\ 
     Onychomys hollisteri & 1.60 & PBDB + regression \\ 
-    Onychomys leucogaster & 40.90 & PBDB \\ 
     Onychomys martini & 18.36 & \cite{Tomiya2013} \\ 
     Onychomys pedroensis & 36.23 & \cite{Tomiya2013} \\ 
-    Onychomys torridus & 4.04 & \cite{Smith2004} \\ 
-    Oreamnos americanus & 129.02 & \cite{Smith2004} \\ 
-    Oreamnos harringtoni & 130.97 & \cite{Smith2004} \\ 
     Oregonomys magnus & 1.60 & PBDB + regression \\ 
     Oregonomys pebblespringsensis & 26.58 & \cite{Tomiya2013} \\ 
     Oregonomys sargenti & 26.05 & \cite{Tomiya2013} \\ 
@@ -1493,13 +1200,11 @@
     Oreolagus nebrascensis & 336.97 & \cite{Tomiya2013} \\ 
     Oreolagus nevadensis & 78.00 & \cite{McKenna2011} \\ 
     Oreolagus wallacei & 354.25 & \cite{Tomiya2013} \\ 
-    Oreolagus wilsoni & 399.41 & \cite{Tomiya2013} \\ 
     Oreotalpa florissantensis & 1.50 & PBDB + regression \\ 
     Orohippus pumilus & 39.20 & PBDB + regression \\ 
     Orohippus sylvaticus & 37.00 & PBDB + regression \\ 
     Oromeryx plicatus & 32.90 & PBDB + regression \\ 
     Oropyctis pediasius & 5.20 & PBDB + regression \\ 
-    Oryzomys palustris & 49.90 & PBDB \\ 
     Osbornoceros osborni & 17326.63 & \cite{Tomiya2013} \\ 
     Osbornodon brachypus & 141.90 & \cite{Chester2012} \\ 
     Osbornodon fricki & 25848.30 & \cite{Tomiya2013} \\ 
@@ -1512,9 +1217,6 @@
     Ottoceros peacevalleyensis & 13493.99 & \cite{Tomiya2013} \\ 
     Ourayia hopsoni & 12.20 & PBDB + regression \\ 
     Ourayia uintensis & 14.00 & PBDB + regression \\ 
-    Ovibos moschatus & 318470.00 & PBDB \\ 
-    Ovis canadensis & 72032.00 & PBDB \\ 
-    Ovis dalli & 115.01 & \cite{Smith2004} \\ 
     Oxetocyon cuspidatus & 2440.60 & \cite{Tomiya2013} \\ 
     Oxyacodon agapetillus & 9.20 & PBDB + regression \\ 
     Oxyacodon apiculatus & 17.30 & PBDB + regression \\ 
@@ -1523,7 +1225,6 @@
     Oxyaena forcipata & 137.50 & PBDB + regression \\ 
     Oxyaena gulo & 126.30 & PBDB + regression \\ 
     Oxyaena intermedia & 130.30 & PBDB + regression \\ 
-    Oxyclaenus corax & 4.85 & PBDB + regression \\ 
     Oxyclaenus cuspidatus & 5.30 & PBDB + regression \\ 
     Oxyclaenus pugnax & 7.10 & PBDB + regression \\ 
     Oxyclaenus simplex & 4.80 & PBDB + regression \\ 
@@ -1533,7 +1234,7 @@
     Pachyaena gigantea & 24.50 & PBDB + regression \\ 
     Pachyaena gracilis & 19.80 & PBDB + regression \\ 
     Pachyaena ossifraga & 380.00 & PBDB \\ 
-    Pachyarmatherium leiseyi & 15420.00 & \cite{McDonald1995} \\ 
+    Pachyarmatherium leiseyi & 15420.00 & \cite{McDonald2005} \\ 
     Paciculus montanus & 3.20 & PBDB + regression \\ 
     Paciculus nebraskensis & 80.64 & \cite{Tomiya2013} \\ 
     Paciculus woodi & 2.10 & \cite{Korth1993} \\ 
@@ -1555,29 +1256,22 @@
     Palaeolagus philoi & 1211.97 & \cite{Tomiya2013} \\ 
     Palaeolagus primus & 5.10 & PBDB + regression \\ 
     Palaeolagus temnodon & 6.20 & PBDB + regression \\ 
-    Palaeolama mirifica & 134.69 & \cite{Smith2004} \\ 
     Palaeonictis occidentalis & 117.30 & PBDB + regression \\ 
     Palaeonictis peloria & 154.40 & PBDB + regression \\ 
     Palaeoryctes cruoris & 4.40 & PBDB + regression \\ 
     Palaeoryctes puercensis & 2.50 & PBDB + regression \\ 
-    Palaeosinopa dorri & 32.40 & PBDB + regression \\ 
-    Palaeosyops fontinalis & 640.30 & PBDB + regression \\ 
     Palaeosyops laevidens & 787.30 & PBDB + regression \\ 
-    Palaeosyops laticeps & 856.50 & PBDB + regression \\ 
     Palaeosyops paludosus & 945.00 & PBDB + regression \\ 
     Palaeosyops robustus & 1046.40 & PBDB + regression \\ 
     Palenochtha minor & 1.30 & PBDB + regression \\ 
     Palenochtha weissae & 1.30 & PBDB + regression \\ 
     Paleotomus junior & 6.20 & PBDB + regression \\ 
     Paleotomus radagasti & 19.20 & PBDB \\ 
-    Pandemonium dis & 5.00 & PBDB + regression \\ 
-    Panthera leo & 150519.00 & PBDB \\ 
     Panthera onca & 100000.00 & PBDB \\ 
     Pantolambda bathmodon & 308.05 & PBDB \\ 
     Pantolambda cavirictus & 214.50 & PBDB + regression \\ 
     Pantolambda intermedius & 147.80 & PBDB + regression \\ 
     Parablastomeryx galushi & 56.40 & PBDB + regression \\ 
-    Parablastomeryx gregorii & 22026.47 & \cite{Tomiya2013} \\ 
     Paracosoryx furlongi & 13493.99 & \cite{Tomiya2013} \\ 
     Paracosoryx wilsoni & 10.67 & PBDB \\ 
     Paracryptotis gidleyi & 28.22 & \cite{Tomiya2013} \\ 
@@ -1588,7 +1282,6 @@
     Paradaphoenus minimus & 8.70 & PBDB + regression \\ 
     Paradaphoenus tooheyi & 3498.19 & \cite{Tomiya2013} \\ 
     Paradjidaumo alberti & 1.40 & PBDB + regression \\ 
-    Paradjidaumo hansonorum & 1.85 & PBDB \\ 
     Paradjidaumo hypsodus & 2.00 & PBDB + regression \\ 
     Paradjidaumo reynoldsi & 1.60 & PBDB + regression \\ 
     Paradjidaumo spokanensis & 2.80 & PBDB + regression \\ 
@@ -1596,11 +1289,8 @@
     Paradjidaumo validus & 3.00 & PBDB + regression \\ 
     Paradomnina relictus & 23.81 & \cite{Tomiya2013} \\ 
     Paraenhydrocyon josephi & 7942.63 & \cite{Tomiya2013} \\ 
-    Paraenhydrocyon robustus & 9136.20 & \cite{Tomiya2013} \\ 
     Paraenhydrocyon wallovianus & 14185.85 & \cite{Tomiya2013} \\ 
-    Parahippus cognatus & 91126.14 & \cite{Tomiya2013} \\ 
     Parahippus leonensis & 94845.07 & \cite{Tomiya2013} \\ 
-    Parahippus nebrascensis & 336.00 & PBDB + regression \\ 
     Parahippus pawniensis & 99707.88 & \cite{Tomiya2013} \\ 
     Parahippus tyleri & 173.20 & PBDB + regression \\ 
     Parahippus wyomingensis & 98400.00 & \cite{MacFadden1986} \\ 
@@ -1616,17 +1306,13 @@
     Paramys delicatior & 12.00 & PBDB + regression \\ 
     Paramys delicatus & 20.30 & PBDB + regression \\ 
     Paramys excavatus & 6.80 & PBDB + regression \\ 
-    Paramys hunti & 7.30 & PBDB + regression \\ 
     Paramys taurus & 7.60 & PBDB + regression \\ 
     Paranamatomys storeri & 0.92 & PBDB \\ 
-    Parapaenemarmota oregonensis & 2164.62 & \cite{Tomiya2013} \\ 
     Parapliohippus carrizoensis & 80821.64 & \cite{Tomiya2013} \\ 
     Parapliosaccomys oregonensis & 24.29 & \cite{Tomiya2013} \\ 
     Parapliosaccomys transversus & 2.54 & PBDB \\ 
     Parapotos tedfordi & 3533.34 & \cite{Tomiya2013} \\ 
     Pararyctes pattersoni & 2.00 & PBDB + regression \\ 
-    Parascalops breweri & 51.00 & PBDB \\ 
-    Paratamias tarassus & 27.39 & \cite{Tomiya2013} \\ 
     Paratomarctus euthos & 14472.42 & \cite{Tomiya2013} \\ 
     Paratomarctus temerarius & 11498.82 & \cite{Tomiya2013} \\ 
     Paratylopus labiatus & 101.80 & PBDB + regression \\ 
@@ -1643,7 +1329,6 @@
     Pareumys grangeri & 2.90 & PBDB + regression \\ 
     Pareumys guensburgi & 4.80 & PBDB + regression \\ 
     Pareumys milleri & 3.40 & PBDB + regression \\ 
-    Pareumys troxelli & 3.60 & PBDB + regression \\ 
     Parictis parvus & 6.80 & PBDB + regression \\ 
     Parictis personi & 7.60 & PBDB + regression \\ 
     Paromomys depressidens & 3.40 & PBDB + regression \\ 
@@ -1654,28 +1339,22 @@
     Paroreodon parvus & 51150.00 & \cite{McKenna2011} \\ 
     Parvericius montanus & 41.26 & \cite{Tomiya2013} \\ 
     Parvericius voorhiesi & 28.79 & \cite{Tomiya2013} \\ 
-    Parvitragulus priscus & 16.60 & PBDB + regression \\ 
     Patriofelis ferox & 22418.00 & \cite{McKenna2011} \\ 
     Patriofelis ulta & 136.00 & PBDB + regression \\ 
     Patriolestes novaceki & 10.20 & PBDB + regression \\ 
     Pauromys exallos & 1.50 & PBDB + regression \\ 
     Pauromys lillegraveni & 1.20 & PBDB + regression \\ 
-    Pauromys schaubi & 1.10 & PBDB + regression \\ 
     Pauromys simplex & 1.30 & PBDB + regression \\ 
     Pauromys texensis & 1.50 & PBDB + regression \\ 
     Pediomeryx hemphillensis & 167711.41 & \cite{Tomiya2013} \\ 
-    Pelycodus danielsae & 6300.00 & \cite{Soligo2006} \\ 
     Pelycodus jarrovii & 30.90 & PBDB + regression \\ 
     Pelycomys brulanus & 6.10 & PBDB + regression \\ 
-    Pelycomys placidus & 7.90 & PBDB + regression \\ 
     Pelycomys rugosus & 7.80 & PBDB + regression \\ 
-    Penetrigonias dakotensis & 343.83 & PBDB \\ 
     Penetrigonias hudsoni & 544.50 & PBDB \\ 
     Pentacemylus leotensis & 24.90 & PBDB + regression \\ 
     Pentacemylus progressus & 29.20 & PBDB + regression \\ 
     Pentacodon inversus & 17.70 & PBDB + regression \\ 
     Pentacodon occultus & 31.70 & PBDB + regression \\ 
-    Pentacosmodon pronus & 55.00 & \cite{Wilson2012} \\ 
     Peraceras hessei & 936589.16 & \cite{Tomiya2013} \\ 
     Peraceras profectum & 2326789.55 & \cite{Tomiya2013} \\ 
     Peraceras superciliosum & 1639660.88 & \cite{Tomiya2013} \\ 
@@ -1687,17 +1366,14 @@
     Peratherium comstocki & 4.30 & PBDB + regression \\ 
     Peratherium marsupium & 4.40 & PBDB + regression \\ 
     Perchoerus probus & 94.00 & PBDB + regression \\ 
-    Peridiomys borealis & 2.00 & PBDB + regression \\ 
     Peridiomys halis & 63.43 & \cite{Tomiya2013} \\ 
     Peridiomys oregonensis & 2.20 & PBDB + regression \\ 
     Peridiomys rusticus & 69.41 & \cite{Tomiya2013} \\ 
     Periptychus carinidens & 106.00 & PBDB + regression \\ 
     Periptychus coarctatus & 90.00 & PBDB + regression \\ 
     Perognathus ancenensis & 11.47 & \cite{Tomiya2013} \\ 
-    Perognathus brevidens & 7.32 & \cite{Tomiya2013} \\ 
     Perognathus coquorum & 2.20 & PBDB + regression \\ 
     Perognathus dunklei & 7.92 & \cite{Tomiya2013} \\ 
-    Perognathus flavus & 2.43 & \cite{Smith2004} \\ 
     Perognathus furlongi & 9.68 & \cite{Tomiya2013} \\ 
     Perognathus gidleyi & 11.82 & \cite{Tomiya2013} \\ 
     Perognathus maldei & 1.10 & PBDB + regression \\ 
@@ -1705,34 +1381,20 @@
     Perognathus minutus & 5.93 & \cite{Tomiya2013} \\ 
     Perognathus pearlettensis & 6.89 & \cite{Tomiya2013} \\ 
     Perognathus rexroadensis & 1.50 & PBDB + regression \\ 
-    Perognathus stevei & 10.70 & \cite{Tomiya2013} \\ 
     Perognathus trojectioansrum & 3.63 & \cite{Tomiya2013} \\ 
     Peromyscus antiquus & 26.84 & \cite{Tomiya2013} \\ 
-    Peromyscus berendsensis & 1.30 & PBDB + regression \\ 
-    Peromyscus boylii & 27.40 & PBDB \\ 
     Peromyscus brachygnathus & 1.10 & PBDB + regression \\ 
-    Peromyscus cochrani & 3.75 & \cite{Smith2004} \\ 
     Peromyscus complexus & 1.83 & PBDB \\ 
     Peromyscus cragini & 15.49 & \cite{Tomiya2013} \\ 
-    Peromyscus crinitus & 21.60 & PBDB \\ 
     Peromyscus dentalis & 1.20 & PBDB + regression \\ 
-    Peromyscus difficilis & 4.25 & \cite{Smith2004} \\ 
-    Peromyscus eremicus & 19.00 & PBDB \\ 
-    Peromyscus gossypinus & 4.34 & \cite{Smith2004} \\ 
     Peromyscus hagermanensis & 19.89 & \cite{Tomiya2013} \\ 
-    Peromyscus leucopus & 21.70 & PBDB \\ 
-    Peromyscus maniculatus & 18.10 & PBDB \\ 
     Peromyscus minimus & 0.70 & PBDB + regression \\ 
     Peromyscus nosher & 1.40 & PBDB + regression \\ 
-    Peromyscus pectoralis & 4.91 & \cite{Smith2004} \\ 
     Peromyscus polionotus & 14.30 & PBDB \\ 
-    Peromyscus progressus & 1.10 & PBDB + regression \\ 
     Peromyscus sarmocophinus & 1.50 & PBDB + regression \\ 
-    Peromyscus truei & 4.21 & \cite{Smith2004} \\ 
     Petauristodon jamesi & 307.97 & \cite{Tomiya2013} \\ 
     Petauristodon mathewsi & 214.86 & \cite{Tomiya2013} \\ 
     Petauristodon pattersoni & 336.97 & \cite{Tomiya2013} \\ 
-    Petauristodon volans & 124.50 & PBDB \\ 
     Pewelagus dawsonae & 57.70 & \cite{Jepsen1932} \\ 
     Pewelagus mexicanus & 6.50 & PBDB + regression \\ 
     Phelosaccomys annae & 26.31 & \cite{Tomiya2013} \\ 
@@ -1752,17 +1414,12 @@
     Phenacolemur mcgrewi & 3.60 & PBDB + regression \\ 
     Phenacolemur praecox & 5.80 & PBDB + regression \\ 
     Phenacolemur simonsi & 2.80 & PBDB + regression \\ 
-    Phenacomys deeringensis & 5.60 & PBDB + regression \\ 
     Phenacomys gryci & 228.00 & \cite{McKenna2011} \\ 
-    Phenacomys intermedius & 4.06 & \cite{Smith2004} \\ 
-    Phenacomys longicaudus & 3.56 & PBDB \\ 
-    Phenacomys ungava & 4.54 & \cite{Smith2004} \\ 
     Philotrox condoni & 11968.10 & \cite{Tomiya2013} \\ 
     Phlaocyon achoros & 2951.30 & \cite{Tomiya2013} \\ 
     Phlaocyon annectens & 3498.19 & \cite{Tomiya2013} \\ 
     Phlaocyon latidens & 2779.43 & \cite{Tomiya2013} \\ 
     Phlaocyon leucosteus & 3827.63 & \cite{Tomiya2013} \\ 
-    Phlaocyon marslandensis & 4914.77 & \cite{Tomiya2013} \\ 
     Phlaocyon minor & 3498.19 & \cite{Tomiya2013} \\ 
     Phlaocyon taylori & 1939.14 & \cite{Tomiya2013} \\ 
     Phlaocyon yatkolai & 9604.62 & \cite{Tomiya2013} \\ 
@@ -1770,19 +1427,13 @@
     Picrodus calgariensis & 1.50 & PBDB + regression \\ 
     Picrodus canpacius & 3.10 & PBDB + regression \\ 
     Picrodus silberlingi & 3.10 & PBDB + regression \\ 
-    Picromomys petersonorum & 0.80 & PBDB + regression \\ 
     Pipestoneomys bisulcatus & 2.60 & PBDB + regression \\ 
     Plagioctenodon krausae & 0.90 & PBDB + regression \\ 
     Plagioctenodon rosei & 1.50 & PBDB + regression \\ 
     Plagiomene accola & 9.30 & PBDB + regression \\ 
     Plagiomene multicuspis & 14.90 & PBDB + regression \\ 
-    Planetetherium mirabile & 5.70 & PBDB + regression \\ 
     Planisorex dixonensis & 1.60 & PBDB + regression \\ 
     Platygonus bicalcaratus & 182.50 & PBDB + regression \\ 
-    Platygonus compressus & 154.62 & \cite{Smith2004} \\ 
-    Platygonus compresus & 28600.00 & PBDB \\ 
-    Platygonus depressifrons & 28600.00 & PBDB \\ 
-    Platygonus intermedius & 288.75 & \cite{Rose1982a} \\ 
     Platygonus oregonensis & 40134.84 & \cite{Tomiya2013} \\ 
     Platygonus pearcei & 55826.28 & \cite{Tomiya2013} \\ 
     Platygonus vetus & 65463.62 & \cite{Brook2004a} \\ 
@@ -1794,7 +1445,6 @@
     Plesiadapis gingerichi & 28.20 & PBDB + regression \\ 
     Plesiadapis praecursor & 6.60 & PBDB + regression \\ 
     Plesiadapis rex & 13.30 & PBDB + regression \\ 
-    Plesiadapis simonsi & 15.60 & PBDB + regression \\ 
     Plesiocolopirus hancocki & 94.70 & PBDB + regression \\ 
     Plesiogulo lindsayi & 4628.55 & \cite{Tomiya2013} \\ 
     Plesiogulo marshalli & 3133.79 & \cite{Tomiya2013} \\ 
@@ -1804,7 +1454,6 @@
     Plesiosminthus clivosus & 9.30 & \cite{Tomiya2013} \\ 
     Plesiosorex coloradensis & 192.48 & \cite{Tomiya2013} \\ 
     Plesiosorex donroosai & 685.40 & \cite{Tomiya2013} \\ 
-    Plesiosorex latidens & 7.20 & PBDB \\ 
     Pleurolicus dakotensis & 60.95 & \cite{Tomiya2013} \\ 
     Pleurolicus exiguus & 1.80 & PBDB + regression \\ 
     Pleurolicus sellardsi & 2.77 & \cite{Zakrzewski1991a} \\ 
@@ -1823,10 +1472,8 @@
     Plionarctos edensis & 56954.05 & \cite{Tomiya2013} \\ 
     Plionarctos harroldorum & 21.30 & PBDB + regression \\ 
     Plionictis ogygia & 36.97 & \cite{Tomiya2013} \\ 
-    Plionictis oregonensis & 8.10 & PBDB + regression \\ 
     Pliophenacomys dixonensis & 2.70 & PBDB + regression \\ 
     Pliophenacomys finneyi & 3.10 & PBDB + regression \\ 
-    Pliophenacomys koenigswaldi & 104.58 & \cite{Tomiya2013} \\ 
     Pliophenacomys meadensis & 2.80 & PBDB + regression \\ 
     Pliophenacomys osborni & 86.49 & \cite{Tomiya2013} \\ 
     Pliophenacomys primaevus & 61.56 & \cite{Tomiya2013} \\ 
@@ -1836,25 +1483,20 @@
     Pliotaxidea nevadensis & 130.32 & \cite{Tomiya2013} \\ 
     Pliotomodon primitivus & 107.77 & \cite{Tomiya2013} \\ 
     Pliozapus solus & 18.73 & \cite{Tomiya2013} \\ 
-    Plithocyon barstowensis & 141492.22 & \cite{Tomiya2013} \\ 
     Plithocyon ursinus & 189094.09 & \cite{Tomiya2013} \\ 
     Poabromylus golzi & 40.90 & PBDB + regression \\ 
     Poabromylus kayi & 64.10 & PBDB + regression \\ 
-    Podomys floridanus & 4.43 & \cite{Smith2004} \\ 
     Poebrotherium eximium & 106.10 & PBDB + regression \\ 
     Poebrotherium wilsoni & 119.80 & PBDB + regression \\ 
     Pogonodon eileenae & 242.00 & \cite{Fox2011b} \\ 
     Pratifelis martini & 215345.72 & \cite{Tomiya2013} \\ 
     Pratilepus kansasensis & 972.63 & \cite{Tomiya2013} \\ 
-    Predicrostonyx hopkinsi & 6.20 & PBDB + regression \\ 
     Premnoides douglassi & 2.80 & PBDB + regression \\ 
     Presbymys lophatus & 3.30 & PBDB + regression \\ 
     Presbytherium rhodorugatus & 46.40 & PBDB + regression \\ 
     Princetonia yalensis & 21.80 & PBDB + regression \\ 
-    Priscocamelus wilsoni & 68871.66 & \cite{Tomiya2013} \\ 
     Probassariscus matthewi & 7.80 & PBDB + regression \\ 
     Probathyopsis harrisorum & 162.70 & PBDB + regression \\ 
-    Probathyopsis lysitensis & 113.60 & PBDB + regression \\ 
     Probathyopsis praecursor & 187.80 & PBDB + regression \\ 
     Problastomeryx primus & 14913.17 & \cite{Tomiya2013} \\ 
     Procamelus grandis & 400312.19 & \cite{Tomiya2013} \\ 
@@ -1864,7 +1506,6 @@
     Prochetodon foxi & 6.80 & PBDB + regression \\ 
     Prochetodon speirsae & 10.10 & PBDB \\ 
     Prochetodon taxus & 10.90 & PBDB + regression \\ 
-    Procoptodon goliah & 220.96 & \cite{Smith2004} \\ 
     Procranioceras skinneri & 169396.94 & \cite{Tomiya2013} \\ 
     Procynodictis progressus & 9.00 & PBDB + regression \\ 
     Procyon lotor & 5814.00 & PBDB \\ 
@@ -1895,12 +1536,10 @@
     Promartes darbyi & 97.00 & \cite{Dawson2007} \\ 
     Promartes gemmarosae & 86.00 & \cite{Dawson2007} \\ 
     Promartes lepidus & 46.41 & \cite{Mora2005} \\ 
-    Promartes vantasselensis & 75.00 & \cite{Dawson2007} \\ 
     Promioclaenus acolytus & 10.00 & PBDB + regression \\ 
     Promioclaenus pipiringosi & 13.90 & PBDB + regression \\ 
     Promioclaenus thnetus & 7.80 & \cite{Gazin1930} \\ 
     Promylagaulus riggsi & 85.63 & \cite{Tomiya2013} \\ 
-    Proneofiber guildayi & 14.10 & PBDB + regression \\ 
     Pronodens silberlingi & 22247.84 & \cite{Tomiya2013} \\ 
     Pronothodectes gaoi & 7.70 & PBDB + regression \\ 
     Pronothodectes jepi & 7.50 & PBDB + regression \\ 
@@ -1908,7 +1547,6 @@
     Pronotolagus apachensis & 445.86 & \cite{Tomiya2013} \\ 
     Pronotolagus nevadensis & 60.34 & \cite{Tomiya2013} \\ 
     Pronotolagus whitei & 1436.55 & \cite{Tomiya2013} \\ 
-    Propalaeanodon schaffi & 2.30 & PBDB + regression \\ 
     Proscalops miocaenus & 2.70 & PBDB + regression \\ 
     Proscalops secundus & 72.97 & \cite{Tomiya2013} \\ 
     Proscalops tertius & 96.54 & \cite{Tomiya2013} \\ 
@@ -1936,14 +1574,12 @@
     Prothryptacodon albertensis & 10.70 & PBDB + regression \\ 
     Prothryptacodon furens & 19.20 & PBDB + regression \\ 
     Prothryptacodon hilli & 23.50 & PBDB + regression \\ 
-    Protictis agastor & 7.06 & PBDB + regression \\ 
     Protictis haydenianus & 7.43 & PBDB + regression \\ 
     Protictis microlestes & 13.63 & PBDB \\ 
     Protictis minor & 6.30 & PBDB + regression \\ 
     Protictis paralus & 4.10 & PBDB + regression \\ 
     Protictis paulus & 8.40 & PBDB \\ 
     Protictis simpsoni & 8.60 & PBDB + regression \\ 
-    Protictis vanvaleni & 8.12 & \cite{Emry2005} \\ 
     Protitanops curryi & 142477.00 & \cite{McKenna2011} \\ 
     Protitanotherium superbum & 1522.00 & PBDB + regression \\ 
     Protoceras celer & 172.20 & PBDB + regression \\ 
@@ -1955,7 +1591,6 @@
     Protolabis coartatus & 110194.25 & \cite{Tomiya2013} \\ 
     Protolabis heterodontus & 219695.99 & \cite{Tomiya2013} \\ 
     Protomarctus optatus & 11271.13 & \cite{Tomiya2013} \\ 
-    Protoprocyon savagei & 1669.03 & \cite{Tomiya2013} \\ 
     Protoreodon pacificus & 82.10 & PBDB + regression \\ 
     Protoreodon parvus & 80.30 & PBDB + regression \\ 
     Protoreodon pearcei & 88.30 & PBDB + regression \\ 
@@ -1966,9 +1601,7 @@
     Protosciurus mengi & 8.70 & PBDB + regression \\ 
     Protosciurus tecuyensis & 478.19 & \cite{Tomiya2013} \\ 
     Protoselene griphus & 21.20 & PBDB + regression \\ 
-    Protoselene novissimus & 20.16 & PBDB \\ 
     Protoselene opisthacus & 21.80 & PBDB + regression \\ 
-    Protospermophilus angusticeps & 320.54 & \cite{Tomiya2013} \\ 
     Protospermophilus kelloggi & 202.35 & \cite{Tomiya2013} \\ 
     Protospermophilus malheurensis & 103.54 & \cite{Tomiya2013} \\ 
     Protospermophilus oregonensis & 450.34 & \cite{Tomiya2013} \\ 
@@ -2003,15 +1636,12 @@
     Pseudocylindrodon medius & 2.50 & PBDB + regression \\ 
     Pseudocylindrodon neglectus & 3.70 & PBDB + regression \\ 
     Pseudocylindrodon pintoensis & 5.78 & MIOMAP \\ 
-    Pseudocylindrodon texanus & 5.50 & PBDB + regression \\ 
     Pseudodiplacodon progressum & 888.00 & PBDB \\ 
     Pseudolabis dakotensis & 59874.14 & \cite{Tomiya2013} \\ 
-    Pseudomyscus bathygnathus & 26.05 & \cite{Tomiya2013} \\ 
     Pseudoparablastomeryx francescita & 22.80 & PBDB \\ 
     Pseudoparablastomeryx scotti & 5884.05 & \cite{Tomiya2013} \\ 
     Pseudoprotoceras longinaris & 83.40 & PBDB + regression \\ 
     Pseudoprotoceras minor & 57.60 & PBDB + regression \\ 
-    Pseudoprotoceras semicinctus & 95.10 & PBDB + regression \\ 
     Pseudotheridomys cuyamensis & 12.43 & \cite{Tomiya2013} \\ 
     Pseudotheridomys hesperus & 14.15 & \cite{Tomiya2013} \\ 
     Pseudotheridomys pagei & 8.17 & \cite{Tomiya2013} \\ 
@@ -2023,9 +1653,6 @@
     Pseudotomus littoralis & 24.50 & PBDB + regression \\ 
     Pseudotomus petersoni & 32.90 & \cite{Carraway2010} \\ 
     Pseudotomus robustus & 32.20 & PBDB + regression \\ 
-    Pseudotrimylus blacki & 48.91 & \cite{Tomiya2013} \\ 
-    Pseudotrimylus compressus & 2.73 & PBDB \\ 
-    Pseudotrimylus dakotensis & 2.50 & PBDB + regression \\ 
     Pseudotrimylus mawbyi & 7.30 & PBDB + regression \\ 
     Ptilodus fractus & 105.00 & \cite{Wilson2012} \\ 
     Ptilodus gnomus & 4.30 & PBDB + regression \\ 
@@ -2036,26 +1663,14 @@
     Puercolestes simpsoni & 10.60 & PBDB + regression \\ 
     Puma concolor & 48009.00 & PBDB \\ 
     Puma lacustris & 15.30 & PBDB + regression \\ 
-    Purgatorius coracis & 2.38 & \cite{Scott1937} \\ 
-    Purgatorius unio & 3.10 & PBDB + regression \\ 
     Pyrocyon dioctetus & 22.70 & PBDB + regression \\ 
-    Quadratomus gigans & 57.10 & PBDB + regression \\ 
     Quadratomus grandis & 19.00 & PBDB + regression \\ 
     Quadratomus grossus & 34.70 & PBDB + regression \\ 
-    Quadratomus sundelli & 43.30 & PBDB + regression \\ 
     Quadrodens wilsoni & 46.06 & \cite{Tomiya2013} \\ 
     Rakomeryx sinclairi & 111301.72 & \cite{Tomiya2013} \\ 
-    Rakomylus raki & 82454.34 & \cite{Tomiya2013} \\ 
-    Rangifer tarandus & 86034.00 & PBDB \\ 
     Rapamys fricki & 15.00 & PBDB + regression \\ 
     Raphictis gausion & 3.70 & PBDB + regression \\ 
-    Rattus rattus & 11.55 & \cite{Smith2004} \\ 
-    Reithrodontomys fulvescens & 11.70 & PBDB \\ 
     Reithrodontomys galushai & 1.10 & PBDB + regression \\ 
-    Reithrodontomys humulis & 2.51 & \cite{Smith2004} \\ 
-    Reithrodontomys megalotis & 2.64 & \cite{Smith2004} \\ 
-    Reithrodontomys montanus & 2.82 & \cite{Smith2004} \\ 
-    Reithrodontomys moorei & 11.47 & \cite{Tomiya2013} \\ 
     Reithrodontomys rexroadensis & 0.90 & PBDB + regression \\ 
     Reithrodontomys wetmorei & 9.03 & \cite{Tomiya2013} \\ 
     Reithroparamys debequensis & 5.70 & PBDB + regression \\ 
@@ -2067,10 +1682,8 @@
     Repomys maxumi & 122.73 & \cite{Tomiya2013} \\ 
     Repomys panacaensis & 38.47 & \cite{Tomiya2013} \\ 
     Rhizocyon oregonensis & 3361.02 & \cite{Tomiya2013} \\ 
-    Rhynchotherium blicki & 8950.50 & PBDB \\ 
     Rhynchotherium falconeri & 10697.20 & PBDB + regression \\ 
     Russellagus vonhofi & 214.86 & \cite{Tomiya2013} \\ 
-    Saiga tatarica & 43000.00 & NOW \\ 
     Sanctimus falkenbachi & 151.41 & \cite{Tomiya2013} \\ 
     Sanctimus stouti & 120.30 & \cite{Tomiya2013} \\ 
     Sanctimus stuartae & 100.48 & \cite{Tomiya2013} \\ 
@@ -2088,27 +1701,21 @@
     Scaphohippus sumani & 171.00 & PBDB \\ 
     Scenopagus curtidens & 2.60 & PBDB + regression \\ 
     Scenopagus edenensis & 4.80 & PBDB + regression \\ 
-    Scenopagus hewettensis & 2.90 & PBDB + regression \\ 
     Scenopagus priscus & 2.00 & PBDB + regression \\ 
-    Schaubeumys cartomylos & 1.60 & PBDB + regression \\ 
     Schaubeumys galbreathi & 1.57 & \cite{Loomis1911} \\ 
     Schaubeumys grangeri & 1.60 & PBDB + regression \\ 
     Schaubeumys sabrae & 1.48 & \cite{Matthew1901} \\ 
     Schizodontomys amnicolus & 111.05 & \cite{Tomiya2013} \\ 
     Schizodontomys greeni & 94.00 & \cite{McKenna2011} \\ 
     Schizodontomys harkseni & 105.64 & \cite{Tomiya2013} \\ 
-    Schizodontomys sulcidens & 65.37 & \cite{Tomiya2013} \\ 
     Sciuravus bridgeri & 2.40 & PBDB + regression \\ 
     Sciuravus nitidus & 5.30 & PBDB + regression \\ 
     Sciuravus popi & 7.90 & PBDB + regression \\ 
     Sciuravus powayensis & 3.70 & PBDB + regression \\ 
     Sciuravus wilsoni & 3.60 & PBDB + regression \\ 
     Sciurion campestre & 1.90 & PBDB + regression \\ 
-    Sciurus aberti & 16.36 & \cite{Smith2004} \\ 
     Sciurus carolinensis & 518.00 & PBDB \\ 
-    Sciurus niger & 17.85 & \cite{Smith2004} \\ 
     Sciurus olsoni & 1.71 & PBDB \\ 
-    Scottimus ambiguus & 2.30 & PBDB + regression \\ 
     Scottimus exiguus & 3.21 & \cite{Novacek1977} \\ 
     Scottimus longiquus & 111.05 & \cite{Tomiya2013} \\ 
     Scottimus lophatus & 4.65 & PBDB \\ 
@@ -2125,12 +1732,8 @@
     Sifrhippus aemulor & 45.36 & \cite{Osborn1933} \\ 
     Sifrhippus grangeri & 40.20 & PBDB + regression \\ 
     Sifrhippus sandrae & 38.00 & PBDB + regression \\ 
-    Sigmodon bakeri & 74.44 & \cite{Tomiya2013} \\ 
     Sigmodon curtisi & 3.80 & PBDB + regression \\ 
-    Sigmodon hispidus & 96.40 & PBDB \\ 
     Sigmodon hudspethensis & 3.20 & PBDB + regression \\ 
-    Sigmodon libitinus & 3.40 & PBDB + regression \\ 
-    Sigmodon lindsayi & 120.30 & \cite{Tomiya2013} \\ 
     Sigmodon minor & 52.98 & \cite{Tomiya2013} \\ 
     Simidectes magnus & 9.10 & PBDB + regression \\ 
     Simidectes medius & 8.30 & PBDB + regression \\ 
@@ -2148,69 +1751,37 @@
     Simpsonlemur jepseni & 121.00 & \cite{Soligo2006} \\ 
     Simpsonodus chacensis & 18.50 & PBDB + regression \\ 
     Sinclairella dakotensis & 7.20 & PBDB + regression \\ 
-    Sinclairomeryx riparius & 110194.25 & \cite{Tomiya2013} \\ 
     Sinopa major & 49.30 & PBDB + regression \\ 
     Sinopa rapax & 31.30 & PBDB + regression \\ 
     Smilodectes gracilis & 16.60 & PBDB + regression \\ 
     Smilodectes mcgrewi & 18.10 & PBDB + regression \\ 
     Smilodectes sororis & 15.70 & PBDB + regression \\ 
-    Smilodon fatalis & 270.97 & \cite{Smith2004} \\ 
     Smilodon gracilis & 22.70 & PBDB + regression \\ 
     Sminthosinis bowleri & 100.48 & \cite{Tomiya2013} \\ 
-    Sorex arcticus & 2.49 & \cite{Smith2004} \\ 
     Sorex cinereus & 3.80 & PBDB \\ 
-    Sorex cudahyensis & 6.62 & \cite{Tomiya2013} \\ 
-    Sorex dispar & 2.01 & \cite{Smith2004} \\ 
     Sorex edwardsi & 1.13 & PBDB \\ 
-    Sorex fumeus & 7.30 & PBDB \\ 
     Sorex hagermanensis & 1.20 & PBDB + regression \\ 
-    Sorex hoyi & 1.51 & \cite{Smith2004} \\ 
-    Sorex lacustris & 11.02 & \cite{Tomiya2013} \\ 
-    Sorex longirostris & 1.74 & \cite{Smith2004} \\ 
-    Sorex megapalustris & 17.99 & \cite{Tomiya2013} \\ 
     Sorex meltoni & 3.46 & \cite{Tomiya2013} \\ 
-    Sorex merriami & 2.16 & \cite{Smith2004} \\ 
-    Sorex minutus & 1.92 & \cite{Smith2004} \\ 
-    Sorex monticolus & 2.05 & \cite{Smith2004} \\ 
     Sorex palustris & 3.09 & \cite{Smith2004} \\ 
     Sorex powersi & 7.77 & \cite{Tomiya2013} \\ 
-    Sorex pratensis & 7.46 & \cite{Tomiya2013} \\ 
     Sorex rexroadensis & 8.00 & \cite{McKenna2011} \\ 
-    Sorex vagrans & 2.16 & \cite{Smith2004} \\ 
     Sorex yatkolai & 0.92 & PBDB \\ 
     Spermophilus argonautus & 131.63 & \cite{Tomiya2013} \\ 
-    Spermophilus armatus & 12.13 & \cite{Smith2004} \\ 
-    Spermophilus beecheyi & 15.83 & \cite{Smith2004} \\ 
     Spermophilus bensoni & 184.93 & \cite{Tomiya2013} \\ 
     Spermophilus boothi & 9.83 & \cite{Secord2008a} \\ 
-    Spermophilus columbianus & 14.78 & \cite{Smith2004} \\ 
     Spermophilus cragini & 578.25 & \cite{Tomiya2013} \\ 
-    Spermophilus cyanocittus & 94.63 & \cite{Tomiya2013} \\ 
     Spermophilus dotti & 270.43 & \cite{Tomiya2013} \\ 
-    Spermophilus elegans & 14.25 & \cite{Smith2004} \\ 
-    Spermophilus franklinii & 12.94 & \cite{Smith2004} \\ 
     Spermophilus fricki & 6.38 & \cite{Simons1960} \\ 
     Spermophilus gidleyi & 700.00 & \cite{McKenna2011} \\ 
     Spermophilus howelli & 139.77 & \cite{Tomiya2013} \\ 
     Spermophilus jerae & 87.36 & \cite{Tomiya2013} \\ 
-    Spermophilus lateralis & 9.79 & \cite{Smith2004} \\ 
-    Spermophilus lorisrusselli & 5.30 & PBDB + regression \\ 
     Spermophilus matachicensis & 6.20 & PBDB + regression \\ 
     Spermophilus matthewi & 8.68 & \cite{Beatty2009} \\ 
-    Spermophilus mckayensis & 172.43 & \cite{Tomiya2013} \\ 
     Spermophilus meadensis & 100.48 & \cite{Tomiya2013} \\ 
-    Spermophilus parryii & 90.70 & PBDB \\ 
-    Spermophilus primitivus & 112.17 & \cite{Tomiya2013} \\ 
     Spermophilus rexroadensis & 8.00 & PBDB + regression \\ 
-    Spermophilus richardsonii & 13.59 & \cite{Smith2004} \\ 
     Spermophilus russelli & 166.00 & \cite{McKenna2011} \\ 
     Spermophilus shotwelli & 204.00 & \cite{McKenna2011} \\ 
-    Spermophilus spilosoma & 7.02 & \cite{Smith2004} \\ 
     Spermophilus tephrus & 89.12 & \cite{Tomiya2013} \\ 
-    Spermophilus townsendii & 10.26 & \cite{Smith2004} \\ 
-    Spermophilus tridecemlimeatus & 174.91 & Encyclopedia of Life \\ 
-    Spermophilus tridecemlineatus & 139.00 & PBDB \\ 
-    Spermophilus variegatus & 17.12 & \cite{Smith2004} \\ 
     Spermophilus wellingtonensis & 295.89 & \cite{Tomiya2013} \\ 
     Spermophilus wilsoni & 247.15 & \cite{Tomiya2013} \\ 
     Sphacorhysis burntforkensis & 2.80 & PBDB + regression \\ 
@@ -2225,21 +1796,13 @@
     Stenoechinus tantalus & 48.42 & \cite{Tomiya2013} \\ 
     Stenomylus gracilis & 44801.64 & \cite{Tomiya2013} \\ 
     Stenomylus hitchcocki & 38948.67 & \cite{Tomiya2013} \\ 
-    Stenomylus keelinensis & 19.50 & \cite{Czaplewski2012} \\ 
     Stenomylus taylori & 192.72 & PBDB \\ 
     Sthenictis dolichops & 665.14 & \cite{Tomiya2013} \\ 
     Sthenictis junturensis & 330.30 & \cite{Tomiya2013} \\ 
-    Sthenictis lacota & 129.50 & \cite{Mihlbacher2006} \\ 
-    Sthenodectes priscus & 1570.10 & PBDB + regression \\ 
     Stibarus montanus & 17.60 & PBDB + regression \\ 
     Stibarus obtusilobus & 19.70 & PBDB + regression \\ 
     Stibarus quadricuspis & 24.40 & PBDB + regression \\ 
-    Stibarus yoderensis & 18.10 & PBDB + regression \\ 
     Stockia powayensis & 6.00 & PBDB + regression \\ 
-    Stockoceros conklingi & 110.83 & \cite{Smith2004} \\ 
-    Stockoceros onusrosagris & 114.43 & \cite{Smith2004} \\ 
-    Strathcona major & 5.20 & PBDB + regression \\ 
-    Strathcona minor & 3.60 & PBDB + regression \\ 
     Stratimus strobeli & 20.09 & \cite{Tomiya2013} \\ 
     Strigorhysis bridgerensis & 4.40 & PBDB + regression \\ 
     Strigorhysis huerfanensis & 6.30 & PBDB + regression \\ 
@@ -2251,34 +1814,16 @@
     Subhyracodon mitis & 455.00 & \cite{Scott1940} \\ 
     Subhyracodon occidentalis & 580.10 & PBDB + regression \\ 
     Sunkahetanka geringensis & 11158.98 & \cite{Tomiya2013} \\ 
-    Sus scrofa & 55562.00 & PBDB \\ 
     Swaindelphys cifellii & 2.14 & PBDB \\ 
-    Sylvilagus aquaticus & 2135.79 & PBDB \\ 
-    Sylvilagus audubonii & 19.09 & \cite{Smith2004} \\ 
-    Sylvilagus bachmani & 16.58 & \cite{Smith2004} \\ 
-    Sylvilagus floridanus & 1216.00 & PBDB \\ 
-    Sylvilagus nuttallii & 17.78 & \cite{Smith2004} \\ 
-    Sylvilagus transitionalis & 16.73 & \cite{Smith2004} \\ 
-    Symmetrodontomys daamsi & 20.49 & \cite{Tomiya2013} \\ 
     Symmetrodontomys simplicidens & 26.84 & \cite{Tomiya2013} \\ 
-    Synaptomys australis & 5.61 & \cite{Smith2004} \\ 
-    Synaptomys bunkeri & 3.67 & \cite{Smith2004} \\ 
-    Synaptomys cooperi & 29.00 & PBDB \\ 
-    Synaptomys morgani & 3.30 & PBDB + regression \\ 
     Syndyoceras cooki & 73865.41 & \cite{Tomiya2013} \\ 
-    Synthetoceras davisorum & 219695.99 & \cite{Tomiya2013} \\ 
     Tachylagus gawneae & 5.70 & PBDB + regression \\ 
-    Taeniolabis lamberti & 128.00 & PBDB + regression \\ 
     Taeniolabis taoensis & 173.80 & PBDB + regression \\ 
     Talpavoides dartoni & 1.20 & PBDB + regression \\ 
     Talpavus conjunctus & 3.00 & PBDB + regression \\ 
     Talpavus duplus & 1.80 & PBDB + regression \\ 
     Talpavus nitidus & 1.40 & PBDB + regression \\ 
-    Tamias aristus & 8.63 & \cite{Smith2004} \\ 
     Tamias ateles & 2.10 & PBDB + regression \\ 
-    Tamiasciurus hudsonicus & 192.00 & PBDB \\ 
-    Tamiasciurus tenuidens & 218.70 & PBDB \\ 
-    Tamias striatus & 90.00 & PBDB \\ 
     Tanymykter brachyodontus & 102744.44 & \cite{Tomiya2013} \\ 
     Tapiravus validus & 64860.88 & \cite{Tomiya2013} \\ 
     Tapirus simpsoni & 369534.73 & \cite{Tomiya2013} \\ 
@@ -2286,7 +1831,6 @@
     Tapochoerus mcmillini & 21.10 & PBDB + regression \\ 
     Tapocyon dawsonae & 77.90 & PBDB + regression \\ 
     Tapocyon robustus & 87.70 & PBDB + regression \\ 
-    Tapomys tapensis & 23.70 & PBDB + regression \\ 
     Tardontia nevadans & 157.59 & \cite{Tomiya2013} \\ 
     Tardontia occidentale & 5.60 & PBDB + regression \\ 
     Tarka stylifera & 34.10 & PBDB + regression \\ 
@@ -2294,14 +1838,10 @@
     Taxidea mexicana & 12.80 & \cite{Bloch2007} \\ 
     Taxidea taxus & 47.09 & \cite{Smith2004} \\ 
     Tayassu protervus & 98.60 & PBDB \\ 
-    Tayassu tajacu & 17200.00 & PBDB \\ 
     Teilhardina americana & 3.70 & PBDB + regression \\ 
     Teilhardina crassidens & 3.40 & PBDB + regression \\ 
-    Teilhardina demissa & 2.80 & PBDB + regression \\ 
-    Teilhardina tenuicula & 2.60 & PBDB + regression \\ 
     Teleoceras meridianum & 2022813.66 & \cite{Tomiya2013} \\ 
     Teletaceras mortivallis & 155.00 & PBDB + regression \\ 
-    Teletaceras radinskyi & 256.10 & PBDB + regression \\ 
     Telmatherium altidens & 1236.90 & PBDB + regression \\ 
     Telmatherium cultridens & 560.00 & PBDB + regression \\ 
     Telmatherium manteoceras & 468.00 & PBDB + regression \\ 
@@ -2310,16 +1850,13 @@
     Tenudomys bodei & 43.38 & \cite{Tomiya2013} \\ 
     Tenudomys macdonaldi & 79.84 & \cite{Tomiya2013} \\ 
     Tephrocyon rurestris & 13095.19 & \cite{Tomiya2013} \\ 
-    Tetonius ambiguus & 4.43 & \cite{Brown1980} \\ 
+    Tetonius ambiguus & 4.43 & PBDB \\ 
     Tetonius matthewi & 4.80 & PBDB + regression \\ 
     Tetonius mckennai & 3.40 & PBDB + regression \\ 
     Tetraclaenodon puercensis & 55.60 & PBDB + regression \\ 
-    Tetrameryx shuleri & 118.87 & \cite{Smith2004} \\ 
-    Tetrapassalus mckennai & 0.90 & \cite{Brown1980} \\ 
-    Texoceros altidens & 17326.63 & \cite{Tomiya2013} \\ 
+    Tetrapassalus mckennai & 0.90 & PBDB \\ 
     Texomys ritchiei & 97.51 & \cite{Tomiya2013} \\ 
-    Texomys stewarti & 1.70 & PBDB + regression \\ 
-    Thinobadistes segnis & 645890.00 & \cite{McDonald1995} \\ 
+    Thinobadistes segnis & 645890.00 & \cite{McDonald2005} \\ 
     Thinocyon velox & 23.30 & PBDB + regression \\ 
     Thinohyus lentus & 101400.00 & \cite{McKenna2011} \\ 
     Thisbemys corrugatus & 14.30 & PBDB + regression \\ 
@@ -2329,34 +1866,23 @@
     Thomomys bottae & 7.85 & \cite{Smith2004} \\ 
     Thomomys carsonensis & 2.00 & PBDB + regression \\ 
     Thomomys gidleyi & 37.34 & \cite{Tomiya2013} \\ 
-    Thomomys monticola & 6.71 & \cite{Smith2004} \\ 
-    Thomomys orientalis & 7.23 & \cite{Smith2004} \\ 
-    Thomomys potomacensis & 3.00 & PBDB + regression \\ 
-    Thomomys talpoides & 69.50 & PBDB \\ 
-    Thomomys townsendii & 11.26 & \cite{Smith2004} \\ 
-    Thomomys umbrinus & 9.21 & \cite{Smith2004} \\ 
     Thryptacodon antiquus & 35.30 & PBDB + regression \\ 
     Thryptacodon australis & 28.30 & PBDB + regression \\ 
-    Thryptacodon barae & 21.30 & PBDB + regression \\ 
     Thryptacodon orthogonius & 20.60 & PBDB + regression \\ 
     Thryptacodon pseudarctos & 43.70 & PBDB + regression \\ 
     Thylacaelurus campester & 2.60 & PBDB + regression \\ 
     Thylacaelurus montanus & 3.60 & PBDB + regression \\ 
-    Thylacodon montanensis & 3.30 & PBDB + regression \\ 
     Thylacodon pusillus & 3.10 & PBDB + regression \\ 
     Ticholeptus zygomaticus & 106937.52 & \cite{Tomiya2013} \\ 
     Tillodon fodiens & 266.10 & PBDB + regression \\ 
     Tillomys senex & 3.60 & PBDB + regression \\ 
     Tinimomys graybulliensis & 1.40 & PBDB + regression \\ 
-    Tinimomys loomisi & 1.10 & PBDB + regression \\ 
     Tinimomys tribos & 0.93 & \cite{Skinner1972} \\ 
     Titanoides gidleyi & 260.10 & PBDB + regression \\ 
     Titanoides nanus & 223.10 & PBDB + regression \\ 
     Titanoides primaevus & 335.40 & PBDB + regression \\ 
-    Tiznatzinia vanderhoofi & 9.30 & PBDB + regression \\ 
     Tomarctus brevirostris & 17500.77 & \cite{Tomiya2013} \\ 
     Tomarctus hippophaga & 13766.59 & \cite{Tomiya2013} \\ 
-    Toromeryx marginensis & 49.60 & PBDB + regression \\ 
     Torrejonia sirokyi & 10.40 & PBDB + regression \\ 
     Toxotherium hunteri & 157.70 & PBDB + regression \\ 
     Tregosorex holmani & 26.84 & \cite{Tomiya2013} \\ 
@@ -2367,7 +1893,6 @@
     Trigonictis cookii & 11.40 & PBDB + regression \\ 
     Trigonictis macrodon & 419.89 & \cite{Tomiya2013} \\ 
     Triisodon quivirensis & 16.50 & PBDB + regression \\ 
-    Trilaccogaulus lemhiensis & 221.41 & \cite{Tomiya2013} \\ 
     Trilaccogaulus ovatus & 103.54 & \cite{Tomiya2013} \\ 
     Triplopus cubitalis & 82.00 & PBDB + regression \\ 
     Triplopus implicatus & 124.90 & PBDB + regression \\ 
@@ -2384,11 +1909,9 @@
     Trogosus latidens & 373.10 & PBDB + regression \\ 
     Tubulodon atopum & 6.50 & PBDB + regression \\ 
     Tubulodon taylori & 4.94 & PBDB \\ 
-    Tuscahomys ctenodactylops & 3.70 & PBDB \\ 
     Tuscahomys medius & 3.60 & PBDB \\ 
     Tuscahomys minor & 2.50 & PBDB \\ 
     Tylocephalonyx skinneri & 2018.54 & PBDB \\ 
-    Tytthaena parrisi & 29.80 & PBDB + regression \\ 
     Uintaceras radinskyi & 492.30 & PBDB + regression \\ 
     Uintacyon asodes & 43.80 & PBDB + regression \\ 
     Uintacyon massetericus & 30.80 & PBDB + regression \\ 
@@ -2399,7 +1922,6 @@
     Uintasorex parvulus & 1.00 & PBDB + regression \\ 
     Uintatherium anceps & 33.50 & PBDB + regression \\ 
     Untermannerix copiosus & 121.51 & \cite{Tomiya2013} \\ 
-    Unuchinia asaphes & 3.68 & PBDB \\ 
     Unuchinia dysmathes & 6.37 & PBDB \\ 
     Uriscus californicus & 4.60 & PBDB + regression \\ 
     Urocyon cinereoargenteus & 3829.00 & PBDB \\ 
@@ -2408,12 +1930,10 @@
     Ursavus primaevus & 90000.00 & NOW \\ 
     Ursus abstrusus & 20.70 & PBDB + regression \\ 
     Ursus americanus & 93431.00 & PBDB \\ 
-    Ursus arctos & 133158.00 & PBDB \\ 
     Utahia carina & 1.80 & PBDB + regression \\ 
     Utahia kayi & 2.70 & PBDB + regression \\ 
     Valenia wilsoni & 8.10 & PBDB + regression \\ 
     Vassacyon promicrodon & 41.10 & PBDB + regression \\ 
-    Viejadjidaumo magniscopuli & 1.80 & PBDB + regression \\ 
     Viverravus acutus & 4.55 & PBDB + regression \\ 
     Viverravus gracilis & 5.50 & PBDB + regression \\ 
     Viverravus laytoni & 3.60 & PBDB + regression \\ 
@@ -2427,39 +1947,26 @@
     Vulpavus profectus & 100.00 & \cite{Williamson2013} \\ 
     Vulpes stenognathus & 7331.97 & \cite{Tomiya2013} \\ 
     Vulpes velox & 28.28 & \cite{Smith2004} \\ 
-    Vulpes vulpes & 4687.00 & PBDB \\ 
     Washakius insignis & 4.90 & PBDB + regression \\ 
     Washakius izetti & 3.90 & PBDB + regression \\ 
     Washakius woodringi & 3.10 & PBDB + regression \\ 
     Wilsoneumys planidens & 51.70 & PBDB \\ 
-    Wilsonosorex bateslandensis & 18.54 & \cite{Tomiya2013} \\ 
-    Wilsonosorex conulatus & 25.28 & \cite{Tomiya2013} \\ 
     Worlandia inusitata & 3.90 & PBDB + regression \\ 
-    Wortmania otariidens & 65.45 & PBDB \\ 
     Wyolestes apheles & 6.80 & PBDB + regression \\ 
-    Wyolestes dioctes & 5.90 & PBDB + regression \\ 
     Wyolestes iglesius & 6.33 & PBDB + regression \\ 
     Wyonycteris chalix & 1.30 & PBDB + regression \\ 
     Xenicohippus craspedotum & 10895.00 & \cite{McKenna2011} \\ 
     Xenicohippus grangeri & 41.80 & PBDB + regression \\ 
-    Xenicohippus osborni & 79.20 & PBDB + regression \\ 
-    Xenosmilus hodsonae & 118300.00 & \cite{Torregrosa2010} \\ 
-    Yaquius travisi & 16.30 & PBDB + regression \\ 
-    Yatkolamys edwardsi & 50.91 & \cite{Tomiya2013} \\ 
-    Yoderimys bumpi & 3.20 & PBDB + regression \\ 
-    Yoderimys stewarti & 4.30 & PBDB + regression \\ 
     Ysengrinia americana & 110194.25 & \cite{Tomiya2013} \\ 
     Yumaceras figginsi & 293607.76 & \cite{Tomiya2013} \\ 
     Yumaceras hamiltoni & 247706.54 & \cite{Tomiya2013} \\ 
     Yumaceras ruminalis & 314896.72 & \cite{Tomiya2013} \\ 
     Zapus burti & 21.33 & \cite{Tomiya2013} \\ 
-    Zapus hudsonius & 18.20 & PBDB \\ 
     Zapus rinkeri & 1.90 & PBDB + regression \\ 
     Zapus sandersi & 18.92 & \cite{Tomiya2013} \\ 
-    Zapus sykesae & 17.12 & \cite{Tomiya2013} \\ 
     Zemiodontomys burkei & 4.40 & PBDB + regression \\ 
     Zetamys nebraskensis & 60.34 & \cite{Tomiya2013} \\ 
-    Zygolophodon proavus & 260.00 & \cite{Lofgren2011} \\ 
   \end{longtable}
-%  \label{tab:mass_data}
-%\end{table}
+\end{center}
+\bibliography{newbib,packages}
+\end{document}

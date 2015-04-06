@@ -52,7 +52,7 @@ generated quantities {
       log_lik[n] <- bernoulli_log(diversity[n], theta);
     } else {
       log_lik[n] <- poisson_log(diversity[n], exp(intercept + spatial[n])) -
-        poisson_ccdf_log(1, exp(intercept + spatial[n]));
+        poisson_ccdf_log(0, exp(intercept + spatial[n]));
     }
   }
 }

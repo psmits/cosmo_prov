@@ -5,7 +5,7 @@ library(plyr)
 library(parallel)
 library(mapproj)
 library(stringr)
-#library(xtable)
+library(xtable)
 #library(dismo)
 #library(raster)
 #library(sp)
@@ -84,8 +84,8 @@ cohort <- bin.range[, 2] / 2  # find the cohorts
 
 north.source <- north.source[north.source$Species %in% 
                              na.ecol$taxa[cohort != 1], ]
-#mass.table <- xtable(north.source, label = 'tab:mass_data')
-#print.xtable(mass.table, 
-#             file = '../doc/na_surv/mass_data.tex',
-#             include.rownames = FALSE, 
-#             sanitize.text.function = identity)
+mass.table <- xtable(north.source, label = 'tab:mass_data')
+print.xtable(mass.table, 
+             file = '../doc/na_surv/mass_data.tex',
+             include.rownames = FALSE, 
+             sanitize.text.function = identity)
