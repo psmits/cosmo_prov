@@ -1,0 +1,71 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{graphicx,hyperref}
+\usepackage{microtype, parskip}
+\usepackage[comma,sort&compress]{natbib}
+\usepackage{docmute}
+\usepackage{subcaption, multirow, morefloats}
+\usepackage{wrapfig, rotating}
+
+\frenchspacing
+
+\captionsetup[subfigure]{position = top, labelfont = bf, textfont = normalfont, singlelinecheck = off, justification = raggedright}
+
+\begin{document}
+\section{Methods}
+\subsection{Species information}
+
+\subsubsection{Spatial occurrence}
+
+\subsection{Spatial model of species diversity}
+
+Define \(y_{i}\) as the number of species present in grid cell \(i\), where \(i = 1, \dots, N\). Also define \(\lambda\) is the inverse-scale or ``rate'' parameter of the Poisson distribution; \(\alpha\) as a constant; and \(s_{i}\) as the effect of spatial autocorrelation on species diversty.
+\begin{equation}
+  \begin{aligned}
+    y_{i} &\sim \mathrm{Poisson}(\lambda) \\
+    \lambda &= \alpha + s_{i}.
+  \end{aligned}
+  \label{eq:model}
+\end{equation}
+
+Individual grid cells, and their relation, are an example of areal data CITATION. Given In order to model the effect of grid cell location, I use a multivariate normal condiational autoregressive (CAR) prior for the spatial term \(s\). A CAR prior has multiple different variables, some of which are defined based on the spatial structure of the data. \(\mathbf{W}\) is an adjacency matrix where the off-diagonal terms are 0 or 1, 1 indicating that the two grid cells are adjacent. The diagonal of \(\mathbf{W}\) is all zeros as a cell cannot be adjacent to itself. \(\mathbf{D_{w}}\) is a diagonal matrix where the diagonal elements are equal to the total number of cells that cell \(i\) is adjacent too CITATIONS.
+
+A CAR prior is defined as
+\begin{equation}
+  s \sim \mathrm{MVN}(0, \sigma^{2} (\mathbf{D_{w}} - \rho \mathbf{W})^{-1}))
+  \label{eq:car}
+\end{equation}
+where \(\rho\) can be weakly interpreted as the ``strength'' of spatial autocorrelation and \(\sigma\) is an unknown scale parameter for the covariance matrix describing the dispersion of \(s\) around 0 CITATION.
+
+\subsubsection{Zero-Inflated}
+
+Define \(\theta\) and the probability of observing a cell with 0 species, and a 1 - \(\theta\) is the probability from observing a cell with Poisson(\(\lambda\)) species. The probability function is then defined as 
+\begin{equation}
+  \begin{aligned}
+    p(y_{t} | \theta, \lambda_{t}) = 
+    \begin{cases}
+      \theta + (1 - \theta) \times \mathrm{Poisson}(0 | \lambda_{t}) & \text{if} y_{t} = 0, \text{and} \\
+      (1 - \theta) \times \mathrm{Poisson}(y_{t} | \lambda_{t}) & \text{if} y_{t} > 0.
+    \end{cases}
+  \end{aligned}
+  \label{eq:zip}
+\end{equation}
+
+\subsubsection{Hurdle}
+
+Define \(\theta\) and the probability of observing a cell with 0 species, and a 1 - \(\theta\) is the probability from observing a cell with Poisson(\(\lambda\)) species. The probability function is then defined as 
+\begin{equation}
+  \begin{aligned}
+    p(y_{i} | \theta, \lambda_{i}) = 
+    \begin{cases}
+      \theta & \text{if} y_{i} = 0\\
+      (1 - \theta) \frac{\mathrm{Poisson}(y_{t} | \lambda_{i})}{1 - \mathrm{PoissonCDF}(0 | \lambda_{i})} & \text{if} y_{t} > 0,
+    \end{cases}
+  \end{aligned}
+  \label{eq:hurdle}
+\end{equation}
+where PoissonCDF is the cummulative density function for the Poisson distribution.
+
+
+\end{document}
