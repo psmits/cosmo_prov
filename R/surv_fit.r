@@ -44,8 +44,8 @@ tree.vcv <- tree.vcv[cor.ord, cor.ord]
 #cov2cor(tree.vcv)
 
 data <- list(duration = duration,
-             size = log(size),
-             occ = logit(occ),
+             size = rescale(log(size)),
+             occ = rescale(logit(occ)),
              diet = di,
              move = mo,
              rac = inr,
@@ -94,12 +94,6 @@ data$samp_cen <- seq(from = data$N_unc + 1,
 data$vcv <- tree.vcv
 
 # rescale following gelman
-scale.data <- data
-scale.data$size_unc <- rescale(scale.data$size_unc)
-scale.data$size_cen <- rescale(scale.data$size_cen)
-scale.data$occ_unc <- rescale(scale.data$occ_unc)
-scale.data$occ_cen <- rescale(scale.data$occ_cen)
-
 with(data, {stan_rdump(list = c('N', 'N_unc', 'N_cen', 'D', 'M', 'L', 'C', 
                                 'dur_unc', 'dur_cen', 'size_unc', 'size_cen', 
                                 'occ_unc', 'occ_cen', 'diet_unc', 'diet_cen', 
