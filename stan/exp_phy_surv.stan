@@ -24,7 +24,6 @@ data {
 }
 transformed data {
   matrix[N, N] vcv_inv;
-
   vcv_inv <- inverse(vcv);
 }
 parameters {
@@ -40,7 +39,6 @@ parameters {
 }
 transformed parameters {
   real<lower = 0> sq_sigma;
-
   sq_sigma <- sigma_phy^2;  // make a variance, keeping sigma_phy as a standard deviation
 }
 model {

@@ -11,6 +11,8 @@ library(plyr)
 
 source('../R/surv_post_sim.r')
 
+xx <- summary(phy.scalemfit)[[1]]
+
 nsim <- 100
 
 pairwise.diffs <- function(x) {
@@ -118,42 +120,42 @@ ggsave(ppc.sum, filename = '../doc/na_surv/figure/res_sum_plot.png',
        width = 5, height = 10)
 
 
-# survival function
-condition <- extinct
-condition[extinct == 1 & duration == 1] <- 2
-emp.surv <- survfit(Surv(time = duration, time2 = duration, 
-                         event = condition, type = 'interval') ~ 1)
-emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
-emp.surv <- rbind(c(0, 1), emp.surv)
-
-sim.surv <- llply(pm, function(x) survfit(Surv(x) ~ 1))
-sim.surv <- llply(sim.surv, function(x) data.frame(cbind(time = x$time, 
-                                                         surv = x$surv)))
-sim.surv <- llply(sim.surv, function(x) rbind(c(0, 1), x))
-sim.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
-                              x = sim.surv, y = seq(length(sim.surv))))
-sim.surv <- sim.surv[sim.surv$label %in% 1:nsim, ]
-
-exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
-exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time, 
-                                                         surv = x$surv)))
-exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
-exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
-                              x = exp.surv, y = seq(length(exp.surv))))
-exp.surv <- exp.surv[exp.surv$label %in% 1:nsim, ]
-
-mix.surv <- rbind(cbind(sim.surv, lab = rep('Weibull', nrow(sim.surv))),
-                  cbind(exp.surv, lab = rep('Exponential', nrow(exp.surv))))
-
-soft <- ggplot(emp.surv, aes(x = time, y = surv))
-soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
-                         colour = 'grey', alpha = .2)
-soft <- soft + geom_step(size = 1, direction = 'hv')
-soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
-soft <- soft + facet_grid(. ~ lab)
-soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
-ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
-       width = 15, height = 10)
+## survival function
+#condition <- extinct
+#condition[extinct == 1 & duration == 1] <- 2
+#emp.surv <- survfit(Surv(time = duration, time2 = duration, 
+#                         event = condition, type = 'interval') ~ 1)
+#emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
+#emp.surv <- rbind(c(0, 1), emp.surv)
+#
+#sim.surv <- llply(pm, function(x) survfit(Surv(x) ~ 1))
+#sim.surv <- llply(sim.surv, function(x) data.frame(cbind(time = x$time, 
+#                                                         surv = x$surv)))
+#sim.surv <- llply(sim.surv, function(x) rbind(c(0, 1), x))
+#sim.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
+#                              x = sim.surv, y = seq(length(sim.surv))))
+#sim.surv <- sim.surv[sim.surv$label %in% 1:nsim, ]
+#
+#exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
+#exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time, 
+#                                                         surv = x$surv)))
+#exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
+#exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
+#                              x = exp.surv, y = seq(length(exp.surv))))
+#exp.surv <- exp.surv[exp.surv$label %in% 1:nsim, ]
+#
+#mix.surv <- rbind(cbind(sim.surv, lab = rep('Weibull', nrow(sim.surv))),
+#                  cbind(exp.surv, lab = rep('Exponential', nrow(exp.surv))))
+#
+#soft <- ggplot(emp.surv, aes(x = time, y = surv))
+#soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
+#                         colour = 'grey', alpha = .2)
+#soft <- soft + geom_step(size = 1, direction = 'hv')
+#soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
+#soft <- soft + facet_grid(. ~ lab)
+#soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
+#ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
+#       width = 15, height = 10)
 
 # do each cohort
 

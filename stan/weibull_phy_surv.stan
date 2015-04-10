@@ -41,7 +41,6 @@ parameters {
 }
 transformed parameters {
   real<lower = 0> sq_sigma;
-
   sq_sigma <- sigma_phy^2;  // make a variance, keeping sigma_phy as a standard deviation
 }
 model {
