@@ -5,15 +5,14 @@ library(hexbin)
 library(stringr)
 library(grid)
 library(survival)
-library(GGally)
 library(moments)
 library(plyr)
-
+source('../R/waic.r')
 source('../R/surv_post_sim.r')
+#waic(phy.scalemfit)
+#waic(escalefit)
 
-xx <- summary(phy.scalemfit)[[1]]
-
-nsim <- 100
+nsim <- 1000
 
 pairwise.diffs <- function(x) {
   # create column combination pairs
@@ -24,7 +23,7 @@ pairwise.diffs <- function(x) {
   # set colnames
   if(is.null(colnames(x)))
     colnames(x) <- 1:ncol(x)
-  
+
   colnames(result) <- paste('beta[', colnames(x)[col.diffs[, 1]], "] - beta[", 
                             colnames(x)[col.diffs[, 2]], ']', sep = "")
   result
@@ -84,9 +83,10 @@ ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
        width = 10, height = 10)
 
 # deviance residuals
+# change this to be x = duration, y = residual
 std.res <- melt(pm.res)
 std.res <- std.res[std.res$L1 %in% 1:12, ]
-std.res$index <- rep(seq(1:1936), 12)
+std.res$index <- rep(seq(data$N), 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
 ppc.res <- ppc.res + geom_hline(aes(yintercept = 0), 
                                 colour = 'darkgrey', size = 1)
@@ -120,42 +120,50 @@ ggsave(ppc.sum, filename = '../doc/na_surv/figure/res_sum_plot.png',
        width = 5, height = 10)
 
 
-## survival function
-#condition <- extinct
-#condition[extinct == 1 & duration == 1] <- 2
-#emp.surv <- survfit(Surv(time = duration, time2 = duration, 
-#                         event = condition, type = 'interval') ~ 1)
-#emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
-#emp.surv <- rbind(c(0, 1), emp.surv)
-#
-#sim.surv <- llply(pm, function(x) survfit(Surv(x) ~ 1))
-#sim.surv <- llply(sim.surv, function(x) data.frame(cbind(time = x$time, 
-#                                                         surv = x$surv)))
-#sim.surv <- llply(sim.surv, function(x) rbind(c(0, 1), x))
-#sim.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
-#                              x = sim.surv, y = seq(length(sim.surv))))
-#sim.surv <- sim.surv[sim.surv$label %in% 1:nsim, ]
-#
-#exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
-#exp.surv <- llply(exp.surv, function(x) data.frame(cbind(time = x$time, 
-#                                                         surv = x$surv)))
-#exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
-#exp.surv <- Reduce(rbind, Map(function(x, y) cbind(x, label = rep(y, nrow(x))),
-#                              x = exp.surv, y = seq(length(exp.surv))))
-#exp.surv <- exp.surv[exp.surv$label %in% 1:nsim, ]
-#
-#mix.surv <- rbind(cbind(sim.surv, lab = rep('Weibull', nrow(sim.surv))),
-#                  cbind(exp.surv, lab = rep('Exponential', nrow(exp.surv))))
-#
-#soft <- ggplot(emp.surv, aes(x = time, y = surv))
-#soft <- soft + geom_step(data = mix.surv, aes(x = time, y = surv, group = label), 
-#                         colour = 'grey', alpha = .2)
-#soft <- soft + geom_step(size = 1, direction = 'hv')
-#soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
-#soft <- soft + facet_grid(. ~ lab)
-#soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
-#ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
-#       width = 15, height = 10)
+# survival function
+condition <- extinct
+condition[extinct == 1 & duration == 1] <- 2
+emp.surv <- survfit(Surv(time = duration, time2 = duration, 
+                         event = condition, type = 'interval') ~ 1)
+emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
+emp.surv <- rbind(c(0, 1), emp.surv)
+
+sim.surv <- llply(pm, function(x) survfit(Surv(x) ~ 1))
+sim.surv <- llply(sim.surv, function(x) {
+                  y <- data.frame(cbind(time = x$time, surv = x$surv))
+                  y <- rbind(c(0, 1), y)
+                  y})
+sim.surv <- Reduce(rbind, Map(function(x, y) {
+                              x$group <- y
+                              x},
+                              x = sim.surv, y = seq(length(sim.surv))))
+sim.surv <- sim.surv[sim.surv$group %in% 1:nsim, ]
+sim.surv$lab <- 'Weibull'
+
+exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
+exp.surv <- llply(exp.surv, function(x) {
+                  y <- data.frame(cbind(time = x$time, surv = x$surv))
+                  y <- rbind(c(0, 1), y)
+                  y})
+exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
+exp.surv <- Reduce(rbind, Map(function(x, y) {
+                              x$group <- y
+                              x},
+                              x = exp.surv, y = seq(length(exp.surv))))
+exp.surv <- exp.surv[exp.surv$group %in% 1:nsim, ]
+exp.surv$lab <- 'Exponential'
+mix.surv <- rbind(sim.surv, exp.surv)
+
+soft <- ggplot(emp.surv, aes(x = time, y = surv))
+soft <- soft + geom_line(data = mix.surv, aes(x = time, y = surv, 
+                                              group = group),
+                         colour = 'grey', alpha = .2)
+soft <- soft + geom_line(size = 1)
+soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
+soft <- soft + facet_grid(. ~ lab)
+soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
+ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
+       width = 15, height = 10)
 
 # do each cohort
 
@@ -225,13 +233,17 @@ ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
 # effect of body size and occupancy
 sc.size.eff <- scale.melted[scale.melted$L1 == 'beta_size', 'value']
 sc.occ.eff <- scale.melted[scale.melted$L1 == 'beta_occ', 'value']
-sc.inter.eff <- scale.melted[scale.melted$L1 == 'beta_interaction', 'value']
-sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff, sc.inter.eff))
+sc.oth.eff <- melt(cbind(sc.size.eff, sc.occ.eff))
 sc.oth.eff$Var2 <- as.character(sc.oth.eff$Var2)
-sc.oth.eff$Var2 <- mapvalues(sc.oth.eff$Var2, c('sc.occ.eff', 'sc.size.eff', 
-                                                'sc.inter.eff'),
-                             c('beta[occupancy]', 'beta[size]', 
-                               'beta[interaction]'))
+sc.oth.eff$Var2 <- mapvalues(sc.oth.eff$Var2, c('sc.occ.eff', 'sc.size.eff'), 
+                             c('beta[occupancy]', 'beta[size]'))
+
+sum(sc.size.eff < 0) / length(sc.size.eff)
+mean(sc.size.eff)
+sd(sc.size.eff)
+sum(sc.occ.eff < 0) / length(sc.occ.eff)
+mean(sc.occ.eff)
+sd(sc.occ.eff)
 
 other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)

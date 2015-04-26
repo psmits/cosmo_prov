@@ -6,6 +6,7 @@ library(stringr)
 library(mvnfast)
 library(plyr)
 library(reshape2)
+library(xtable)
 
 RNGkind(kind = "L'Ecuyer-CMRG")
 seed <- 420
@@ -19,9 +20,16 @@ source('../R/surv_fit.r')
 outs <- dir('../data/mcmc_out', pattern = 'wei_surv_[0-9]', full.names = TRUE)
 phy.scalemfit <- read_stan_csv(outs)
 
-#outs <- dir('../data/mcmc_out', pattern = 'exp_surv_[0-9]', full.names = TRUE)
-#escalefit <- read_stan_csv(outs)
+a <- summary(phy.scalemfit)[[1]]
+all(a[, ncol(a)] < 1.1)
 
+outs <- dir('../data/mcmc_out', pattern = 'exp_surv_[0-9]', full.names = TRUE)
+escalefit <- read_stan_csv(outs)
+
+b <- summary(phy.scalemfit)[[1]]
+all(b[, ncol(b)] < 1.1)
+
+# data and important functions
 duration <- c(data$dur_unc, data$dur_cen)
 
 wei.surv <- function(time, scale, shape) {
@@ -46,43 +54,43 @@ deviance.res <- function(time, scale, shape, inclusion) {
 }
 
 
-## exponential data set simulations
-#set.seed(seed)
-#epost <- extract(escalefit, permuted = TRUE)
-#dat <- cbind(c(data$occ_unc, data$occ_cen), 
-#             c(data$size_unc, data$size_cen))
-#dd <- rbind(data$diet_unc, data$diet_cen)
-#mo <- rbind(data$move_unc, data$move_cen)
-#
-#dead <- duration
-#ee <- list()
-#ee.res <- list()
-#for(i in 1:nsim) {
-#  n <- length(dead)
-#  inc <- sample(epost$beta_inter, 1)
-#  oc <- sample(epost$beta_occ, 1)
-#  sz <- sample(epost$beta_size, 1)
-#  mv <- epost$beta_move[sample(nrow(epost$beta_move), 1), ]
-#  di <- epost$beta_diet[sample(nrow(epost$beta_diet), 1), ]
-#  ff <- epost$rando[sample(nrow(epost$rando), 1), ]
-#  pp <- epost$phy[sample(nrow(epost$phy), 1), ]
-#
-#  oo <- c()
-#  rr <- c()
-#  for(j in seq(n)) {
-#    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-#    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]] + pp[j]
-#    oo[j] <- rexp(1, rate = exp(reg))
-#    
-#    rr[j] <- deviance.res(duration[j], 
-#                          scale = 1 / exp(reg), 
-#                          shape = 1, 
-#                          inclusion = extinct[j])
-#  }
-#  ee[[i]] <- oo
-#
-#  ee.res[[i]] <- rr
-#}
+# exponential data set simulations
+set.seed(seed)
+epost <- extract(escalefit, permuted = TRUE)
+dat <- cbind(c(data$occ_unc, data$occ_cen), 
+             c(data$size_unc, data$size_cen))
+dd <- rbind(data$diet_unc, data$diet_cen)
+mo <- rbind(data$move_unc, data$move_cen)
+
+dead <- duration
+ee <- list()
+ee.res <- list()
+for(i in 1:nsim) {
+  n <- length(dead)
+  inc <- sample(epost$beta_inter, 1)
+  oc <- sample(epost$beta_occ, 1)
+  sz <- sample(epost$beta_size, 1)
+  mv <- epost$beta_move[sample(nrow(epost$beta_move), 1), ]
+  di <- epost$beta_diet[sample(nrow(epost$beta_diet), 1), ]
+  ff <- epost$rando[sample(nrow(epost$rando), 1), ]
+  pp <- epost$phy[sample(nrow(epost$phy), 1), ]
+
+  oo <- c()
+  rr <- c()
+  for(j in seq(n)) {
+    reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
+    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + ff[coh[j]] + pp[j]
+    oo[j] <- rexp(1, rate = exp(reg))
+
+    rr[j] <- deviance.res(duration[j], 
+                          scale = 1 / exp(reg), 
+                          shape = 1, 
+                          inclusion = extinct[j])
+  }
+  ee[[i]] <- oo
+
+  ee.res[[i]] <- rr
+}
 
 
 # weibull scaled data set simulations
@@ -112,8 +120,8 @@ for(i in 1:nsim) {
   rr <- c()
   for(j in seq(n)) {
     reg <- inc + oc * dat[j, 1] + sz * dat[j, 2] + 
-           sum(di * dd[j, ]) + sum(mv * mo[j, ]) + 
-           ff[coh[j]] + pp[j]
+    sum(di * dd[j, ]) + sum(mv * mo[j, ]) + 
+    ff[coh[j]] + pp[j]
     oo[j] <- rweibull(1, scale = exp(-(reg) / alp),
                       shape = alp)
     rr[j] <- deviance.res(duration[j], 
@@ -133,8 +141,8 @@ wei.var <- function(scale, shape) {
 }
 sim.var <- function(n) {
   c.star <- rnorm(n, 0, sample(phypost$fv, 1))
-#  p.star <- rnorm(n, 0, sqrt(sample(phypost$sq_sigma, 1) *
-#                             sample(diag(tree.vcv), 1)))
+  #  p.star <- rnorm(n, 0, sqrt(sample(phypost$sq_sigma, 1) *
+  #                             sample(diag(tree.vcv), 1)))
   p.star <- rnorm(n, 0, sample(phypost$sigma_phy, 1))
 
   aa <- sample(phypost$alpha, 1)
