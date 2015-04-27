@@ -5,10 +5,10 @@ library(reshape2)
 library(stringr)
 library(xtable)
 
-load('../data/survival_out.rdata')
+source('../R/surv_post_sim.r')
 
 exct <- extract(phy.scalemfit)
-pp <- !(names(exct) %in% c('rando', 'phy', 'sigma_phy', 'lp__'))
+pp <- !(names(exct) %in% c('rando', 'phy', 'sigma_phy', 'lp__', 'log_lik'))
 summs <- summary(phy.scalemfit, pars = names(exct)[pp])[[1]]
 summs <- summs[, !colnames(summs) %in% c('se_mean', 'n_eff')]
 

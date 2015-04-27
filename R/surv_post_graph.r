@@ -13,6 +13,7 @@ source('../R/surv_post_sim.r')
 #waic(escalefit)
 
 nsim <- 1000
+duration <- c(data$dur_unc, data$dur_cen)
 
 pairwise.diffs <- function(x) {
   # create column combination pairs
@@ -86,7 +87,7 @@ ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
 # change this to be x = duration, y = residual
 std.res <- melt(pm.res)
 std.res <- std.res[std.res$L1 %in% 1:12, ]
-std.res$index <- rep(seq(data$N), 12)
+std.res$index <- rep(duration, 12)
 ppc.res <- ggplot(std.res, aes(x = index, y = value))
 ppc.res <- ppc.res + geom_hline(aes(yintercept = 0), 
                                 colour = 'darkgrey', size = 1)
@@ -96,7 +97,7 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = 2),
 ppc.res <- ppc.res + geom_hline(aes(yintercept = -2), 
                                 colour = 'darkgrey', size = 1, 
                                 linetype = 'dashed')
-ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1)
+ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1, position = 'jitter')
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ppc.res <- ppc.res + labs(x = '', y = 'deviance residuals')
 ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
