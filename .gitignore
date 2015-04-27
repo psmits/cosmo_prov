@@ -2,6 +2,8 @@ survival_out.rdata
 data_dump/
 meta_dump/
 mcmc_out/
+death_taxa/
+death_taxa.zip
 *.cpp
 *.hpp
 ne_10m_coastline.*
