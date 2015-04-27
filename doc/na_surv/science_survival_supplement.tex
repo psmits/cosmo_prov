@@ -17,8 +17,8 @@
 
 \begin{document}
 \maketitle
-\linenumbers
-\modulolinenumbers[2]
+%\linenumbers
+%\modulolinenumbers[2]
 
 \section{Materials and Methods}
 
@@ -226,8 +226,7 @@ The simulated values of \(h\) were drawn from a univariate normal distribution b
 Weibull variance is calculated as
 \begin{equation}
   var(x) = \sigma^{2}\left(\Gamma\left(1 + \frac{2}{\alpha}\right) - \left(\Gamma\left(1 + \frac{1}{\alpha}\right)\right)^{2}\right),
-  \label{eq:wei_var}
-\end{equation}
+  \label{eq:wei_var} \end{equation}
 where \(\Gamma\) is the gamma function. 
 
 The variance partitioning coefficients are then calculated, for example, as \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similarly for the other components.
@@ -235,18 +234,19 @@ The variance partitioning coefficients are then calculated, for example, as \(VP
 I used variance partitioning coefficients (VPC) to estimate the relative importance of the different variance components \cite{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \cite{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
 
 
-\section{Model adequacy and comparison}
+\section{Results}
+\subsection{Model adequacy and comparison}
 With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible to examine the quality of model fit (Table~\ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \cite{Gelman2013d}.
 
 Visual examination of the deviance residuals from twelve different sets of posterior predictive simulations indicates a systematic weakness estimating durations greater than 3 2-My bins (Fig.~\ref{fig:ppc_res}). However, posterior predictive estimates of the 25th, 50th, and 75th quantiles of the observed indicate adequate fit. (Fig.~\ref{fig:ppc_quant}). Importantly, this indicates that the model has approximate fit for 50+\% of the data. Because, the inferred model can be inferred to be approximately adequate at capturing the observed variation.
 
-The Wiebull model (VALUE) also had a much lower WAIC score than the Exponential model (VALUE). This difference indicates that the Weibull model probably has the lower out-of-sample predictive accuracy of the two.
+The Wiebull model (6140.37) also had a much lower WAIC score than the Exponential model (16697.35). This large a difference indicates that the Weibull model probably has the lower out-of-sample predictive accuracy of the two.
 
 
-\section{Concerns surrounding estimates of $\alpha$}
+\subsection{Concerns surrounding estimates of $\alpha$}
 The estimate of the Weibull shape parameter, $\alpha$, is greater than 1 meaning that extinction risk is expected to increase with taxon age (Table~\ref{tab:post_sum}). As the value of $\alpha$ is between 1 and 1.5, extinction risk for a given species only gradually increases with age (Fig.~\ref{fig:haz}). There are three possible explanations for this result: 1) older taxa being out competed by younger taxa \cite{Wagner2014b}; or 2) this is an artifact of the minimum resolution of the fossil record \cite{Sepkoski1975}. 
 
-An additional concern is that there may be an upward bias in estimates of $\alpha$ at this sample size, similar to that for scale parameters \cite{Gelman2013d}. The plausibility of third possibility in this example can be explored in simulation. I simulated from 10, 100, 1000, and 10000 samples from a Weibull(\(alpha = 1.3\), \(\sigma = 1\)) 100 times each. For each of these simulated datasets, I then estimated the values of \(\alpha\) and \(\sigma\) in a Bayesian context, giving each of them weak C\(^{+}\) distributions (e.g. \(\alpha \sim \mathrm{C}^{+}(2.5)\)). The means of the marginal posterior estimate for the simulated datasets were then compared to the known values. The results from these simulations demonstrate that the estimates of \(\alpha\) in the above analyses (Table~\ref{tab:post_sum}) should not be overly biased based on my sample size of approximately 2000 species. 
+An additional concern is that there may be an upward bias in estimates of $\alpha$ at this sample size, similar to that for scale parameters \cite{Gelman2013d}. The plausibility of third possibility in this example can be explored in simulation. I simulated from 10, 100, 1000, and 10000 samples from a Weibull(\(alpha = 1.3\), \(\sigma = 1\)) 100 times each. For each of these simulated datasets, I then estimated the values of \(\alpha\) and \(\sigma\) in a simple maximum likelihood context in order to just get the modeal estimate. The modal estimates of both parameters for the simulated datasets were then compared to the known values (Fig. \ref{fig:alpha_sims}. The results from these simulations demonstrate that the estimates of \(\alpha\) in the above analyses (Table~\ref{tab:post_sum}) should not be particularily biased based on my sample size of approximately 2000 species. 
 
 The model used in this analysis, however, is unable to distinguish between the remaining two hypotheses \cite{Sepkoski1975,Wagner2014b}. Further work on how to better constrain estimates $\alpha$ is necessary. A possibly is somehow incoporating these hypotheses as prior information.
 
@@ -275,6 +275,12 @@ The model used in this analysis, however, is unable to distinguish between the r
   \label{fig:haz}
 \end{figure}
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height=0.5\textheight,width=\textwidth,keepaspectratio=true]{figure/alpha_simulation}
+  \caption{Comparison of maximum likelihood estimates of shape (\(\alpha\)) and scale (\(\sigma\)) parameters from 1000 simulated data sets from 4 different sample sizes. Vertical lines are the actual parameter value used to generate the data. When sample size is approximately 100 or greater, estimates are not overly biased.}
+  \label{fig:alpha_sims}
+\end{figure}
 
 
 \clearpage

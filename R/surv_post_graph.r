@@ -9,8 +9,8 @@ library(moments)
 library(plyr)
 source('../R/waic.r')
 source('../R/surv_post_sim.r')
-#waic(phy.scalemfit)
-#waic(escalefit)
+wei.waic <- waic(phy.scalemfit)
+exp.waic <- waic(escalefit)
 
 nsim <- 1000
 duration <- c(data$dur_unc, data$dur_cen)
@@ -65,7 +65,7 @@ ppc.mean <- ppc.mean + geom_histogram(aes(y = ..density..), binwidth = .2)
 ppc.mean <- ppc.mean + geom_vline(xintercept = mean.dur, 
                                   colour = 'blue', size = 2)
 ggsave(ppc.mean, filename = '../doc/na_surv/figure/mean_ppc.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 quant <- laply(pm, function(x) c(mean = mean(x), quantile(x, c(.25, .5, .75))))
 quant <- melt(quant)
@@ -81,7 +81,7 @@ ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value),
 ppc.quant <- ppc.quant + labs(x = 'Duration (2 My bins)', y = 'Prob. Density')
 ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
 ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 # deviance residuals
 # change this to be x = duration, y = residual
@@ -99,9 +99,7 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = -2),
                                 linetype = 'dashed')
 ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1, position = 'jitter')
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
-ppc.res <- ppc.res + labs(x = '', y = 'deviance residuals')
-ppc.res <- ppc.res + theme(axis.ticks.x = element_blank(),
-                           axis.text.x = element_blank())
+ppc.res <- ppc.res + labs(x = 'Duration (2 My bins)', y = 'Deviance residual')
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
        width = 15, height = 10)
 
@@ -193,7 +191,7 @@ loco <- loco + geom_histogram(aes(y = ..density..))
 loco <- loco + facet_grid(Var2 ~ .)
 loco <- loco + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(loco, filename = '../doc/na_surv/figure/loco_est.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 # better to compare as differences?
 loco.diff <- melt(pairwise.diffs(cbind(arb, grd, scn)))
@@ -203,7 +201,7 @@ lodf <- lodf + geom_histogram(aes(y = ..density..))
 lodf <- lodf + facet_grid(Var2 ~ ., labeller = label_parsed)
 lodf <- lodf + labs(x = 'Estimated difference', y = 'Prob. Density')
 ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 
 # effect of dietary category
@@ -218,7 +216,7 @@ diet <- diet + geom_histogram(aes(y = ..density..))
 diet <- diet + facet_grid(Var2 ~ .)
 diet <- diet + labs(x = 'Estimate', y = 'Prob. Density')
 ggsave(diet, filename = '../doc/na_surv/figure/diet_est.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 # better to compare as differences?
 diet.diff <- melt(pairwise.diffs(cbind(crn, hrb, ist, omn)))
@@ -227,8 +225,9 @@ didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 didf <- didf + geom_histogram(aes(y = ..density..))
 didf <- didf + facet_grid(Var2 ~ ., labeller = label_parsed)
 didf <- didf + labs(x = 'Estimated difference', y = 'Prob. Density')
+didg <- didf + theme(axis.text.y = 15)
 ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 
 # effect of body size and occupancy
@@ -250,9 +249,9 @@ other <- ggplot(sc.oth.eff, aes(x = value))
 other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 2)
 other <- other + geom_histogram(aes(y = ..density..))
 other <- other + facet_grid(Var2 ~ . , labeller = label_parsed)
-other <- other + labs(x = 'Estimate', y = 'Prob. Density')
+other <- other + labs(x = 'Parameter estimate', y = 'Prob. Density')
 ggsave(other, filename = '../doc/na_surv/figure/other_est.png',
-       width = 10, height = 10)
+       width = 10, height = 8)
 
 
 # variance partition coefficient
@@ -287,7 +286,7 @@ cohort <- ggplot(rands, aes(x = bin, y = med, ymin = bot, ymax = top))
 cohort <- cohort + geom_hline(aes(yintercept = 0), colour = 'grey', size = 2)
 cohort <- cohort + geom_pointrange(size = 1)
 cohort <- cohort + scale_x_reverse(breaks = seq(from = 0, to = 65, by = 5))
-cohort <- cohort + labs(x = 'Time (Mya)', y = 'Cohort effect')
+cohort <- cohort + labs(x = 'Time (Mya)', y = 'Estimated cohort effect')
 ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.png',
        width = 15, height = 10)
 

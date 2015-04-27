@@ -4,49 +4,43 @@ library(MASS)
 library(plyr)
 library(parallel)
 library(ggplot2)
+library(grid)
 library(reshape2)
 
-mod <- stan(file = '../stan/shape_est.stan')
+theme_set(theme_bw())
+cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
+         '#0072B2', '#D55E00', '#CC79A7')
+theme_update(axis.text = element_text(size = 15),
+             axis.title = element_text(size = 25),
+             legend.text = element_text(size = 25),
+             legend.title = element_text(size = 26),
+             legend.key.size = unit(2, 'cm'),
+             strip.text = element_text(size = 20))
+
 set.seed(420)
 n <- c(10, 100, 1000, 10000)
-nn <- llply(n, function(x) rep(x, 100))
+nn <- llply(n, function(x) rep(x, 1000))
 
 sims <- llply(nn, function(x) {
               o <- llply(x, function(y) rweibull(y, shape = 1.3))
               o})
 
-fits <- list()
-for(ii in seq(length(sims))) {
-  ins <- list()
-  for(jj in seq(length(sims[[ii]]))) {
-    fit.list <- mclapply(1:4, mc.cores = detectCores(),
-                         function(x) stan(fit = mod,
-                                          data = list(N = n[ii], 
-                                                      y = sims[[ii]][[jj]]),
-                                          seed = 420,
-                                          chains = 1, chain_id = x,
-                                          refresh = -1))
-    ins[[jj]] <- sflist2stanfit(fit.list)
-  }
-  fits[[ii]] <- ins
-}
+modes <- llply(sims, function(y) {
+               aa <- llply(y, function(x) fitdistr(x, 'weibull'))
+               aa <- laply(aa, function(x) x$estimate)
+               aa})
+names(modes) <- c('10', '100', '1000', '10000')
+modes <- melt(modes)
+modes$Var2 <- mapvalues(modes$Var2, 
+                        from = unique(modes$Var2), 
+                        to = c('alpha', 'sigma'))
+vline <- data.frame(Var2 = c('alpha', 'sigma'), value = c(1.3, 1))
 
-means <- llply(fits, function(y) 
-               Reduce(rbind, llply(y, function(x) 
-                                   laply(extract(x, permuted = TRUE), mean))))
-means <- llply(means, function(x) {
-               x <- data.frame(x)
-               names(x) <- c('alpha', 'sigma', 'lp__')
-               x[, 1:2]})
-means <- llply(means, function(x) melt(x))
-means <- Reduce(rbind, Map(function(x, y) 
-                           data.frame(x, size = rep(paste0('n == ', y), 
-                                                    length(x))), 
-                           x = means, y = n))
-vline <- data.frame(variable = c('alpha', 'sigma'), value = c(1.3, 1))
-r <- ggplot(means, aes(x = value))
+
+r <- ggplot(modes, aes(x = value))
 r <- r + geom_vline(data = vline, aes(xintercept = value), colour = 'darkgrey')
 r <- r + geom_histogram(aes(y = ..density..))
-r <- r + facet_grid(variable ~ size, labeller = label_parsed)
+r <- r + facet_grid(Var2 ~ L1, labeller = label_parsed)
+r <- r + labs(x = 'Estimated value', y = 'Prob. Density')
 ggsave(r, file = '../doc/na_surv/figure/alpha_simulation.png', 
-       width = 3.5, height = 4)
+       width = 10, height = 8)
