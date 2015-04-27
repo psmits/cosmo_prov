@@ -183,6 +183,28 @@ The solution to this is to use the deviance residuals, \(D\). This is defined as
 \end{equation*}
 Deviance residuals have a mean of 0 and a standard deviation of 1 by definition.
 
+\subsection{Model comparison}
+The exponential and Weibull models were compared for out-of-sample predictive accuracy using the widely-applicable information criterion (WAIC) \cite{Watanabe2010a}. Because the Weibull model reduces to the exponential model when \(\alpha = 0\), our interest is not in choosing between these models. Instead comparison of WAIC values is useful for better understanding the effect of model complexity on out-of-sample predictive accuracy. The calculation of WAIC used here corresponds to the ``WAIC 2'' formulation recommended by \cite{Gelman2013d}.
+
+WAIC can be considered fully Bayesian alternative to the Akaike information criterion, where WAIC acts as an approximation of leave-one-out cross-validation which acts as a measure of out-of-sample predictive accuracy. WAIC is calculated starting with the log pointwise posterior predictive density calculated as
+\begin{equation}
+  \mathrm{lppd} = \sum_{i = 1}^{n} \log \left(\frac{1}{S} \sum_{s = 1}^{S} p(y_{i}|\Theta^{S})\right),
+  \label{eq:lppd}
+\end{equation}
+where \(n\) is sample size, \(S\) is the number posterior simulation draws, and \(\Theta\) represents all of the estimated parameters of the model. This is similar to calculating the likelihood of each observation given the entire posterior. A correction for the effective number of parameters is then added to lppd to adjust for overfitting. The effective number of parameters is calculated, following derivation and recommendations of \cite{Gelman2013d}, as
+\begin{equation}
+  p_{\mathrm{WAIC}} = \sum_{i = 1}^{n} V_{s = 1}^{S} (\log p(y_{i}|\Theta^{S})).
+  \label{eq:pwaic}
+\end{equation}
+where \(V\) is the sample posterior variance of the log predictive density for each data point.
+
+Given both equations \ref{eq:lppd} and \ref{eq:pwaic}, WAIC is then calculated
+\begin{equation}
+  \mathrm{WAIC} = \mathrm{lppd} - p_{\mathrm{WAIC}}.
+  \label{eq:waic}
+\end{equation}
+When comparing two or more models, lower WAIC values indicate better out-of-sample predictive accuracy. Importantly, WAIC is just one way of comparing models. When combined with posterior predictive checks it is possible to get a more complete understanding of model fit.
+
 
 \subsection{Variance partitioning}
 There are three different variance components in this model: sample \(\sigma_{y}^{2}\), cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). The sample variance, \(\sigma_{y}^{2}\), is similar to the residual variance from a normal linear regression. Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the Weibull based model used here (Eq.~\ref{eq:weibull}) does not include an estimate of the sample variance, \(\sigma_{y}^{2}\). Partitioning the variance between these three components was approximated via a simulation approach modified from \cite{Goldstein2002}.
@@ -213,12 +235,13 @@ The variance partitioning coefficients are then calculated, for example, as \(VP
 I used variance partitioning coefficients (VPC) to estimate the relative importance of the different variance components \cite{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \cite{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
 
 
-\section{Results of posterior predictive checks}
+\section{Model adequacy and comparison}
 With all marginal posterior estimates having converged (\(\hat{R} < 1.1\)) it is possible to examine the quality of model fit (Table~\ref{tab:post_sum}). If the model is an adequate descriptor of the observed data, then relatively confident inference can be made \cite{Gelman2013d}.
 
-Visual examination of the deviance residuals from twelve different sets of posterior predictive simulations indicates few systematic problems (Fig.~\ref{fig:ppc_res}). The only concern is that the residuals are slightly skewed,however this bias appears very small. This is confirmed by comparing the K-M estimate of the empirical survival function to 100 estimated survival functions from posterior simulations (Fig. 1, main text).
+Visual examination of the deviance residuals from twelve different sets of posterior predictive simulations indicates a systematic weakness estimating durations greater than 3 2-My bins (Fig.~\ref{fig:ppc_res}). However, posterior predictive estimates of the 25th, 50th, and 75th quantiles of the observed indicate adequate fit. (Fig.~\ref{fig:ppc_quant}). Importantly, this indicates that the model has approximate fit for 50+\% of the data. Because, the inferred model can be inferred to be approximately adequate at capturing the observed variation.
 
-Comparisons of the observed 25th, 50th, and 75th quantiles, and mean durations to the results from the posterior predictive simulations indicate adequate model fit (Fig.~\ref{fig:ppc_quant}). Because all the different posterior predictive checks seem to agree, the inferred model appears adequate at capturing the observed variation.
+The Wiebull model (VALUE) also had a much lower WAIC score than the Exponential model (VALUE). This difference indicates that the Weibull model probably has the lower out-of-sample predictive accuracy of the two.
+
 
 \section{Concerns surrounding estimates of $\alpha$}
 The estimate of the Weibull shape parameter, $\alpha$, is greater than 1 meaning that extinction risk is expected to increase with taxon age (Table~\ref{tab:post_sum}). As the value of $\alpha$ is between 1 and 1.5, extinction risk for a given species only gradually increases with age (Fig.~\ref{fig:haz}). There are three possible explanations for this result: 1) older taxa being out competed by younger taxa \cite{Wagner2014b}; or 2) this is an artifact of the minimum resolution of the fossil record \cite{Sepkoski1975}. 
@@ -234,7 +257,7 @@ The model used in this analysis, however, is unable to distinguish between the r
 \begin{figure}[ht]
   \centering
   \includegraphics[height = 0.5\textheight, width = \textwidth, keepaspectratio = true]{figure/residual_plot}
-  \caption{Deviance residuals from the fitted survival model. Each graph depicts the residuals from single draws from the posterior distributions of all estimated parameters. Positive values indicate an underestimate of the observed duration, while negative values indicate an overestimate of the observed duration. Twelve different examples are provided here to indicate the lack of individual observation based biases.}
+  \caption{Deviance residuals from the fitted survival model compared to observed durations. Each graph depicts the residuals from single draws from the posterior distributions of all estimated parameters. Positive values indicate an underestimate of the observed duration, while negative values indicate an overestimate of the observed duration. A small amount of noise is added to each point to increase clarity. Twelve different examples are provided here to indicate consistency across multiple realizations.}
   \label{fig:ppc_res}
 \end{figure}
 
@@ -284,6 +307,7 @@ The model used in this analysis, however, is unable to distinguish between the r
 
 \begin{table}[t!]
   \centering
+  \caption{Regression equations used in this study for estimating body size. Equations are presented with reference to taxonomic grouping, part name, and reference.}
   \begin{tabular}{l | l | l | l}
     Group & Equation & log(Measurement) & Source \\
     \hline
@@ -304,7 +328,6 @@ The model used in this analysis, however, is unable to distinguish between the r
     Ungulates & \(\log(m) = 3.113x - 1.374\) & lower toothrow length & \cite{Mendoza2006} \\
     \hline
   \end{tabular}
-  \caption{CAPTION}
   \label{tab:mass_est}
 \end{table}
 
