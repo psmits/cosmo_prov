@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{graphicx,subcaption,lineno}
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{multirow,microtype}
+\usepackage{longtable}
+
+\frenchspacing
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\title{Supplemental information for ``Death and taxa''}
+\author{Peter D Smits}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Supertree inference}
+As there is no single, combined formal phylogenetic hypothesis of all Cenozoic fossils mammals from North America, it was necessary to construct a semi-formal supertree. This was done by combining taxonomic information for all the observed species and a few published phylogenies. 
+
+The initial taxonomic classification of the observed species was based on the associated taxonomic information from the PBDB. This information was then updated using the Encyclopedia of Life (http://eol.org/) which collects and collates taxonomic information in a single database. This was done programatically using the \texttt{taxize} package for R \cite{2013taxize}. Finally, this taxonomic information was further updated using a published taxonomy of fossil mammals \cite{Janis2008,Janis1998}. 
+
+This taxonomy serves as an initial phylogenetic hypothesis which was then combined with a selection of species-level phylogenies \cite{Bininda-Emonds2007,Raia2012f} in order to better constrain a minimum estimate of the actual phylogenetic relationships of the species. The supertree was inferred via matrix representation parsimony implemented in the \texttt{phytools} package for R \cite{revell2012phytools}. While four most parsimonious trees were found, I selected a single of these for use in analysis.
+
+Polytomies were resolved in order of species first appearance in order to minize stratigraphic gaps. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \cite{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not to be positive definite, which is important for computation (see below). While other time scaling approaches are possible \cite{Bapst2013a,Hedman2010} this method was chosen for its simplicity and not requiring additional information about diversification rates which are the interest of this study.
+
+\section{Deviance residuals}
+% need a few definitions from the main text
+In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cumulative hazard function \cite{Klein2003}. Given \(S(t)\), we define the cumulative hazard function as 
+\begin{equation*}
+  \Lambda(t) = -log\left(S\left(t\right)\right).
+\end{equation*}
+
+Next, we define martingale residuals \(m\) as
+\begin{equation*}
+  m_{i} = I_{i} - \Lambda(t_i).
+\end{equation*}
+\(I\) is the inclusion vector of length \(n\), where \(I_{i} = 1\) means the observation is completely observed and \(I_{i} = 0\) means the observation is censored. Martingale residuals have a mean of 0, range between 1 and \(-\infty\), and can be viewed as the difference between the observed number of deaths between 0 and \(t_{i}\) and the expected number of deaths based on the model. However, martingale residuals are asymmetrically distributed, and can not be interpreted in the same manner as standard residuals. 
+
+The solution to this is to use the deviance residuals, \(D\). This is defined as a function of martingale residuals and takes the form
+\begin{equation*}
+  D_{i} = \text{sign}(m_{i}) \sqrt{-2[m_{i} + I_{i}log(I_{i} - m_{i})]}.
+\end{equation*}
+Deviance residuals have a mean of 0 and a standard deviation of 1 by definition.
+
+\section{Variance partitioning}
+I calculated VPC using a resampling approach based on \cite{Goldstein2002}. The procedure is as follows:
+\begin{enumerate}
+  \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq.~\ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
+  \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq.~\ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
+  \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\). 
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq.~\ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
+  \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq.~\ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
+  \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\).
+  \item \(\sigma_{c*}^{2} = var(\upsilon_{c})\) and \(\sigma_{p*}^{2} = var(\upsilon_{p})\).
+\end{enumerate}
+
+The simulated values of \(h\) were drawn from a univariate normal distribution because each simulated value is in isolation, so there is no concern of phylogenetic autocorrelation. The chosen value for \(\beta^{T} \mathbf{X}\) was a draw from the posterior estimate of the intercept. Because input variables were standardized prior to model fitting, the intercept corresponds to the estimated effect on survival of the sample mean.
+
+Weibull variance is calculated as
+\begin{equation}
+  var(x) = \sigma^{2}\left(\Gamma\left(1 + \frac{2}{\alpha}\right) - \left(\Gamma\left(1 + \frac{1}{\alpha}\right)\right)^{2}\right),
+  \label{eq:wei_var} \end{equation}
+where \(\Gamma\) is the gamma function. 
+
+The variance partitioning coefficients are then calculated, for example, as \(VPC_{phylo} = \frac{\sigma_{p*}^{2}}{\sigma_{y*}^{2} + \sigma_{c*}^{2} + \sigma_{p*}^{2}}\) and similarly for the other components.
+
+
+
+\section{Widely applicable information criterion}
+WAIC can be considered fully Bayesian alternative to the Akaike information criterion, where WAIC acts as an approximation of leave-one-out cross-validation which acts as a measure of out-of-sample predictive accuracy \cite{Gelman2013d}. The following explanation uses the ``WAIC 2'' formulation recommended by \cite{Gelman2013d}. 
+
+WAIC is calculated starting with the log pointwise posterior predictive density calculated as
+\begin{equation}
+  \mathrm{lppd} = \sum_{i = 1}^{n} \log \left(\frac{1}{S} \sum_{s = 1}^{S} p(y_{i}|\Theta^{S})\right),
+  \label{eq:lppd}
+\end{equation}
+where \(n\) is sample size, \(S\) is the number posterior simulation draws, and \(\Theta\) represents all of the estimated parameters of the model. This is similar to calculating the likelihood of each observation given the entire posterior.
+
+A correction for the effective number of parameters is then added to lppd to adjust for overfitting. The effective number of parameters is calculated, following derivation and recommendations of \cite{Gelman2013d}, as
+\begin{equation}
+  p_{\mathrm{WAIC}} = \sum_{i = 1}^{n} V_{s = 1}^{S} (\log p(y_{i}|\Theta^{S})).
+  \label{eq:pwaic}
+\end{equation}
+where \(V\) is the sample posterior variance of the log predictive density for each data point.
+
+Given both equations \ref{eq:lppd} and \ref{eq:pwaic}, WAIC is then calculated
+\begin{equation}
+  \mathrm{WAIC} = \mathrm{lppd} - p_{\mathrm{WAIC}}.
+  \label{eq:waic}
+\end{equation}
+When comparing two or more models, lower WAIC values indicate better out-of-sample predictive accuracy. Importantly, WAIC is just one way of comparing models. When combined with posterior predictive checks it is possible to get a more complete understanding of model fit.
+
+\section{Supplementary tables}
+\begin{table}[ht]
+  \centering
+  \caption{Species trait assignments in this study are a coarser version of the information available in the PBDB. Information was coarsened to improve per category sample size and uniformity and followed this table.}
+  \begin{tabular}[ht]{ l | l | l }
+    \hline
+    \multicolumn{2}{ c |}{This study} & PBDB categories \\
+    \hline \hline
+    \multirow{4}{*}{Diet} & Carnivore & Carnivore \\
+    & Herbivore & Browser, folivore, granivore, grazer, herbivore. \\
+    & Insectivore & Insectivore. \\
+    & Omnivore & Frugivore, omnivore. \\ 
+    \hline
+    \multirow{3}{*}{Locomotor} & Arboreal & Arboreal.\\
+    & Ground dwelling & Fossorial, ground dwelling, semifossorial, saltatorial. \\
+    & Scansorial & Scansorial. \\
+    \hline
+  \end{tabular}
+  \label{tab:trait_cats}
+\end{table}
+
+\begin{table}[ht]
+  \centering
+  \caption{Regression equations used in this study for estimating body size. Equations are presented with reference to taxonomic grouping, part name, and reference.}
+  \begin{tabular}{l | l | l | l}
+    Group & Equation & log(Measurement) & Source \\
+    \hline
+    General & \(\log(m) = 1.827x + 1.81\) & lower m1 area &  \cite{Legendre1986} \\
+    General & \(\log(m) = 2.9677x - 5.6712\) & mandible length & \cite{Foster2009a} \\
+    General & \(\log(m) = 3.68x - 3.83\) & skull length & \cite{Luo2001} \\
+    Carnivores & \(\log(m) = 2.97x + 1.681\) & lower m1 length & \cite{VanValkenburgh1990} \\
+    Insectivores & \(\log(m) = 1.628x + 1.726\) & lower m1 area & \cite{Bloch1998} \\
+    Insectivores & \(\log(m) = 1.714x + 0.886\) & upper M1 area & \cite{Bloch1998} \\
+    Lagomorph & \(\log(m) = 2.671x - 2.671\) & lower toothrow area & \cite{Tomiya2013} \\
+    Lagomorph & \(\log(m) = 4.468x - 3.002\) & lower m1 length & \cite{Tomiya2013} \\
+    Marsupials & \(\log(m) = 3.284x + 1.83\) & upper M1 length & \cite{Gordon2003} \\
+    Marsupials & \(\log(m) = 1.733x + 1.571\) & upper M1 area & \cite{Gordon2003} \\
+    Rodentia & \(\log(m) = 1.767x + 2.172\) & lower m1 area & \cite{Legendre1986} \\
+    Ungulates & \(\log(m) = 1.516x + 3.757\) & lower m1 area & \cite{Mendoza2006} \\
+    Ungulates & \(\log(m) = 3.076x + 2.366\) & lower m2 length & \cite{Mendoza2006} \\
+    Ungulates & \(\log(m) = 1.518x + 2.792\) & lower m2 area & \cite{Mendoza2006} \\
+    Ungulates & \(\log(m) = 3.113x - 1.374\) & lower toothrow length & \cite{Mendoza2006} \\
+    \hline
+  \end{tabular}
+  \label{tab:mass_est}
+\end{table}
+
+\clearpage 
+
+\bibliographystyle{plain}
+\bibliography{newbib,packages}
+\end{document}

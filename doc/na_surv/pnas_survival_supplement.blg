@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: pnas_survival_supplement.aux
+The style file: plain.bst
+Database file #1: newbib.bib
+Database file #2: packages.bib
+You've used 20 entries,
+            2118 wiz_defined-function locations,
+            640 strings with 7527 characters,
+and the built_in function-call counts, 6694 in all, are:
+= -- 665
+> -- 319
+< -- 2
++ -- 126
+- -- 106
+* -- 495
+:= -- 1145
+add.period$ -- 61
+call.type$ -- 20
+change.case$ -- 110
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 241
+empty$ -- 510
+format.name$ -- 106
+if$ -- 1366
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 24
+newline$ -- 103
+num.names$ -- 42
+pop$ -- 99
+preamble$ -- 1
+purify$ -- 92
+quote$ -- 0
+skip$ -- 154
+stack$ -- 0
+substring$ -- 442
+swap$ -- 34
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 72
+warning$ -- 0
+while$ -- 70
+width$ -- 22
+write$ -- 225
