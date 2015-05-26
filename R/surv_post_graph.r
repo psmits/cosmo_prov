@@ -39,7 +39,7 @@ theme_update(axis.text = element_text(size = 6),
              legend.text = element_text(size = 8),
              legend.title = element_text(size = 9),
              legend.key.size = unit(0.75, 'cm'),
-             strip.text = element_text(size = 6))
+             strip.text = element_text(size = 8))
 
 
 # posterior predictive checks
@@ -202,8 +202,10 @@ lodf <- lodf + geom_histogram(aes(y = ..density..))
 lodf <- lodf + facet_grid(Var2 ~ ., labeller = label_parsed)
 lodf <- lodf + theme(axis.text.y = element_text(size = 6))
 lodf <- lodf + labs(x = 'Estimated difference', y = 'Prob. Density')
+lodf <- lodf + scale_y_continuous(breaks = seq(0, 7, by = 2))
+lodf <- lodf + scale_x_continuous(breaks = seq(-0.4, 0.6, by = 0.2))
 ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
-       width = 3.42, height = 2.00, dpi = 750)
+       width = 3.42, height = 2.25, dpi = 750)
 
 
 # effect of dietary category
@@ -228,9 +230,10 @@ didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 1)
 didf <- didf + geom_histogram(aes(y = ..density..))
 didf <- didf + facet_grid(Var2 ~ ., labeller = label_parsed)
 didf <- didf + labs(x = 'Estimated difference', y = 'Prob. Density')
+didf <- didf + scale_y_continuous(breaks = seq(0, 7, by = 2))
 didg <- didf + theme(axis.text.y = element_text(size = 6))
 ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
-       width = 3.42, height = 3.00, dpi = 750)
+       width = 3.42, height = 4.50, dpi = 750)
 
 
 # effect of body size and occupancy

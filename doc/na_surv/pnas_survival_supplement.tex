@@ -28,6 +28,17 @@ This taxonomy serves as an initial phylogenetic hypothesis which was then combin
 
 Polytomies were resolved in order of species first appearance in order to minize stratigraphic gaps. The resulting tree was then time scaled using the \texttt{paleotree} package via the ``minimum branch length'' approach with a minimum length of 0.1 My \cite{Bapst2012a}. The minimum length is necessary to avoid zero-length branches which cause the phylogenetic covariance matrix not to be positive definite, which is important for computation (see below). While other time scaling approaches are possible \cite{Bapst2013a,Hedman2010} this method was chosen for its simplicity and not requiring additional information about diversification rates which are the interest of this study.
 
+\section{Modeling censored observations}
+Censored data are modeled using the survival function of the distribution, \(S(t)\), defined earlier for the Weibull distribution (Eq. 5, 6) with \(\sigma\) defined as above (Eq. 8, 9). \(S(t)\) is the probability that an observation will survive longer than a given time \(t\). 
+
+The likelihood of uncensored observations is evaluated as normal using equation 4 while right censored observations are evaluated at \(S(t)\) and left censored observations are evaluated at \(1 - S(t)\). Note, \(1 - S(t)\) is equivalent to the cumulative distribution function and \(S(t)\) is equivalent to the complementary cumulative distribution function \cite{Gelman2013d}.
+
+The final sampling statement/likelihood for both uncensored and both right and left censored observations is then written
+\begin{equation*}
+  L \propto \prod_{i \in C} \mathrm{Weibull}(y_{i} | \alpha, \sigma) \prod_{j \in R} S(y_j | \alpha, \sigma) \prod_{k \in L} \left(1 - S(y_{k} | \alpha, \sigma)\right),
+\end{equation*}
+where \(C\) is the set of uncensored observations, \(R\) is the set of right censored observations, and \(L\) is the set of left censored observations.
+
 \section{Deviance residuals}
 % need a few definitions from the main text
 In standard linear regression, residuals are defined as \(r_{i} = y_{i} - y_{i}^{est}\). For the model used here, this definition is inadequate. The equivalent values for survival analysis are deviance residuals. To define how deviance residuals are calculated, we first define the cumulative hazard function \cite{Klein2003}. Given \(S(t)\), we define the cumulative hazard function as 
@@ -51,10 +62,10 @@ Deviance residuals have a mean of 0 and a standard deviation of 1 by definition.
 I calculated VPC using a resampling approach based on \cite{Goldstein2002}. The procedure is as follows:
 \begin{enumerate}
   \item Simulate \(w\) (50,000) values of \(\eta\); \(\eta \sim \mathcal{N}(0, \sigma_{c})\).
-  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq.~\ref{eq:reg}) for all \(w\) simulations, holding \(h\) constant at 0.
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{c*}\) (Eq. 7) for all \(w\) simulations, holding \(h\) constant at 0.
   \item Calculate \(\upsilon_{c}\), the Weibull variance (Eq.~\ref{eq:wei_var}) of each element of \(\sigma^{c*}\) with \(\alpha\) drawn from the posterior estimate.
   \item Simulate \(w\) values of \(h\); \(h \sim \mathcal{N}(0, \sigma_{p})\). 
-  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq.~\ref{eq:reg}) for all \(w\) simulations, holding \(\eta\) constant at 0.
+  \item For a given value of \(\beta^{T} \mathbf{X}\), calculate \(\sigma^{p*}\) (Eq. 7) for all \(w\) simulations, holding \(\eta\) constant at 0.
   \item Calculate \(\upsilon_{p}\), the Weibull variance (Eq.~\ref{eq:wei_var}) of each element of \(\sigma^{p*}\) with \(\alpha\) drawn from the posterior estimate.
   \item \(\sigma_{y*}^{2} = \frac{1}{2} \left(\left(\frac{1}{w} \sum_{i}^{w} \upsilon_{pi}\right) + \left(\frac{1}{w} \sum_{j}^{w} \upsilon_{cj}\right)\right)\).
   \item \(\sigma_{c*}^{2} = var(\upsilon_{c})\) and \(\sigma_{p*}^{2} = var(\upsilon_{p})\).

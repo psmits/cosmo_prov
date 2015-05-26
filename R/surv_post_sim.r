@@ -20,14 +20,14 @@ source('../R/surv_fit.r')
 outs <- dir('../data/mcmc_out', pattern = 'wei_surv_[0-9]', full.names = TRUE)
 phy.scalemfit <- read_stan_csv(outs)
 
-a <- summary(phy.scalemfit)[[1]]
-all(a[, ncol(a)] < 1.1)
+#a <- summary(phy.scalemfit)[[1]]
+#all(a[, ncol(a)] < 1.1)
 
 outs <- dir('../data/mcmc_out', pattern = 'exp_surv_[0-9]', full.names = TRUE)
 escalefit <- read_stan_csv(outs)
 
-b <- summary(phy.scalemfit)[[1]]
-all(b[, ncol(b)] < 1.1)
+#b <- summary(phy.scalemfit)[[1]]
+#all(b[, ncol(b)] < 1.1)
 
 # data and important functions
 duration <- c(data$dur_unc, data$dur_cen)
