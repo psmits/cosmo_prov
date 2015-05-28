@@ -97,7 +97,7 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = 2),
 ppc.res <- ppc.res + geom_hline(aes(yintercept = -2), 
                                 colour = 'darkgrey', size = 1, 
                                 linetype = 'dashed')
-ppc.res <- ppc.res + geom_point(alpha = 0.5, size = 1, position = 'jitter')
+ppc.res <- ppc.res + geom_point(alpha = 0.1, size = 0.5, position = 'jitter')
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ppc.res <- ppc.res + labs(x = 'Duration (2 My bins)', y = 'Deviance residual')
 ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.png',
