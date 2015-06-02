@@ -1,0 +1,168 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{graphicx,microtype,parskip}
+\usepackage{caption,subcaption,multirow}
+\usepackage{attrib}
+
+\frenchspacing
+
+\usetheme{default}
+\usecolortheme{whale}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercolor{title}{fg=blue,bg=white}
+
+\setbeamercolor{block title}{fg=white,bg=gray}
+\setbeamercolor{block body}{fg=black,bg=lightgray}
+
+\setbeamercolor{block title alerted}{fg=white,bg=darkgray}
+\setbeamercolor{block body alerted}{fg=black,bg=lightgray}
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\title{Death and Taxa}
+\subtitle{time-invariant differences in mammal species durations}
+\author{Peter D Smits}
+\institute{Committee on Evolutionary Biology, University of Chicago}
+\titlegraphic{
+  \includegraphics[width=2.75cm,height=2.75cm,keepaspectratio=true]{figure/paleodb}
+  \hspace*{0.35\paperwidth}
+  \includegraphics[width=2cm,height=2cm,keepaspectratio=true]{figure/chicago}
+}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{Question}
+    Why do taxa go extinct at different rates?
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Motivating questions}
+    \begin{itemize}
+      \item How do mammal species traits affect extinction risk?
+        \begin{itemize}
+          \item How do shared time of origination or evolutionary history relate?
+        \end{itemize}
+      \item How do my findings compare to current risk factors?
+      \item Is species extinction risk age-independent?
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Relationship between range size and extinction risk}
+\end{frame}
+
+% do as idealized survival curves?
+\begin{frame}
+  \frametitle{Hypotheses of effects of geographic range category}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hypotheses of effects of dietary category}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hypotheses of effects of locomotor category}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hierarchical Bayesian modeling approach}
+
+  \includegraphics[width = \textwidth,height = 0.8\textheight,keepaspectratio = true]{figure/han_bayes}
+
+  \tiny{\attrib{www.countbayesie.com}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Survival model diagram}
+  \begin{center}
+    \includegraphics[height=0.8\textheight,keepaspectratio=true]{figure/mammal_model}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Pattern of species survival under two models}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Effect of dietary category on extinction risk}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Effect of locomotor category on extinction risk}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Difference in risk between origination cohorts}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Three sources of variance}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Comparison with the Recent}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
+  % survival of the unspecialized
+  % decrease extinction risk towards present
+  %   both time and phylogeny
+  % incongruence with Recent
+  % accelerating extinction with age, unknown mechanism
+\end{frame}
+
+\begin{frame}
+  \frametitle{Acknowledgements}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Advising
+          \begin{itemize}
+            \item Kenneth D. Angielczyk, Michael J. Foote, \\P. David Polly, \\Richard H. Ree
+          \end{itemize}
+        \item Angielczyk Lab
+          \begin{itemize}
+            \item {\small{David Grossnickle, \\Dallas Krentzel}}
+          \end{itemize}
+        \item Foote lab
+          \begin{itemize}
+            \item {\small{Marites Villarosa Garcia, \\Nadia Pierrehumbert, \\Kathleen Ritterbush}}
+          \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item {\footnotesize{Stewart Edie, \\Colin Kyle, \\Darcy Ross, \\Elizabeth Sander, \\Laura Southcott, \\Courtney Stepien}}
+        \item {\footnotesize{John Alroy, \\David Bapst, \\Ben Frable, \\Graeme Lloyd, \\Carl Simpson, \\Graham Slater, \\Peter Wagner}}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\appendix
+
+\begin{frame}
+  \frametitle{Further posterior predictive checks}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Concerns regarding estimation of \(\alpha\)}
+\end{frame}
+
+\end{document}

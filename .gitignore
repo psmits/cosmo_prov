@@ -4,6 +4,7 @@ meta_dump/
 mcmc_out/
 death_taxa/
 death_taxa.zip
+doc/presentations/figure/*
 *.cpp
 *.hpp
 ne_10m_coastline.*
