@@ -12,11 +12,8 @@ nsim <- 1000
 set.seed(seed)
 source('../R/surv_setup.r')  # data cleaned up nice
 
-# multiple states of super tree
-#load('../data/taxonomy_tree.rdata')
-#load('../data/super_big_tree.rdata')
+# super tree
 load('../data/scaled_super.rdata')  # best
-
 
 plio <- which(cohort == 1)
 

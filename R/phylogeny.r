@@ -8,7 +8,6 @@ library(phangorn)
 load('../data/update_taxonomy.rdata')
 source('../R/phylo_gen.r')
 source('../R/na_mung.r')
-#load('../data/many_trees.rdata')
 
 raia.tree <- read.tree('../data/raia_tree.txt')
 tom.tree <- read.nexus('../data/tomiya_tree.nex')
@@ -29,7 +28,7 @@ new.tax <- replace.taxonomy(dat, uni.tax[, 1:3])
 # so i want them to be polytomy at the "root"
 new.tax$order_name[new.tax$order_name == 'Artiodactyla'] <- 'Cetartiodactyla'
 
-# split the 
+# split by orders
 by.order <- split(new.tax, new.tax$order_name)
 order.tree <- list()
 for(ii in seq(length(by.order))) {
@@ -41,6 +40,7 @@ for(ii in seq(length(by.order))) {
   check$name.bi <- as.factor(check$name.bi)
   check <- unique(check)
 
+  # screen situations with only 1 family, causes problems
   if(length(levels(check[, 1])) == 1) {
     temp <- as.phylo.formula(~ occurrence.genus_name/
                              name.bi, 
@@ -64,31 +64,10 @@ for(ii in seq(length(by.order))) {
 names(order.tree) <- names(by.order)
 ntip <- laply(order.tree, function(x) length(x$tip.label))
 order.tree <- order.tree[ntip != 1]
+# combine the orders into a huge tree
 taxon.tree <- Reduce(bind.tree, order.tree)
 
 species.trees <- list(raia.tree, super.tree[[1]], taxon.tree)
 class(species.trees) <- 'multiPhylo'
-big.tree <- mrp.supertree(species.trees)
 
-fad <- ddply(dat, .(name.bi), summarize, max(bins))
-lad <- ddply(dat, .(name.bi), summarize, min(bins))
-fad[, 1] <- str_replace(fad[, 1], ' ', '_')
-lad[, 1] <- str_replace(lad[, 1], ' ', '_')
-fad <- fad[match(big.tree$tip.label, fad[, 1]), ]
-lad <- lad[match(big.tree$tip.label, lad[, 1]), ]
-datmat <- cbind(fad[, 2], lad[, 2])
-rownames(datmat) <- fad[, 1]
-
-# get rid of the stupid tips
-if(class(big.tree) == 'multiPhylo') {
-  spt <- big.tree[[1]] 
-} else {
-  spt <- big.tree
-}
-
-dr <- spt$tip.label[!(spt$tip.label %in% rownames(datmat))]
-spt <- drop.tip(spt, dr)
-spt <- timeLadderTree(spt, timeData = datmat)
-spt <- timePaleoPhy(spt, timeData = datmat, 
-                         type = 'mbl', vartime = 0.1)
-save(spt, file = '../data/scaled_super.rdata')
+save.image(file = '../data/setup_tree.rdata')
