@@ -4,44 +4,44 @@ The top-level auxiliary file: pnas_survival_supplement.aux
 The style file: plain.bst
 Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 22 entries,
+You've used 23 entries,
             2118 wiz_defined-function locations,
-            654 strings with 7856 characters,
-and the built_in function-call counts, 7357 in all, are:
-= -- 736
-> -- 339
+            662 strings with 8098 characters,
+and the built_in function-call counts, 7703 in all, are:
+= -- 767
+> -- 362
 < -- 2
-+ -- 134
-- -- 112
-* -- 546
-:= -- 1253
-add.period$ -- 67
-call.type$ -- 22
-change.case$ -- 119
++ -- 143
+- -- 120
+* -- 576
+:= -- 1315
+add.period$ -- 70
+call.type$ -- 23
+change.case$ -- 126
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 263
-empty$ -- 567
-format.name$ -- 112
-if$ -- 1502
+cite$ -- 23
+duplicate$ -- 274
+empty$ -- 590
+format.name$ -- 120
+if$ -- 1570
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 26
-newline$ -- 113
-num.names$ -- 46
-pop$ -- 104
+int.to.str$ -- 23
+missing$ -- 27
+newline$ -- 118
+num.names$ -- 48
+pop$ -- 109
 preamble$ -- 1
-purify$ -- 99
+purify$ -- 105
 quote$ -- 0
-skip$ -- 169
+skip$ -- 176
 stack$ -- 0
-substring$ -- 514
-swap$ -- 36
+substring$ -- 528
+swap$ -- 37
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 84
 warning$ -- 0
-while$ -- 78
-width$ -- 24
-write$ -- 247
+while$ -- 81
+width$ -- 25
+write$ -- 258
