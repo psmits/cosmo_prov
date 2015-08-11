@@ -5,44 +5,44 @@ The style file: pnas.bst
 A level-1 auxiliary file: post_out.aux
 Database file #1: newbib.bib
 Database file #2: packages.bib
-You've used 64 entries,
+You've used 63 entries,
             1765 wiz_defined-function locations,
-            899 strings with 14521 characters,
-and the built_in function-call counts, 14304 in all, are:
-= -- 1480
-> -- 473
+            893 strings with 14367 characters,
+and the built_in function-call counts, 14100 in all, are:
+= -- 1458
+> -- 468
 < -- 7
-+ -- 177
-- -- 113
-* -- 1065
-:= -- 2261
-add.period$ -- 117
-call.type$ -- 64
-change.case$ -- 56
++ -- 175
+- -- 112
+* -- 1050
+:= -- 2228
+add.period$ -- 115
+call.type$ -- 63
+change.case$ -- 55
 chr.to.int$ -- 0
-cite$ -- 64
-duplicate$ -- 646
-empty$ -- 1307
-format.name$ -- 120
-if$ -- 3132
+cite$ -- 63
+duplicate$ -- 637
+empty$ -- 1288
+format.name$ -- 119
+if$ -- 3089
 int.to.chr$ -- 0
-int.to.str$ -- 64
-missing$ -- 65
-newline$ -- 320
-num.names$ -- 70
-pop$ -- 107
+int.to.str$ -- 63
+missing$ -- 64
+newline$ -- 315
+num.names$ -- 69
+pop$ -- 106
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 146
+skip$ -- 145
 stack$ -- 0
-substring$ -- 1313
-swap$ -- 192
+substring$ -- 1291
+swap$ -- 190
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 170
-width$ -- 66
-write$ -- 701
+while$ -- 167
+width$ -- 65
+write$ -- 690

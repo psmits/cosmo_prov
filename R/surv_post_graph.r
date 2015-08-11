@@ -1,4 +1,5 @@
 library(ggplot2)
+library(gridExtra)
 library(reshape2)
 library(scales)
 library(hexbin)
@@ -100,21 +101,21 @@ sim.surv <- Reduce(rbind, Map(function(x, y) {
                               x},
                               x = sim.surv, y = seq(length(sim.surv))))
 sim.surv <- sim.surv[sim.surv$group %in% 1:nsim, ]
-sim.surv$lab <- 'Weibull'
+#sim.surv$lab <- 'Weibull'
 
-exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
-exp.surv <- llply(exp.surv, function(x) {
-                  y <- data.frame(cbind(time = x$time, surv = x$surv))
-                  y <- rbind(c(0, 1), y)
-                  y})
-exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
-exp.surv <- Reduce(rbind, Map(function(x, y) {
-                              x$group <- y
-                              x},
-                              x = exp.surv, y = seq(length(exp.surv))))
-exp.surv <- exp.surv[exp.surv$group %in% 1:nsim, ]
-exp.surv$lab <- 'Exponential'
-mix.surv <- rbind(sim.surv, exp.surv)
+#exp.surv <- llply(ee, function(x) survfit(Surv(x) ~ 1))
+#exp.surv <- llply(exp.surv, function(x) {
+#                  y <- data.frame(cbind(time = x$time, surv = x$surv))
+#                  y <- rbind(c(0, 1), y)
+#                  y})
+#exp.surv <- llply(exp.surv, function(x) rbind(c(0, 1), x))
+#exp.surv <- Reduce(rbind, Map(function(x, y) {
+#                              x$group <- y
+#                              x},
+#                              x = exp.surv, y = seq(length(exp.surv))))
+#exp.surv <- exp.surv[exp.surv$group %in% 1:nsim, ]
+#exp.surv$lab <- 'Exponential'
+mix.surv <- sim.surv
 
 soft <- ggplot(emp.surv, aes(x = time, y = surv))
 soft <- soft + geom_line(data = mix.surv, aes(x = time, y = surv, 
@@ -122,10 +123,10 @@ soft <- soft + geom_line(data = mix.surv, aes(x = time, y = surv,
                          colour = 'grey', alpha = .2)
 soft <- soft + geom_line(size = 1)
 soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
-soft <- soft + facet_grid(. ~ lab)
+#soft <- soft + facet_grid(. ~ lab)
 soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
 ggsave(soft, filename = '../doc/na_surv/figure/survival_function.png',
-       width = 3.42, height = 2.30, dpi = 750)
+       width = 3.42, height = 3.42, dpi = 750)
 ggsave(soft, filename = '../doc/na_surv/figure/survival_function_pres.png',
        width = 4.7, height = 3.5, dpi = 750)
 
@@ -152,19 +153,20 @@ scn <- base.inter$value + move.eff$value[(ns + 1):(2 * ns)]
 
 # better to compare as differences?
 loco.diff <- melt(pairwise.diffs(cbind(arb, grd, scn)))
-lodf <- ggplot(loco.diff, aes(x = value))
-lodf <- lodf + geom_vline(xintercept = 0, colour = 'grey', size = 1)
-lodf <- lodf + geom_histogram(aes(y = ..density..))
-lodf <- lodf + theme(axis.text.y = element_text(size = 6))
-lodf <- lodf + labs(x = 'Estimated difference', y = 'Prob. Density')
-lodf <- lodf + scale_y_continuous(breaks = seq(0, 7, by = 2))
-lodf <- lodf + scale_x_continuous(breaks = seq(-0.4, 0.6, by = 0.2))
-lodf.v <- lodf + facet_grid(Var2 ~ ., labeller = label_parsed)
-ggsave(lodf.v, filename = '../doc/na_surv/figure/loco_diff_est.png',
-       width = 3.42, height = 2.25, dpi = 750)
-lodf.h <- lodf + coord_flip() + facet_grid(~ Var2, labeller = label_parsed)
-ggsave(lodf.h, filename = '../doc/na_surv/figure/loco_diff_est_pres.png',
-       width = 4.7, height = 3.5, dpi = 750)
+relab.x <- scale_x_discrete(labels = 
+                            c('beta[arb] - beta[grd]' = 
+                              expression(beta[arb]-beta[grd]), 
+                              'beta[arb] - beta[scn]' = 
+                              expression(beta[arb]-beta[scn]), 
+                              'beta[grd] - beta[scn]' = 
+                              expression(beta[grd]-beta[scn])))
+lodf <- ggplot(loco.diff, aes(x = Var2, y = value))
+lodf <- lodf + geom_hline(yintercept = 0, colour = 'grey', size = 1)
+lodf <- lodf + geom_violin() + geom_boxplot(width = 0.1, outlier.size = 1)
+lodf <- lodf + relab.x + theme(axis.text.x = element_text(size = 7))
+lodf <- lodf + labs(x = '', y = 'Prob. Density')
+ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.png',
+       width = 3.42, height = 2.75, dpi = 750)
 
 
 # effect of dietary category
@@ -175,18 +177,26 @@ omn <- base.inter$value + diet.eff$value[(2 * ns + 1):(3 * ns)]
 
 # better to compare as differences?
 diet.diff <- melt(pairwise.diffs(cbind(crn, hrb, ist, omn)))
-didf <- ggplot(diet.diff, aes(x = value))
-didf <- didf + geom_vline(xintercept = 0, colour = 'grey', size = 1)
-didf <- didf + geom_histogram(aes(y = ..density..))
-didf <- didf + labs(x = 'Estimated difference', y = 'Prob. Density')
-didf <- didf + scale_y_continuous(breaks = seq(0, 7, by = 2))
-didf <- didf + theme(axis.text.y = element_text(size = 6))
-didf.v <- didf + facet_grid(Var2 ~ ., labeller = label_parsed)
-ggsave(didf.v, filename = '../doc/na_surv/figure/diet_diff_est.png',
-       width = 3.42, height = 4.50, dpi = 750)
-didf.h <- didf + coord_flip() + facet_grid(~ Var2, labeller = label_parsed)
-ggsave(didf.h, filename = '../doc/na_surv/figure/diet_diff_est_pres.png',
-       width = 4.7, height = 3.5, dpi = 750)
+relab.x <- scale_x_discrete(labels = 
+                            c('beta[crn] - beta[hrb]' = 
+                              expression(beta[crn]-beta[hrb]), 
+                              'beta[crn] - beta[ist]' = 
+                              expression(beta[crn]-beta[ist]), 
+                              'beta[crn] - beta[omn]' =
+                              expression(beta[crn]-beta[omn]),
+                              'beta[hrb] - beta[ist]' =
+                              expression(beta[hrb]-beta[ist]),
+                              'beta[hrb] - beta[omn]' = 
+                              expression(beta[hrb]-beta[omn]),
+                              'beta[ist] - beta[omn]' =
+                              expression(beta[ist]-beta[omn])))
+didf <- ggplot(diet.diff, aes(x = Var2, y = value))
+didf <- didf + geom_hline(yintercept = 0, colour = 'grey', size = 1)
+didf <- didf + geom_violin() + geom_boxplot(width = 0.1, outlier.size = 1)
+didf <- didf + relab.x + theme(axis.text.x = element_text(size = 7))
+didf <- didf + labs(x = '', y = 'Prob. Density')
+ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.png',
+       width = 3.42, height = 2.75, dpi = 750)
 
 
 # effect of body size and occupancy
