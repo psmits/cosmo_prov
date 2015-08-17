@@ -2,47 +2,110 @@ This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: pnas_survival.aux
 The style file: pnas.bst
-A level-1 auxiliary file: post_out.aux
-Database file #1: newbib.bib
-Database file #2: packages.bib
-You've used 63 entries,
+I found no \bibdata command---while reading file pnas_survival.aux
+Warning--I didn't find a database entry for "Simpson1944"
+Warning--I didn't find a database entry for "VanValen1973"
+Warning--I didn't find a database entry for "Raup1994"
+Warning--I didn't find a database entry for "Quental2013"
+Warning--I didn't find a database entry for "Wagner2014b"
+Warning--I didn't find a database entry for "Alroy2009"
+Warning--I didn't find a database entry for "Liow2008"
+Warning--I didn't find a database entry for "Smith2004"
+Warning--I didn't find a database entry for "Tomiya2013"
+Warning--I didn't find a database entry for "Marcot2014"
+Warning--I didn't find a database entry for "Wang2003"
+Warning--I didn't find a database entry for "Jablonski1986"
+Warning--I didn't find a database entry for "Jernvall2004"
+Warning--I didn't find a database entry for "Jablonski2008a"
+Warning--I didn't find a database entry for "Roy2009c"
+Warning--I didn't find a database entry for "Liow2009"
+Warning--I didn't find a database entry for "Liow2004a"
+Warning--I didn't find a database entry for "Price2012"
+Warning--I didn't find a database entry for "Rabosky2010a"
+Warning--I didn't find a database entry for "Purvis2000a"
+Warning--I didn't find a database entry for "Blois2009"
+Warning--I didn't find a database entry for "Janis1993a"
+Warning--I didn't find a database entry for "Gelman2013d"
+Warning--I didn't find a database entry for "Lynch1991"
+Warning--I didn't find a database entry for "Housworth2004"
+Warning--I didn't find a database entry for "Agusti2013"
+Warning--I didn't find a database entry for "Moya-Sola2005"
+Warning--I didn't find a database entry for "Goldstein2002"
+Warning--I didn't find a database entry for "Raup1982a"
+Warning--I didn't find a database entry for "Foote2003"
+Warning--I didn't find a database entry for "Alroy2010c"
+Warning--I didn't find a database entry for "Alroy2000g"
+Warning--I didn't find a database entry for "McShea1994a"
+Warning--I didn't find a database entry for "Stanley1975"
+Warning--I didn't find a database entry for "Fritz2009"
+Warning--I didn't find a database entry for "Fritz2010b"
+Warning--I didn't find a database entry for "Jones2009c"
+Warning--I didn't find a database entry for "Brook2004a"
+Warning--I didn't find a database entry for "Freudenthal2013"
+Warning--I didn't find a database entry for "McKenna2011"
+Warning--I didn't find a database entry for "Raia2012f"
+Warning--I didn't find a database entry for "Smith2004c"
+Warning--I didn't find a database entry for "Sidor2013"
+Warning--I didn't find a database entry for "Vilhena2013"
+Warning--I didn't find a database entry for "Rosvall2008"
+Warning--I didn't find a database entry for "Rosvall2009a"
+Warning--I didn't find a database entry for "Vilhena2013b"
+Warning--I didn't find a database entry for "raster"
+Warning--I didn't find a database entry for "csardi2006igraph"
+Warning--I didn't find a database entry for "Bininda-Emonds2007"
+Warning--I didn't find a database entry for "Klein2003"
+Warning--I didn't find a database entry for "Gelman2007"
+Warning--I didn't find a database entry for "Schielzeth2010"
+Warning--I didn't find a database entry for "Gelman2008"
+Warning--I didn't find a database entry for "Foote1988"
+Warning--I didn't find a database entry for "Raup1978"
+Warning--I didn't find a database entry for "Raup1975"
+Warning--I didn't find a database entry for "VanValen1979"
+Warning--I didn't find a database entry for "Baumiller1993"
+Warning--I didn't find a database entry for "Gelman2006a"
+Warning--I didn't find a database entry for "Ibrahim2001"
+Warning--I didn't find a database entry for "2014stan"
+Warning--I didn't find a database entry for "Hoffman-Gelman:2011"
+Warning--I didn't find a database entry for "Watanabe2010a"
+You've used 0 entries,
             1765 wiz_defined-function locations,
-            893 strings with 14367 characters,
-and the built_in function-call counts, 14100 in all, are:
-= -- 1458
-> -- 468
-< -- 7
-+ -- 175
-- -- 112
-* -- 1050
-:= -- 2228
-add.period$ -- 115
-call.type$ -- 63
-change.case$ -- 55
+            587 strings with 4934 characters,
+and the built_in function-call counts, 18 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 7
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 63
-duplicate$ -- 637
-empty$ -- 1288
-format.name$ -- 119
-if$ -- 3089
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
 int.to.chr$ -- 0
-int.to.str$ -- 63
-missing$ -- 64
-newline$ -- 315
-num.names$ -- 69
-pop$ -- 106
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 145
+skip$ -- 1
 stack$ -- 0
-substring$ -- 1291
-swap$ -- 190
-text.length$ -- 7
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 167
-width$ -- 65
-write$ -- 690
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There was 1 error message)

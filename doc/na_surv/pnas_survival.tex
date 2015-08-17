@@ -40,33 +40,33 @@ of the United States of America}
 
 %%%Newly updated.
 %%% If significance statement need, then can use the below command otherwise just delete it.
-\significancetext{Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to human impacts. The durations of species in the fossil record are a rich source of information for estimating systematic differences in extinction risk. I analyzed Cenozoic North American fossil mammal species durations and their relationship with multiple ecological traits, their time of origination, and their shared evolutionary histories. I find support for generalists having lower extinction risk than specialists as a time-invariant generalization. When these results are compared to risk factors associated with living mammals, I find some incongruities which may indicate that the current biodiversity crisis is akin to the great mass extinctions in Earth's history.}
+\significancetext{Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to human impacts. The durations of fossil species are a rich source of information for estimating systematic differences in extinction risk. I analyzed Cenozoic North American fossil mammal species durations and their relationship with multiple ecological traits, their time of origination, and their shared evolutionary histories. I find support for generalists having lower extinction risk than specialists as a general statement. When these results are compared to risk factors associated with living mammals, I find some incongruities which may indicate that the current biodiversity crisis is akin to the great mass extinctions in Earth's history.}
 
 \maketitle
 
 \begin{article}
 \begin{abstract}
- Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to anthropogenic impacts. Here I present a hierarchical Bayesian survival model of North American Cenozoic mammal species durations in relation to species-level ecological factors, time of origination, and phylogenetic relationships. I find support for the ``survival of the unspecialized'' as a time-invariant generalization of trait-based extinction risk. Furthermore, I find that phylogenetic and temporal effects are both substantial factors associated with differences in species durations. Finally, I find that the estimated effects of these factors are partially incongruous with how these factors are correlated extinction risk of the extant species. This is consistent with how previous periods of background extinction have been poor predictors of mass extinction events.
+ Determining which biological traits influence differences in extinction risk is vital for understanding the differential diversification of life and for making predictions about species' vulnerability to anthropogenic impacts. Here I present a hierarchical Bayesian survival model of North American Cenozoic mammal species durations in relation to species-level ecological factors, time of origination, and phylogenetic relationships. I find support for the ``survival of the unspecialized'' as a time-invariant generalization of trait-based extinction risk. Furthermore, I find that phylogenetic and temporal effects are both substantial factors associated with differences in species durations. Finally, I find that the estimated effects of these factors are partially incongruous with how these factors are correlated with extinction risk of the extant species. This parallels previous observations that background extinction is a poor predictor of mass extinction events and suggests that attention should be focused on mass extinctions to gain insight into modern species loss.
 \end{abstract}
 
-\keywords{paleobiology | macroevolution | macroecology | extinction }
+\keywords{macroevolution | macroecology | extinction | paleobiology}
 
 %\abbreviations{}
 
 
 \dropcap{W}hy extinction risk varies among species remains one of the most fundamental questions in paleobiology and conservation biology \cite{Simpson1944,VanValen1973,Raup1994,Quental2013,Wagner2014b}. To address this issue, I test for similarities in associations between extinction risk and multiple species-level traits during times of background extinction and in the modern world; which traits have time-invariant effects on species duration; and whether extinction is age-independent. I approach these questions together by using a model of species duration whose parameter estimates act as direct tests of these questions. Cenozoic mammals are an ideal focus for this study because their fossil record is well sampled and well resolved both temporally and spatially, and because individual species ecology and taxonomic position are generally understood \cite{Simpson1944,Quental2013,Alroy2009,Liow2008,Smith2004,Tomiya2013,Marcot2014}. 
 
-Time-invariant factors are those that have a constant directional effect even if the magnitude varies. Because change in the magnitude of extinction risk is not necessarily the best indicator of a shift from background to mass extinction \cite{Wang2003}, it is better to look for changes in either the direction of selection, the loss of a selective pressure, or the appearance of novel selective pressures \cite{Jablonski1986}.
+Time-invariant factors are those that have a constant directional effect even if their magnitude varies. Because change in the magnitude of extinction risk is not necessarily the best indicator of a shift from background to mass extinction \cite{Wang2003}, it is better to look for changes in either the direction of selection, the loss of a selective pressure, or the appearance of novel selective pressures \cite{Jablonski1986}.
 
-The species-level traits studied here are bioprovince occupancy, body mass, and both dietary and locomotor categories. These traits are related to aspects of a species' adaptive zone such as population density, expected range size, potential prey, and dispersal ability \cite{Smith2004,Jernvall2004}. It is expected that species with larger geographic ranges have lower extinction rates than species with smaller geographic ranges \cite{Jablonski1986,Roy2009c}; however, how traits more directly related to species--environment interactions may affect species extinction risk is more nebulous.
+The species-level traits studied here are bioprovince occupancy, body mass, and dietary and locomotor categories. These traits are related to aspects of a species' adaptive zone such as population density, expected range size, potential prey, and dispersal ability \cite{Smith2004,Jernvall2004} and are a combination of aggregate and emergent traits \cite{Jablonski2008a}. It is expected that species with larger geographic ranges have lower extinction rates than species with smaller geographic ranges \cite{Jablonski1986,Roy2009c}; however, how traits more directly related to species--environment interactions may affect species extinction risk is more nebulous.
 
-Body size is a complex trait related to many life history characteristics. There are three general hypotheses of how body size may effect extinction risk: 1) positive effect where an increase in body size causes an increase in extinction risk, potentially due to associated decrease in reproductive rate or similar \cite{Liow2008,Liow2009}; 2) negative effect where an increase in body size causes a decrease in extinction risk because of an expected positive relationship between body size and geographic range; and 3) no effect of body size on extinction risk \cite{Tomiya2013}. 
+Body size is a complex trait related to many life history characteristics. There are three general hypotheses of how body size may effect extinction risk: 1) positive effect where an increase in body size causes an increase in extinction risk, potentially due to associated decrease in reproductive rate or other similar life history traits \cite{Liow2008,Liow2009}; 2) negative effect where an increase in body size causes a decrease in extinction risk because of an expected positive relationship between body size and geographic range; and 3) no effect of body size on extinction risk \cite{Tomiya2013}. 
 
 The strongest expectation for the effects of dietary category on extinction risk is that omnivores will have the lowest extinction risk of all species. This expectation is based on the long standing ``survival of the unspecialized'' hypothesis where more generalist species (e.g. omnivores) have greater survival than specialist species (e.g. carnivores/herbivores) \cite{Simpson1944,Liow2004a}. It has also been observed that both carnivores and herbivores have greater diversification rates than omnivores, with herbivores diversifying faster than carnivores \cite{Price2012}. How this result translates into differences in extinction risk is currently unknown \cite{Rabosky2010a}. In modern taxa, higher trophic levels (e.g. carnivores versus herbivores) have been associated with greater extinction risk, most likely because of human extermination of top predators \cite{Liow2009,Purvis2000a}. 
 
 Similarly, there are few expectations of how locomotor category may effect extinction risk. During the Cenozoic, there was a shift at the Paleogene/Neogene boundary from predominately closed to predominately open environments \cite{Blois2009,Janis1993a}. Based on this observation, a prediction is that arboreal taxa will have the greatest extinction risk of all, with both scansorial and ground dwelling taxa having lower extinction risks. 
 
-I use a hierarchical Bayesian survival model of species duration as predicted by the covariates of interest along with species' temporal and phylogenetic context. Species duration, in 2 My bins, was modeled as realizations from either an exponential or Weibull distribution-based hierarchical model \cite{Gelman2013d}. The exponential distribution corresponds to the Law of Constant Extinction, which states that extinction is age-independent \cite{VanValen1973}. Note that the exponential is a special case of the Weibull when its shape parameter, $\alpha$, is 1. The Weibull distribution allows for extinction to be taxon-age dependent, where values of $\alpha$ greater than 1 corresponding to increasing risk with age and values less than 1 corresponding to decreasing risk with age. Origination cohort and phylogenetic position were modeled as independent effects. Phylogenetic effect was modeled assuming species duration may have evolved via a Brownian motion-like process \cite{Lynch1991,Housworth2004}. The results from the Weibull model are detailed here because this model has a better fit to the data the exponential (Weibull WAIC 6140.37, exponential WAIC 16697.35; Fig.~\ref{fig:ppc_surv}, S1, S2).
+I use a hierarchical Bayesian survival model of species duration as predicted by the covariates of interest along with species' temporal and phylogenetic context. Species duration, in 2 My bins, was modeled as realizations from either an exponential or Weibull distribution-based hierarchical model \cite{Gelman2013d}. The exponential distribution corresponds to the Law of Constant Extinction, which states that extinction is age-independent \cite{VanValen1973}. Note that the exponential is a special case of the Weibull when its shape parameter, $\alpha$, is 1. The Weibull distribution allows for extinction to be taxon-age dependent, where values of $\alpha$ greater than 1 corresponds to increasing risk with age and values less than 1 corresponds to decreasing risk with age. Origination cohort and phylogenetic position were modeled as independent effects. Phylogenetic effect was modeled assuming species duration may have evolved via a Brownian motion-like process \cite{Lynch1991,Housworth2004}. The results from the Weibull model are detailed here because this model has a better fit to the data the exponential (Weibull WAIC 6140.37, exponential WAIC 16697.35; Fig.~\ref{fig:ppc_surv}, S1, S2).
 
 % show results from exponential model results along side weibull results
 %   make sure the signs are the same for exponential and weibull?
@@ -99,13 +99,13 @@ The estimates for the individual cohort effects show a weak pattern of greater e
 Interestingly, the shift from older cohorts with a higher extinction risk to younger cohorts with lower extinction risk is approximately at the Paleogene--Neogene boundary. Given the association with arboreality and increased extinction risk (Fig.~\ref{fig:trait_est}), the decrease in expected extinction risk over time might relate to the preferential loss of arboreal taxa over the Cenozoic. However, because the model used here does not allow for time-varying effects, I cannot identify whether this boundary is associated with a shift in the direction or magnitude of the expected effect of arboreality on extinction risk.
 
 \section{Discussion}
-My results indicate that Cenozoic North American mammal ``generalists'' are expected to have a lower extinction risk than ``specialists.'' This implies that the diversification of specialized taxa would have required either a driven trend away from generality \cite{McShea1994a} or an increase in speciation rate relative to extinction rate \cite{Stanley1975}. This requires that specialist traits should somehow increase or be associated with an increases in speciation rate, perhaps via niche partitioning or changes in habitat heterogeneity. For example, descendant species of omnivores many more finely divide available prey items or arboreal taxa may increase in both extinction and speciation rates via increases in habitat heterogeneity. Possible evident to support this hypothesis would be to demonstrate differences in speciation rate associated with those traits analyzed here or other similar traits.
+My results indicate that Cenozoic North American mammal ``generalists'' are expected to have a lower extinction risk than ``specialists.'' This implies that the diversification of specialized taxa would have required either a driven trend away from generality \cite{McShea1994a} or an increase in speciation rate relative to extinction rate \cite{Stanley1975}. This requires that specialist traits should somehow increase or be associated with increases in speciation rate, perhaps via niche partitioning or changes in habitat heterogeneity. For example, descendant species of omnivores many divide available prey items more finely or arboreal taxa may increase in both extinction and speciation rates via increases in habitat heterogeneity. Possible evidence to support this hypothesis would be to demonstrate differences in speciation rate associated with those traits analyzed here or other similar traits.
 
 When these results are compared to factors contributing to increased extinction risk in extant mammals, there are some incongruencies. As expected, large range size is consistently associated with lower extinction risk in the modern world \cite{Liow2009,Purvis2000a,Fritz2009,Fritz2010b}. While my analysis found body size to have almost no time-invariant effect on extinction risk, in extant mammals this is not necessarily the case as increased body size is associated with increased extinction risk \cite{Liow2009,Purvis2000a}. However, this pattern is partially clade dependent \cite{Fritz2009}. As stated earlier, higher trophic levels have been found to be associated with greater extinction risk in extant mammals \cite{Liow2009,Purvis2000a}. In contrast, I found that omnivores and carnivores have a lower expected extinction risk than either insectivores or herbivores (Fig.~\ref{fig:trait_est}). Finally, phylogeny has been found to be a good predictor of differences in extinction risk in extant mammals as certain clades are at much higher risks than others \cite{Fritz2010b}. This effect seems much greater in the Recent than for the whole Cenozoic, implying that current extinction risk is more phylogenetically concentrated than during times of background extinction levels during the Cenozoic.
 
 Whether these incongruities are within the standard range of time-variant effects is unknown, though my comparisons do imply that current processes are different from those studied here. However, this is not a model of what makes taxa vulnerable during mass extinctions and that may account for these incongruities, assuming mass extinctions are qualitatively different than background extinction \cite{Jablonski1986}. These results would also be inapplicable if the current biodiversity crisis is qualitatively different from either background or mass extinction as preserved in the fossil record.
 
-By modeling how different ecologies and historical factors effect a species' expected extinction risk, it is possible to better understand what processes may have driven the resulting pattern of selection (i.e. diversity). This analysis finds support for the ``survival of the unspecialized'' hypothesis \cite{Simpson1944,Liow2004a} as a time-invariant generalization about extinction risk. I also find that there are substantial effects of both cohort and phylogeny on extinction risk, which supports the idea that the decrease in extinction risk \cite{Raup1982a} over time has both temporal and phylogenetic components. Additionally, I found evidence of increasing extinction risk with species age, the cause of which is unknown. These results show that, like prior mass extinction events in the fossil record, the current biodiversity crisis is qualitatively different from the previous period of background extinction in the fossil record \cite{Jablonski1986}.
+By modeling how different ecologies and historical factors effect a species' expected extinction risk, it is possible to better understand what processes may have driven the resulting pattern of selection (i.e. diversity) while also providing a baseline for evaluating the current biodiversity crisis. This analysis finds support for the ``survival of the unspecialized'' hypothesis \cite{Simpson1944,Liow2004a} as a time-invariant generalization about extinction risk. I also find that there are substantial effects of both cohort and phylogeny on extinction risk, which supports the idea that the decrease in extinction risk \cite{Raup1982a} over time has both temporal and phylogenetic components. Additionally, I found evidence of increasing extinction risk with species age, the cause of which is unknown. These results show that, like prior mass extinction events in the fossil record, the current biodiversity crisis is qualitatively different from the previous period of background extinction in the fossil record \cite{Jablonski1986}.
 
 
 \begin{materials}
@@ -116,7 +116,7 @@ Species dietary and locomotor category assignments were done using the assignmen
 
 All individual fossil occurrences were assigned to 2 My bins ranging through the entire Cenozoic. Taxon duration was measured as the number of 2 My bins from the first occurrence to the last occurrence, inclusive. This bin size was chosen because it approximately reflects the resolution of the North American Cenozoic mammal fossil record \cite{Alroy2009,Alroy2000g,Marcot2014}. Species originating in the youngest cohort, 0-2 My, were excluded from analysis because every species duration would be both left and right censored, which is illogical.
 
-Species body size estimates in grams were sourced from a large selection of primary literature and database compilations. Databases used include the PBDB, PanTHERIA \cite{Jones2009c}, and the Neogene Old World Mammal database (NOW; http://www.helsinki.fi/science/now/). Major sources of additional compiled body size estimates include \cite{Tomiya2013,Brook2004a,Freudenthal2013,McKenna2011,Raia2012f,Smith2004c}. These were then supplemented with an additional literature search to try and fill in the remaining gaps. In many cases, species body mass was estimated using various published regression equations based on tooth or skull measurements (Supplementary Table S2). If multiple specimens were measured, I used the mean of specimen measures as the species mean. See Supplemental Dataset 1 for a complete list of mass estimates and sources.
+Species body size estimates in grams were sourced from a large selection of primary literature and database compilations. Databases used include the PBDB, PanTHERIA \cite{Jones2009c}, and the Neogene Old World Mammal database (NOW; http://www.helsinki.fi/science/now/). Major sources of additional compiled body size estimates include \cite{Tomiya2013,Brook2004a,Freudenthal2013,McKenna2011,Raia2012f,Smith2004c}. These were then supplemented with an additional literature search to try and fill in the remaining gaps. In many cases, species body mass was estimated using various published regression equations based on tooth or skull measurements (Supplementary Table S2). If multiple specimens were measured, I used the mean of specimen measures as the species mean. See Dataset S1 for a complete list of mass estimates and sources.
 
 \subsection{Biogeographic network}
 Species geographic extent was measured as the mean of the relative number of bioprovinces occupied by a species for each 2 My bin the species was present. Bioprovinces were identified using a network-theoretic approach that has previously been applied to paleontological data \cite{Sidor2013,Vilhena2013}. This approach relies on defining a biogeographic bipartite network of taxa and localities. In this study, taxa were defined as species and localities were grid cells from a regular lattice on a global equal-area cylinder map projection. The regular lattice was defined as a 70 x 34 global grid where each cell corresponds to approximately 250000 km\(^{2}\). An advantage of this approach is that this approach reduces to occupancy when all localities are independent and to a single bioprovince when all localities are identical.
@@ -153,6 +153,27 @@ The choice of the exponential distribution corresponds directly to the Law of Co
 
 The current sampling statement (Eq.~\ref{eq:exp}) assumes that all species share the same rate parameter with no variation. To allow for variation in \(\lambda\) associated with relevant covariate information like species body size, \(\lambda\) is reparameterized as \(\lambda_{i} = \exp(\sum \beta^{T}\mathbf{X}_{i})\) with \(i\) indexing a given observation and its covariates, \(\beta\) is a vector of regression coefficients, and \(\mathbf{X}\) is a matrix of covariates. This is a standard regression approach, where one column of \(\mathbf{X}\) is all 1-s and its corresponding \(\beta\) coefficient is the intercept. 
 
+\(\mathbf{X}\) is an \(n \times K\) matrix of species-level covariates. Three of the covariates of interest are the logit of mean relative occupancy, and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. For example, the difference in effect of arboreality versus scansoriality on extinction risk, given that arboreality is the reference category, is the coefficient for the scansorial indicator variable as that is the difference between between the effect of arboreality (the intercept \(\beta_{0}\)) and scansoriality (the intercept + scansorial effect \(\beta_{s}\)); Fig. \ref{fig:trait_est}). Finally, a vector of 1-s was included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
+
+\(\beta\) is the vector of regression coefficients. The intercept term was given a weak normal prior, \(\beta_{0} \sim \mathcal{N}(0, 10)\) while all of these other coefficients were slightly more informative priors, e.g. \(\beta_{mass} \sim \mathcal{N}(0, 5)\). These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates \cite{Gelman2007}.
+
+Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This is accomplished by subtracting the mean of the covariate from all values and then dividing by the standard deviation, resulting in a variable with mean of zero and a standard deviation of one. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation in the covariate \cite{Schielzeth2010}. Additionally, this makes the intercept directly interpretable as the estimate of mean (transformed) \(\sigma\) (Eq.~\ref{eq:reg}). However, because the expected standard deviation for a random binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \cite{Gelman2008}. 
+
+Origination cohort is defined as the group of species which all originated during the same 2 My temporal bin. Because the most recent temporal bin, 0-2 My, was excluded, there are 32 total cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual and statistical unification between dynamic and cohort survival analysis in paleontology \cite{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of compromise between these two end members. The choice of the half-Cauchy prior for \(\sigma_{c}\) follows \cite{Gelman2006a}.
+\begin{align*}
+  \eta_{j} &\sim \mathcal{N}(0, \sigma_{c}) \\
+  \sigma_{c} &\sim \mathrm{C}^{+}(0, 2.5)
+\end{align*}
+
+The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect where each observation, \(i\), is modeled as a multivariate normal, \(h\), where the covariance matrix \(\Sigma\) is known up to a constant, \(\sigma_{p}^{2}\) \cite{Lynch1991,Housworth2004}. This is written
+\begin{align*}
+  h &\sim \mathrm{MVN}(0, \mathbf{\Sigma}) \\
+  \mathbf{\Sigma} &= \sigma_{p}^{2} \mathbf{V}_{phy} \\
+  \sigma_{p} &\sim \mathrm{C}^{+}(0, 2.5).
+\end{align*}
+
+\(\mathbf{V}_{phy}\) is the phylogenetic covariance matrix defined as an \(n \times n\) matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\). \(\sigma_{p}\) was given a weakly informative half-Cauchy hyperprior. Note that because the phylogeny used here is primarily based on taxonomy, estimates of \(\sigma_{p}\) represent minimum estimates \cite{Lynch1991,Housworth2004}. Improved phylogenetic estimates of all fossil Cenozoic mammals would greatly improve this estimate.
+
 To relax the assumption of age-independent extinction of the Law of Constant Extinction, the Weibull distribution is substituted for the exponential \cite{Klein2003}. The Weibull distribution has a shape parameter \(\alpha\) and scale parameter \(\sigma\). Conceptually, \(\sigma\) is the inverse of \(\lambda\). \(\alpha\) modifies the impact of taxon age on extinction risk. When \(\alpha > 1\) then \(h(t)\) is a monotonically increasing function, but when \(\alpha < 1\) then \(h(t)\) is a monotonically decreasing function. When \(\alpha = 1\) then the Weibull distribution is equivalent to the exponential.
 
 The Weibull distribution and sampling statement were defined
@@ -173,7 +194,7 @@ To allow for \(\sigma\) to vary with a given observation's covariate information
   \label{eq:reg}
 \end{equation}
 
-Given the above, the survival model was then fit in a Bayesian context using both exponential and Weibull distributions. The Weibull's \(\alpha\) parameter was assumed constant across species, which is standard practice in survival analysis \cite{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy (C\(^{+}\)) prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq.~\ref{eq:reg}). This was further expanded (Eq.~\ref{eq:wei_reg_ext}) to allow for two hierarchical factors as discussed below. This is written
+Given the above, the survival model was then fit in a Bayesian context using both exponential and Weibull distributions. The Weibull's \(\alpha\) parameter was assumed constant across species, which is standard practice in survival analysis \cite{Klein2003}. \(\alpha\) was given a weakly informative half-Cauchy (C\(^{+}\)) prior. \(\sigma\) was reparameterized as an exponentiated regression model (Eq.~\ref{eq:reg}). This was further expanded (Eq.~\ref{eq:wei_reg_ext}) to allow for two hierarchical factors as discussed above. This is written
 \begin{equation}
   \sigma_{i} = \exp\left(\frac{-(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})}{\alpha}\right)
   \label{eq:wei_reg_ext}
@@ -183,29 +204,6 @@ where equivalent statement for the exponential distribution is defined
   \lambda_{i} = \exp\left(h_{i} + \eta_{j[i]} + \sum \beta^{T} \mathbf{X}_{i})\right).
   \label{eq:exp_reg_ext}
 \end{equation}
-
-\(\mathbf{X}\) is an \(n \times K\) matrix of species-level covariates. Three of the covariates of interest are the logit of mean relative occupancy, and the logarithm of body size (g). The discrete covariate index variables of dietary and locomotor category were transformed into \(n \times (k - 1)\) matrices where each column is an indicator variable (0/1) for that species's category, \(k\) being the number of categories of the index variable (3 and 4, respectively). Only \(k - 1\) indicator variables are necessary as the intercept takes on the remaining value. For example, the difference in effect of arboreality versus scansoriality on extinction risk, given that arboreality is the reference category, is the coefficient for the scansorial indicator variable as that is the difference between between the effect of arboreality (the intercept) and scansoriality (the intercept + scansorial effect; Fig. \ref{fig:trait_est}). 
-
-Finally, a vector of 1-s was included in the matrix \(\mathbf{X}\) whose corresponding \(\beta\) coefficient is the intercept, making \(K\) equal eight.
-
-\(\beta\) is the vector of regression coefficients. The intercept term was given a weak normal prior, \(\beta_{0} \sim \mathcal{N}(0, 10)\) while all of these other coefficients were slightly more informative priors, e.g. \(\beta_{mass} \sim \mathcal{N}(0, 5)\). These priors were chosen because it is expected that the effect size of each variable on duration will be small, as is generally the case with binary covariates \cite{Gelman2007}. %In all cases, posterior inference was not effected by changes to this choice of prior. Do I have proof?
-
-Regression coefficients are not directly comparable without first standardizing the input variables to have equal standard deviations. This is accomplished by subtracting the mean of the covariate from all values and then dividing by the standard deviation, resulting in a variable with mean of zero and a standard deviation of one. This linear transform greatly improves the interpretability of the coefficients as expected change in mean duration given a difference of one standard deviation in the covariate \cite{Schielzeth2010}. Additionally, this makes the intercept directly interpretable as the estimate of mean (transformed) \(\sigma\) (Eq.~\ref{eq:reg}). However, because the expected standard deviation for a random binary variable is 0.5, in order to make comparisons between the binary and continuous variables, the continuous inputs were divided by twice their standard deviation \cite{Gelman2008}. 
-
-Origination cohort is defined as the group of species which all originated during the same 2 My temporal bin. Because the most recent temporal bin, 0-2 My, was excluded, there are 32 total cohorts. The effect of origination cohort \(j\) was modeled with each group being a sample from a common cohort effect, \(\eta\), which was considered normally distributed with mean 0, and standard deviation \(\sigma_{c}\). The value of \(\sigma_{c}\) was then estimated from the data itself, corresponding to the amount of pooling in the individual estimates of \(\eta_{j}\). This approach is a conceptual and statistical unification between dynamic and cohort survival analysis in paleontology \cite{Foote1988,Raup1978,Raup1975,VanValen1979,Baumiller1993}, with \(\sigma_{c}\) acting as a measure of compromise between these two end members. The choice of the half-Cauchy prior for \(\sigma_{c}\) follows \cite{Gelman2006a}.
-\begin{align*}
-  \eta_{j} &\sim \mathcal{N}(0, \sigma_{c}) \\
-  \sigma_{c} &\sim \mathrm{C}^{+}(0, 2.5)
-\end{align*}
-
-The impact of shared evolutionary history, or phylogeny, was modeling as an individual effect where each observation, \(i\), is modeled as a multivariate normal, \(h\), where the covariance matrix \(\Sigma\) is known up to a constant, \(\sigma_{p}^{2}\) \cite{Lynch1991,Housworth2004}. This is written
-\begin{align*}
-  h &\sim \mathrm{MVN}(0, \mathbf{\Sigma}) \\
-  \mathbf{\Sigma} &= \sigma_{p}^{2} \mathbf{V}_{phy} \\
-  \sigma_{p} &\sim \mathrm{C}^{+}(0, 2.5).
-\end{align*}
-
-\(\mathbf{V}_{phy}\) is the phylogenetic covariance matrix defined as an \(n \times n\) matrix where the diagonal elements are the distance from root to tip, in branch length, for each observation and the off-diagonal elements are the amount of shared history, measured in branch length, between observations \(i\) and \(j\). \(\sigma_{p}\) was given a weakly informative half-Cauchy hyperprior. Note that because the phylogeny used here is primarily based on taxonomy, estimates of \(\sigma_{p}\) represent minimum estimates \cite{Lynch1991,Housworth2004}. Improved phylogenetic estimates of all fossil Cenozoic mammals would greatly improve this estimate.
 
 An important part of survival analysis is the inclusion of censored observations where the failure time has not been observed \cite{Ibrahim2001,Klein2003}. The most common censored observation is right censored, where the point of extinction had not yet been observed in the period of study, such as taxa that are still present in the most recent time bin (0-2 My). Left censored observations, on the other hand, correspond to observations that went extinct any time between 0 and some known point. To account for this uncertainty, the probability of a left censored observation is found by integrating over all possible durations between 0 and 1 time bin. For an explanation of how censored observations are included in the sampling statement, please see the Supplementary information.
 
@@ -219,76 +217,441 @@ The most basic assessment of model fit is that simulated data generated given th
 
 The exponential and Weibull models were compared for out-of-sample predictive accuracy using the widely-applicable information criterion (WAIC) \cite{Watanabe2010a}. Because the Weibull model reduces to the exponential model when \(\alpha = 0\), our interest is not in choosing between these models. Instead comparison of WAIC values is useful for better understanding the effect of model complexity on out-of-sample predictive accuracy. An explanation of how WAIC is calculated is presented in the Supplementary information following the recommended ``WAIC 2'' formulation \cite{Gelman2013d}.
 
-There are three different variance components in this model: sample component, cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). The sample variance, \(\sigma_{y}^{2}\), is similar to the residual variance from a normal linear regression. Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. However, the Weibull based model used here (Eq.~\ref{eq:weibull}) does not include an estimate of the sample component. Partitioning the variance between these three components was approximated via a simulation approach modified from \cite{Goldstein2002}. For explanation of this method, please see Supplementary information.
+There are three different variance components in this model: sample component, cohort \(\sigma_{c}^{2}\), and phylogenetic \(\sigma_{p}^{2}\). Partitioning the variance between these sources allows the relative amount of unexplained variance of the sample to be compared. The sample component is similar to the residual variance from a normal linear regression. However, the Weibull based model used here (Eq.~\ref{eq:weibull}) does not include an estimate of the variance similar to the squared scale term of the a Normal distribution. Instead, the sample component was approximated via a simulation approach modified from \cite{Goldstein2002}. For explanation of this method, please see Supplementary information.
 
-I used variance partitioning coefficients (VPC) to estimate the relative importance of the different variance components \cite{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \cite{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Additionally, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
+I used variance partitioning coefficients (VPC) to estimate the relative importance of the different variance components \cite{Gelman2007}. Phylogenetic heritability, \(h_{p}^{2}\) \cite{Lynch1991,Housworth2004}, is identical to the VPC of the phylogenetic effect. Phylogenetic heritability is a measure of how shared evolutionary history impacts differences in individual species trait values (e.g. duration). This is a broad sense ``heritability'' as it combines both genetic inheritance and other, non-genetic shared history factors. Importantly, because phylogenetic effect was estimated using a principally taxonomy based tree the estimates derived here can be considered minimum estimates of the phylogenetic effect.
 \end{materials}
 
 \begin{acknowledgments}
 P.D.S would like to thank M. Foote, K. Angielczyk, R. Ree, P.D. Polly for discussion; N. Pierrehumbert, E. Sander, L. Southcott for draft comments; and J. Alroy and the Fossilworks/Paleobiology Database for data accumulation, management, and availability. This is Paleobiology Database publication number XXX.
 \end{acknowledgments}
 
-\bibliography{newbib,packages}
+
+
+\begin{thebibliography}{10}
+
+\bibitem{Simpson1944}
+Simpson GG
+\newblock (1944) \emph{{Tempo and Mode in Evolution}}
+\newblock (Columbia University Press, New York).
+
+\bibitem{VanValen1973}
+{Van Valen} L
+\newblock (1973) {A new evolutionary law}.
+\newblock \emph{Evolutionary Theory} 1:1--30.
+
+\bibitem{Raup1994}
+Raup DM
+\newblock (1994) {The role of extinction in evolution}.
+\newblock \emph{Proceedings of the National Academy of Sciences} 91:6758--6763.
+
+\bibitem{Quental2013}
+Quental TB, Marshall CR
+\newblock (2013) {How the Red Queen Drives Terrestrial Mammals to Extinction}.
+\newblock \emph{Science} 341:290--292.
+
+\bibitem{Wagner2014b}
+Wagner PJ, Estabrook GF
+\newblock (2014) {Trait-based diversification shifts reflect differential
+  extinction among fossil taxa}.
+\newblock \emph{Proceedings of the National Academy of Sciences}
+  111:16419--16424.
+
+\bibitem{Alroy2009}
+Alroy J
+\newblock (2009) in \emph{Speciation and patterns of diversity}, eds{} Butlin
+  RK, Bridle JR, Schluter D
+\newblock (Cambridge University Press, Cambridge), pp 302--323.
+
+\bibitem{Liow2008}
+Liow LH, {et~al.}
+\newblock (2008) {Higher origination and extinction rates in larger mammals}.
+\newblock \emph{Proceedings of the National Academy of Sciences} 105:6097.
+
+\bibitem{Smith2004}
+Smith FA, Brown J, Haskell J, Lyons S
+\newblock (2004) {Similarity of mammalian body size across the taxonomic
+  hierarchy and across space and time}.
+\newblock \emph{The American Naturalist} 163:672--691.
+
+\bibitem{Tomiya2013}
+Tomiya S
+\newblock (2013) {Body Size and Extinction Risk in Terrestrial Mammals Above
+  the Species Level}.
+\newblock \emph{The American Naturalist} 182:196--214.
+
+\bibitem{Marcot2014}
+Marcot JD
+\newblock (2014) {The fossil record and macroevolutionary history of North
+  American ungulate ungulate mammals: standardizing variation in intensity and
+  geography of sampling}.
+\newblock \emph{Paleobiology} 40:237--254.
+
+\bibitem{Wang2003}
+Wang SC
+\newblock (2003) {On the continuity of background and mass extinction}.
+\newblock \emph{Paleobiology} 29:455--467.
+
+\bibitem{Jablonski1986}
+Jablonski D
+\newblock (1986) {Background and mass extincitons: the alternation of
+  macroevolutionary regimes}.
+\newblock \emph{Science} 231:129--133.
+
+\bibitem{Jernvall2004}
+Jernvall J, Fortelius M
+\newblock (2004) {Maintenance of trophic structure in fossil mammal
+  communities: site occupancy and taxon resilience.}
+\newblock \emph{American Naturalist} 164:614--624.
+
+\bibitem{Jablonski2008a}
+Jablonski D
+\newblock (2008) {Species Selection: Theory and Data}.
+\newblock \emph{Annual Review of Ecology, Evolution, and Systematics}
+  39:501--524.
+
+\bibitem{Roy2009c}
+Roy K, Hunt G, Jablonski D, Krug AZ, Valentine JW
+\newblock (2009) {A macroevolutionary perspective on species range limits.}
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences}
+  276:1485--1493.
+
+\bibitem{Liow2009}
+Liow LH, Fortelius M, Lintulaakso K, Mannila H, Stenseth NC
+\newblock (2009) {Lower Extinction Risk in Sleep‐or‐Hide Mammals}.
+\newblock \emph{The American Naturalist} 173:264--272.
+
+\bibitem{Liow2004a}
+Liow LH
+\newblock (2004) {A test of Simpson's "rule of the survival of the relatively
+  unspecialized" using fossil crinoids.}
+\newblock \emph{The American naturalist} 164:431--43.
+
+\bibitem{Price2012}
+Price SA, Hopkins SSB, Smith KK, Roth VL
+\newblock (2012) {Tempo of trophic evolution and its impact on mammalian
+  diversification.}
+\newblock \emph{Proceedings of the National Academy of Sciences} 109:7008--12.
+
+\bibitem{Rabosky2010a}
+Rabosky DL
+\newblock (2010) {Extinction rates should not be estimated from molecular
+  phylogenies}.
+\newblock \emph{Evolution} 64:1816--24.
+
+\bibitem{Purvis2000a}
+Purvis A, Gittleman JL, Cowlishaw G, Mace GM
+\newblock (2000) {Predicting extinction risk in declining species.}
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences}
+  267:1947--52.
+
+\bibitem{Blois2009}
+Blois JL, Hadly EA
+\newblock (2009) {Mammalian Response to Cenozoic Climatic Change}.
+\newblock \emph{Annual Review of Earth and Planetary Sciences} 37:181--208.
+
+\bibitem{Janis1993a}
+Janis CM
+\newblock (1993) {Tertiary mammal evolution in the context of changing
+  climates, vegetation, and tectonic events}.
+\newblock \emph{Annual Review of Ecology and Systematics} 24:467--500.
+
+\bibitem{Gelman2013d}
+Gelman A, {et~al.}
+\newblock (2013) \emph{{Bayesian data analysis}}
+\newblock (Chapman and Hall, Boca Raton, FL), 3 edition, p 675.
+
+\bibitem{Lynch1991}
+Lynch M
+\newblock (1991) {Methods for the analysis of comparative data in evolutionary
+  biology}.
+\newblock \emph{Evolution} 45:1065--1080.
+
+\bibitem{Housworth2004}
+Housworth EA, Martins P, Lynch M
+\newblock (2004) {The Phylogenetic Mixed Model}.
+\newblock \emph{The American Naturalist} 163:84--96.
+
+\bibitem{Agusti2013}
+Agust\'{\i} J, Cabrera L, Garc\'{e}s M
+\newblock (2013) {The Vallesian Mammal Turnover: A Late Miocene record of
+  decoupled land-ocean evolution}.
+\newblock \emph{Geobios} 46:151--157.
+
+\bibitem{Moya-Sola2005}
+Moy\`{a}-Sol\`{a} ICVS, Agust\'{\i} J, Kohler M
+\newblock (2005) in \emph{Migration of Organisms: Climate, geography, ecology},
+  ed{} Elewa AMT
+\newblock (Springer, Berlin), pp 247--300.
+
+\bibitem{Goldstein2002}
+Goldstein H, Browne W, Rasbash J
+\newblock (2002) {Partitioning variation in multilevel models}.
+\newblock \emph{Understanding Statistics} 1:1--12.
+
+\bibitem{Raup1982a}
+Raup DM, Sepkoski JJ
+\newblock (1982) {Mass Extinctions in the Marine Fossil Record}.
+\newblock \emph{Science} 215:1501--1503.
+
+\bibitem{Foote2003}
+Foote M
+\newblock (2003) {Origination and extinction through the Phanerozoic: a new
+  approach}.
+\newblock \emph{Journal of Geology} 111:125--148.
+
+\bibitem{Alroy2010c}
+Alroy J
+\newblock (2010) in \emph{Quantitative Methods in Paleobiology}, eds{} Alroy J,
+  Hunt G
+\newblock (The Paleontological Society), pp 55--80.
+
+\bibitem{Alroy2000g}
+Alroy J, Koch PL, Zachos JC
+\newblock (2000) {Global climate change and North American mammalian
+  evolution}.
+\newblock \emph{Paleobiology} 26:259--288.
+
+\bibitem{McShea1994a}
+McShea DW
+\newblock (1994) {Mechanicsms of large--scale evolutionary trends}.
+\newblock \emph{Evolution} 48:1747--1763.
+
+\bibitem{Stanley1975}
+Stanley SM
+\newblock (1975) {A theory of evolution above the species level}.
+\newblock \emph{Proc. Natl. Acad. Sci. USA} 72:646.
+
+\bibitem{Fritz2009}
+Fritz SA, Bininda-Emonds ORP, Purvis A
+\newblock (2009) {Geographical variation in predictors of mammalian extinction
+  risk: big is bad, but only in the tropics.}
+\newblock \emph{Ecology Letters} 12:538--49.
+
+\bibitem{Fritz2010b}
+Fritz SA, Purvis A
+\newblock (2010) {Selectivity in mammalian extinction risk and threat types: a
+  new measure of phylogenetic signal strength in binary traits.}
+\newblock \emph{Conservation Biology} 24:1042--51.
+
+\bibitem{Jones2009c}
+Jones KE, {et~al.}
+\newblock (2009) {PanTHERIA : a species-level database of life history ,
+  ecology , and geography of extant and recently extinct mammals}.
+\newblock \emph{Ecology} 90:2648.
+
+\bibitem{Brook2004a}
+Brook BW, Bowman DMJS
+\newblock (2004) {The uncertain blitzkrieg of Pleistocene megafauna}.
+\newblock \emph{Journal of Biogeography} 31:517--523.
+
+\bibitem{Freudenthal2013}
+Freudenthal M, Mart\'{\i}n-Su\'{a}rez E
+\newblock (2013) {Estimating body mass of fossil rodents}.
+\newblock \emph{Scripta Geologica} 145:1--130.
+
+\bibitem{McKenna2011}
+McKenna RT
+\newblock (2011) Masters (Portland State University).
+
+\bibitem{Raia2012f}
+Raia P, Carotenuto F, Passaro F, Fulgione D, Fortelius M
+\newblock (2012) {Ecological specialization in fossil mammals explains Cope's
+  rule.}
+\newblock \emph{The American naturalist} 179:328--37.
+
+\bibitem{Smith2004c}
+Smith FA, {et~al.}
+\newblock (2004) {Similarity of Mammalian Body Size across the Taxonomic
+  Hierarchy and across Space and Time}.
+\newblock \emph{The American Naturalist} 163:672--691.
+
+\bibitem{Sidor2013}
+Sidor CA, {et~al.}
+\newblock (2013) {Provincialization of terrestrial faunas following the
+  end-Permian mass extinction.}
+\newblock \emph{Proceedings of the National Academy of Sciences} 110:8129--33.
+
+\bibitem{Vilhena2013}
+Vilhena DA, {et~al.}
+\newblock (2013) {Bivalve network reveals latitudinal selectivity gradient at
+  the end-Cretaceous mass extinction.}
+\newblock \emph{Scientific Reports} 3:1790.
+
+\bibitem{Rosvall2008}
+Rosvall M, Bergstrom CT
+\newblock (2008) {Maps of random walks on complex networks reveal community
+  structure.}
+\newblock \emph{Proceedings of the National Academy of Sciences} 105:1118--23.
+
+\bibitem{Rosvall2009a}
+Rosvall M, Axelsson D, Bergstrom C
+\newblock (2009) {The map equation}.
+\newblock \emph{The European Physical Journal Special Topics} 178:13--24.
+
+\bibitem{Vilhena2013b}
+Vilhena DA
+\newblock (2013) Ph.D. thesis (University of Washington).
+
+\bibitem{raster}
+Hijmans RJ
+\newblock (2015) \emph{raster: Geographic data analysis and modeling}
+\newblock R package version 2.3-24.
+
+\bibitem{csardi2006igraph}
+Csardi G, Nepusz T
+\newblock (2006) The igraph software package for complex network research.
+\newblock \emph{InterJournal} Complex Systems:1695.
+
+\bibitem{Bininda-Emonds2007}
+Bininda-Emonds ORP, {et~al.}
+\newblock (2007) {The delayed rise of present-day mammals}.
+\newblock \emph{Nature} 446:507--512.
+
+\bibitem{Klein2003}
+Klein JP, Moeschberger ML
+\newblock (2003) \emph{{Survival Analysis: Techniques for Censored and
+  Truncated Data}}
+\newblock (Springer, New York), 2nd edition.
+
+\bibitem{Gelman2007}
+Gelman A, Hill J
+\newblock (2007) \emph{{Data Analysis using Regression and
+  Multilevel/Hierarchical Models}}
+\newblock (Cambridge University Press, New York, NY), p 625.
+
+\bibitem{Schielzeth2010}
+Schielzeth H
+\newblock (2010) {Simple means to improve the interpretability of regression
+  coefficients}.
+\newblock \emph{Methods in Ecology and Evolution} 1:103--113.
+
+\bibitem{Gelman2008}
+Gelman A
+\newblock (2008) {Scaling regression inputs by dividing by two standard
+  deviations}.
+\newblock \emph{Statistics in Medicine} pp 2865--2873.
+
+\bibitem{Foote1988}
+Foote M
+\newblock (1988) {Survivorship analysis of Cambrian and Ordovician Trilobites}.
+\newblock \emph{Paleobiology} 14:258--271.
+
+\bibitem{Raup1978}
+Raup DM
+\newblock (1978) {Cohort Analysis of generic survivorship}.
+\newblock \emph{Paleobiology} 4:1--15.
+
+\bibitem{Raup1975}
+Raup DM
+\newblock (1975) {Taxonomic survivorship curves and Van Valen's Law}.
+\newblock \emph{Paleobiology} 1:82--96.
+
+\bibitem{VanValen1979}
+{Van Valen} L
+\newblock (1979) {Taxonomic survivorship curves}.
+\newblock \emph{Evolutionary Theory} 4:129--142.
+
+\bibitem{Baumiller1993}
+Baumiller TK
+\newblock (1993) {Survivorship analysis of Paleozoic Crinoidea: effect of
+  filter morphology on evolutionary rates}.
+\newblock \emph{Paleobiology} 19:304--321.
+
+\bibitem{Gelman2006a}
+Gelman A
+\newblock (2006) {Prior distributions for variance parameters in hierarchical
+  models}.
+\newblock \emph{Bayesian Analysis} 1:515--533.
+
+\bibitem{Ibrahim2001}
+Ibrahim JG, Chen MH, Sinha D
+\newblock (2001) \emph{{Bayesian Survival Analysis}}
+\newblock (Springer, New York), p 480.
+
+\bibitem{2014stan}
+{Stan Development Team}
+\newblock (2014) Stan: A c++ library for probability and sampling, version
+  2.5.0.
+
+\bibitem{Hoffman-Gelman:2011}
+Hoffman MD, Gelman A
+\newblock (2011) The no-{U}-turn sampler: Adaptively setting path lengths in
+  {H}amiltonian {M}onte {C}arlo.
+\newblock \emph{arXiv} 1111.
+
+\bibitem{Watanabe2010a}
+Watanabe S
+\newblock (2010) {Asymptotic Equivalence of Bayes Cross Validation and Widely
+  Applicable Information Criterion in Singular Learning Theory}.
+\newblock \emph{Journal of Machine Learning Research} 11:3571--3594.
+
+\end{thebibliography}
+
+
 
 \end{article}
 
+
+
 \begin{figure}[ht]
   \centering
-  \includegraphics{figure/survival_function}
+%  \includegraphics{figure/survival_function}
   \caption{Weibull-based model estimates (grey) from 1000 posterior predictive data sets of the empirical survival function (black). The survival function is the probability that a species with duration \(t\) will not have gone extinct. Simulated data sets were generated by drawing parameter values randomly from their estimated posteriors and using the observed covariate information to estimate durations for all the observed species.}
   \label{fig:ppc_surv}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \begin{subfigure}[b]{0.5\textwidth}
-    \caption{}
-    \includegraphics{figure/loco_diff_est}
-    \label{subfig:loco}
-  \end{subfigure}
-  \\
-  \begin{subfigure}[b]{0.5\textwidth}
-    \caption{}
-    \includegraphics{figure/diet_diff_est}
-    \label{subfig:diet}
-  \end{subfigure}
+%  \begin{subfigure}[b]{0.5\textwidth}
+%    \caption{}
+%    \includegraphics{figure/loco_diff_est}
+%    \label{subfig:loco}
+%  \end{subfigure}
+%  \\
+%  \begin{subfigure}[b]{0.5\textwidth}
+%    \caption{}
+%    \includegraphics{figure/diet_diff_est}
+%    \label{subfig:diet}
+%  \end{subfigure}
   \caption{Pairwise differences in effect of the locomotor (\textbf{A}) and dietary categories (\textbf{B}) on expected duration from 1000 samples from the posterior distribution. Comparisons of locomotor categories, from top to bottom (\textbf{A}), are: arboreal (\(\beta_{arb} = \beta_{0}\)) versus ground dwelling (\(\beta_{grd} = \beta_{0} + \beta_{g}\)), arboreal versus scansorial (\(\beta_{scn} = \beta_{0} + \beta_{s}\)), and ground dwelling versus scansorial. For dietary category, from top to bottom (\textbf{B}): carnivore (\(\beta_{crn} = \beta_{0}\)) versus herbivore (\(\beta_{hrb} = \beta_{0} + \beta_{h}\)), carnivore versus insectivore (\(\beta_{ist} = \beta_{0} + \beta_{i}\)), carnivore versus omnivore (\(\beta_{omn} = \beta_{0} + \beta_{o}\)), herbivore versus insectivore, herbivore versus omnivore, and insectivore versus omnivore. Negative values indicate that the first category is expected to have a greater duration than the second, while positive values indicate that the first category is expected to have a shorter duration.}
   \label{fig:trait_est}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figure/cohort_est}
+%  \includegraphics{figure/cohort_est}
   \caption{Summaries of posterior estimates of individual cohort effect depicted as medians and 80\% credible intervals. High values correspond to shorter species durations while lower values correspond to greater species durations compared to the mean duration. Lines are placed at the middle of the 2 My origination cohorts.}
   \label{fig:eff_cohort}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics{figure/variance_est}
+%  \includegraphics{figure/variance_est}
   \caption{Estimates of the variance partitioning coefficients for the three different sources of variance: species, cohort, and phylogeny. Higher values correspond to greater contribution to total observed variance. Each of the estimates is a distribution of 1000 approximating simulations due to the model's non-normally distributed errors.}
   \label{fig:vpc}
 \end{figure}
 
 \begin{table}[c]
   \centering
-  \begin{tabular}{ l l r r r r r r r r }
-    parameter & effect & mean & sd & 2.5\% & 25\% & 50\% & 75\% & 97.5\% & \(\hat{R}\) \\ 
-    \hline
-    \(\alpha\) & ``age'' & 1.29 & 0.03 & 1.23 & 1.27 & 1.29 & 1.31 & 1.36 & 1.00 \\ 
-    \(\beta_{0}\) & arboreal/carnivore & -0.78 & 0.14 & -1.05 & -0.87 & -0.78 & -0.68 & -0.51 & 1.00 \\ 
-    \(\beta_{o}\) & occupancy & -0.53 & 0.08 & -0.69 & -0.59 & -0.53 & -0.48 & -0.38 & 1.00 \\ 
-    \(\beta_{size}\) & body size & -0.05 & 0.05 & -0.14 & -0.08 & -0.05 & -0.01 & 0.05 & 1.00 \\ 
-    \(\beta_{g}\) & ground dwelling & -0.28 & 0.10 & -0.47 & -0.34 & -0.28 & -0.21 & -0.09 & 1.00 \\ 
-    \(\beta_{s}\) & scansorial & -0.22 & 0.11 & -0.43 & -0.29 & -0.22 & -0.14 & -0.00 & 1.00 \\ 
-    \(\beta_{h}\) & herbivore & 0.09 & 0.09 & -0.09 & 0.03 & 0.09 & 0.14 & 0.27 & 1.00 \\ 
-    \(\beta_{i}\) & insectivore & 0.10 & 0.11 & -0.11 & 0.03 & 0.10 & 0.17 & 0.31 & 1.00 \\ 
-    \(\beta_{o}\) & omnivore & -0.12 & 0.11 & -0.33 & -0.19 & -0.12 & -0.05 & 0.09 & 1.00 \\ 
-    \hline
-    \(\sigma_{c}\) & sd cohort & 0.33 & 0.06 & 0.23 & 0.29 & 0.33 & 0.37 & 0.48 & 1.00 \\ 
-    \(\sigma_{p}\) & sd phylogeny & 0.11 & 0.05 & 0.03 & 0.07 & 0.10 & 0.14 & 0.23 & 1.03 \\ 
-    \hline
-  \end{tabular}
+%  \begin{tabular}{ l l r r r r r r r r }
+%    parameter & effect & mean & sd & 2.5\% & 25\% & 50\% & 75\% & 97.5\% & \(\hat{R}\) \\ 
+%    \hline
+%    \(\alpha\) & ``age'' & 1.29 & 0.03 & 1.23 & 1.27 & 1.29 & 1.31 & 1.36 & 1.00 \\ 
+%    \hline
+%    \(\beta_{0}\) & arboreal/carnivore & -0.78 & 0.14 & -1.05 & -0.87 & -0.78 & -0.68 & -0.51 & 1.00 \\ 
+%    \(\beta_{o}\) & occupancy & -0.53 & 0.08 & -0.69 & -0.59 & -0.53 & -0.48 & -0.38 & 1.00 \\ 
+%    \(\beta_{size}\) & body size & -0.05 & 0.05 & -0.14 & -0.08 & -0.05 & -0.01 & 0.05 & 1.00 \\ 
+%    \(\beta_{g}\) & ground dwelling & -0.28 & 0.10 & -0.47 & -0.34 & -0.28 & -0.21 & -0.09 & 1.00 \\ 
+%    \(\beta_{s}\) & scansorial & -0.22 & 0.11 & -0.43 & -0.29 & -0.22 & -0.14 & -0.00 & 1.00 \\ 
+%    \(\beta_{h}\) & herbivore & 0.09 & 0.09 & -0.09 & 0.03 & 0.09 & 0.14 & 0.27 & 1.00 \\ 
+%    \(\beta_{i}\) & insectivore & 0.10 & 0.11 & -0.11 & 0.03 & 0.10 & 0.17 & 0.31 & 1.00 \\ 
+%    \(\beta_{o}\) & omnivore & -0.12 & 0.11 & -0.33 & -0.19 & -0.12 & -0.05 & 0.09 & 1.00 \\ 
+%    \hline
+%    \(\sigma_{c}\) & sd cohort & 0.33 & 0.06 & 0.23 & 0.29 & 0.33 & 0.37 & 0.48 & 1.00 \\ 
+%    \(\sigma_{p}\) & sd phylogeny & 0.11 & 0.05 & 0.03 & 0.07 & 0.10 & 0.14 & 0.23 & 1.03 \\ 
+%    \hline
+%  \end{tabular}
   \caption{Marginal posterior estimates for the praameters of interested based on 1000 posterior samples. The intercept \(\beta_{0}\) can also be interpreted as the estimate for the mean observed species. The remaining \(\beta\) values can be interpreted as the effect of a trait on the expected species duration as expressed as deviation from the mean. The categorical variables are binary index variables where an observation is of that category or not. See Equation \ref{eq:wei_haz} for an explanation of the effect of \(\alpha\) on extinction risk. \(\hat{R}\) values of less than 1.1 indicate approximate chain convergence for the posterior samples.}
   \label{tab:post_sum}
 \end{table}

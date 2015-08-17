@@ -1,47 +1,47 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: pnas_survival_supplement.aux
-The style file: plain.bst
+The style file: pnas.bst
 Database file #1: newbib.bib
 Database file #2: packages.bib
 You've used 23 entries,
-            2118 wiz_defined-function locations,
-            662 strings with 8098 characters,
-and the built_in function-call counts, 7703 in all, are:
-= -- 767
-> -- 362
-< -- 2
-+ -- 143
-- -- 120
-* -- 576
-:= -- 1315
-add.period$ -- 70
+            1765 wiz_defined-function locations,
+            629 strings with 7694 characters,
+and the built_in function-call counts, 5158 in all, are:
+= -- 523
+> -- 183
+< -- 3
++ -- 68
+- -- 45
+* -- 383
+:= -- 821
+add.period$ -- 41
 call.type$ -- 23
-change.case$ -- 126
+change.case$ -- 20
 chr.to.int$ -- 0
 cite$ -- 23
-duplicate$ -- 274
-empty$ -- 590
-format.name$ -- 120
-if$ -- 1570
+duplicate$ -- 238
+empty$ -- 476
+format.name$ -- 47
+if$ -- 1143
 int.to.chr$ -- 0
 int.to.str$ -- 23
 missing$ -- 27
 newline$ -- 118
-num.names$ -- 48
-pop$ -- 109
+num.names$ -- 25
+pop$ -- 46
 preamble$ -- 1
-purify$ -- 105
+purify$ -- 0
 quote$ -- 0
-skip$ -- 176
+skip$ -- 51
 stack$ -- 0
-substring$ -- 528
-swap$ -- 37
-text.length$ -- 2
+substring$ -- 419
+swap$ -- 72
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 84
+type$ -- 0
 warning$ -- 0
-while$ -- 81
+while$ -- 57
 width$ -- 25
-write$ -- 258
+write$ -- 254

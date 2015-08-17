@@ -1,5 +1,7 @@
 \documentclass{letter}
 \usepackage{microtype}
+\usepackage{letterbib}
+\usepackage{natbib}
 \frenchspacing
 
 \signature{Peter D Smits}
@@ -10,22 +12,61 @@
 \begin{letter}{Editor \\ \textit{Proceedings of the National Academy of Sciences}}
   \opening{Dear Editor,}
 
-  Please find enclosed my manuscript entitled: ``Death and taxa: time-invariant differences in mammal species duration'' which I am submitting for consideration as a Report in the journal \textit{Proceedings of the National Academy of Sciences}.
+  Please find enclosed my manuscript entitled: ``Death and taxa: time-invariant differences in mammal species duration'' which I am submitting for further consideration as a Report in the journal \textit{Proceedings of the National Academy of Sciences}. This paper was submitted earlier this year as an Express Submission, wherein revisions were requested before further consideration.
 
   In this study I tested for associations between extinction risk and multiple species-level traits using a fully Bayesian analysis of the fossil record of Cenozoic mammals from North America. The species-level traits analyzed here are geographic range size, body size, and both dietary and locomotor categories. Understanding which traits are important for long-term species survival is important for better understanding how anthropogenic effects are changing the nature of selection and possibly accelerating species extinction rates.
-  
+
   The results of my analysis are broadly consistent with the long standing ``survival of the unspecialized'' hypothesis as a time-invariant description of the differences in species duration. I also find evidence of a decrease in extinction risk over the Cenozoic. Additionally, I find that both time of origination and shared evolutionary history both contribute to differences in species extinction risk. Normally, analyses are restricted to including either temporal or evolutionary information. By including both these factors, this is an important step forward in better understanding and quantifying the complexities underlying macroevolution pattern and process.
-  
+
   Finally, I compare the results of my analysis to known extinction risk factors for currently living mammal species from recent macroevolutionary and macroecological studies. I find that my results are partially incongruous with known risk factors, which has two major implications: that either the extinctions catalogued by fossil record are not a good predictor of further extinctions or that the current biodiversity crisis represents something completely different such as a mass extinction.
 
-  This study should have broad scientific interest for both empirical and methodological reasons. Empirically, this paper is at the intersection of paleobiology and macroevolution while having both macroecological and conservation biological implications. 
+  As you, the Editor, expressed in your comments in the reviews of the earlier Express Submission, the reviewers provided substantial guidance for improving the clarity and ``readability'' of the manuscript. I have attempted to best follow their suggestions. Below is an itemized response to the reviewers, beginning with Reviewer 1. Each comment or concern is presented in italics before my response.
 
-  Possible appropriate reviewers for this paper include Steve Wang (Swarthmore College, scwang@swarthmore.edu), Samantha Price (University of California -- Davis, saprice@ucdavis.edu), Graeme Llyod (Maquarie University, graemetlloyd@gmail.com), and Jonathan Marcot (University of Illinois at Urbana--Champagne, jmarcot@illinois.edu). All of these individuals have strong backgrounds in macroevolution, macroecology, and quantitative paleobiology. 
+
+  \textbf{Response to Reviewer \#1}
+  \begin{itemize}
+    \item \textit{I that I would modify the conclusion of the abstract: what this shows is that background extinction seems to be a poor predictor of the current biodiversity crisis, just as background extinctions are poor predictors of pass mass extinctions \cite{Jablonski1986}. I would concluse that, really, the big extinction pulses (mass extinctions or even just unusually big turnovers) really might be where we need to concetrate our efforts, rather than suggesting  that the fossil record isn't going to help us here. (Otherwise, this paper will get cited for saying that the fossil record is unimportant for the current biodiversity crisis!)} 
+      \\\\As requested, I have adjusted the concluding statements of the abstract so that they are phrased in terms of \textit{background} and \textit{mass} extinction. I have also removed all statements which may cause this paper to be cited for stating that the ``fossil record is unimportant for the current biodiversity crisis.''
+    \item \textit{Something else that bears stressing in this paper that does not get quite the emphasis that it should is that it implies that any trends away from unspecialized ecolomorphological grades requires either driven trends sense McShea \cite{McShea1994a} or elevated specaition rates by specialized taxa \cite{Stanley1975}: biased extinction could not be doing it here. Either is an important point to communicate. I think that this would be particularly useful to put in the conclusions: this is a pretty cool study, but the final couple of paragraphs sell short the whole range of implications of this project.}
+      \\\\I have added a section to the discussion which discusses the macroevolutionary ramifications of the results of this study. In particular, I address how a net increase in diversity of ``specialists'' would require some association between the biological traits and speciation, for example the descendant species of an omnivorous ancestor might more finely divide prey items than their ancestor. I also detail what empirical results would need to be found to support these hypotheses.
+    \item \textit{I found the methods pretty easy to follow. The only thing of which I can think that might make it clearer is if there is an actual ``walk-through'' of one of the contrasts (e.g. arboreal vs ground dwelling) where Smits takes us from the data creating figure 2 and table 1 to that figure and table. That would (I think) make it much easier for many readers to grasp.}
+      \\\\In order to attempt to improve the interpretability of the use of categorical covariates in a regression model, I added two aspects to the manuscript. First, I expanded the textual explanation of how the effects of categorical covariates are interpreted. Second, I increase the amount of explanation present in the caption of Figure 2. Additionally, I altered Figure 2 to hopefully better illustrate the comparisons being made. 
+    \item \textit{Obviously, some readers (or reviewers) might object to using the Paleobiology Datbase. However, for these results to be an artifact of bad taxonomy, it would have to be true that the species-level taxonomy varies in quality non-randomly between (say) arboreal and scansorial mammals. Given that mammal species usually are identified by teeth, this seems impluasible. The only way I could see this being a lefitimate concern is if some of the long-ranging dietary species have unusually simple teeth: but I don't think that is the case. Smits should add something to the paper point out these things (or at least what biases would have to exist to create his results as an artifact of uneven taxonomy).}
+      \\\\I added a section to the Supplementary Information that covers data quality concerns stemming from use of the Paleobiological Database. 
+    \item \textit{I think that the contrast of Weibull and Exponential can get moved to the supplementary information: just state that the Weibull does a better job, which means that there is an ``aging'' component to the taxa.}
+      \\\\I simplified Figure 1 to only include the comparison of the observed survival curve to those from posterior predictive datasets generated from the Weibull based model. The results from the Exponential based model are not reported as the Weibull model was found to have much better fit.
+    \item \textit{Is there some way to illustrate this in the supplementary section? Somethings, these can be drawn out as graphs, with nested effects creating a ``clade'' and the non-nested effects linked as a ``polytomy''.}
+      \\\\I attempted to improve the wording of how hierarchical effects were included. Principally, I state how origination cohort and phylogenetic position were modeled independently as additive components. 
+    \item \textit{Figure 2: This might work better in matrix form: that would emphasize the pair-wise comparisons better. The problem, of course, is that creates some dead space. Is it possible that the numbers describing the differences could be put into that?}
+      \\\\I chose not to use a matrix form of presenting the pairwise comparisons. Instead I chose instead to represent these as density violins (similar to box plots) while also improving both the axis labels and caption text in particular because I wanted to present the differences as full posteriors, as opposed to point estimates. Matrix form was also avoided because of the excess amount of while space that would be necessary to present both the different sets of pairwise comparisons. 
+    \item \textit{I would simply state that this is consistent with the idea that it is a mass-extinction event. Alternately, I would write: ``These results show that, like prior mass-extinction events in the fossil records events, the current biodiversity crisis is qualitateively different from normal background extinction in the fossil record.''}
+      \\\\The concluding statements of the discussion section were amended to better reflect the comparison between background and mass extinction and how this relates to previous work on comparing selective factors between background and mass extinction \cite{Jablonski1986}.
+    \item \textit{This confused me a little. Is Smits referring to the fact that if a species ranges to, say, Aquitanian, then it might have gone extinct at any time during the Aquitanian rather than at the end? The other sort of ``left censorship'' that I can imagine are ``Elvis Taxa'': taxa that have misidentified specimens assigned to them that are younger than the last true members.}
+      \\\\I amended the explanation of how to interpret the censoring of data points by rephrasing the logic behind left-censoring. Specifically, because the observed are only known to have existed for at most one temporal bin, to obtain the probability of the observed it is necessary to integrate over all possible values between 0 and 1. The reviewer is correct in comparing this to the idea that I am modeling a species as going extinct anytime within the temporal window as opposed to just at the end. Note that this is conceptually very different than the concept of ``Elvis taxa.''
+  \end{itemize}
+  
+  \textbf{Response to Reviewer \#2}
+  \begin{itemize}
+    \item \textit{I also worry about data quality in general but see nothing specific to rectify. Doing the analysis at the level of genus rather than species might be more robust and less noisy, that's what I've found to be generally the case. }
+      \\\\In order to address issues surrounding data quality, I've included a section in the Supplementary Information which discusses the possibility that the results of this study are due to various issues including sampling. 
+      \\\\I chose to not repeat the analysis at the genus-level because genus duration is a product of both speciation and extinction; this may lead to very different results if the analyzed biological factors are associated with differences in speciation rates which may prolong the duration of genera. By using species-level data this concern is removed and taxon duration is not artificially extended. % add this to the manuscript!
+    \item \textit{I think one question that could be clarified a bit is the heritability of extinction rate. I understand that it is so in a technical sense, but that's not very revealing, essentially just confirming that some traits are heritable and some of them influence extinction risk. Latitude is also heritable (I think) but that isn't a particularly illuminating fact either. Can anything more specific be squeezed from the analysis?}
+      \\\\I've expanded the explanation of phylogenetic heritability in the methods section. A few stray statements surrounding what ``heritability of duration'' means have been cleared up, hopefully impoving the overall clarity of the document. The impact of heritability here is that there is some evidence that more closely related species have more similar durations than more distantly related species.
+    \item \textit{Concerning the effect of arboreality, the analysis reportedly cannot distinguish between the hypotheses that arboreal taxa have higher intrinsic extinction risks or were ``hit harder'' by a specific event. This question I think could be illuminated from the published literature, which I believe rather favours the latter explanation for later Cenozoic mammals (e.g., the ``Vallesian crisis'').}
+      \\\\In the discussion of the results of the effects of locomotor category I've added discussion of the Vallesian crisis. While the Vallesian crisis is primarily a European phenomenon and thus might not be driving these results, it may provide some insight into faunal turnover in North America.
+    \item \textit{I do think raising the question of whether or not the fossil record could provide a guide for conservation is appropriate here, even if it cannot be answered, but perhaps one ought to acknowledge that the fossil record does provide a ``baseline of normality'' regardless of whether the present is normal or not (most likely it's very far from normal, as implied). Just so as to avoid the misunderstanding that the fossil record would be somehow irrelevant to understanding the present.}
+      \\\\I've changed the language in both the concluding sentences of the abstract and the concluding paragraph of the discussion in order to prevent this potential misunderstanding.
+    \item Additionally, the two identified grammatical mistakes have been corrected.
+  \end{itemize}
+
 
   Thank you for considering my work. Please send all correspondence regarding this manuscript to me via my email address (psmits@uchicago.edu).
 
   \closing{Sincerely,}
 
   \encl{Article; supplementary text, figures, tables.}
+
 \end{letter}
+\bibliographystyle{plain}
+\bibliography{newbib}
 \end{document}
