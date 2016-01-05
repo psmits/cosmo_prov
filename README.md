@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/19849/psmits/cosmo_prov.svg)](https://zenodo.org/badge/latestdoi/19849/psmits/cosmo_prov)
+
+
 Analysis of Mammalian Survival and Distribution
 ===============================================
 
@@ -21,9 +24,3 @@ Historical factor
 Fully Bayesian survival model.
 
 North America with goals to include Europe and South America.
-
-
-Landscape distribution
-----------------------
-
-Effect of species traits on landscape heterogenity.
