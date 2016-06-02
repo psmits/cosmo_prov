@@ -38,6 +38,9 @@ tree.vcv <- vcv(na.tree)
 split.tax <- rev(split(tax.nam, extinct))
 cor.ord <- match(unlist(split.tax), colnames(tree.vcv))
 tree.vcv <- tree.vcv[cor.ord, cor.ord]
+
+#length(colnames(tree.vcv))
+sum(str_replace(colnames(tree.vcv), '_', ' ') %in% as.character(north.source[north.source$Source == 'PBDB + regression', 1]))
 #cov2cor(tree.vcv)
 
 data <- list(duration = duration,

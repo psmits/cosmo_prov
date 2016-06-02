@@ -45,8 +45,8 @@ na.pan <- get.val(panbi, dat$name.bi, pan$mass)
 er.pan <- get.val(panbi, eur$name.bi, pan$mass)
 # Smith et al. 2003
 smithbi <- binom.make(smith$Genus, smith$Species)
-na.smith <- get.val(smithbi, dat$name.bi, exp(smith$LogMass))
-er.smith <- get.val(smithbi, eur$name.bi, exp(smith$LogMass))
+na.smith <- get.val(smithbi, dat$name.bi, 10^(smith$LogMass))
+er.smith <- get.val(smithbi, eur$name.bi, 10^(smith$LogMass))
 # brook and bownman 2004
 brook$mass <- 10^brook[, 3]
 na.brook <- get.val(brook$Name, dat$name.bi, brook$mass)
@@ -138,6 +138,10 @@ measures <- rbind(me.measure[, c(1, 3:5)], good.mean[, 1:4])
 # predict mass
 # ungulate
 ung.mass <- ungulate.mass(ords$ungulates, measures)
+miohippus <- ords$ungulates[laply(str_split(ords$ungulates, ' '), 
+                                  function(x) x[1]) == 'Miohippus']
+ungulate.mass(miohippus, measures)
+
 # carnivores
 car.mass <- carnivore.mass(ords$carnivore, measures)
 # lagomorphs
@@ -153,8 +157,8 @@ gen.mass <- general.mass(c(na.uptax$name.bi, er.uptax$name.bi),
                          measures)
 est.mass <- rbind(ung.mass, car.mass, lag.mass, ins.mass, rod.mass, mar.mass, gen.mass)
 est.mass <- est.mass[!duplicated(est.mass$species), ]
-na.est <- get.val(est.mass$species, dat$name.bi, est.mass$value)
-er.est <- get.val(est.mass$species, eur$name.bi, est.mass$value)
+na.est <- get.val(est.mass$species, dat$name.bi, est.mass$mass) # correction
+er.est <- get.val(est.mass$species, eur$name.bi, est.mass$mass) # correction
 na.mass <- rbind(na.mass, na.est)
 er.mass <- rbind(er.mass, er.est)
 
