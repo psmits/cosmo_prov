@@ -3,10 +3,18 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: fancy_mass_data.aux
 The style file: science.bst
 Database file #1: newbib.bib
+Repeated entry---line 3146 of file newbib.bib
+ : @article{Dalquest1978
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8960 of file newbib.bib
+ : @article{Macdonald1956
+ :                       ,
+I'm skipping whatever remains of this entry
 Database file #2: packages.bib
 You've used 88 entries,
             2300 wiz_defined-function locations,
-            1326 strings with 20703 characters,
+            1326 strings with 20701 characters,
 and the built_in function-call counts, 16385 in all, are:
 = -- 1489
 > -- 600
@@ -45,3 +53,4 @@ warning$ -- 0
 while$ -- 172
 width$ -- 90
 write$ -- 705
+(There were 2 error messages)
