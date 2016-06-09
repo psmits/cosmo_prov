@@ -12,7 +12,7 @@ source('../R/waic.r')
 source('../R/multiplot.r')
 source('../R/surv_post_sim.r')
 wei.waic <- waic(phy.scalemfit)
-exp.waic <- waic(escalefit)
+#exp.waic <- waic(escalefit)
 
 nsim <- 1000
 duration <- c(data$dur_unc, data$dur_cen)

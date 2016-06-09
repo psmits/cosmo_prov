@@ -1,4 +1,4 @@
-#' Predict mammal body mass from lower m1 area
+# 'Predict mammal body mass from lower m1 area
 #'
 #' This is based on the work of S. Legrendre 1986 and is for all mammals.
 #'
@@ -204,7 +204,7 @@ insectivore.mass <- function(species, measures) {
 rodentia.m1area <- function(area) {
   la <- log(area)
   lnm <- 2.172 + 1.767 * la
-  mass <- log(lnm)
+  mass <- exp(lnm)
   mass
 }
 

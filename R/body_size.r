@@ -135,6 +135,8 @@ me.measure <- smits[smits$measure != '' & smits$measure != 'mass', ]
 names(good.mean)[2:3] <- c('part', 'measure')
 measures <- rbind(me.measure[, c(1, 3:5)], good.mean[, 1:4])
 
+oo <- measures[laply(str_split(measures[, 1], ' '), function(x) x[1]) %in% 'Acritoparamys', ]
+rodentia.mass(oo[, 1], oo)
 # predict mass
 # ungulate
 ung.mass <- ungulate.mass(ords$ungulates, measures)
