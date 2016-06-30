@@ -7,9 +7,11 @@ library(mapproj)
 library(stringr)
 library(xtable)
 
+
 source('../R/paleo_surv.r')
 source('../R/oxygen_curve.r')
 load('../data/cosmo_prov_setup.r')
+janis <- read.csv('../data/suspicious.csv', header = FALSE)
 
 nadur <- read.csv('../data/mam-ranges.csv', stringsAsFactors = FALSE)
 names(nadur) <- c('genus', 'species', 'fad', 'lad', 
@@ -77,6 +79,9 @@ cohort <- bin.range[, 2] / 2  # find the cohorts
 
 north.source <- north.source[north.source$Species %in% 
                              na.ecol$taxa[cohort != 1], ]
+north.source$suspicious <- as.character(north.source[, 1]) %in% janis[, 1] * 1
+north.source$suspicious <- ifelse(north.source$suspicious, '*', '')
+
 mass.table <- xtable(north.source, label = 'tab:mass_data')
 print.xtable(mass.table, 
              file = '../doc/na_surv/mass_data.tex',

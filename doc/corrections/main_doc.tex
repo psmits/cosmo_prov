@@ -20,21 +20,20 @@
 
 \maketitle
 
-It was recently brought to the author's attention a series of errors in the body mass data recorded in Supplementary Dataset 1 of \citep{Smits2015} which were then included in that analysis. These errors took two forms: 1) improperly back-transforming body mass data from SMIT ET AL 2004, and 2) incorrectly inserting the measurement of the part used to estimate body mass into the body mass column for the ``PBDB + regression'' observations. The first error affects 24 of 1936 observations while the second affects approximately 1000 of the observations.
+It was recently brought to the author's attention a series of errors in the body mass data recorded in Supplementary Dataset 1 of \citep{Smits2015} which were then included in that analysis. These errors took three forms: 1) improperly back-transforming body mass data from SMIT ET AL 2004, 2) incorrectly inserting the measurement of the part used to estimate body mass into the body mass column for the ``PBDB + regression'' observations, and 3) improperly transforming rodent log mass estimated as a part of this study. The first error affects 24 of 1936 observations, the second affects approximately 1000 of the observations, and the third error affects an unknown set of observations.
 
-The first error was due to the body mass data recorded in SMITH ET AL 2004 being recorded in log base 10 units and not in natual log units; I made the mistake and back-transformed raising \(e\) to that power instead of 10. This was my honest mistake and has since been corrected NEW SUPPLEMENT.
+The first error was due to the body mass data recorded in SMITH ET AL 2004 being recorded in log base 10 units and not in natural log units; I made the mistake and back-transformed by raising \(e\) to that power instead of 10. 
 
-The second error was also the product of a minor coding mistake. In the code for processing body mass data from all the different sources, those which are processed as ``PBDB + regression'' have an intermediate step with four columns; I used the incorrect column call which caused this error. Like the first, this error was my honest mistake and I have since corrected it NEW SUPPLEMENT.
+The second error was also the product of a minor coding mistake. In the code for processing body mass data from all the different sources, those which are processed as ``PBDB + regression'' have an intermediate step with four columns; I used the incorrect column call which caused this error. 
 
-An archive of the original, uncorrected code is avaliable at http://dx.doi.org/10.5281/zenodo.44365. An archive of the new, corrected code is avaliable at URL DOI. The errors take place in file R/body\_size.r on lines 48-49 and 160-161, respectively. No other code changes were necessary to correct these errors.
+The third error was involved with predicting rodent mass from lower first molar area. The regression formula used to estimate mass uses log of area of m1 and gives log mass. Instead of exponentiating that log mass to put it in grams, I accidentally log transformed the log mass value again. What this produces a number of mass estimates below 2 grams, which is unrealistic given that this is the approximate minimum for mammal body size CITATION. 
 
 
-I have since re-run the original analysis of \citep{Smits2015} with the updated and corrected body mass estimates. 
+I have since re-run the original analysis of \citep{Smits2015} with the updated and corrected body mass estimates. Quantitatively, the subtle aspects of the estimates have moved slightly but not substantially enough to change the original results. Qualitatively, there is no difference in the conclusions that can be made from these new results. Whatever changes to the parameter estimates which may have occurred are most observable in TABLE which is a remake of Table 1 from \citet{Smits2015}; the mean and median of the posterior distributions for each parameter have changed by approximately 0.01.
 
-% my guess is that only the estimate of the effect of body size could change
-% because predictors are treated as independent
-% however, have to wait and see
-% might affect size the time and/or phylogeny contributions
+
+An archive of the original, uncorrected code is available at http://dx.doi.org/10.5281/zenodo.44365. An archive of the new, corrected code is available at URL DOI. The first two errors take place in file R/body\_size.r on lines 48-49 and 160-161, respectively. The third error is found in file R/predict\_mass.r on line 207. No other code changes were necessary to correct these errors.
+
 
 
 \bibliographystyle{abbrvnat}

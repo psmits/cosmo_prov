@@ -204,7 +204,8 @@ insectivore.mass <- function(species, measures) {
 rodentia.m1area <- function(area) {
   la <- log(area)
   lnm <- 2.172 + 1.767 * la
-  mass <- exp(lnm)
+  mass <- exp(lnm)  # corrected
+  # mass <- log(lnm)  # old
   mass
 }
 
