@@ -28,16 +28,40 @@ The second error was also the product of a minor coding mistake. In the code for
 
 The third error was involved with predicting rodent mass from lower first molar area. The regression formula used to estimate mass uses log of area of m1 and gives log mass. Instead of exponentiating that log mass to put it in grams, I accidentally log transformed the log mass value again. What this produces a number of mass estimates below 2 grams, which is unrealistic given that this is the approximate minimum for mammal body size CITATION. 
 
-
-I have since re-run the original analysis of \citep{Smits2015} with the updated and corrected body mass estimates. Quantitatively, the subtle aspects of the estimates have moved slightly but not substantially enough to change the original results. Qualitatively, there is no difference in the conclusions that can be made from these new results. Whatever changes to the parameter estimates which may have occurred are most observable in TABLE which is a remake of Table 1 from \citet{Smits2015}; the mean and median of the posterior distributions for each parameter have changed by approximately 0.01.
-
+The original analysis of \citep{Smits2015} were re-run using the updated and corrected body mass estimates. Quantitatively, the subtle aspects of the estimates have moved slightly but not substantially enough to change the original results. Qualitatively, there is no difference in the conclusions that can be made from these new results. Whatever changes to the parameter estimates which may have occurred are most observable in Table \ref{tab:new_res} which is a remake of Table 1 from \citet{Smits2015}; the mean and median of the posterior distributions for each parameter have changed by approximately 0.01.
 
 An archive of the original, uncorrected code is available at http://dx.doi.org/10.5281/zenodo.44365. An archive of the new, corrected code is available at URL DOI. The first two errors take place in file R/body\_size.r on lines 48-49 and 160-161, respectively. The third error is found in file R/predict\_mass.r on line 207. No other code changes were necessary to correct these errors.
+
+
+\begin{table}[c]
+  \centering
+  \caption{Marginal posterior estimates for the praameters of interested based on 1000 posterior samples. The intercept \(\beta_{0}\) can also be interpreted as the estimate for the mean observed species. The remaining \(\beta\) values can be interpreted as the effect of a trait on the expected species duration as expressed as deviation from the mean. The categorical variables are binary index variables where an observation is of that category or not. See \citet{Smits2015} for explainations of the parameters and their estimates.}
+  \begin{tabular}{ l l r r r r r r r r }
+    parameter & effect & mean & sd & 2.5\% & 25\% & 50\% & 75\% & 97.5\% & \(\hat{R}\) \\ 
+    \hline
+    \(\alpha\) & ``age'' &1.29 & 0.03 & 1.23 & 1.27 & 1.29 & 1.31 & 1.36 & 1.02 \\ 
+    \hline
+    \(\beta_{0}\) & arboreal/carnivore & -0.78 & 0.14 & -1.06 & -0.88 & -0.78 & -0.69 & -0.50 & 1.01 \\ 
+    \(\beta_{o}\) & occupancy & -0.57 & 0.08 & -0.73 & -0.63 & -0.57 & -0.52 & -0.41 & 1.00 \\ 
+    \(\beta_{size}\) & body size & 0.01 & 0.05 & -0.08 & -0.02 & 0.02 & 0.05 & 0.11 & 1.00 \\ 
+    \(\beta_{g}\) & ground dwelling & -0.27 & 0.09 & -0.45 & -0.33 & -0.27 & -0.21 & -0.08 & 1.00 \\ 
+    \(\beta_{s}\) & scansorial & -0.21 & 0.11 & -0.43 & -0.28 & -0.21 & -0.14 & -0.01 & 1.00 \\ 
+    \(\beta_{h}\) & herbivore & 0.08 & 0.09 & -0.09 & 0.02 & 0.08 & 0.14 & 0.26 & 1.00 \\ 
+    \(\beta_{i}\) & insectivore & 0.08 & 0.11 & -0.13 & 0.01 & 0.08 & 0.15 & 0.29 & 1.00 \\ 
+    \(\beta_{o}\) & omnivore & -0.13 & 0.10 & -0.34 & -0.20 & -0.13 & -0.06 & 0.07 & 1.00 \\ 
+    \hline
+    \(\sigma_{c}\) & sd cohort & 0.34 & 0.07 & 0.24 & 0.30 & 0.33 & 0.38 & 0.50 & 1.00 \\ 
+    \(\sigma_{p}\) & sd phylogeny & 0.11 & 0.06 & 0.02 & 0.07 & 0.10 & 0.15 & 0.25 & 1.07 \\ 
+    \hline
+  \end{tabular}
+  \label{tab:new_res}
+\end{table}
+
 
 
 
 \bibliographystyle{abbrvnat}
 %\bibliographystyle{pnas}
-\bibliography{biblio,packages}
+\bibliography{biblio}
 
 \end{document}

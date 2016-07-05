@@ -39,7 +39,7 @@ coh <- cohort[-plio] - 1
 
 nojanis.duration <- nojanis.dur[-plio]
 nojanis.extinct <- nojanis.ext[-plio]
-nojanis.coh <- nojanis.occ[-plio] - 1
+nojanis.coh <- nojanis.coh[-plio] 
 
 # continuous variables
 size <- na.ecol$mass[-plio]

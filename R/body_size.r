@@ -45,8 +45,10 @@ na.pan <- get.val(panbi, dat$name.bi, pan$mass)
 er.pan <- get.val(panbi, eur$name.bi, pan$mass)
 # Smith et al. 2003
 smithbi <- binom.make(smith$Genus, smith$Species)
-na.smith <- get.val(smithbi, dat$name.bi, 10^(smith$LogMass))
-er.smith <- get.val(smithbi, eur$name.bi, 10^(smith$LogMass))
+#na.smith <- get.val(smithbi, dat$name.bi, exp(smith$LogMass)) # old
+#er.smith <- get.val(smithbi, eur$name.bi, exp(smith$LogMass)) # old
+na.smith <- get.val(smithbi, dat$name.bi, 10^(smith$LogMass)) # correction
+er.smith <- get.val(smithbi, eur$name.bi, 10^(smith$LogMass)) # correction
 # brook and bownman 2004
 brook$mass <- 10^brook[, 3]
 na.brook <- get.val(brook$Name, dat$name.bi, brook$mass)
@@ -159,8 +161,10 @@ gen.mass <- general.mass(c(na.uptax$name.bi, er.uptax$name.bi),
                          measures)
 est.mass <- rbind(ung.mass, car.mass, lag.mass, ins.mass, rod.mass, mar.mass, gen.mass)
 est.mass <- est.mass[!duplicated(est.mass$species), ]
-na.est <- get.val(est.mass$species, dat$name.bi, est.mass$mass) # correction
+na.est <- get.val(est.mass$species, dat$name.bi, est.mass$mass) # old
 er.est <- get.val(est.mass$species, eur$name.bi, est.mass$mass) # correction
+#na.est <- get.val(est.mass$species, dat$name.bi, est.mass$value) # old
+#er.est <- get.val(est.mass$species, eur$name.bi, est.mass$mass) # old
 na.mass <- rbind(na.mass, na.est)
 er.mass <- rbind(er.mass, er.est)
 
