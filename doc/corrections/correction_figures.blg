@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: correction_figures.aux
+The style file: pnas.bst
+Database file #1: biblio.bib
+You've used 1 entry,
+            1765 wiz_defined-function locations,
+            472 strings with 3791 characters,
+and the built_in function-call counts, 269 in all, are:
+= -- 27
+> -- 5
+< -- 0
++ -- 2
+- -- 1
+* -- 22
+:= -- 47
+add.period$ -- 2
+call.type$ -- 1
+change.case$ -- 1
+chr.to.int$ -- 0
+cite$ -- 1
+duplicate$ -- 9
+empty$ -- 25
+format.name$ -- 1
+if$ -- 54
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 1
+pop$ -- 1
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 37
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 3
+width$ -- 2
+write$ -- 13
