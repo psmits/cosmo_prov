@@ -58,10 +58,14 @@ ppc.quant <- ppc.quant + geom_vline(data = quant.dur, aes(xintercept = value),
                                     colour = 'blue', size = 1)
 ppc.quant <- ppc.quant + labs(x = 'Duration (2 My bins)', y = 'Prob. Density')
 ppc.quant <- ppc.quant + facet_wrap(~ Var2, ncol = 2)
-ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.pdf',
+ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc_noj.pdf',
        width = 3.42, height = 2.75, dpi = 750)
-ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc_pres.pdf',
+#ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc.pdf',
+#       width = 3.42, height = 2.75, dpi = 750)
+ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc_pres_noj.pdf',
        width = 4.7, height = 3.5, dpi = 750)
+#ggsave(ppc.quant, filename = '../doc/na_surv/figure/quant_ppc_pres.pdf',
+#       width = 4.7, height = 3.5, dpi = 750)
 
 # deviance residuals
 # change this to be x = duration, y = residual
@@ -80,13 +84,17 @@ ppc.res <- ppc.res + geom_hline(aes(yintercept = -2),
 ppc.res <- ppc.res + geom_point(alpha = 0.1, size = 0.5, position = 'jitter')
 ppc.res <- ppc.res + facet_wrap( ~ L1, nrow = 3, ncol = 4)
 ppc.res <- ppc.res + labs(x = 'Duration (2 My bins)', y = 'Deviance residual')
-ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.pdf',
+ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot_noj.pdf',
        width = 3.42, height = 2.25, dpi = 750)
+#ggsave(ppc.res, filename = '../doc/na_surv/figure/residual_plot.pdf',
+#       width = 3.42, height = 2.25, dpi = 750)
 
 
 # survival function
-condition <- extinct
-condition[extinct == 1 & duration == 1] <- 2
+condition <- nojanis.extinct
+#condition <- extinct
+condition[nojanis.extinct == 1 & nojanis.duration == 1] <- 2
+#condition[extinct == 1 & duration == 1] <- 2
 emp.surv <- survfit(Surv(time = duration, time2 = duration, 
                          event = condition, type = 'interval') ~ 1)
 emp.surv <- data.frame(cbind(time = emp.surv$time, surv = emp.surv$surv))
@@ -126,10 +134,14 @@ soft <- soft + geom_line(size = 1)
 soft <- soft + coord_cartesian(xlim = c(-0.5, max(duration) + 2))
 #soft <- soft + facet_grid(. ~ lab)
 soft <- soft + labs(x = 'Duration (2 My bins)', y = 'P(T > t)')
-ggsave(soft, filename = '../doc/na_surv/figure/survival_function.tiff',
+ggsave(soft, filename = '../doc/na_surv/figure/survival_function_noj.tiff',
        width = 3.42, height = 3.42, dpi = 750)
-ggsave(soft, filename = '../doc/na_surv/figure/survival_function_pres.pdf',
+ggsave(soft, filename = '../doc/na_surv/figure/survival_function_pres_noj.pdf',
        width = 4.7, height = 3.5, dpi = 750)
+#ggsave(soft, filename = '../doc/na_surv/figure/survival_function.tiff',
+#       width = 3.42, height = 3.42, dpi = 750)
+#ggsave(soft, filename = '../doc/na_surv/figure/survival_function_pres.pdf',
+#       width = 4.7, height = 3.5, dpi = 750)
 
 # do each cohort
 
@@ -167,8 +179,10 @@ lodf <- lodf + geom_violin()# + geom_boxplot(width = 0.1, outlier.size = 1)
 lodf <- lodf + relab.x + theme(axis.text.x = element_text(size = 7))
 lodf <- lodf + labs(x = '', y = 'Estimated difference', title = 'A')
 lodf <- lodf + theme(plot.title = element_text(hjust = 0, size = 10))
-ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.pdf',
+ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est_noj.pdf',
        width = 3.42, height = 2.75, dpi = 750)
+#ggsave(lodf, filename = '../doc/na_surv/figure/loco_diff_est.pdf',
+#       width = 3.42, height = 2.75, dpi = 750)
 
 
 # effect of dietary category
@@ -198,13 +212,19 @@ didf <- didf + geom_violin()# + geom_boxplot(width = 0.1, outlier.size = 1)
 didf <- didf + relab.x + theme(axis.text.x = element_text(size = 7))
 didf <- didf + labs(x = '', y = 'Estimated difference', title = 'B')
 didf <- didf + theme(plot.title = element_text(hjust = 0, size = 10))
-ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.pdf',
+ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est_noj.pdf',
        width = 3.42, height = 2.75, dpi = 750)
+#ggsave(didf, filename = '../doc/na_surv/figure/diet_diff_est.pdf',
+#       width = 3.42, height = 2.75, dpi = 750)
 
-tiff('../doc/na_surv/figure/trait_eff.tiff', 
+tiff('../doc/na_surv/figure/trait_eff_noj.tiff', 
      width = 3.42, height = 5.5, units = 'in', res = 750)
 multiplot(lodf, didf, cols = 1)
 dev.off()
+#tiff('../doc/na_surv/figure/trait_eff.tiff', 
+#     width = 3.42, height = 5.5, units = 'in', res = 750)
+#multiplot(lodf, didf, cols = 1)
+#dev.off()
 
 
 # effect of body size and occupancy
@@ -227,8 +247,10 @@ other <- other + geom_vline(xintercept = 0, colour = 'grey', size = 1)
 other <- other + geom_histogram(aes(y = ..density..))
 other <- other + facet_grid(Var2 ~ . , labeller = label_parsed)
 other <- other + labs(x = 'Parameter estimate', y = 'Prob. Density')
-ggsave(other, filename = '../doc/na_surv/figure/other_est.pdf',
+ggsave(other, filename = '../doc/na_surv/figure/other_est_noj.pdf',
        width = 3.42, height = 2.00, dpi = 750)
+#ggsave(other, filename = '../doc/na_surv/figure/other_est.pdf',
+#       width = 3.42, height = 2.00, dpi = 750)
 
 
 # variance partition coefficient
@@ -249,13 +271,17 @@ gvar <- gvar + scale_x_continuous(limits = c(0, 1))
 gvar.v <- gvar + facet_grid(Var2 ~ .)
 gvar.v <- gvar.v + labs(x = 'Variance partition\ncoefficient', 
                         y = 'Prob. Density')
-ggsave(gvar.v, filename = '../doc/na_surv/figure/variance_est.pdf',
+ggsave(gvar.v, filename = '../doc/na_surv/figure/variance_est_noj.pdf',
        width = 3.42, height = 3.00, dpi = 750)
+#ggsave(gvar.v, filename = '../doc/na_surv/figure/variance_est.pdf',
+#       width = 3.42, height = 3.00, dpi = 750)
 gvar.h <- gvar + coord_flip() + facet_grid(~ Var2)
 gvar.h <- gvar.h + labs(x = 'Variance partition coefficient', 
                         y = 'Prob. Density')
-ggsave(gvar.h, filename = '../doc/na_surv/figure/variance_est_pres.pdf',
+ggsave(gvar.h, filename = '../doc/na_surv/figure/variance_est_pres_noj.pdf',
        width = 4.7, height = 3.5, dpi = 750)
+#ggsave(gvar.h, filename = '../doc/na_surv/figure/variance_est_pres.pdf',
+#       width = 4.7, height = 3.5, dpi = 750)
 
 
 # for cohort effect, do point range with 80% quartile
@@ -270,10 +296,14 @@ cohort <- cohort + geom_hline(aes(yintercept = 0), colour = 'grey', size = 1)
 cohort <- cohort + geom_pointrange(size = 0.75)
 cohort <- cohort + scale_x_reverse(breaks = seq(from = 0, to = 65, by = 5))
 cohort <- cohort + labs(x = 'Time (Mya)', y = 'Estimated cohort effect')
-ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.pdf',
+ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est_noj.pdf',
        width = 3.42, height = 2.25, dpi = 750)
-ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est_pres.pdf',
+ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est_pres_noj.pdf',
        width = 4.7, height = 3.5, dpi = 750)
+#ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est.pdf',
+#       width = 3.42, height = 2.25, dpi = 750)
+#ggsave(cohort, filename = '../doc/na_surv/figure/cohort_est_pres.pdf',
+#       width = 4.7, height = 3.5, dpi = 750)
 
 
 # estimate of alpha
@@ -302,5 +332,7 @@ haz <- haz + geom_line(data = wzm, aes(x = time, y = hazard, group = label),
                        colour = 'darkgrey', alpha = 0.2)
 haz <- haz + geom_line(colour = 'blue')
 haz <- haz + labs(x = 'Duration (2 My bins)', y = 'h(t)')
-ggsave(haz, filename = '../doc/na_surv/figure/haz_est.pdf',
+ggsave(haz, filename = '../doc/na_surv/figure/haz_est_noj.pdf',
        width = 3.42, height = 2.25, dpi = 750)
+#ggsave(haz, filename = '../doc/na_surv/figure/haz_est.pdf',
+#       width = 3.42, height = 2.25, dpi = 750)

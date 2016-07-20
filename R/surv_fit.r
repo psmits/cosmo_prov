@@ -1,4 +1,7 @@
 library(rstan)
+library(ggplot2)
+library(scales)
+library(grid)
 library(arm)
 library(parallel)
 library(xtable)
@@ -55,8 +58,31 @@ nojanis.mo <- factor(nojanis.ecol$move[-plio])
 nojanis.inr <- interaction(nojanis.di, nojanis.mo)
 
 
-
-# prepare the vcv
+# compare distribution of body sizes
+theme_set(theme_bw())
+cbp <- c('#E69F00', '#56B4E9', '#009E73', '#F0E442', 
+         '#0072B2', '#D55E00', '#CC79A7')
+theme_update(axis.text = element_text(size = 6),
+             axis.title = element_text(size = 10),
+             legend.text = element_text(size = 8),
+             legend.title = element_text(size = 9),
+             legend.key.size = unit(0.75, 'cm'),
+             strip.text = element_text(size = 8))
+jj <- na.ecol[-plio, 1] %in% as.character(janis[, 1])
+bs <- data.frame(size = log(size),
+                 state = ifelse(jj == 1, 'suspicious', 'fine'),
+                 time = coh * 2,
+                 diet = di,
+                 move = mo)
+bs.gg <- ggplot(bs, aes(x = size, fill = state))
+bs.gg <- bs.gg + geom_histogram()
+bs.gg <- bs.gg + scale_fill_manual(values = c('black', 'blue'))
+bs.gg <- bs.gg + labs(x = 'log(body size in grams)', y = 'Frequency')
+ggsave(filename = '../doc/na_surv/figure/body_size_compare.png', plot = bs.gg,
+       width = 4, height = 3)
+bs.gg <- bs.gg + facet_wrap( ~ time)
+ggsave(filename = '../doc/na_surv/figure/body_size_compare_time.png', plot = bs.gg,
+       width = 8, height = 6)
 
 # prepare the vcv
 tax.nam <- str_replace(na.ecol[-plio, 1], ' ', '_')
@@ -67,6 +93,7 @@ tree.vcv <- vcv(na.tree)
 split.tax <- rev(split(tax.nam, extinct))
 cor.ord <- match(unlist(split.tax), colnames(tree.vcv))
 tree.vcv <- tree.vcv[cor.ord, cor.ord]
+
 
 # prepare the _other_ vcv
 nj.tax.nam <- str_replace(nojanis.ecol[-plio, 1], ' ', '_')

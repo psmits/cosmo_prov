@@ -19,4 +19,4 @@ rownames(summs) <- c('intercept', 'logit(occupancy)', 'log(size)',
 summs <- summs[c(4, 1:3, 5:nrow(summs)), ]
 
 sum.table <- xtable(summs, label = 'post_sum')
-print.xtable(sum.table, file = '../doc/na_surv/post_out_raw.tex')
+print.xtable(sum.table, file = '../doc/na_surv/post_out_raw_noj.tex')

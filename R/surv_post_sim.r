@@ -18,6 +18,8 @@ source('../R/surv_fit.r')
 
 # this is for the total model
 outs <- dir('../data/mcmc_out', pattern = 'wei_surv_[0-9]', full.names = TRUE)
+# outs[1:4]  # normal
+outs <- outs[6:9]  # nojanis
 phy.scalemfit <- read_stan_csv(outs)
 
 #a <- summary(phy.scalemfit)[[1]]
