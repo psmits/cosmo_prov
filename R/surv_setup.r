@@ -79,8 +79,8 @@ cohort <- bin.range[, 2] / 2  # find the cohorts
 
 north.source <- north.source[north.source$Species %in% 
                              na.ecol$taxa[cohort != 1], ]
-north.source$suspicious <- as.character(north.source[, 1]) %in% janis[, 1] * 1
-north.source$suspicious <- ifelse(north.source$suspicious, '*', '')
+#north.source$suspicious <- as.character(north.source[, 1]) %in% janis[, 1] * 1
+#north.source$suspicious <- ifelse(north.source$suspicious, '*', '')
 
 mass.table <- xtable(north.source, label = 'tab:mass_data')
 print.xtable(mass.table, 
